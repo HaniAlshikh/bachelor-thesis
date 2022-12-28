@@ -1,0 +1,227 @@
+% @author Thomas Lehmann
+%
+\chapter{Event Sourcing}
+
+Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
+
+Event Sourcing is a pattern for storing data as events in an append-only log. This simple definition misses the fact that by storing the events, you also keep the context of the events; you know an invoice was sent and for what reason from the same piece of information. In other storage patterns, the business operation context is usually lost, or sometimes stored elsewhere. % https://www.eventstore.com/event-sourcing#:~:text=What%20is%20Event%20Sourcing%3F,the%20same%20piece%20of%20information.
+
+Event driven, CQRS and Evnet Sourcing are complementary patterns so it makes sense to consider them both as a set and individually. This article is the latter - a focus on event sourcing.
+
+% https://oparu.uni-ulm.de/xmlui/bitstream/handle/123456789/25321/Diss_BenjaminErb.pdf?sequence=3&isAllowed=y
+
+% https://www.grahambrooks.com/event-driven-architecture/patterns/event-sourcing/
+
+Martin Fowler believes that the key to Event Sourcing is that it guarantees that all changes to the domain objects are initiated by the event objects. This leads to a number of facilities that can be built on top of the event log:
+
+Complete Rebuild: we can discard the application state completely and rebuild it by re-running the events from the event log on an empty application.
+Temporal Query: we can determine the application state at any point in time. Notionally we do this by starting with a blank state and rerunning the events up to a particular time or event.
+Event Replay: if we find a past event was incorrect, we can compute the consequences by reversing it and later events and then replaying the new event and later events. % https://apiumacademy.com/event-sourcing-benefits/
+
+One obvious form of return is that it's easy to serialize the events to make an Audit Log.Such an audit trail is useful for audit, no shocks there, but also has other usages. I chatted with someone who got their online accounts into an awkward state and phoned in for help. He was impressed that the helper was able to tell him exactly what he did and thus was able to figure out how to fix it. To provide such a capability means exposing the audit trail to the support group so they can walk through a user's interaction. While Event Sourcing is a good way of doing this, you could also do this with more regular logging mechanisms, and that way not have to deal with the odd interface. % https://martinfowler.com/eaaDev/EventSourcing.html
+
+however, logging is mostly associated with debugging and has no direct relation to the system state. Logging style, verbosity....
+
+Event Sourcing is a design approach where distributed applications keep their state as a sequence of state-changing operations. Instead of storing mutable objects, applications keep an immutable sequence of changes to such objects. Changing state and writing an event to the log is one single, therefore atomic, operation. The log becomes the authoritative source of truth, offering eventual consistency, as events propagate to different parts of the distributed application. This design entails a strongly decoupled architecture, typical of publish–subscribe systems (Clayman et al., 2010), while providing reliable auditing and logging functionality. For example, developers may bring the application back to a previous execution state, by replaying the events in the log. This feature is particularly powerful, not only for the sake of failure recovery and state management (most services can be stateless), but also for debugging and to experiment alternative what-if scenarios. Furthermore, it makes the system’s data schema more flexible, as it becomes possible to recover field values or even calculate additional ones from the log.
+
+The foundational idea of event sourcing is the domain event as described by Evans (2015). His seminal book on Domain-Driven Design (DDD), however, does not mention the pattern. Vernon (2013) describes event sourcing only briefly in his book on the implementation of various DDD patterns. Young (2017), as one of the original proposers of event sourcing, discusses the challenge of versioning ESSs. Event sourcing is also discussed in the context of CQRS (Young, 2010), a pattern strongly related to event sourcing. Recent academic literature (Erb, 2019, Zhong et al., 2019) shows an interest in applying event sourcing for research projects.
+
+Recently, the event sourcing pattern has become a popular answer to the challenges of complex, mission-critical, scalable systems. Examples of organizations that apply event sourcing are Netflix (Avery and Reta, 2017), and Walmart’s Jet.com (Gorodinski, 2017), with the goal of creating scalable and reliable critical systems. Event sourcing is informally described by Fowler (2005) as a pattern that “ensures that all changes to application state are stored as a sequence of events”. Flexibility, debug-ability, and reliability are given by Avery and Reta (2017) as rationale for using event sourcing. Debski et al. (2017) and Erb and Hauck (2016) show how event sourcing can be applied to achieve scalable, reactive systems. Kabbedijk et al. (2012) describes event sourcing as a sub pattern of Command Query Responsibility Segregation (CQRS) in his work on the improved variability and scalability of systems applying CQRS.
+
+The events in event sourcing, as opposed to general event-driven architectures (EDAs) (Fowler, 2017), are stored as an append-only log of all state changes. Two key characteristics separate event sourcing from event-driven approaches, such as stream processing, transactional processing, and blockchain. First, events in Event Sourced Systems (ESSs) are stored as the state of the application. Other approaches use the events to communicate, while the communication aspect comes second in ESSs. The second difference is that events are closely related to events occurring in real world business processes. This allows event sourcing to be also used as a design approach. Domain-Driven Design (DDD), as described by Evans (2003), advocates events as a design tool for the process flow of a software system. Brandolini (2018) proposes event storming (analogous to brainstorming), a group design process that focuses on the events that take place in a software system. Further details on these analogous approaches are found in Section 3.
+
+
+Our study regards a new research area, therefore, we apply Grounded Theory (GT). Adolph et al. (2011) describe GT as a useful approach for research in areas that have not previously been studied. A GT explains how people resolve their main concern by employing a certain process. That process is called the ‘core category’ of the GT. The core category of the work presented in this article is the process of designing and implementing event sourced systems, as performed by software engineers. The theoretical definition of event sourcing helps both researchers and practitioners to understand, reason about, and teach the pattern and its consequences. Section 2 explains how we applied GT to form a basis for conceptualization of ESSs from 25 interviews, and how the three essential elements are covered. From the gathered data we distill the pattern description and its consequences. This work has the following contributions:
+
+
+the studie contudcted by ..... on 25 engineers of different backgrounds and roles by applying appling Grounded Theory (GT). Adolph et al. (2011) which showcase how event sourcing is ganging on popularity especially when it comes to satisfying auditory needs. As put by one of the engineers when asked about event sourcing ""
+The reasons for applying event sourcing can be grouped into four categories. Remarkably, all systems under study benefit from event sourcing, and no system returned to a current state model. Still, most engineers state that they would not apply event sourcing in every system. The reason given for this opinion is the added complexity of introducing event sourcing. Engineer E2 would apply event sourcing by default, because of the benefits it gives.~\cite{OVEREEM2021110970}
+
+
+Together with this description we identify four categories of rationale for the application of event sourcing, such as a decrease of complexity. In this “In Practice” submission, we also identify five engineering challenges around the pattern, with schema evolution being one of the most complex challenges. With the pattern description and its liabilities presented in this article, we enable engineers to make a considered choice.
+
+% https://www.diva-portal.org/smash/get/diva2:1326163/FULLTEXT01.pdf
+
+Event sourcing is an approach to store data in an application and was originally established by
+Fowler (2005a). This differs from the traditional approach of storing data which, is to store the
+current state of an application in a database. Fowler (2002) describes this approach as active
+records. With the traditional approach, the data is accessed or modified by four operations,
+Create, Read, Update and Delete, these operations are generally referred to as CRUD operations
+(Betts et al. 2013). The idea behind event sourcing is to treat each change to the state as an
+event where each event is part of a sequence of events in the order they occurred. The sequence
+of events can be used to recreate the application state at any point in time (Fowler 2005a).
+Figure 1 illustrates how the state of two shapes can be represented with active records and with
+event sourcing. In Figure 1a the current X and Y values, together with the type of shape, are
+stored in a specific row associated with the shape identification number. In Figure 1b the same
+shapes are stored as a series of events. Each row consists of the type of event and the parameters
+for the event, together with an aggregate number which describes to which shape the event is
+associated. The series of events can be used to rebuild the current state which would result in
+the same state as in Figure 1a. One difference between the two approaches is that in Figure 1b it
+is possible to see that shape number 1 has moved from the original position which is information
+is lost when using active records.
+
+\section{Terminology}
+
+\textbf{CQRS and event driven}
+
+\section{Command Query Responsibility Segregation}
+
+% https://oparu.uni-ulm.de/xmlui/bitstream/handle/123456789/25321/Diss_BenjaminErb.pdf?sequence=3&isAllowed=y
+
+% https://ieeexplore.ieee.org/abstract/document/7884621
+
+One of the architectural patterns that in recent years emerged in the development of cloud systems is Command Query Responsibility Segregation (CQRS). The pattern was introduced by Young [5] and Dahan [6], and the goal of the pattern is to handle actions that change data (those are called commands) in different parts in the system than requests that ask for data (called queries). By separating the command-side (the part that validates and accepts changes) from the query-side (the part that answers queries), the system can optimize the two parts for their very different tasks.
+
+Young [7] describes CQRS as a stepping stone for event sourcing. Event sourcing is a data storage model that does not store the current (or last) state, but all changes leading up to the current state. Fowler [8] explains event sourcing by comparing it to an audit trail: every data change is stored without removing or changing earlier events. The events stored in an event store are stored as schema-less data, because the different events often do not share properties. A store with an explicit schema would make it more difficult to append events in the store to a single stream. Data in schema-less stores is not without schema, but the schema is implicit: the application assumes a certain schema. This makes the problem of schema evolution and data conversion more difficult as observed by Scherzinger et al. [9]. Schema-less data is more difficult to evolve as the store is unaware of structure and thus cannot offer tools to transform the data into a new structure. Relational data stores that have explicit knowledge of the structure of the data can use the standardized data definition language (DDL) to upgrade the schema and convert the data. Another problem in the evolution of event sourced systems is the amount of data that is stored, not only the current state, but also every change leading up to that state. This huge amount of data makes the problem of performing a seamless upgrade even more important: upgrades may need more time, but they are required to be imperceptible.
+
+The foundations of CQRS were laid by Meyer [11] in the Command-Query Separation (CQS) principle. He defined a command as “serving to modify objects” and a query is “to return information about objects”, or informally worded “asking a question should not change the answer”. Figure 1 shows the CQRS pattern: commands are accepted by the command-side and produce events which are processed by the query-side. The query-side projects these events into a form that is suitable for querying and presenting. The command-side and the query-side both have their own data store: the first store is used to maintain data that is used in validating requested changes, and the second store is used to retrieve data for displaying or reporting.
+
+figure to showcase CQRS
+
+The command-side communicates with the query-side through asynchronously sending events. These events are used by the query-side to build a view of the state that can be used to query and present data. By doing this asynchronously the query-side does not influence the performance of the command-side. However, this does lead to eventual consistency. This is a weaker form of consistency that Vogels [12] defines as “when no updates are made to the object, the object will eventually have the last updated value”. The system guarantees that the query-side eventually will reflect the events produced in the command-side. However, there are no guarantees on how fast this will be done. A system with a large delay is unfeasible, because in that case queries will often return data that does not reflect the latest changes send to the command-side. There are difficulties introduced by eventual consistency, such as returning items to a client that in fact are already deleted through commands send to the command-side. The patterns to overcome this difficulty and others are out of scope for the current paper.
+
+The asynchronous sending of events between the command-side and query-side results in a weak coupling. The resulting freedom and flexibility in designing the system leads to availability, scalability, and performance among other advantages. The store used in the command-side is often an event store, because it is natural to store the events that are produced by the command-side. This proposed data storage model has a number of benefits that make it specifically useful as a store for the command-side of a CQRS system. First of all, the command-side is only used for accepting changes and never for queries, and the performance of the store is not thus not hampered by concurring reads and writes. Second, the store contains every change ever accepted into the system, making it easy to inspect when and by whom a change was done. A third benefit is the possibility to rebuild the current state (for instance the query-store) in the system by replaying the events. The replaying of events also enables easy debugging. The fourth benefit is the possibility to analyze the events for patterns in usage. This information is impossible to extract from a store that only persists the last state of the data. In the query-side a diverse range of stores can be used, such as relational, graph, or NoSql databases. The main goal of this store is to support the easy and fast retrieval of data, in whatever form the application requires.
+
+The loosely coupled nature of CQRS combined the benefits of the event sourcing approach makes it a fitting architectural pattern for cloud systems. Event sourcing itself is not tied exclusively to CQRS, the coupling based on events is similar to that in more general event-driven architectures, as described by Michelson [13]. The events in the event store are processed by the system to build the query-side or execute complex processes. The CQRS pattern and its sub-patterns are described in more detail by Kabbedijk et al. [14]. CQRS from a practitioners viewpoint is studied by Korkmaz [15] in order to gain better understanding of the benefits and challenges. Maddodi et al. [16] studies a CQRS system in the context of continuous performance testing.
+
+An audit log is the simplest, yet also one of the most effective forms of tracking temporal information. The idea is that any time something significant happens you write some record indicating what happened and when it happened.
+
+\section{Event-Sourced Architectures}
+
+Event Sourcing is the foundation for Parallel Models or Retroactive Events. If you want to use either of those patterns you will need to use Event Sourcing first. Indeed this goes to the extent that it's very hard to retrofit these patterns onto a system that wasn't built with Event Sourcing. Thus if you think there's a reasonable chance that the system will need these patterns later it's wise to build Event Sourcing now. This does seem to be one of those cases where it isn't wise to leave this decision to later refactoring.
+
+Event Sourcing also raises some possibilities for your overall architecture, particularly if you are looking for something that is very scalable. There is a fair amount of interest in 'event-driven architecture' these days. This term covers a fair range of ideas, but most of centers around systems communicating through event messages. Such systems can operate in a very loosely coupled parallel style which provides excellent horizontal scalability and resilience to systems failure.
+
+An example of this would be a system with lots of readers and a few writers. Using Event Sourcing this could be delivered as a cluster of systems with in-memory databases, kept up to date with each other through a stream of events. If updates are needed, they can be routed to a single master system (or a tighter cluster of servers around a single database or message queue) which applies the updates to the system of record and then broadcasts the resulting events to the wider cluster of readers. Even when the system of record is the application state in a database this could be a very appealing structure. If the system of record is the event log, there is are plenty of options for very high performance since the event log is a purely additive structure that requires minimal locking.
+
+Such an architecture isn't flawless, of course. The reader systems are liable to be out of sync with the master (and each other) due to differences in timing with event propagation. However this broad style of architecture is used and I've heard almost entirely favorable comment about it.
+
+Using event streams like this also allows new applications to be added easily by tapping into the event streams and populating their own models, which don't need to be the same for all systems. It's an approach that fits in very well with a messaging approach to integration.
+
+% https://oparu.uni-ulm.de/xmlui/bitstream/handle/123456789/25321/Diss_BenjaminErb.pdf?sequence=3&isAllowed=y
+
+comparison table why event-sourced/driven \citep{richards2015software}
+
+% https://isip.piconepress.com/courses/temple/ece_1111/resources/articles/20211201_software_architecture_patterns.pdf
+
+\subsection{Domain Event}
+
+A domain event is a class with a name formed using a past-participle verb. It has properties that meaningfully convey the event. Each property is either a primitive value or a
+value object. For example, an OrderCreated event class has an orderId property.
+ A domain event typically also has metadata, such as the event ID, and a timestamp.
+It might also have the identity of the user who made the change, because that’s useful
+for auditing. The metadata can be part of the event object, perhaps defined in a
+superclass. Alternatively, the event metadata can be in an envelope object that wraps
+the event object. The ID of the aggregate that emitted the event might also be part of
+the envelope rather than an explicit event property.
+ The OrderCreated event is an example of a domain event. It doesn’t have any
+fields, because the Order’s ID is part of the event envelope. The following listing
+shows the OrderCreated event class and the DomainEventEnvelope class.~\citep{richardson2018microservices}
+
+\section{Challenges}
+
+However, an ESS introduces not only events and state transfers. Eventual consistency forces developers to let go of guarantees that they would have in a system using current state and synchronous processing. In a CQRS system, an update sent through a command will not immediately be reflected in the result of a query. The system first needs to process the event into one or more projections. Engineer E12 states that “a lot of developers had to get used to information not being in place”, and E2 adds that “getting people to understand eventual consistency is the biggest hurdle”. Eventual consistency forces developers to rethink the basic interactions of the user with the system.
+
+We give two examples of interactions that force developers to rethink system design. The first example is that of the expectation of users to retrieve data that they previously submitted into the system. However, in a CQRS system, the query system might not directly return the data that was submitted through a command. The user interface of the system should make it clear to the user what is going on, or even try to hide the fact that the system is eventual consistent. The second example is that of developers that more or less have the same expectation. Often developers try to use the result of the query to make decisions in an aggregate. However, the query system might not have processed all events and misses recent updates. If developers overlook this principle, the decisions lead to bugs in the system.
+
+\subsection{Event storage}
+
+Event-sourcing enables the reconstruction of arbitrary past application states for event-based applications. However, an entirely
+unbounded log size can conflict with other application requirements. We provided a first exploration of log pruning approaches
+for event-sourced systems and evaluated their effects as the main
+contributions of this work. This included an overview of the design
+space of pruning approaches and an assessment of the impact of
+log pruning mechanisms on state reconstructability.
+Unbounded command and event sourcing approaches enable
+a full reconstruction of previous states, but come with high costs
+in terms of storage. In practice, pure command sourcing is often
+not feasible due to complex re-computations. Bounded approaches
+restrict the log sizes, but enable reconstructions primarily for more
+recent states. Additional periodic checkpoints can help to maintain
+some older states as reference. The probabilistic approach provides
+a configurable bias to determine what to prune. Eventually, the
+choice of a log pruning approach has to reflect the application-level
+requirements — which entity states should be kept, how far the
+application needs to go back in time, and in which resolution.
+Application-based and user-defined pruning mechanisms as well
+as a detailed analysis of pruning parameters constitute future work.
+
+some math from https://dl.acm.org/doi/10.1145/3210284.3219767 (https://dl.acm.org/doi/pdf/10.1145/3210284.3219767)
+
+\subsection{Event schema evolution}
+
+Table 6.1 shows the different types of changes that can occur at each level.~\citep{richardson2018microservices}
+
+With event sourcing, the schema of events (and snapshots!) will evolve over time.
+Because events are stored forever, aggregates potentially need to fold events corresponding to multiple schema versions. There’s a real risk that aggregates may become
+bloated with code to deal with all the different versions. As mentioned in section 6.1.7,
+a good solution to this problem is to upgrade events to the latest version when they’re
+loaded from the event store. This approach separates the code that upgrades events
+from the aggregate, which simp
+
+\subsection{Deleting data is tricky.}
+
+Because one of the goals of event sourcing is to preserve the history of aggregates, it
+intentionally stores data forever. The traditional way to delete data when using event
+sourcing is to do a soft delete. An application deletes an aggregate by setting a
+deleted flag. The aggregate will typically emit a Deleted event, which notifies any
+interested consumers. Any code that accesses that aggregate can check the flag and
+act accordingly.
+ Using a soft delete works well for many kinds of data. One challenge, however, is
+complying with the General Data Protection Regulation (GDPR), a European data
+protection and privacy regulation that grants individuals the right to erasure (https://
+gdpr-info.eu/art-17-gdpr/). An application must have the ability to forget a user’s personal information, such as their email address. The issue with an event sourcing-based
+application is that the email address might either be stored in an AccountCreated
+event or used as the primary key of an aggregate. The application somehow must forget about the user without deleting the events.
+ Encryption is one mechanism you can use to solve this problem. Each user has an
+encryption key, which is stored in a separate database table. The application uses that
+encryption key to encrypt any events containing the user’s personal information
+before storing them in an event store. When a user requests to be erased, the application deletes the encryption key record from the database table. The user’s personal
+information is effectively deleted, because the events can no longer be decrypted.
+ Encrypting events solves most problems with erasing a user’s personal information.
+But if some aspect of a user’s personal information, such as email address, is used as
+an aggregate ID, throwing away the encryption key may not be sufficient. For example, section 6.2 describes an event store that has an entities table whose primary key
+is the aggregate ID. One solution to this problem is to use the technique of pseudonymization, replacing the email address with a UUID token and using that as the
+aggregate ID. The application stores the association between the UUID token and the
+email address in a database table. When a user requests to be erased, the application
+deletes the row for their email address from that table. This prevents the application
+from mapping the UUID back to the email address. ~\citep{richardson2018microservices}
+
+\subsection{Querying the event store is challenging.}
+
+Imagine you need to find customers who have exhausted their credit limit. Because
+there isn’t a column containing the credit, you can’t write SELECT * FROM CUSTOMER
+WHERE\ CREDIT\_LIMIT = 0. Instead, you must use a more complex and potentially inefficient query that has a nested SELECT to compute the credit limit by folding events that
+set the initial credit and adjusting it. To make matters worse, a NoSQL-based event
+store will typically only support primary key-based lookup. Consequently, you must
+implement queries using the CQRS approach described in chapter 7.~\citep{richardson2018microservices}
+
+\subsection{Transactions}
+
+https://www.youtube.com/watch?v=RGqr1cXjS5o
+
+
+\section{Benefits}
+
+% \section{Auditing 2.0}
+
+Event sourcing can be used to implement Auditing 2.0 in a number of ways. Here are a few examples:
+
+Storing a log of events: As mentioned earlier, event sourcing involves storing a log of events that represent changes made to the data over time. This log can be used to reconstruct the state of the data at any point in the past, which can be useful for auditing purposes. By storing a comprehensive and immutable log of events, organizations can use event sourcing to track and monitor changes to sensitive data and ensure compliance with regulations and standards.
+
+Analyzing event data: In addition to storing the log of events, organizations can also use data analytics and machine learning techniques to analyze the event data and identify patterns and trends that may indicate potential risks or issues. By continuously analyzing the event data, organizations can proactively identify and address potential problems as they arise, rather than waiting for them to be discovered during a periodic audit.
+
+Automating the audit process: Event sourcing can also be used to automate the audit process by using technologies such as artificial intelligence and blockchain. For example, AI-powered systems can be used to analyze the event data and identify potential risks or issues, while blockchain technology can be used to provide a secure and transparent record of transactions. This can help to streamline the audit process and make it more efficient.
+
+Overall, event sourcing can be a powerful tool for implementing Auditing 2.0. By storing a comprehensive log of events and using advanced technologies and data analytics to analyze the data, organizations can continuously monitor and assess their financial and operational processes, identify potential risks and issues, and take timely and appropriate action to address them.
+
+Event sourcing is related to database systems techniques used for persistence guarantees and replication. Gray and Reuter (1992) describe how transaction logs can be used to replicate state between database systems. Every state change is recorded as a transaction, which is similar to event sourcing where every state change is recorded as an event. Kleppmann (2017) discusses event sourcing in the context of data-intensive applications, he relates the pattern to the change data capture approach, often used in Extract-Transform-Load (or ETL) processes (Vassiliadis, 2009). ETL solutions are often used for creating data warehouses. The primary difference between event sourcing and these techniques is that a transaction or a data change is a technical entity without relation to the real world, while an event in event sourcing resembles an event in the real world.
+
+Event sourcing is a pattern that stores every state change, immutability is thus at the core of the pattern. Helland (2015) states that immutability of data is a crucial aspect for distributed systems. Although often seen as the defining characteristic of event sourcing, immutability is not enforced in any manner, as opposed to a blockchain. In a number of the systems under study, immutability is sacrificed for a simpler schema evolution technique (see Section 7). We observed different degrees of immutability. The first degree is strict, 8 out of the 19 ESSs never change an event. The second degree of immutability is used by 3 out of 19 systems, which allow for cut-off moments. In such a cut-off moment, the event store is changed, but back-ups guarantee that no information is deleted. The goal of these back-ups is to satisfy regulations or service-level agreements, therefore, they are kept around forever. This degree of immutability still guarantees an audit trail, because the back-ups can be used to retrieve all the state changes. The last degree level of immutability is mutable, 8 out of 19 systems allow events to change. In these systems, the event store is changed on some occasions, and the back-ups are not kept forever. These systems do not satisfy the goal of a complete audit trail. However, the events can still be used to explain how the current state was reached. None of the ESSs lose information regarding the current state of a system. Events that are changed, or transformed, are in most cases changed because of technical reasons.
+
+How can a System that Uses Event Sourcing Protect User Privacy? — Privacy regulations, such as the GDPR, are designed to protect users from being taken advantage of. Personal information should not be kept in a system for all eternity, but the system should delete it whenever someone requests that. However, such a requirement conflicts with the nature of event sourcing: retaining all the data. Engineers E20, E21, E23, E25 mention that they designed their systems to comply with these regulations. Systems HealthSys and P-PaySys use some form of anonymization and removal of information to comply. Obviously, this requires them to rewrite events. System IdentitySys takes a completely different approach. The system separates the events and the personal information in two different stores. When events are read, they are supplemented with the personal information. If that information is no longer present (because of removal requests), default values are supplied.
+
+Easy temporal queries - Because event sourcing maintains the complete history of each business object, implementing temporal queries and reconstructing the historical state of an entity is straightforward. % https://eventuate.io/whyeventsourcing.html
+
+
+

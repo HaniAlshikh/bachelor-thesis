@@ -1,0 +1,134 @@
+% @author Hani Alshikh
+%
+\chapter{Software Architecture and Auditing}
+Design patterns
+
+Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
+
+Software architecture is the structure, or set of structures, which comprises
+software elements, the externally visible properties of those elements, and the
+relationships among them \citep{SAIP}. This structure is an artifact from a software
+development process and is represented by a document composed by one or more
+models, which represent different perspectives about how the system will be
+structured, and information sets that facilitate the understanding of the proposed
+computational solution. It is defined based on the software requirements. Among the
+different types of requirements, the quality requirements are the most important for
+the specification of an architecture since it exerts considerable influence over it
+structure \citep{SAIP}.
+
+\section{Implementing audit logging}
+
+There are a few different ways to implement audit logging:~\cite{richardson2018microservices}
+
+\subsection{Audit logging code in business logic}
+
+The first and most straightforward option is to sprinkle audit logging code throughout your service’s business logic. Each service method, for example, can create an
+audit log entry and save it in the database. The drawback with this approach is that it
+intertwines auditing logging code and business logic, which reduces maintainability.
+The other drawback is that it’s potentially error prone, because it relies on the developer writing audit logging code.
+
+\subsection{Aspect-Oriented programming}
+
+The second option is to use AOP. You can use an AOP framework, such as Spring
+AOP, to define advice that automatically intercepts each service method call and persists an audit log entry. This is a much more reliable approach, because it automatically records every service method invocation. The main drawback of using AOP is
+that the advice only has access to the method name and its arguments, so it might be
+challenging to determine the business object being acted upon and generate a businessoriented audit log entry.
+
+\subsection{Event Sourcing}
+
+The third and final option is to implement your business logic using event sourcing.
+As mentioned in chapter 6, event sourcing automatically provides an audit log for create and update operations. You need to record the identity of the user in each event.
+One limitation with using event sourcing, though, is that it doesn’t record queries. If
+your service must create log entries for queries, then you’ll have to use one of the
+other options as well.
+
+\section{traditional persistence}
+
+The traditional approach to persistence maps classes to database tables, fields of those
+classes to table columns, and instances of those classes to rows in those tables. For
+example, figure 6.1 shows how the Order aggregate, described in chapter 5, is mapped to the ORDER table. Its OrderLineItems are mapped to the ORDER\_LINE\_ITEM table.
+
+The application persists an order instance as rows in the ORDER and ORDER\_LINE\_ITEM
+tables. It might do that using an ORM framework such as JPA or a lower-level framework such as MyBATIS.
+ This approach clearly works well because most enterprise applications store data
+this way. But it has several drawbacks and limitations:
+- Object-Relational impedance mismatch.
+- Lack of aggregate history.
+- Implementing audit logging is tedious and error prone.
+- Event publishing is bolted on to the business logic.
+Let’s look at each of these problems, starting with the Object-Relational impedance
+mismatch problem. \citep{richardson2018microservices}
+
+\subsection{Problems}
+
+OBJECT-RELATIONAL IMPEDANCE MISMATCH
+
+One age-old problem is the so-called Object-Relational impedance mismatch problem.
+There’s a fundamental conceptual mismatch between the tabular relational schema
+and the graph structure of a rich domain model with its complex relationships.
+Some aspects of this problem are reflected in polarized debates over the suitability of
+Object/Relational mapping (ORM) frameworks. For example, Ted Neward has said
+that “Object-Relational mapping is the Vietnam of Computer Science” (http://blogs
+.tedneward.com/post/the-vietnam-of-computer-science/). To be fair, I’ve used
+Hibernate successfully to develop applications where the database schema has been
+derived from the object model. But the problems are deeper than the limitations of
+any particular ORM framework. 
+
+LACK OF AGGREGATE HISTORY
+
+Another limitation of traditional persistence is that it only stores the current state of
+an aggregate. Once an aggregate has been updated, its previous state is lost. If an
+application must preserve the history of an aggregate, perhaps for regulatory purposes, then developers must implement this mechanism themselves. It is time consuming to implement an aggregate history mechanism and involves duplicating code
+that must be synchronized with the business logic.
+
+\subsubsection{implementing audit logging is tedious and error prone}
+
+Another issue is audit logging. Many applications must maintain an audit log that
+tracks which users have changed an aggregate. Some applications require auditing for
+security or regulatory purposes. In other applications, the history of user actions is an
+important feature. For example, issue trackers and task-management applications
+such as Asana and JIRA display the history of changes to tasks and issues. The challenge of implementing auditing is that besides being a time-consuming chore, the
+auditing logging code and the business logic can diverge, resulting in bugs.
+
+event publishing is bolted on to the business logic
+
+Another limitation of traditional persistence is that it usually doesn’t support publishing
+domain events. Domain events, discussed in chapter 5, are events that are published by
+an aggregate when its state changes. They’re a useful mechanism for synchronizing data
+and sending notifications in microservice architecture. Some ORM frameworks, such
+as Hibernate, can invoke application-provided callbacks when data objects change.
+But there’s no support for automatically publishing messages as part of the transaction that updates the data. Consequently, as with history and auditing, developers
+must bolt on event-generation logic, which risks not being synchronized with the business logic. Fortunately, there’s a solution to these issues: event sourcing
+
+\section{Event Sourcing}
+
+% \section{Auditing in other Architectures}
+
+Event sourcing is an architecture pattern that involves storing the history of events that have occurred in a system as a sequence of records. This allows the system to reconstruct past states and to track changes over time.
+
+One way in which event sourcing can be used for auditing is by providing a complete record of all events that have occurred in the system, including information about when the events occurred and who was responsible for them. This can be useful for identifying and analyzing trends, identifying patterns of behavior, and reconstructing past states of the system.
+
+There are several other architecture patterns that can also be used for auditing, including:
+
+Command and Query Responsibility Segregation (CQRS): This pattern involves separating the responsibilities of reading and writing data, allowing for better scalability and security. CQRS can be used to maintain a separate audit log of all write operations, which can be used for auditing purposes.
+
+Change Data Capture (CDC): This pattern involves capturing and storing changes to data as they occur, allowing for real-time analytics and data integration. CDC can be used to track changes to data over time, which can be useful for auditing purposes.
+
+Two-Phase Commit (2PC): This pattern involves coordinating the execution of transactions across multiple systems, ensuring that either all or none of the changes are made. 2PC can be used to maintain a record of all transactions that have been committed, which can be useful for auditing purposes.
+
+Ultimately, the choice of architecture pattern for auditing will depend on the specific needs of the system and the requirements of the audit process.
+
+100\% accurate audit logging - Auditing functionality is often added as an afterthought, resulting in an inherent risk of incompleteness. With event sourcing, each state change corresponds to one or more events, providing 100\% accurate audit logging.~\citep{richardson2018microservices} % https://eventuate.io/whyeventsourcing.html
+
+\subsection{Database Driven}
+
+% To see how event sourcing works, consider the Order entity. Traditionally, each order maps to a row in an ORDER table along with rows in another table like the ORDER_LINE_ITEM table. But when using event sourcing, the Order Service stores an Order by persisting its state changing events: Created, Approved, Shipped, Cancelled. Each event would contain sufficient data to reconstruct the Orders state.
+
+https://eventuate.io/whyeventsourcing.html
+
+% \subsection{Blockchain}
+\section{Blockchain}
+
+Anh et al. (2018) describes another append-only data structure: blockchain. While the data structure is similar to event sourcing, the goals of the two techniques are different. A blockchain focuses on solving problems related to distribution, consensus, and trust, while event sourcing solves problems with history, temporal complexity, and audit trails. The blockchain approach enforces the immutability of the data to solve its problems, while in event sourcing this immutability is self imposed. Event sourced systems could be build using a blockchain solution. However, the distribution and consensus features offered by blockchain do not improve the goals targeted by event sourcing.
+
+\section{Auditing 2.0}

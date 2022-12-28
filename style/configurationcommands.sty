@@ -14,9 +14,7 @@
 \newcommand{\FakPO}[1]{\newcommand{\IfacultyRegulations}{#1}}
 \newcommand{\PO}[1]{\newcommand{\IcurriculumRegulations}{#1}}
 
-% Title and author
-\newcommand{\thesisTitle}[1]{\newcommand{\IthesisTitle}{#1}}
-\newcommand{\thesisTitleEN}[1]{\newcommand{\IthesisTitleEN}{#1}}
+% author
 \newcommand{\thesisAuthor}[1]{\newcommand{\IthesisAuthor}{#1}}
 
 % constant text replacements
@@ -32,6 +30,17 @@
   {
     \newcommand{\ILanguageEN}{}
   }
+}
+
+% Title
+\newcommand{\thesisTitleDE}[1]{\newcommand{\IthesisTitleDE}{#1}}
+\newcommand{\thesisTitleEN}[1]{\newcommand{\IthesisTitleEN}{#1}}
+\newcommand{\IthesisTitle}{%
+  \ifdefined\ILanguageEN
+    \IthesisTitleEN
+  \else
+    \IthesisTitleDE
+  \fi
 }
 
 % constant commands
