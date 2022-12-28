@@ -1,0 +1,49 @@
+#
+
+## Setup environment
+
+### Glossary
+
+#### VS Code Latex workshop
+
+the following need to be added to VS code settings if latex workshop is used
+
+```json
+"latex-workshop.latex.recipes":[
+    {
+        "name": "pdflatex, bibtex, makeglossaries, pdflatex",
+        "tools": [
+            "pdflatex",
+            "bibtex",
+            "makeglossaries",
+            "pdflatex"
+        ]
+    },
+],
+"latex-workshop.latex.tools":[
+    {
+        "name": "pdflatex",
+        "command": "pdflatex",
+        "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "%DOCFILE%"
+        ]
+    },
+    {
+        "name": "bibtex",
+        "command": "bibtex",
+        "args": [
+            "%DOCFILE%"
+        ]
+    },
+    {
+        "name": "makeglossaries",
+        "command": "makeglossaries",
+        "args": [
+            "%DOCFILE%"
+        ]
+        }
+]
+```

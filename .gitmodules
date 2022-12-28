@@ -1,0 +1,6 @@
+[submodule "monoskope"]
+	path = monoskope
+	url = git@github.com:finleap-connect/monoskope.git
+[submodule "monogui"]
+	path = monogui
+	url = git@github.com:HaniAlshikh/monogui.git
