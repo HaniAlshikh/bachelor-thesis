@@ -1,0 +1,69 @@
+% @author Hani Alshikh
+%
+\chapter{Audit Browser}
+
+Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
+
+Process Discovery \cite{5427384}
+By analyzing frequent patterns, process mining techniques can extract from event logs models that describe the processes at hand. For example, the Alpha process mining algorithm can automatically extract a Petri net that concisely models behavior in the event log. This gives the auditor an unbiased view of what has actually happened.
+
+Conformance Checking
+An auditor can use an a priori process model to check if reality, as recorded in the event log, conforms to the model and vice versa. For example, a model may indicate that purchase orders exceeding one million euros require two checks. Auditors can use conformance checking to detect deviations, locate and explain them, and measure their severity (A. Rozinat and W.M.P. van der Aalst, “Conformance Checking of Processes Based on Monitoring Real Behavior,” Information Systems, vol. 33, no. 1, 2008, pp. 64–95).
+
+Toward Operational Support
+Although process mining has traditionally focused on offline analysis and is seldom used for operational decision support, it can consider running-process instances and compare them with models based on historic data or business rules (W. M. P. van der Aalst, M. Pesic, and M. Song, “Beyond Process Mining: From the Past to Present and Future,” tech. report BPM-09-18 BPMcenter.org, 2009). For example, an auditor can “replay” a running case on the process model in real time and check whether the observed behavior fits. The moment the case deviates, the auditor can alert an appropriate actor.
+
+Auditors can also use a process model based on historic data to make predictions about running cases—for example, to estimate the remaining processing time and a particular outcome's probability—or provide recommendations, such as an activity that will minimize the expected costs and completion time.
+
+\section{Requirements}
+
+Anforderungen aufgrund von Gesprächen mit dem Anwender und aufgrund der technischen
+und sozialen Verantwortung des Entwicklers,Stand der Technik und ggf. der Forschung,
+
+Keine Anforderung darf im Folgenden vergessen werden (mindestens Erwähnung in "Weiter- entwicklungsmöglichkeiten").
+• Jedes Feature des konzipierten bzw. realisierten Systems muss auf eine Anforderung zurück- geführt werden.
+
+\subsection{Use-Cases}
+
+\subsection{Stakeholders}
+
+\subsection{Architectural Constraints}
+
+\section{System Design}
+
+\subsection{Enabling Technologies}
+
+the 8 fallacies of distributed computing
+
+protobuf vs json: https://youtu.be/CAGuhVIOT2c?t=1206
+
+Stand des Projekts und Weiterentwicklungsmöglichkeiten.
+• Anhang: Entwicklerdokumentation,Benutzerdokumentation
+Elektronischer Anhang: Sources, Projektdateien.
+
+\subsection{Scope and Context}
+
+\subsection{Solution Strategy}
+
+\subsection{Building Block View}
+
+\subsection{Runtime View}
+
+\subsection{Deployment View}
+
+\section{Design Decisions}
+
+\subsection{DD01: gRPC proxy}
+
+Communicating using the synchronous Remote
+procedure invocation pattern \citep{richardson2018microservices}
+
+comparison: https://youtu.be/CAGuhVIOT2c?t=1829
+
+dealing with api changes
+
+\subsection{DD02: Micro Frontends}
+
+\section{Technical Decisions}
+
+Lösungsalternativen sind kritisch zu bewerten und Auswahl zu begründen.

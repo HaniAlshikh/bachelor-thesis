@@ -11,8 +11,8 @@
 %\RequirePackage[applemac]{inputenc}     % Mac encoding
 %\RequirePackage[latin1]{inputenc}       % Linux encoding
 
-\RequirePackage[ngerman]{babel}     % New german spell checking
-%\RequirePackage[english]{babel}     % English spell checking
+% \RequirePackage[ngerman]{babel}     % New german spell checking
+\RequirePackage[english]{babel}     % English spell checking
 \RequirePackage[T1]{fontenc}        % Font
 \RequirePackage{opensans}
 %\RequirePackage{url}                % Line break support in URL
@@ -23,7 +23,7 @@
 \setkomafont{disposition}{\normalfont\bfseries} % Headings in normal font
 
 \RequirePackage[automark, headsepline]{scrlayer-scrpage}
-\clearscrheadfoot                   % clear all headings and footers
+\clearpairofpagestyles                   % clear all headings and footers
 \ihead{\headmark}
 \automark{chapter}
 \ofoot[\pagemark]{\pagemark}
@@ -35,9 +35,11 @@
 
 \RequirePackage{graphicx}           % Include graphics to document
 \RequirePackage{subcaption}         % Multiple Pictures next to each other
-\RequirePackage[numbers]{natbib}    % More citation styles
+\RequirePackage[authoryear,square]{natbib}    % More citation styles
+% \setcitestyle{square}
 \parindent0pt                       % First line starts imediately
 \RequirePackage{todonotes}          % Adds notes on marginpar (can lead to warnings!)
+% \RequirePackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}          % Adds notes on marginpar (can lead to warnings!)
 
                                     % Page layout
 %\RequirePackage[top=2.5cm, right=2.5cm, bottom=2.5cm, left=4cm]{geometry}
@@ -73,3 +75,7 @@ toc
 % give LaTeX the option to insert more space between words
 % (when the line-breaks would overflow the hbox otherwise)
 %\emergencystretch 1.5em
+
+\definecolor{mycolor}{rgb}{0,0,0}
+
+\RequirePackage{tabularx}

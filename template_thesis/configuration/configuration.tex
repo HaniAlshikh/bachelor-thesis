@@ -6,36 +6,55 @@
 % English Language support
 % -> uncomment if needed
 % Beta!
-%\fullenglish{yes}
-\fullenglish{no}
+\fullenglish{yes}
+% \fullenglish{no}
 
 % text field
 %-> replace supervisor names with correct ones
-\firstSupervisor{Prof. Dr.-Ing. Jane Doe}
-\secondSupervisor{Prof. Dr. John Doe}
+\firstSupervisor{Prof. Dr. Stefan Sarstedt}
+\secondSupervisor{Prof. Dr. Olaf Zukunft}
 
 % text field
 %-> replace title with your thesis title
-\thesisTitle{Das Leben, das Universum und der ganze Rest}
-\thesisTitleEN{Life, the Universe and Everything}
+\thesisTitleDE{}
+\thesisTitleEN{Evaluation and use of Event-Sourcing for audit logging}
 
 % text field
 %-> replace the key words with your own key words
-\keywordsDE{Leben, Universum, Alles}
-\keywordsEN{Life, Universe, Everything}
+\keywordsDE{}
+\keywordsEN{Event Sourcing, Auditing, Audit Trail, Software Engineering, Software Architecture}
 
 % text field
 %-> replace the text with a description of the thesis
-\abstractDE{Arthur Dents Reise in eine neue Zukunft \dots}
-\abstractEN{Arthur Dents travel to a new future \dots}
+\abstractDE{\todo{TODO} 
+Erläutern Sie zuerst das Was (Allgemeine) und gehen Sie dann auf das Wie über. Sind die Hin- tergründe der Übergänge nicht von selbst ersichtlich, so ist eine Begründung zu liefern. Ein (zu) detailliertes Beispiel einer Motoransteuerung mittels Mikrokontroller:
+„Ein Motor soll mit variabler Geschwindigkeit angesteuert werden[Worum geht es?]. Die Ge- schwindigkeit wird über ein PWM-Signal (mit einer Frequenz von 50 Hz) eingestellt und muss entsprechend der Sollwerte erzeugt werden [Was wird gemacht?]. Das PWM-Signal wird mit- tels eines TPU-Kanals erzeugt. Die einzustellenden Parameter sind Prescaler p_s = 4 und Ti- mer Register TGRA = 0x3211 [Wie wird das Signal erzeugt?]. Der Prescaler wurde zu p_s = 4 bestimmt, da sich so die beste Zeitauflösung erzielen lässt [Warum p_s = 4?].“
+
+Die Einhaltung der Bestimmungen und die genaue Protokollaufzeichnungen sind wichtige Bestandteile kretischen Systeme, die in sensiblen Bereiche wie Regierung, Finanzen, Infrastruktur, etc.. eingesetzt werden. Im Vergleich zu anderen Architekturen stellt Event-Sourcing eine vollständige und unveränderliche Aufzeichnung aller Ereignisse und Zustandsänderungen innerhalb eines Systems bereit, was ein effizientes und gründliches Auditing der Systemaktivität ermöglicht. 
+
+In dieser Arbeit wird Event-Sourcing auf eine zuverlässige Grundlage bei der Prüfung und Einhaltung gesetzlicher Vorschriften eines streng auditierten Systems am Beispiel eines FinTech Unternehmens untersucht und mit anderen Architekturen verglichen.
+
+Dazu werden organisatorische sowie technische Anforderungen an eine geeignete Audit-Komponente eines Event-Sourcing Systems abgeleitet und im Rahmen der Evaluierung entwickelt. Dabei wird ein enger Kontakt zum Chief Information Security Officer bei Finleap Connect gehalten.
+
+After a brief survey of the problems related to audit trail analysis and of some approaches to deal with them, the paper outlines the project ASAX which aims at providing an advanced tool to support such analysis. One key feature of ASAX is its elegant architecture build on top of a universal analysis tool allowing any audit trail to be analysed after a straight format adaptation. Another key feature of the project ASAX is the language RUSSEL used to express queries on audit trails. RUSSEL is a rulebased language which is tailor-made for the analysis of sequential files in one and only one pass. The conception of RUSSEL makes a good compromise with respect to the needed efficiency on the one hand and to the suitable declarative look on the other hand. The language is illustrated by examples of rules for the detection of some representative classical security breaches.
+
+Event sourced systems are increasing in popularity because they are reliable, flexible, and scalable. In this article, we point a microscope at a software architecture pattern that is rapidly gaining popularity in industry, but has not received as much attention from the scientific community. We do so through constructivist grounded theory, which proves a suitable qualitative method for extracting architectural knowledge from practitioners. \dots}
+\abstractEN{\todo{TODO} 
+Kurzfassung
+Falls Sie über den Titel die Aufmerksamkeit des Lesers geweckt haben, wird dieser in der Regel die Kurzfassung und das Inhaltsverzeichnis überfliegen. Im Inhaltsverzeichnis erwartet er Information über die Struktur der Arbeit, in der Kurzfassung über deren Inhalt. Die Kurzfassung sollte deshalb eine konzentrierte Verdichtung des fachlichen Inhaltes der Arbeit enthalten. Die Kurzfassung zu schreiben ist nicht ganz einfach. Sie wird immer als Allerletztes verfasst. Die Kunst besteht darin, die wesentlichen Kernaussagen der Arbeit in einer viertel bis halben Seite zusammenzufassen.
+
+% Erläutern Sie zuerst das Was (Allgemeine) und gehen Sie dann auf das Wie über. Sind die Hin- tergründe der Übergänge nicht von selbst ersichtlich, so ist eine Begründung zu liefern. Ein (zu) detailliertes Beispiel einer Motoransteuerung mittels Mikrokontroller:
+% „Ein Motor soll mit variabler Geschwindigkeit angesteuert werden[Worum geht es?]. Die Ge- schwindigkeit wird über ein PWM-Signal (mit einer Frequenz von 50 Hz) eingestellt und muss entsprechend der Sollwerte erzeugt werden [Was wird gemacht?]. Das PWM-Signal wird mit- tels eines TPU-Kanals erzeugt. Die einzustellenden Parameter sind Prescaler p_s = 4 und Ti- mer Register TGRA = 0x3211 [Wie wird das Signal erzeugt?]. Der Prescaler wurde zu p_s = 4 bestimmt, da sich so die beste Zeitauflösung erzielen lässt [Warum p\_s = 4?].“
+
+\dots}
 
 % text field
 %-> replace john with your name
-\thesisAuthor{John Doe}
+\thesisAuthor{Hani Alshikh}
 
 % text field
 %-> enter the submission date
-\submissionDate{07. Juni 1954}
+\submissionDate{20. März 2023}
 
 % switch - uncomment only one
 %-> uncomment NDA or public
@@ -46,7 +65,7 @@
 %-> uncomment old standard cover or cover Corporate Design 2017
 \Cover{CD2017}
 %\Cover{CD2017NoLogo}
-%\Cover{Std2018}
+% \Cover{Std2018}
 %\Cover{Std2018_green} 			% with green bar
 
 % switch - uncomment only one
@@ -76,9 +95,9 @@
 
 % switch - uncomment only one
 %-> uncomment the study course you are in
-\studycourse{ITS}
+%\studycourse{ITS}
 %\studycourse{TI}
-%\studycourse{AI}
+\studycourse{AI}
 %\studycourse{WI}
 %\studycourse{EI}
 %\studycourse{REE}

@@ -1,3 +1,5 @@
+\PassOptionsToPackage{table}{xcolor} % TODO fix me \usepackage[table]{xcolor}
+
 \documentclass[
   a4paper,            % DIN A4
   DIV=10,             % Schriftgröße und Satzspiegel
@@ -13,7 +15,7 @@
 \makeglossaries           % create all glossary entries (remember: run makeglossaries manually)
 \loadglsentries{thesisglossaries.tex}  % load acronym, symbol and glossary entries
 
-\sisetup{locale = DE}     % siunitx locale setup
+%\sisetup{locale = DE}     % siunitx locale setup
 %\DeclareSIUnit \fps{fps}  % a custom unit (usage: \SI{24}{\fps})
 
 \begin{document}
@@ -48,6 +50,7 @@
 \IListOfAccronyms
 
 % List of symbols here
+% TODO Einheiten werden mit einem Leerzeichen von dem Wert getrennt, z. B. 5 V, 23° C. Um Fehler im Um- bruch zu vermeiden, sollten man gesperrte Leerzeichen verwenden. In LaTeX „~“
 \IListOfSymbols
 
 % Uncomment if list of source code is needed (rarely).
@@ -59,11 +62,20 @@
 % Chapters
 \clearpage
 \pagenumbering{arabic}
-\input{chapters/first_chapter}
+\input{chapters/acknowledgments}
+\input{chapters/introduction}
+\input{chapters/audit}
+\input{chapters/event_sourcing}
+\input{chapters/software_architecture_and_auditin}
+\input{chapters/audit_component_implementation}
+\input{chapters/audit_browser_implementation}
+\input{chapters/installation_and_configuration}
+\input{chapters/conclusion}
 % Add additional chapters here
 
 %\bibliographystyle{plain}
 \bibliographystyle{dinat}
+% \bibliographystyle{unsrtnat}
 \bibliography{literature}
 
 % Appendix
