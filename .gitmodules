@@ -1,0 +1,3 @@
+[submodule "monoskope"]
+	path = monoskope
+	url = git@github.com:finleap-connect/monoskope.git
