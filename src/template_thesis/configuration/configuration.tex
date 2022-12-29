@@ -22,31 +22,18 @@
 % text field
 %-> replace the key words with your own key words
 \keywordsDE{}
-\keywordsEN{Event Sourcing, Auditing, Audit Trail, Software Engineering, Software Architecture}
+\keywordsEN{Event Sourcing, Auditing, Auditing 2.0, Audit Trail, Audit log, Software Engineering, Software Architecture}
 
 % text field
 %-> replace the text with a description of the thesis
-\abstractDE{\todo{TODO} 
-Erläutern Sie zuerst das Was (Allgemeine) und gehen Sie dann auf das Wie über. Sind die Hin- tergründe der Übergänge nicht von selbst ersichtlich, so ist eine Begründung zu liefern. Ein (zu) detailliertes Beispiel einer Motoransteuerung mittels Mikrokontroller:
-„Ein Motor soll mit variabler Geschwindigkeit angesteuert werden[Worum geht es?]. Die Ge- schwindigkeit wird über ein PWM-Signal (mit einer Frequenz von 50 Hz) eingestellt und muss entsprechend der Sollwerte erzeugt werden [Was wird gemacht?]. Das PWM-Signal wird mit- tels eines TPU-Kanals erzeugt. Die einzustellenden Parameter sind Prescaler p_s = 4 und Ti- mer Register TGRA = 0x3211 [Wie wird das Signal erzeugt?]. Der Prescaler wurde zu p_s = 4 bestimmt, da sich so die beste Zeitauflösung erzielen lässt [Warum p_s = 4?].“
+\abstractDE{\dots}
+\abstractEN{
+Keeping accurate audit records is a requirement for complaint \gls{ac:it} systems, especially when used in sensitive industries such as government, finance, infrastructure, etc.
 
-Die Einhaltung der Bestimmungen und die genaue Protokollaufzeichnungen sind wichtige Bestandteile kretischen Systeme, die in sensiblen Bereiche wie Regierung, Finanzen, Infrastruktur, etc.. eingesetzt werden. Im Vergleich zu anderen Architekturen stellt Event-Sourcing eine vollständige und unveränderliche Aufzeichnung aller Ereignisse und Zustandsänderungen innerhalb eines Systems bereit, was ein effizientes und gründliches Auditing der Systemaktivität ermöglicht. 
+Event-Sourced architectures are rapidly gaining in popularity as they provide reliability, flexibility, and scalability. One of the primary benefits of Event-Sourcing is that it provides complete and immutable records of all events and state changes within the system, allowing for efficient and thorough audit logging by design.
 
-In dieser Arbeit wird Event-Sourcing auf eine zuverlässige Grundlage bei der Prüfung und Einhaltung gesetzlicher Vorschriften eines streng auditierten Systems am Beispiel eines FinTech Unternehmens untersucht und mit anderen Architekturen verglichen.
-
-Dazu werden organisatorische sowie technische Anforderungen an eine geeignete Audit-Komponente eines Event-Sourcing Systems abgeleitet und im Rahmen der Evaluierung entwickelt. Dabei wird ein enger Kontakt zum Chief Information Security Officer bei Finleap Connect gehalten.
-
-After a brief survey of the problems related to audit trail analysis and of some approaches to deal with them, the paper outlines the project ASAX which aims at providing an advanced tool to support such analysis. One key feature of ASAX is its elegant architecture build on top of a universal analysis tool allowing any audit trail to be analysed after a straight format adaptation. Another key feature of the project ASAX is the language RUSSEL used to express queries on audit trails. RUSSEL is a rulebased language which is tailor-made for the analysis of sequential files in one and only one pass. The conception of RUSSEL makes a good compromise with respect to the needed efficiency on the one hand and to the suitable declarative look on the other hand. The language is illustrated by examples of rules for the detection of some representative classical security breaches.
-
-Event sourced systems are increasing in popularity because they are reliable, flexible, and scalable. In this article, we point a microscope at a software architecture pattern that is rapidly gaining popularity in industry, but has not received as much attention from the scientific community. We do so through constructivist grounded theory, which proves a suitable qualitative method for extracting architectural knowledge from practitioners. \dots}
-\abstractEN{\todo{TODO} 
-Kurzfassung
-Falls Sie über den Titel die Aufmerksamkeit des Lesers geweckt haben, wird dieser in der Regel die Kurzfassung und das Inhaltsverzeichnis überfliegen. Im Inhaltsverzeichnis erwartet er Information über die Struktur der Arbeit, in der Kurzfassung über deren Inhalt. Die Kurzfassung sollte deshalb eine konzentrierte Verdichtung des fachlichen Inhaltes der Arbeit enthalten. Die Kurzfassung zu schreiben ist nicht ganz einfach. Sie wird immer als Allerletztes verfasst. Die Kunst besteht darin, die wesentlichen Kernaussagen der Arbeit in einer viertel bis halben Seite zusammenzufassen.
-
-% Erläutern Sie zuerst das Was (Allgemeine) und gehen Sie dann auf das Wie über. Sind die Hin- tergründe der Übergänge nicht von selbst ersichtlich, so ist eine Begründung zu liefern. Ein (zu) detailliertes Beispiel einer Motoransteuerung mittels Mikrokontroller:
-% „Ein Motor soll mit variabler Geschwindigkeit angesteuert werden[Worum geht es?]. Die Ge- schwindigkeit wird über ein PWM-Signal (mit einer Frequenz von 50 Hz) eingestellt und muss entsprechend der Sollwerte erzeugt werden [Was wird gemacht?]. Das PWM-Signal wird mit- tels eines TPU-Kanals erzeugt. Die einzustellenden Parameter sind Prescaler p_s = 4 und Ti- mer Register TGRA = 0x3211 [Wie wird das Signal erzeugt?]. Der Prescaler wurde zu p_s = 4 bestimmt, da sich so die beste Zeitauflösung erzielen lässt [Warum p\_s = 4?].“
-
-\dots}
+The benefits and challenges of Event-Sourcing compared to other approaches were examined and evaluated. A \gls{ac:poc} auditing component and an audit browser were also developed to showcase what to expect in terms of auditing capabilities as well as laying the groundwork for auditing 2.0 integration\dots
+}
 
 % text field
 %-> replace john with your name
