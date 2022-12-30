@@ -1,6 +1,8 @@
 % @author Thomas Lehmann
 %
-\chapter{Event Sourcing}
+\chapter{Event-Sourcing}
+
+...\citep{fowler2022es}
 
 Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
 
@@ -70,6 +72,8 @@ is lost when using active records.
 
 % https://ieeexplore.ieee.org/abstract/document/7884621
 
+...\citep{young2010cqrs}
+
 One of the architectural patterns that in recent years emerged in the development of cloud systems is Command Query Responsibility Segregation (CQRS). The pattern was introduced by Young [5] and Dahan [6], and the goal of the pattern is to handle actions that change data (those are called commands) in different parts in the system than requests that ask for data (called queries). By separating the command-side (the part that validates and accepts changes) from the query-side (the part that answers queries), the system can optimize the two parts for their very different tasks.
 
 Young [7] describes CQRS as a stepping stone for event sourcing. Event sourcing is a data storage model that does not store the current (or last) state, but all changes leading up to the current state. Fowler [8] explains event sourcing by comparing it to an audit trail: every data change is stored without removing or changing earlier events. The events stored in an event store are stored as schema-less data, because the different events often do not share properties. A store with an explicit schema would make it more difficult to append events in the store to a single stream. Data in schema-less stores is not without schema, but the schema is implicit: the application assumes a certain schema. This makes the problem of schema evolution and data conversion more difficult as observed by Scherzinger et al. [9]. Schema-less data is more difficult to evolve as the store is unaware of structure and thus cannot offer tools to transform the data into a new structure. Relational data stores that have explicit knowledge of the structure of the data can use the standardized data definition language (DDL) to upgrade the schema and convert the data. Another problem in the evolution of event sourced systems is the amount of data that is stored, not only the current state, but also every change leading up to that state. This huge amount of data makes the problem of performing a seamless upgrade even more important: upgrades may need more time, but they are required to be imperceptible.
@@ -86,7 +90,7 @@ The loosely coupled nature of CQRS combined the benefits of the event sourcing a
 
 An audit log is the simplest, yet also one of the most effective forms of tracking temporal information. The idea is that any time something significant happens you write some record indicating what happened and when it happened.
 
-\section{Event-Sourced Architectures}
+\section{Event-Sourced Architecture}
 
 Event Sourcing is the foundation for Parallel Models or Retroactive Events. If you want to use either of those patterns you will need to use Event Sourcing first. Indeed this goes to the extent that it's very hard to retrofit these patterns onto a system that wasn't built with Event Sourcing. Thus if you think there's a reasonable chance that the system will need these patterns later it's wise to build Event Sourcing now. This does seem to be one of those cases where it isn't wise to leave this decision to later refactoring.
 
