@@ -17,8 +17,6 @@ Figure 1 shows an Auditing 2.0 framework based on process mining. “Current dat
 
 \gls{ac:m8} is an event-sourced system...~\todo{TODO}
 
-
-
 \section{Requirements}
 
 \todo{clreaify how this should be  written? meeting, disscussion parties, etc...}
@@ -40,10 +38,63 @@ It should be possible to utilise \gls{ac:es}'s temporal quires \todo{add chapter
 
 \subsection{Use-Cases}
 
-\subsection{Stakeholders}
+From the requirements overview the following use-cases are derived
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{Audit component derived use-cases}
+    \label{tab:acuc}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{ID} & \textbf{Use-Case} & \textbf{Description}\\
+      UC01 & get audit-log for date-range & As an Auditor, I want to see all actions taken within a specific date-range\\
+      UC02 & get audit-log about a user & As an Auditor, I want see all actions taken on a user\\
+      UC03 & get audit-log of user-actions & As an Auditor, I want see all actions taken by a user\\
+      UC04 & get audit-log users overview & As an Auditor, I want a report of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+% \subsection{Stakeholders}
 
 \subsection{Architectural Constraints}
 
+\subsubsection{Technical Constraints}
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{Audit component technical constraints}
+    \label{tab:actc}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
+      TC01 & human-readable representation & log structs musst contain a human-readable representation\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+\subsubsection{Organisational Constraints}
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{Audit component organisational constraints}
+    \label{tab:acoc}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
+      OC01 & Deadline & implementation musst be finalised before 31.01.2023\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
 
 \section{System Design}
 
