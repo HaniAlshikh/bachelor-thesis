@@ -11,16 +11,90 @@ Event logs and process mining techniques enable new forms of auditing. Rather th
 
 Figure 1 shows an Auditing 2.0 framework based on process mining. “Current data” events are cases that are still running, while “Historic data” events are completed cases. The figure also shows two types of process models: De jure models describe a desired or required way of working, while de facto models aim to describe reality with potential violations of the boundaries defined in de jure models (W. M. P. van der Aalst et al., “Conceptual Model for On Line Auditing,” tech. report BPM-09-19 BPMcenter.org, 2009).
 
+\section{Monoskope}
+
+\gls{ac:m8} implements the management and operation of tenants, users and their roles in a Kubernetes multi-cluster environment. It fulfills the needs of operators of the clusters as well as the needs of developers using the cloud infrastructure provided by the operators.~\todo{rewrite m8 overview}
+
+\gls{ac:m8} is an event-sourced system...~\todo{TODO}
+
 \section{Requirements}
+
+\todo{clreaify how this should be  written? meeting, disscussion parties, etc...}
+
+\gls{ac:m8} has by nature a full audit log of every change to the system.This should be utilised to provide auditors and operators the ability to get detailed information of who is allowed to do what and why to answer questions like:
+
+\begin{itemize}
+  \item How did a user get a specific role?
+  \item How did a user become a tenant member?
+  \item What actions were taken by a user?
+  \item \dots
+\end{itemize}
+
+Auditors have different backgrounds and technical knowledge thus all events musst have a human-readable representation.
+
+It should be possible to utilise \gls{ac:es}'s temporal quires \todo{add chapter refrence} to get a system overview at a specific date and time 
+
+...~\citep{SAIP}
 
 \subsection{Use-Cases}
 
-\subsection{Stakeholders}
+From the requirements overview the following use-cases are derived
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{Audit component derived use-cases}
+    \label{tab:acuc}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{ID} & \textbf{Use-Case} & \textbf{Description}\\
+      UC01 & get audit-log for date-range & As an Auditor, I want to see all actions taken within a specific date-range\\
+      UC02 & get audit-log about a user & As an Auditor, I want see all actions taken on a user\\
+      UC03 & get audit-log of user-actions & As an Auditor, I want see all actions taken by a user\\
+      UC04 & get audit-log users overview & As an Auditor, I want a report of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+% \subsection{Stakeholders}
 
 \subsection{Architectural Constraints}
 
-\subsection{Base System}
+\subsubsection{Technical Constraints}
 
+\begin{table}[h!]
+  \begin{center}
+    \caption{Audit component technical constraints}
+    \label{tab:actc}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
+      TC01 & human-readable representation & log structs musst contain a human-readable representation\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+\subsubsection{Organisational Constraints}
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{Audit component organisational constraints}
+    \label{tab:acoc}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
+      OC01 & Deadline & implementation musst be finalised before 31.01.2023\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
 
 \section{System Design}
 
