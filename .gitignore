@@ -280,3 +280,4 @@ TSWLatexianTemp*
 *.slo
 *.sls
 *.ist
+*svg-inkscape*
