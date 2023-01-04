@@ -98,6 +98,18 @@ From the requirements overview the following use-cases are derived
 
 \section{System Design}
 
+% \subsection{Enabling Technologies}
+
+\subsection{Scope and Context}
+
+\subsubsection{Business Context}
+
+\includenamedsvg{\includesvg}{diagrams/audit_component/business_context.drawio}{Business Context Diagram}
+
+\subsubsection{Technical Context}
+
+\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_component/technical_context.drawio}{Technical Context Diagram}
+
 \subsection{Solution Strategy}
 
 \begin{table}[H]
@@ -119,20 +131,97 @@ From the requirements overview the following use-cases are derived
 \end{table}
 ...\todo{finish the table}
 
-% \subsection{Enabling Technologies}
-
-% \subsection{Scope and Context}
-
 \subsection{Building Block View}
 
-% \includesvg{diagrams/audit_component/component_diagram.drawio}
-% \includesvg[inkscapelatex=false]{diagrams/audit_component/component_diagram.drawio}
-\includesvg[pretex=\footnotesize]{diagrams/audit_component/component_diagram.drawio}
+\subsubsection{Overall System White Box}
+
+\includenamedsvg{\includesvg[pretex=\footnotesize]}{diagrams/audit_component/component_diagram.drawio}{Overall System Component Diagram}
+
+\subparagraph{Level 1}
+
+\paragraph{Contained Building Blocks}.
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Audit component overall system contained building blocks white box}
+    \label{tab:acoscbbwb}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{Component} & \textbf{Description}\\
+      Audit & handles aggregating and formatting events for audit related queries\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+\paragraph{Audit Component Black Box}.
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Audit component black box}
+    \label{tab:acbb}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{Interface} & \textbf{Description}\\
+      AuditLogClient & handles communication with the audit log server\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+\subparagraph{Level 2}
+
+\paragraph{Audit Component White Box}.
+
+% \caption{Audit Component White Box}
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\footnotesize]}{diagrams/audit_component/audit_component_diagram.drawio}{Audit Component Diagram}
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Audit component contained building blocks white box}
+    \label{tab:accbbwb}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{Component} & \textbf{Description}\\
+      Audit & handles audit client queries\\
+      EventFormatterRegistry & register and initialise \glspl{gl:ef} based on the event type\\
+      EventFormatter & formats an event in human-readable format\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+\subparagraph{Event Component Black Box}.
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Event component black box}
+    \label{tab:ecbb}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{Interface} & \textbf{Description}\\
+      EventFormatterRegistry & register and initialise \glspl{gl:ef} based on the event type\\
+      EventFormatter & formats an event in human-readable format\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+\subparagraph{Level 3}
+
+\todo{Class Digram}
 
 \subsection{Runtime View}
 
 \subsection{Deployment View}
-
 
 \section{Design Decisions}
 

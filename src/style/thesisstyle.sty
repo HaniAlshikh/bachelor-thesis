@@ -84,4 +84,9 @@ toc
 
 % svg
 \RequirePackage{svg}
-\svgsetup{clean=true}
+\svgsetup{
+  % width=\textwidth,
+  inkscapepath=diagrams/svg-inkscape,
+  inkscapelatex=true, % render text with latex
+  pretex=\footnotesize,
+  }
