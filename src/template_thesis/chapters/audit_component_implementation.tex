@@ -11,7 +11,7 @@ Event logs and process mining techniques enable new forms of auditing. Rather th
 
 Figure 1 shows an Auditing 2.0 framework based on process mining. “Current data” events are cases that are still running, while “Historic data” events are completed cases. The figure also shows two types of process models: De jure models describe a desired or required way of working, while de facto models aim to describe reality with potential violations of the boundaries defined in de jure models (W. M. P. van der Aalst et al., “Conceptual Model for On Line Auditing,” tech. report BPM-09-19 BPMcenter.org, 2009).
 
-\section{Monoskope}
+\section{Monoskope}\label{sec:m8}
 
 \gls{ac:m8} implements the management and operation of tenants, users and their roles in a Kubernetes multi-cluster environment. It fulfills the needs of operators of the clusters as well as the needs of developers using the cloud infrastructure provided by the operators.~\todo{rewrite m8 overview}
 
@@ -40,7 +40,7 @@ It should be possible to utilise \gls{ac:es}'s temporal quires \todo{add chapter
 
 From the requirements overview the following use-cases are derived
 
-\begin{table}[h!]
+\begin{table}[H]
   \begin{center}
     \caption{Audit component derived use-cases}
     \label{tab:acuc}
@@ -64,7 +64,7 @@ From the requirements overview the following use-cases are derived
 
 \subsubsection{Technical Constraints}
 
-\begin{table}[h!]
+\begin{table}[H]
   \begin{center}
     \caption{Audit component technical constraints}
     \label{tab:actc}
@@ -81,7 +81,7 @@ From the requirements overview the following use-cases are derived
 
 \subsubsection{Organisational Constraints}
 
-\begin{table}[h!]
+\begin{table}[H]
   \begin{center}
     \caption{Audit component organisational constraints}
     \label{tab:acoc}
@@ -98,18 +98,130 @@ From the requirements overview the following use-cases are derived
 
 \section{System Design}
 
-\subsection{Enabling Technologies}
+% \subsection{Enabling Technologies}
 
 \subsection{Scope and Context}
 
+\subsubsection{Business Context}
+
+\includenamedsvg{\includesvg}{diagrams/audit_component/business_context.drawio}{Business Context Diagram}
+
+\subsubsection{Technical Context}
+
+\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_component/technical_context.drawio}{Technical Context Diagram}
+
 \subsection{Solution Strategy}
 
+\begin{table}[H]
+  \footnotesize
+  \begin{center}
+    \caption{Audit component solution strategy}
+    \label{tab:acss}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l X l X X X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{Actor} & \textbf{Funktion} & \textbf{UCID} & \textbf{Semantics} & \textbf{Pre-condition} & \textbf{Post-condition}\\
+      QueryHandler & New\-Audit\-Log\-Server\-(Event\-Store\-Client, Event\-Formatter\-Registry) & All & Creates server instance of the audit log component to handle grpc client requests & \gls{gl:ef} server is running and \glspl{gl:ef} are registered & Audit-log server is ready to handle client requests  \\
+      AuditLogClient & Get\-By\-Date\-Range(Range\-Request, Stream) & UC01 & streams formatted events & Audit\-Log\-Server is running & human-readable events were streamed to the client  \\
+      ... & ... & ... & ... & ... & ...  \\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+...\todo{finish the table}
+
 \subsection{Building Block View}
+
+\subsubsection{Overall System White Box}
+
+\includenamedsvg{\includesvg[pretex=\footnotesize]}{diagrams/audit_component/component_diagram.drawio}{Overall System Component Diagram}
+
+\subparagraph{Level 1}
+
+\paragraph{Contained Building Blocks}.
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Audit component overall system contained building blocks white box}
+    \label{tab:acoscbbwb}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{Component} & \textbf{Description}\\
+      Audit & handles aggregating and formatting events for audit related queries\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+\paragraph{Audit Component Black Box}.
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Audit component black box}
+    \label{tab:acbb}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{Interface} & \textbf{Description}\\
+      AuditLogClient & handles communication with the audit log server\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+\subparagraph{Level 2}
+
+\paragraph{Audit Component White Box}.
+
+% \caption{Audit Component White Box}
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\footnotesize]}{diagrams/audit_component/audit_component_diagram.drawio}{Audit Component Diagram}
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Audit component contained building blocks white box}
+    \label{tab:accbbwb}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{Component} & \textbf{Description}\\
+      Audit & handles audit client queries\\
+      EventFormatterRegistry & register and initialise \glspl{gl:ef} based on the event type\\
+      EventFormatter & formats an event in human-readable format\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+\subparagraph{Event Component Black Box}.
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Event component black box}
+    \label{tab:ecbb}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{Interface} & \textbf{Description}\\
+      EventFormatterRegistry & register and initialise \glspl{gl:ef} based on the event type\\
+      EventFormatter & formats an event in human-readable format\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+\subparagraph{Level 3}
+
+\todo{Class Digram}
 
 \subsection{Runtime View}
 
 \subsection{Deployment View}
-
 
 \section{Design Decisions}
 

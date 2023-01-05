@@ -9,10 +9,19 @@
 % @param name of the file (without format extenstion), used in label as well
 % @param caption text
 \newcommand\includenamedimage[3][]{
-    \begin{figure}
+    \begin{figure}[H]
       \centering
-      \includegraphics[width=#1\textwidth]{#2}
       \caption{#3}
       \label{fig:#2}
+      \includegraphics[width=#1\textwidth]{#2}
+    \end{figure}
+}
+
+\newcommand\includenamedsvg[3]{
+    \begin{figure}[H]
+      \centering
+      \caption{#3}
+      \label{fig:#2}
+      #1{#2}
     \end{figure}
 }
