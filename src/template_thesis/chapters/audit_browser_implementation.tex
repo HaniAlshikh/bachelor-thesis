@@ -17,26 +17,32 @@ Auditors can also use a process model based on historic data to make predictions
 
 \section{Requirements}
 
-Anforderungen aufgrund von Gesprächen mit dem Anwender und aufgrund der technischen
-und sozialen Verantwortung des Entwicklers,Stand der Technik und ggf. der Forschung,
+% Anforderungen aufgrund von Gesprächen mit dem Anwender und aufgrund der technischen
+% und sozialen Verantwortung des Entwicklers,Stand der Technik und ggf. der Forschung,
 
-Keine Anforderung darf im Folgenden vergessen werden (mindestens Erwähnung in "Weiter- entwicklungsmöglichkeiten").
-• Jedes Feature des konzipierten bzw. realisierten Systems muss auf eine Anforderung zurück- geführt werden.
+% Keine Anforderung darf im Folgenden vergessen werden (mindestens Erwähnung in "Weiter- entwicklungsmöglichkeiten").
+% • Jedes Feature des konzipierten bzw. realisierten Systems muss auf eine Anforderung zurück- geführt werden.
 
-Auditors have different backgrounds and technical knowledge thus the following need to be consider:
+The audit component implemented in chapter \ref{chap:ac} is to be utilised to offer an audit reporting \gls{ac:gui}. \gls{ac:m8} offer much more features, that can be utilised, thus the \gls{ac:gui} should be expandable to accommodate other use-cases and implementations.
 
-- The same event view musst be ensured to ease dealing with deferent events and allow for a sense of familiarity. For example if a table is used to showcase the event, the table structure is preserved for all types.
-- lack of events is not an error and musst be clearly represented
+Upstream \gls{ac:iam} authentication like onelogin is to be supported.
 
-Automated audit reports 
-audit log is exportable
-alerting and monitoring
-End with a GUI, that the auditor can configure to her/his own requirements
+Since Auditors have different backgrounds and technical knowledge the \gls{ac:ux} should be intuitive and well thought out. The following is to be considered:
 
+\begin{itemize}
+  \item The same event view musst be ensured to ease dealing with deferent events and allow for a sense of familiarity. For example if a table is used to showcase the event, the table structure is preserved for all types.
+  \item lack of events is not an error and musst be clearly represented
+\end{itemize}
+
+To ease auditors workflows and external auditing needs audit reports should be exportable and sendable via e-mail in a spread-sheet compatible format like \gls{ac:csv}. Automating these reports should be possible as well.
+
+% alerting and monitoring
+
+% End with a GUI, that the auditor can configure to her/his own requirements
 
 \subsection{Use-Cases}
 
-\subsection{Stakeholders}
+% \subsection{Stakeholders}
 
 \subsection{Architectural Constraints}
 

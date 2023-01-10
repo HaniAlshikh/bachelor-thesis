@@ -1,6 +1,6 @@
 % @author Hani Alshikh
 %
-\chapter{Audit Component}
+\chapter{Audit Component}\label{chap:ac}
 
 Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
 
@@ -49,10 +49,10 @@ From the requirements overview the following use-cases are derived
       \hline
       \rowcolor{gray!20}
       \textbf{ID} & \textbf{Use-Case} & \textbf{Description}\\
-      UC01 & get audit-log for date-range & As an Auditor, I want to see all actions taken within a specific date-range\\
-      UC02 & get audit-log about a user & As an Auditor, I want see all actions taken on a user\\
-      UC03 & get audit-log of user-actions & As an Auditor, I want see all actions taken by a user\\
-      UC04 & get audit-log users overview & As an Auditor, I want a report of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters\\
+      UC01 & get audit-log for date-range & As an auditor, I want to get all actions taken within a specific date-range\\
+      UC02 & get audit-log about a user & As an auditor, I want to get all actions taken on a user\\
+      UC03 & get audit-log of user-actions & As an auditor, I want to get all actions taken by a user\\
+      UC04 & get audit-log users overview & As an auditor, I want to get an overview of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters\\
       \hline
     \end{tabularx}
   \end{center}
@@ -227,6 +227,6 @@ From the requirements overview the following use-cases are derived
 
 \subsection{DD01: Registry pattern}
 
-
 \section{Technical Decisions}
 
+\subsection{TD01: Limit get user actions query to max 1 year}
