@@ -17,28 +17,91 @@ Auditors can also use a process model based on historic data to make predictions
 
 \section{Requirements}
 
-Anforderungen aufgrund von Gesprächen mit dem Anwender und aufgrund der technischen
-und sozialen Verantwortung des Entwicklers,Stand der Technik und ggf. der Forschung,
+% Anforderungen aufgrund von Gesprächen mit dem Anwender und aufgrund der technischen
+% und sozialen Verantwortung des Entwicklers,Stand der Technik und ggf. der Forschung,
 
-Keine Anforderung darf im Folgenden vergessen werden (mindestens Erwähnung in "Weiter- entwicklungsmöglichkeiten").
-• Jedes Feature des konzipierten bzw. realisierten Systems muss auf eine Anforderung zurück- geführt werden.
+% Keine Anforderung darf im Folgenden vergessen werden (mindestens Erwähnung in "Weiter- entwicklungsmöglichkeiten").
+% • Jedes Feature des konzipierten bzw. realisierten Systems muss auf eine Anforderung zurück- geführt werden.
 
-Auditors have different backgrounds and technical knowledge thus the following need to be consider:
+The audit component implemented in chapter \ref{chap:ac} is to be utilised to offer an audit reporting \gls{ac:gui}. \gls{ac:m8} offer much more features, that can be utilised, thus the \gls{ac:gui} should be expandable to accommodate other use-cases and implementations.
 
-- The same event view musst be ensured to ease dealing with deferent events and allow for a sense of familiarity. For example if a table is used to showcase the event, the table structure is preserved for all types.
-- lack of events is not an error and musst be clearly represented
+Upstream \gls{ac:iam} authenticators like onelogin are to be supported.
 
-Automated audit reports 
-audit log is exportable
-alerting and monitoring
-End with a GUI, that the auditor can configure to her/his own requirements
+Since Auditors have different backgrounds and technical knowledge the \gls{ac:ux} should be intuitive and well thought out. The following is to be considered:
 
+\begin{itemize}
+  \item The same event view musst be ensured to ease dealing with deferent events and allow for a sense of familiarity. For example if a table is used to showcase the event, the table structure is preserved for all types.
+  \item lack of events is not an error and musst be clearly represented
+\end{itemize}
+
+To ease auditors workflows and external auditing needs audit reports should be exportable and sendable via e-mail in a spread-sheet compatible format like \gls{ac:csv}. Automating these reports should be possible as well.
+
+% alerting and monitoring
+
+% End with a GUI, that the auditor can configure to her/his own requirements
 
 \subsection{Use-Cases}
 
-\subsection{Stakeholders}
+\begin{table}[H]
+  \begin{center}
+    \caption{Audit browser derived use-cases}
+    \label{tab:abuc}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{ID} & \textbf{Use-Case} & \textbf{Description}\\
+      UC01 & \gls{ac:m8} \gls{ac:gui} & As a user, I want to use \gls{ac:m8} features through an easy to navigate \gls{ac:gui}\\
+      UC02 & Onelogin \gls{ac:iam} authentication & As a user, I want to authenticate using my onelogin \gls{ac:iam} account\\
+      UC04 & audit-log for date-range report & As an auditor, I want to see all actions taken within a specific date-range\\
+      UC05 & audit-log about a user report & As an auditor, I want see all actions taken on a user\\
+      UC06 & audit-log of user-actions report & As an auditor, I want see all actions taken by a user\\
+      UC07 & audit-log users overview & As an auditor, I want a report of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters\\
+      UC08 & \gls{ac:csv} audit-log reports export & As an auditor, I want to export audit-log reports in a \gls{ac:csv} formatted file \gls{ac:gui}\\
+      UC09 & Send audit-log reports via e-mail & As an auditor, I want to send audit-log reports via e-mail \gls{ac:gui}\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+% \subsection{Stakeholders}
 
 \subsection{Architectural Constraints}
+
+\subsubsection{Technical Constraints}
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Audit browser technical constraints}
+    \label{tab:abtc}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
+      TC01 & Expandable \gls{ac:gui} & \gls{ac:gui} implementation allow for other \gls{ac:m8} features support\\
+      TC02 & Unified event view & Audit-log reports have unified event views\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+\subsubsection{Organisational Constraints}
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Audit component organisational constraints}
+    \label{tab:acoc}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
+      OC01 & Deadline & implementation musst be finalised before 28.02.2023\\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
 
 \section{System Design}
 
