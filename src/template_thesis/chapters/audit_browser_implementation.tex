@@ -123,20 +123,85 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 \section{Design Decisions}
 
-\subsection{DD01: gRPC proxy}
+\subsection{DD01: REST gRPC Gateway}
+
+frontend only talks rest
+
+options
+
+- generate REST API
+- translate REST to gRPC and vice versa
+
+
+however kubernetes dose gRPC internally and REST externally, for lack of options back then?
+
+\header{The problem with REST}
+
+comparison: https://youtu.be/CAGuhVIOT2c?t=1829
+
+\todo{rest problems}
+
+readability comes with costs. there is no readability in ISO 25010
+https://youtu.be/CAGuhVIOT2c?t=841
+
+8 fallacies of distributed systems:
+
+- latency is zero
+normally multiple calls are needed a latency add up
+
+- bandwidth is infinite
+
+- transfer cost (the time it take to marshall and unmarshall)
+
+also reason...~\ref{tc:ac03}
+
+research json vs protbuff performance
+
+\header{why stick with gRPC}
+
+proto buffers are much more efficient etc...\todo{TODO}
+backword and forward compatibility
 
 Communicating using the synchronous Remote
 procedure invocation pattern \citep{richardson2018microservices}
 
-comparison: https://youtu.be/CAGuhVIOT2c?t=1829
-
 dealing with api changes
+
+
+
+
+\header{Conclusion}
+
+could be an overkill but maintining a REST API on top of gRPC in M8 won't be fun either
 
 \subsection{DD02: Micro Frontends}
 
 \section{Technical Decisions}
 
 Lösungsalternativen sind kritisch zu bewerten und Auswahl zu begründen.
+
+\subsection{TD01: gRPC Web}
+
+https://grpc.io/blog/grpc-web-ga/
+
+gRPC REST gateway implementation.
+
+options:
+
+- gRPC Gateway:
+--- server need to know about it
+--- -> more maintenance cost
+--- -> basically REST API
+- gRPC Web: 
+---- only envoy support it
+---- still experimental
+
+loadbalancing:
+
+- nginx
+- envoy
+
+
 
 \subsection{Enabling Technologies}
 
