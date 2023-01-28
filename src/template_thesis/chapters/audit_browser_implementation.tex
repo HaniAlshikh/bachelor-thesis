@@ -81,6 +81,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
       \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
       TC01 & Expandable \gls{ac:gui} & \gls{ac:gui} implementation allow for other \gls{ac:m8} features support\\
       TC02 & Unified event view & Audit-log reports have unified event views\\
+      TC03\label{tc:ab03} & Backend & Backend is written in \gls{gl:go}\\
       \hline
     \end{tabularx}
   \end{center}
@@ -105,19 +106,49 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 \section{System Design}
 
-\subsection{Enabling Technologies}
-
-the 8 fallacies of distributed computing
-
-protobuf vs json: https://youtu.be/CAGuhVIOT2c?t=1206
-
-Stand des Projekts und Weiterentwicklungsmöglichkeiten.
-• Anhang: Entwicklerdokumentation,Benutzerdokumentation
-Elektronischer Anhang: Sources, Projektdateien.
-
 \subsection{Scope and Context}
 
+\subsubsection{Business Context}
+
+\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_browser/audit_browser_business_context.drawio}{Audit Browser Business Context Diagram}
+
+\subsubsection{Technical Context}
+
+\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_browser/audit_browser_technical_context.drawio}{Audit Browser Business Context Diagram}
+
+% https://youtu.be/XdG0EujccHQ?t=748
+
 \subsection{Solution Strategy}
+
+JS/TS
+% https://youtu.be/CAGuhVIOT2c?t=2449
+% https://medium.com/zeals-tech-blog/grpc-go-server-web-client-853daf40cdef
+% https://www.vinsguru.com/grpc-web-example/
+% https://blog.cloudflare.com/moving-k8s-communication-to-grpc/
+react
+% https://www.youtube.com/watch?v=NFZbTy_B4H0&t=423s
+% https://programmingpercy.tech/blog/using-grpc-tls-go-react-no-reverse-proxy/
+% https://www.youtube.com/watch?v=XdG0EujccHQ&t=3348s
+% https://daily.dev/blog/build-a-chat-app-using-grpc-and-reactjs
+% % https://medium.com/@mehran.hrajabi98/grpc-in-front-end-applications-a70a9cea4a43
+% https://github.com/mehran-hrajabi/react-grpc-boilerplate
+% https://medium.com/alva-labs/building-microapps-with-grpc-web-64b7cdf50313
+% https://www.polarsignals.com/blog/posts/2022/06/23/how-we-use-gRPC-to-build-our-frontend/
+% https://www.youtube.com/watch?v=NFZbTy_B4H0&t=1944s
+Vue.js
+% https://medium.com/@itachisasuke/using-grpc-web-vue-js-with-a-golang-backend-76dd9d6fd150
+% https://gustavohenrique.net/en/2020/02/grpc-web-with-golang-and-vuejs-an-alternative-to-rest-and-graphql/
+% https://torq.io/blog/grpc-web-using-grpc-in-your-front-end-application/
+% https://github.com/kostyay/grpc-web-example
+Angular
+% https://www.youtube.com/watch?v=fvFOBkR6GT8&t=1139s
+% https://github.com/search?q=user%3Avishipayyallore+grpc-web&type=code
+% https://itnext.io/a-complete-guide-to-grpc-web-with-angular-and-net-c4ae2500bd24
+WASM
+% https://www.youtube.com/watch?v=swZPL5PjkVU&t=187s
+%  youtube.com/watch?v=wUCCrrlzkPU&t=34s
+% https://www.youtube.com/watch?v=FBRbdpdK3lI&t=155s
+
 
 \subsection{Building Block View}
 
@@ -127,17 +158,112 @@ Elektronischer Anhang: Sources, Projektdateien.
 
 \section{Design Decisions}
 
-\subsection{DD01: gRPC proxy}
+\subsection{DD01: \gls{ac:api} Gateway}
+
+frontend only talks \gls{ac:rest}
+
+% https://www.theseus.fi/bitstream/handle/10024/501885/Vo_Hoang.pdf?sequence=2
+
+\gls{ac:grpc} is not natively supported in the browser 
+% https://drive.google.com/drive/folders/1AOa1kWTnopeOQPy5mVXTJtRt_qqLBnVo
+- no way to use HTTP/2
+Before we continue, we need to discuss the current limitations of browsers. Browsers do support HTTP2 to get the static files like images, javascript, css etc. But for any XMLHttpRequest/Ajax calls, browsers still use HTTP/1.1. It is a limitation of browsers as of now. Because of this limitation, browser / client side javascript can not directly talk to the backend gRPC server as we normally talk to the backend REST API. 
+- no way of attaching gRPC-specific trailers (footers) at the end of every rqueste/response
+% https://youtu.be/UV-VnlcpDhU?t=288
+
+Messages passing back and forth are encoded which will be hard to read debug
+backend has to put an middleware which translates messages from http to grpc, is this middleware removable?
+how is the efficiency doing all this way compared to sending raw http request to backend, any reasonable comparison done so far?
+
+options
+
+- generate REST API
+- translate REST to gRPC and vice versa
+% Pattern: Backends For Frontends https://samnewman.io/patterns/architectural/bff/
+
+
+it’s common to use an API gateway to wrap all RPC’s into REST API. Kubernetes dose gRPC internally and REST externally, for lack of options back then?
+
+\header{The problem with REST}
+
+comparison: https://youtu.be/CAGuhVIOT2c?t=1829
+% https://blog.cloudflare.com/moving-k8s-communication-to-grpc/
+
+\todo{rest problems}
+
+readability comes with costs. there is no readability in ISO 25010
+https://youtu.be/CAGuhVIOT2c?t=841
+
+8 fallacies of distributed systems:
+
+- latency is zero
+normally multiple calls are needed a latency add up
+
+- bandwidth is infinite
+
+- transfer cost (the time it take to marshall and unmarshall)
+
+also reason...~\ref{tc:ac03}
+
+research json vs protbuff performance
+
+\header{why stick with gRPC}
+
+proto buffers are much more efficient etc...\todo{TODO}
+backword and forward compatibility
 
 Communicating using the synchronous Remote
 procedure invocation pattern \citep{richardson2018microservices}
 
-comparison: https://youtu.be/CAGuhVIOT2c?t=1829
-
 dealing with api changes
+
+
+
+
+\header{Conclusion}
+
+could be an overkill but maintining a REST API on top of gRPC in M8 won't be fun either
 
 \subsection{DD02: Micro Frontends}
 
 \section{Technical Decisions}
 
 Lösungsalternativen sind kritisch zu bewerten und Auswahl zu begründen.
+
+\subsection{TD01: gRPC Web}
+
+https://grpc.io/blog/grpc-web-ga/
+
+gRPC REST gateway implementation.
+
+options:
+
+- gRPC Gateway:
+--- server need to know about it
+--- -> more maintenance cost
+--- -> basically REST API
+- gRPC Web: 
+---- only envoy support it
+---- still experimental
+---- only support unary and server streaming
+
+loadbalancing:
+
+- nginx
+
+- envoy
+\gls{ac:m8} comes with \gls{gl:ei} which is built on top of \gls{gl:envoy}
+.Net seems have the most adaption and support for web-gRPC but due to the backend being written in \gls{gl:go} (TC03~ref{tc:ab03}) ...
+
+\subsection{TD02: Angular}
+% https://github.com/grpc/grpc-web/blob/master/doc/roadmap.md#web-framework-integration
+
+\subsection{Enabling Technologies}
+
+the 8 fallacies of distributed computing
+
+protobuf vs json: https://youtu.be/CAGuhVIOT2c?t=1206
+
+Stand des Projekts und Weiterentwicklungsmöglichkeiten.
+• Anhang: Entwicklerdokumentation,Benutzerdokumentation
+Elektronischer Anhang: Sources, Projektdateien.

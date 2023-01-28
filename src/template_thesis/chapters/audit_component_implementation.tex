@@ -74,6 +74,8 @@ From the requirements overview the following use-cases are derived
       \rowcolor{gray!20}
       \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
       TC01 & human-readable representation & log structs musst contain a human-readable representation\\
+      TC02 & Programming language & \gls{ac:m8} is written in \gls{gl:go}. No reason to use other language\\
+      TC03\label{tc:ac03} & Middleware & \gls{ac:m8} uses \gls{ac:grpc}. No reason to use or support any other framework\\
       \hline
     \end{tabularx}
   \end{center}
@@ -104,11 +106,11 @@ From the requirements overview the following use-cases are derived
 
 \subsubsection{Business Context}
 
-\includenamedsvg{\includesvg}{diagrams/audit_component/business_context.drawio}{Business Context Diagram}
+\includenamedsvg{\includesvg}{diagrams/audit_component/audit_component_business_context.drawio}{Audit Component Business Context Diagram}
 
 \subsubsection{Technical Context}
 
-\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_component/technical_context.drawio}{Technical Context Diagram}
+\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_component/audit_component_technical_context.drawio}{ Audit Component Technical Context Diagram}
 
 \subsection{Solution Strategy}
 
@@ -135,11 +137,11 @@ From the requirements overview the following use-cases are derived
 
 \subsubsection{Overall System White Box}
 
-\includenamedsvg{\includesvg[pretex=\footnotesize]}{diagrams/audit_component/component_diagram.drawio}{Overall System Component Diagram}
+\includenamedsvg{\includesvg[pretex=\footnotesize]}{diagrams/audit_component/audit_component_component_diagram_white_box_level_1.drawio}{Overall System Component Diagram}
 
 \subparagraph{Level 1}
 
-\paragraph{Contained Building Blocks}.
+\header{Contained Building Blocks}
 
 \begin{table}[H]
   \begin{center}
@@ -156,7 +158,7 @@ From the requirements overview the following use-cases are derived
   \end{center}
 \end{table}
 
-\paragraph{Audit Component Black Box}.
+\header{Audit Component Black Box}
 
 \begin{table}[H]
   \begin{center}
@@ -175,10 +177,10 @@ From the requirements overview the following use-cases are derived
 
 \subparagraph{Level 2}
 
-\paragraph{Audit Component White Box}.
+\header{Audit Component White Box}
 
 % \caption{Audit Component White Box}
-\includenamedsvg{\includesvg[width=\textwidth,pretex=\footnotesize]}{diagrams/audit_component/audit_component_diagram.drawio}{Audit Component Diagram}
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\footnotesize]}{diagrams/audit_component/audit_component_component_diagram_white_box_level_2.drawio}{Audit Component Diagram}
 
 \begin{table}[H]
   \begin{center}
