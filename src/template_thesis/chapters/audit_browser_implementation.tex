@@ -224,6 +224,8 @@ dealing with api changes
 
 could be an overkill but maintining a REST API on top of gRPC in M8 won't be fun either
 
+From the perspective of using a technology that's a bit bleeding edge, this makes a lot of sense. Putting it on the public edge of your services would definitely be more problematic for load balancers and I imagine it was a struggle just getting basic things working with it vs. the well established patterns one would already have available for REST/HTTP.
+
 \subsection{DD02: Micro Frontends}
 
 \section{Technical Decisions}
@@ -242,6 +244,11 @@ options:
 --- server need to know about it
 --- -> more maintenance cost
 --- -> basically REST API
+% https://jbrandhorst.com/post/gopherjs-grpcweb/
+Clients don’t know what types are used - the interface is HTTP JSON. This can be somewhat mitigated with the use of swagger generated interfaces, but it’s still not perfect.
+The interface being JSON means marshalling and unmarshalling can become a significant part of the latency between the client and the server.
+The gRPC-gateway requires specific changes to the proto definitions - it’s not as straightforward as just defining your RPC methods.
+
 - gRPC Web: 
 ---- only envoy support it
 ---- still experimental

@@ -232,3 +232,8 @@ From the requirements overview the following use-cases are derived
 \section{Technical Decisions}
 
 \subsection{TD01: Limit get user actions query to max 1 year}
+
+a general restructure for the event structure will happen sooner or later (which should allow for a much better implementation)
+for now, limiting the query to a max 1 year should be enough as a preventive measure until the restructuring to filter on the store level is implemented
+All queries are bound to a time-out which will stop the query if it takes too long In case there are too many events within the limiting period.
+
