@@ -281,3 +281,6 @@ TSWLatexianTemp*
 *.sls
 *.ist
 *svg-inkscape*
+
+dev/
+*tmp/

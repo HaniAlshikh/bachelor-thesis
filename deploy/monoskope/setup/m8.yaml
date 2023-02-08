@@ -1,0 +1,76 @@
+global:
+  operationMode: development
+  openTelemetry:
+    enabled: false
+
+vaultOperator:
+  enabled: false
+
+hosting:
+  issuer: selfsigned
+  domain: monoskope.dev
+
+pki:
+  enabled: true
+  certificates:
+    duration: 2160h # 90d
+    renewBefore: 1440h # 60d
+  issuer:
+    name: &rootIssuerName "m8-root-ca-issuer"
+    ca:
+      enabled: true
+      existingTrustAnchorSecretName: "m8-trust-anchor"
+
+gateway:
+  enabled: true
+  auth:
+    selfURL: https://api.monoskope.dev
+    identityProviderURL: http://dex:5556
+  oidcSecret:
+    name: m8-gateway-oidc
+  authTokenValidity: 12h
+
+eventstore:
+  enabled: true
+  backup:
+    enabled: false
+
+commandhandler:
+  enabled: true
+  superusers:
+    - admin@monoskope.dev
+
+queryhandler:
+  enabled: true
+  k8sAuthZ:
+    enabled: false
+
+cockroachdb:
+  enabled: true
+  statefulset:
+    replicas: 1
+  storage:
+    persistentVolume:
+      size: "1Gi"
+  serviceMonitor:
+    enabled: false
+
+rabbitmq:
+  enabled: true
+  replicaCount: 1
+  persistence:
+    enabled: false
+  serviceAccount:
+    create: true
+  rbac:
+    create: true
+  auth:
+    erlangCookie: "thisis32bitlongpassphraseimusing"
+    existingErlangSecret: ""
+
+ambassador:
+  enabled: true
+  deploy: false
+
+scimserver:
+  enabled: false

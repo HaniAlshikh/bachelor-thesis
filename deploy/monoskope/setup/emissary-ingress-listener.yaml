@@ -1,0 +1,25 @@
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
+metadata:
+  name: emissary-ingress-listener
+  namespace: monoskope
+spec:
+  port: 8080
+  protocol: HTTP
+  securityModel: XFP
+  hostBinding:
+    namespace:
+      from: ALL
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
+metadata:
+  name: emissary-ingress-https-listener
+  namespace: monoskope
+spec:
+  hostBinding:
+    namespace:
+      from: ALL
+  port: 8443
+  protocol: HTTPS
+  securityModel: XFP
