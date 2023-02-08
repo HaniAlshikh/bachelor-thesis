@@ -63,6 +63,7 @@ deploy-cert-manager: helm-repo ## deploy dex
 .PHONY: deploy
 deploy-emissary-ingress: helm-repo ## deploy emissary-ingress
 	@$(KUBECTL) apply -f https://app.getambassador.io/yaml/emissary/$(EMISSARY_VERSION)/emissary-crds.yaml
+	@$(KUBECTL) -n emissary-system patch deploy emissary-apiext -p '{"spec":{"replicas": 1}}'
 	@$(KUBECTL) wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
 	@$(HELM) upgrade -i ei -n emissary --create-namespace datawire/emissary-ingress --version $(EMISSARY_INGRESS_CHART_VERSION) --values $(EMISSARY_INGRESS_HELM_VALUES_FILE) \
 		--set=image.tag=$(EMISSARY_VERSION)

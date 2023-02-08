@@ -47,6 +47,8 @@ queryhandler:
 
 cockroachdb:
   enabled: true
+  statefulset:
+    replicas: 1
   storage:
     persistentVolume:
       size: "1Gi"
@@ -55,7 +57,7 @@ cockroachdb:
 
 rabbitmq:
   enabled: true
-  replicaCount: 3
+  replicaCount: 1
   persistence:
     enabled: false
   serviceAccount:
