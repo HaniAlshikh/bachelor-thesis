@@ -13,12 +13,35 @@ The [deploy](deploy.mk) makefile will:
 
 ### Required
 
+A supported system from the following:
+
+- MacOS
+- Linux (tested on ubuntu)
+- Windows (WSL)
+
+Standard userspace utilities like `bash`, `curl`, `sh`, etc.... You can always change to alternatives by setting the corresponding environment variable. For example replacing `curl` with `wget` will be as follows:
+
+```bash
+CURL=wget make deploy
+```
+
+And the following tools
+
+* [docker](https://docs.docker.com/get-docker/) to create isolated environments
 * [make](https://www.gnu.org/software/make/#download) to run deployment scripts
+
+Basic bundled utilities, like  etc... that are normally shipped with the following and 
+
+### Automated
+
+the following will be downloaded locally. If any should fail please the same as the curl example above applies.
+
+* [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to manage Kubernetes (k8s) resources
 * [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) to create a local k9s cluster
 * [helm](https://helm.sh/docs/intro/install/) to generate resource definitions
 * [step-cli](https://smallstep.com/docs/step-cli/installation) to generate m8 PKI's trust-anchor
 
-## Local development
+## Deployment
 
 > **_IMPORTENTE:_**  When adapting the [setup files](setup) make sure to do a wide search and replace all occurrences if applicable
 

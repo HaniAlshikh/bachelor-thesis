@@ -1,6 +1,6 @@
 % @author Hani Alshikh
 %
-\chapter{Audit Browser}
+\chapter{Audit Browser}\label{chap:ab}
 
 Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
 
@@ -82,6 +82,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
       TC01 & Expandable \gls{ac:gui} & \gls{ac:gui} implementation allow for other \gls{ac:m8} features support\\
       TC02 & Unified event view & Audit-log reports have unified event views\\
       TC03\label{tc:ab03} & Backend & Backend is written in \gls{gl:go}\\
+      TC04\label{tc:ab04} & Userbase & Userbase is mainly desktop users\\
       \hline
     \end{tabularx}
   \end{center}
@@ -234,6 +235,8 @@ From the perspective of using a technology that's a bit bleeding edge, this make
 
 Lösungsalternativen sind kritisch zu bewerten und Auswahl zu begründen.
 
+\subsection{TD00: Javascript}
+
 \subsection{TD01: gRPC Web}
 
 https://grpc.io/blog/grpc-web-ga/
@@ -247,6 +250,7 @@ options:
 --- -> more maintenance cost
 --- -> basically REST API
 % https://jbrandhorst.com/post/gopherjs-grpcweb/
+% https://github.com/TanStack/query/discussions/978#discussioncomment-741259
 Clients don’t know what types are used - the interface is HTTP JSON. This can be somewhat mitigated with the use of swagger generated interfaces, but it’s still not perfect.
 The interface being JSON means marshalling and unmarshalling can become a significant part of the latency between the client and the server.
 The gRPC-gateway requires specific changes to the proto definitions - it’s not as straightforward as just defining your RPC methods.
@@ -256,6 +260,24 @@ The gRPC-gateway requires specific changes to the proto definitions - it’s not
 ---- still experimental
 ---- only support unary and server streaming
 
+-- Connect-web
+
+since m8 is not a browser first system maintaining the connect protocol is not justified. 
+
+Connect for Web is currently pre-v1, but we have been using it in production for a while. We plan to release a stable v1 in early 2023. However, you can get started with connect-web now.
+
+connect-web uses protoc-gen-es, which ommit service generation in faivour of serviceType and reflection... % https://github.com/bufbuild/protobuf-es/issues/252#issuecomment-1282549160
+This generally requires deeper knowledge and make a bit tedious and cumbersome for contributors. 
+
+-- protobuf-ts
+
+is the root project that led the seeds for connect.... bla bla bla
+it support service initializers
+
+-- nice-grpc
+
+nice grpc is an alternativ typescript native implementation, which looks promising but....
+
 loadbalancing:
 
 - nginx
@@ -264,8 +286,10 @@ loadbalancing:
 \gls{ac:m8} comes with \gls{gl:ei} which is built on top of \gls{gl:envoy}
 .Net seems have the most adaption and support for web-gRPC but due to the backend being written in \gls{gl:go} (TC03~ref{tc:ab03}) ...
 
-\subsection{TD02: Angular}
+\subsection{TD02: React}
 % https://github.com/grpc/grpc-web/blob/master/doc/roadmap.md#web-framework-integration
+
+Angular for UI heavy -> vue in the middle -> react for casual use
 
 \subsection{Enabling Technologies}
 
@@ -276,3 +300,8 @@ protobuf vs json: https://youtu.be/CAGuhVIOT2c?t=1206
 Stand des Projekts und Weiterentwicklungsmöglichkeiten.
 • Anhang: Entwicklerdokumentation,Benutzerdokumentation
 Elektronischer Anhang: Sources, Projektdateien.
+
+\subsection{TD03: Headless usecasees implementation}
+
+laying down the ground work for micro-frontends or future framework change (framework-agnostic) by insuring all business logic is written in vanila js and. 
+
