@@ -4,16 +4,134 @@
 
 As illustrated in chapter \ref{chap:ac} and \ref{chap:ab} installing and configuring the \gls{gl:ac} and \gls{gl:ab} spans multiple resources and requires intricate yet clear and logical orchestration.
 
-Such work tend to be automated in production environments to speed up development and benefits from \gls{gl:cicd} practices
+Such processes tend to be automated in production environments to insure auditable and reversible actions through \gls{gl:vc}, speed up development, reduce human errors, and benefits from \gls{ac:ci}/\gls{ac:cd} practices.
 
-Utilizing \gls{gl:docker}, \gls{gl:k8s}, \gls{gl:helm} and various backing technologies while keeping the 12 factor app \cite{TheTwelv47} rules in check the entire installation process also known as a deployment in \gls{gl:k8s} terms can be trimmed down to just a few steps.
+Utilizing \gls{gl:docker}, \gls{ac:k8s}, \gls{gl:helm} and various backing technologies while keeping \gls{gl:12faktor}~\citep{TheTwelv47} rules in check (\hyperref[oc:ac02]{OC02}) the entire installation and configuration process also known as a deployment in \gls{ac:k8s} terms can be trimmed down to just a few steps.
 
-if for some reason a command should fail the system and commands are ensured to be \gls{gl:idpt}
+\header{Prerequisite}
 
-\subsubsection{1. prerequisite}
+A supported system from the following:
 
-...
+\begin{itemize}
+  \item MacOS
+  \item Linux (tested on ubuntu)
+  \item Windows (WSL)
+\end{itemize}
+
+Standard userspace utilities like \lstinline[columns=fixed]{bash}, \lstinline[columns=fixed]{curl}, \lstinline[columns=fixed]{tar}, etc.... You can always change to alternatives by setting the corresponding environment variable. For example replacing \sh{curl} with \sh{wget} will be as follows:
+
+\begin{lstlisting}[language=bash, caption={Deploy with custom command}, label={sh:dwcc}]
+    $ CURL=wget make deploy
+\end{lstlisting}
+
+The following tools:
+
+\begin{table}[H]
+  \begin{center}
+    \label{tab:irt}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{Tool} & \textbf{Reson}\\
+      \gls{gl:docker} & to create isolated environments\\
+      \gls{gl:make} & to run deployment scripts\\
+      \hline
+    \end{tabularx}
+    \caption{Installation required tools}
+  \end{center}
+\end{table}
+
+\header{Automated}\label{hdr:auto}
+
+The following will be downloaded and configured locally. If any should fail please download and install manually then follow the same instruction as described in the shell example~\ref{sh:dwcc}.
+
+\begin{table}[H]
+  \begin{center}
+    \label{tab:iat}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{|l X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{Tool} & \textbf{Reson}\\
+      \gls{gl:kubectl} & to manage \gls{ac:k8s} \\
+      \gls{gl:kind} & to create a local \gls{ac:k8s} cluster\\
+      \gls{gl:helm} & to generate components resources and install required \glspl{ac:crd}\\
+      \gls{gl:step} & to generate \gls{ac:m8} \glspl{ac:pki} trust-anchor\\
+      \hline
+    \end{tabularx}
+    \caption{Installation automated tools}
+  \end{center}
+\end{table}
 
 \section{Test Run}
 
-https://tilt.dev/
+To deploy \gls{ac:m8} and \gls{gl:monogui} to a local cluster and experment with the \gls{gl:ac} and \gls{gl:ab} a script is provided, that will:
+
+\begin{enumerate}
+  \item take care of the preparation work and installing the automated~(\ref{hdr:auto}) tools
+  \item create local \gls{ac:k8s} cluster using \gls{gl:kind}
+  \item add \gls{ac:m8} and \gls{gl:monogui} dependencies to \gls{gl:helm}
+  \item setup and deploy all needed resources
+\end{enumerate}
+
+All while making sure to stay \gls{gl:idpt} and localized.
+
+\header{Configure}
+
+Depending on the version on hand open the provided CD-drive or navigate to \href{https://thesis.alshikh.de}{https://thesis.alshikh.de} and clone the repository.
+
+As specified by \gls{gl:12faktor}~\citep{TheTwelv47} methodology (\hyperref[oc:ac02]{OC02}) all configuration are environment specifc and can be configured locally or using \gls{ac:k8s} resource definiations by setting the the corresponding enviorment variable.
+
+All variables are documented under the directory \sh{deploy/setup} and set with defaults for ease of use.
+
+\header{Install}
+
+Open the directory \sh{deploy} and follow the following instruction. Just retry.
+
+If for some reason a command should fail the system and commands are ensured to be \gls{gl:idpt}.\todo{note style}
+
+\todo{test on windows and ubuntu}
+
+\begin{enumerate}
+  \item Create a local cluster and deploy all resources:
+
+  \begin{lstlisting}[language=bash, caption={Deploy all resources to a local cluster}, label={sh:dartlc}]
+    
+    $ make deploy
+    # you can also run the following to monitor the state of the resources
+    $ make kind-watch
+  \end{lstlisting}
+
+  \item Trust \gls{ac:m8} domain certificate: \sh{tmp/domain-ca.crt}, otherwise the browser will block communication with \gls{ac:m8} \gls{ac:api}
+
+  \begin{lstlisting}[language=bash, caption={Trust \gls{ac:m8} domain certificate}, label={sh:tmdc}]
+    
+    # MacOS
+    $ sudo security add-trusted-cert -d -r trustRoot -k "/Library/Keychains/System.keychain" tmp/domain-ca.crt
+  \end{lstlisting}
+
+  \item Create port-forwards to route local request to backing services in the cluster: (Make sure \sh{8443}, \sh{5556} and \sh{3000} are not in use)
+
+  \begin{lstlisting}[language=bash, caption={Create port-forwards to route local request}, label={sh:cpf}]
+    
+    $ make port-forward
+  \end{lstlisting}
+
+  \item Add the following to your hosts file:
+
+  \begin{lstlisting}[language=bash, caption={Update hosts file}, label={sh:uhf}]
+    
+    # Linux & MacOS: /etc/hosts
+    # windows: c:\Windows\System32\Drivers\etc\hosts
+    127.0.0.1 api.monoskope.dev
+    127.0.0.1 dex
+  \end{lstlisting}
+
+  \item Populate the \gls{gl:est} with some mock data for a better \gls{ac:ux}
+
+  \begin{lstlisting}[language=bash, caption={Populate the \gls{gl:est} with some mock}, label={sh:pemd}]
+    
+    $ make mock-data
+  \end{lstlisting}
+\end{enumerate}

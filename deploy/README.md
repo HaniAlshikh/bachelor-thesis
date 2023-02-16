@@ -45,7 +45,7 @@ the following will be downloaded and configured locally. If any should fail plea
 
 > **_IMPORTENTE:_**  If you decided to make changes on the [setup files](setup) please make sure to do a wide search and replace all occurrences if applicable.
 
-1. Deploy to the cluster and all resources:
+1. Deploy all resources to a local cluster:
 
     ```shell
     make deploy
@@ -53,7 +53,7 @@ the following will be downloaded and configured locally. If any should fail plea
     make kind-watch
     ```
 
-2. Trust m8 domain certificate: `tmp/domain-ca.crt`, otherwise the browser will block communication with the m8 API
+2. Trust m8 domain certificate: `tmp/domain-ca.crt`, otherwise the browser will block communication with m8 API
 
     ```shell
     # MacOS
