@@ -1,5 +1,5 @@
 # kind
-K8S_VERSION=1.25.4
+K8S_VERSION=1.24.7
 KIND_KUBECONFIG = $(LOCALTMP)/kind-kubeconfig
 KIND_M8_CLUSTER_NAME ?= m8-dev-cluster
 
@@ -11,6 +11,8 @@ DEX_HELM_VALUES_FILE		?= setup/dex.yaml
 MONOSKOPE_HELM_VALUES_FILE		?= setup/m8.yaml
 EMISSARY_INGRESS_LISTENER_RESOURCE_FILE		?= setup/emissary-ingress-listener.yaml
 MONOGUI_HELM_VALUES_FILE		?= setup/monogui.yaml
+
+MOCK_DATA_RESOURCE_FILE		?= setup/m8-eventstore-mock-data.yaml
 
 # versions
 CERT_MANAGER_VERSION ?= v1.11.0
@@ -24,10 +26,7 @@ MONOGUI_VERSION ?= v0.1.0-rc02
 KIND_KUBECTL ?= $(KUBECTL) --kubeconfig ${KIND_KUBECONFIG}
 KIND_HELM ?= $(HELM) --kubeconfig ${KIND_KUBECONFIG}
 
-##@ Deploy
-
-.PHONY: deploy
-deploy: deploy-cleanup kind-create-cluster helm-repo deploy-m8-trust-anchor deploy-cert-manager deploy-emissary-ingress deploy-dex deploy-monoskope deploy-monogui ## deploy monoskope and monogui
+##@ Manage
 
 .PHONY: kind-watch
 kind-watch: kubectl ## watch monoskope beain deployed
@@ -37,12 +36,23 @@ kind-watch: kubectl ## watch monoskope beain deployed
 port-forward: kubectl ## create a port-forward to the m8Api, dex and monogui
 	@KUBECTL=$(KUBECTL) KUBECONFIG=$(KIND_KUBECONFIG) sh ./port-forward.sh
 
-.PHONY: kind-create-cluster-create-cluster
+.PHONY: mock-data
+mock-data: kubectl ## restore mocked data into monoskope backing database
+	@$(KIND_KUBECTL) -n monoskope delete -f $(MOCK_DATA_RESOURCE_FILE) 2>/dev/null || true
+	@$(KIND_KUBECTL) -n monoskope apply -f $(MOCK_DATA_RESOURCE_FILE)
+
+##@ Deploy
+
+.PHONY: deploy
+deploy: deploy-cleanup kind-create-cluster helm-repo deploy-m8-trust-anchor deploy-cert-manager deploy-emissary-ingress deploy-dex deploy-monoskope deploy-monogui ## deploy monoskope and monogui
+
+
+.PHONY: kind-create-cluster
 kind-create-cluster: kind ## create kind cluster
-	@$(KIND) create cluster --name ${KIND_M8_CLUSTER_NAME} --image kindest/node:${K8S_VERSION} --kubeconfig ${KIND_KUBECONFIG}
+	@$(KIND) create cluster --name ${KIND_M8_CLUSTER_NAME} --image kindest/node:v${K8S_VERSION} --kubeconfig ${KIND_KUBECONFIG}
 	@$(KIND) get kubeconfig --name ${KIND_M8_CLUSTER_NAME} > ${KIND_KUBECONFIG}
 
-.PHONY: deploy-m8-trust-anchor-m8-trust-anchor
+.PHONY: deploy-m8-trust-anchor
 deploy-m8-trust-anchor: kubectl step ## create trust-anchor in kind cluster
 	@$(ECHO) "Generating trust-anchor for m8 PKI..."
 	@$(STEP) certificate create root.monoskope.cluster.local $(LOCALTMP)/ca.crt $(LOCALTMP)/ca.key --profile root-ca --no-password --insecure --not-after=87600h
@@ -81,11 +91,10 @@ deploy-monogui: helm kubectl helm-repo ## deploy monoskope
 	@$(KIND_HELM) upgrade -i monogui -n monoskope --create-namespace H-S/monogui --version $(MONOGUI_VERSION) --values $(MONOGUI_HELM_VALUES_FILE)
 
 .PHONY: deploy-cleanup
-deploy-cleanup: ## uninstall everything again
+deploy-cleanup: kind ## uninstall everything again
 	@$(ECHO) "cleaning up..."
-	@$(RM) -R $(LOCALBIN) || true
-	@$(RM) -R $(LOCALTMP) || true
 	@$(KIND) delete cluster --name ${KIND_M8_CLUSTER_NAME}
+	@$(RM) -R $(LOCALTMP) || true
 
 
 ##@ Build Dependencies
@@ -104,7 +113,7 @@ ifeq ($(OS),darwin)
 endif
 
 kubectl: $(KUBECTL) ## Download kubectl locally if necessary.
-$(KUBECTL):
+$(KUBECTL): $(LOCALBIN)
 	@$(CURL) -L -o $(KUBECTL) "https://dl.k8s.io/release/v$(KUBECTL_VERSION)/bin/$(KUBECTL_OS)/$(KUBECTL_ARCH)/kubectl"
 	@chmod +x $(KUBECTL)
 
@@ -115,7 +124,7 @@ KIND_OS = $(KUBECTL_OS)
 KIND_ARCH = $(KUBECTL_ARCH)
 
 kind: $(KIND) ## Download kind locally if necessary.
-$(KIND):
+$(KIND): $(LOCALBIN)
 	@$(CURL) -L -o $(KIND) "https://kind.sigs.k8s.io/dl/v$(KIND_VERSION)/kind-$(KIND_OS)-$(KIND_ARCH)"
 	@chmod +x $(KIND)
 
@@ -147,11 +156,12 @@ export HELM_CONFIG_HOME = $(HELM_HOME)
 export HELM_CACHE_HOME = $(HELM_HOME)
 
 helm: $(HELM) ## Download helm locally if necessary.
-$(HELM): $(HELM_HOME)
+$(HELM): $(LOCALBIN) $(HELM_HOME)
 	@$(CURL) https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | HELM_INSTALL_DIR=$(LOCALBIN) DESIRED_VERSION=v$(HELM_VERSION) USE_SUDO="false" $(BASH)
+	touch $(HELM_REPOSITORY_CONFIG)
 
-helm-repo: helm $(HELM_REPOSITORY_CONFIG) ## add necessary chart repos
-$(HELM_REPOSITORY_CONFIG): $(HELM_HOME)
+helm-repo: helm $(HELM_REGISTRY_CONFIG) ## add necessary chart repos
+$(HELM_REGISTRY_CONFIG): $(HELM_HOME)
 	@$(HELM) repo add jetstack https://charts.jetstack.io
 	@$(HELM) repo add datawire https://getambassador.io
 	@$(HELM) repo add dex https://charts.dexidp.io
