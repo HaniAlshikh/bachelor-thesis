@@ -29,3 +29,21 @@
 \newcommand{\header}[1]{
   \paragraph{#1}\mbox{}\\
   }
+
+\newcommand{\newglsacronym}[4]{
+  \newglossaryentry{gl:#1}{
+  name={#3},
+  description={#4}
+  }
+
+\newglossaryentry{ac:#1}{
+  type=\acronymtype, 
+  name={#2}, 
+  description={\gls{gl:#1}},
+  first={#3 (#2)\glsadd{gl:#1}}, 
+  }
+}
+
+\newcommand{\sh}[1]{
+  \lstinline[columns=fixed]{#1}
+}

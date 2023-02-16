@@ -11,12 +11,6 @@
   description={Die HAW Hamburg ist die vormalige Fachhochschule am Berliner Tor}
   }
 
-\newglossaryentry{gl:es}{
-  name={EventStore},
-  description={\todo{TODO}}
-  plural={EventStores}
-  }
-
 \newglossaryentry{gl:go}{
   name={GO},
   description={\todo{TODO}}
@@ -38,18 +32,102 @@
   description={\todo{TODO}},
   }
 
+\newglossaryentry{gl:ac}{
+  name={Audit Component},
+  description={\todo{TODO}},
+  }
+
+\newglossaryentry{gl:ab}{
+  name={Audit Browser},
+  description={\todo{TODO}},
+  }
+
+\newglossaryentry{gl:docker}{
+  name={Docker},
+  description={\todo{TODO}},
+  }
+
+\newglossaryentry{gl:make}{
+  name={Make},
+  description={\todo{TODO}},
+  }
+
+
+\newglossaryentry{gl:helm}{
+  name={Helm},
+  description={\todo{TODO}},
+  }
+
+\newglossaryentry{gl:kubectl}{
+  name={Kubectl},
+  description={\todo{TODO}},
+  }
+
+\newglossaryentry{gl:kind}{
+  name={Kind},
+  description={\todo{TODO}},
+  }
+
+\newglossaryentry{gl:step}{
+  name={Step-cli},
+  description={\todo{TODO}},
+  }
+
+\newglossaryentry{gl:idpt}{
+  name={idempotent},
+  description={Idempotency is a property of a system or operation where the result of performing that operation multiple times is the same as performing it once. In other words, if an idempotent operation is performed multiple times, the end result is the same as performing it only once.},
+  }
+
+\newglossaryentry{gl:vc}{
+  name={Version Control},
+  description={},
+  }
+
+\newglossaryentry{gl:est}{
+  name={EventStore},
+  description={\todo{TODO}}
+  }
+
+\newglossaryentry{gl:monogui}{
+  name={MonoGUI},
+  description={is a \acrlong{ac:gui} for \glsfirst{ac:m8}}
+  }
+
+\newglossaryentry{gl:12faktor}{
+  name={The Twelve-Faktor App},
+  description={}
+  }
+
+% Hybrid
+\newglsacronym{ci}{CI}{Continuous Integration}{\todo{TODO}}
+\newglsacronym{cd}{CD}{Continuous Delivery}{\todo{TODO}}
+\newglsacronym{k8s}{k8s}{Kubernetes}{
+  \begin{quote}
+  also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+  \end{quote}\citep{Kubernetes}
+  }
+\newglsacronym{crd}{CRD}{Custom Resource Definition}{\todo{TODO}}
+\newglsacronym{pki}{PKI}{Public Key Infrastructure}{\todo{TODO}}
+\newglsacronym{es}{ES}{Event-Sourcing}{\todo{TODO}}
+\newglsacronym{m8}{m8}{Monoskope}{(short m8 spelled "mate") implements the management and operation of tenants, users and their roles in a Kubernetes multi-cloud multi-cluster environment.}
+
 \newglossaryentry{gl:test}{
-  name={test},
-  description={test with plural}
-  plural={tests}
+    name={Test},
+    description={Test description}
+  }
+  
+%%% define the acronym and use the see= option
+\newglossaryentry{ac:test}{
+  type=\acronymtype, 
+  name={tst}, 
+  description={Test, \emph{Glossary:} \gls{gl:test}},
+  first={Test (tst)\glsadd{gl:test}}, 
   }
 
 % Acronyms
 \newacronym{ac:haw}{HAW}{Hochschule für Angewandte Wissenschaften}
 \newacronym{ac:it}{IT}{Information-Technologie}
 \newacronym{ac:poc}{PoC}{Proof of Concept}
-\newacronym{ac:es}{ES}{Event-Sourcing}
-\newacronym{ac:m8}{M8}{Monoskope}
 \newacronym{ac:gui}{GUI}{Graphical User Interface}
 \newacronym{ac:ux}{UX}{User Experince}
 \newacronym{ac:iam}{IAM}{Identity and Access Management}

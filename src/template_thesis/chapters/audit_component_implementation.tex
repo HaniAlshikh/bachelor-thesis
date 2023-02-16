@@ -4,9 +4,9 @@
 
 Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
 
-The event sourced system \cite{OVEREEM2021110970}
+The event sourced system \citep{OVEREEM2021110970}
 
-Auditing Framework \cite{5427384}
+Auditing Framework \citep{5427384}
 Event logs and process mining techniques enable new forms of auditing. Rather than sampling a small set of cases, auditors can consider the whole process and all of its instances. Moreover, they can do this continuously.
 
 Figure 1 shows an Auditing 2.0 framework based on process mining. “Current data” events are cases that are still running, while “Historic data” events are completed cases. The figure also shows two types of process models: De jure models describe a desired or required way of working, while de facto models aim to describe reality with potential violations of the boundaries defined in de jure models (W. M. P. van der Aalst et al., “Conceptual Model for On Line Auditing,” tech. report BPM-09-19 BPMcenter.org, 2009).
@@ -93,6 +93,7 @@ From the requirements overview the following use-cases are derived
       \rowcolor{gray!20}
       \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
       OC01 & Deadline & implementation musst be finalised before 31.01.2023\\
+      OC02~\label{oc:ac02} & \gls{gl:12faktor} & adhere to the \gls{gl:12faktor} methodology\\
       \hline
     \end{tabularx}
   \end{center}

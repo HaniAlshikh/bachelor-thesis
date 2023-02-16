@@ -26,6 +26,14 @@ gateway:
   auth:
     selfURL: https://api.monoskope.dev
     identityProviderURL: http://dex:5556
+    scopes:
+    - "openid"
+    - "profile"
+    - "email"
+    redirectUris:
+      - http://localhost:8000
+      - http://localhost:18000
+      - http://localhost:3000/auth/callback
   oidcSecret:
     name: m8-gateway-oidc
   authTokenValidity: 12h

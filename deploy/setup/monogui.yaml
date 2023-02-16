@@ -1,0 +1,5 @@
+monoskope:
+  api: "https://api.monoskope.dev:8443"
+
+service:
+  type: ClusterIP
