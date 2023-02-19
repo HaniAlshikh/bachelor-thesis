@@ -2,6 +2,14 @@
 %
 \chapter{Event Sourcing}\label{chap:es}
 
+\gls{gl:es} is a software architecture pattern that insures a complete log of changes made to a system as a series of events. Instead of storing the current state in a traditional database, \gls{gl:es} stores the history of changes made over time. This allows developers to rebuild the current state at any point in time by replaying the stored events.
+
+One of the primary benefits of \gls{gl:es} is that it provides a complete audit trail. Because the log of events is comprehensive and immutable, it is possible to trace the history of any given piece of data and see exactly how it has changed over time. This is extremely useful for auditing purposes, as it allows organizations to track and monitor changes to sensitive data and ensure that they are in compliance with regulations and standards.
+
+This makes \gls{gl:es} particularly well-suited for applications that need to support complex business processes that require the ability to track and audit changes to the data over time without relying on traditional logging mechanisms.
+
+In addition to providing a detailed audit trail, \gls{gl:es} also offers a number of other benefits. Since the events are stored in a chronological order, it is possible to implement time-based queries and to reconstruct the state of the system at any point in the past. Beside this being useful for debugging and for performing rollbacks or reversals of changes it lays the base for Auditing 2.0 discussed in section \ref{sec:adt2}.
+
 DATA PROTECTION
 
 ...\citep{fowler2022es}

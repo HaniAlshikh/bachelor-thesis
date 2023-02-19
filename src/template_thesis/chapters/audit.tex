@@ -2,34 +2,79 @@
 %
 \chapter{Audit}\label{chap:adt}
 
-Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
+% Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
 
 An audit is often defined as an independent examination, inspection, or review.
-While the term applies to evaluations of many different subjects, the most frequent usage is with respect to examining an organization’s financial statements or accounts. In contrast to conventional dictionary definitions and sources focused on
-the accounting connotation of audit, definitions used by broad-scope audit standards bodies and in IT auditing contexts neither constrain nor presume the subject to which an audit applies.. \citep{GANTZ20141}.
+While the term applies to evaluations of many different subjects, the most frequent usage is with respect to examining an organization’s financial statements or accounts. Words like assessment, evaluation, and review are often used synonymously with the term audit and while it is certainly true that an audit is a type of
+evaluation, some specific characteristics of auditing distinguish it from concepts
+implied by the use of more general terms. An audit always has a baseline or standard of reference against which the subject of the audit is compared. An audit is not
+intended to check on the use of best practices or (with the possible exception of
+operational audits) to see if opportunities exist to improve or optimize processes
+or operational characteristics. Instead, there is a set standard providing a basis for
+comparison established prior to initiating the audit.
 
-the International Organization for
-Standardization (ISO) guidelines on auditing use the term audit to mean a “systematic, independent and documented process for obtaining objective evidence and evaluating it objectively to determine the extent to which the audit criteria are fulfilled” \citep{ISOISO1953}
+ Auditors compare the subjects of the audit—processes, systems, components, software, or organizations
+overall—explicitly to that predefined standard to determine if the subject satisfies the criteria. Audit determinations tend to be more binary than results of other
+types of assessments or evaluations, in the sense that a given item either meets or
+fails to meet applicable requirements. Auditors often articulate audit findings in
+terms of controls’ conformity or nonconformity to criteria.
 
-the Information Technology Infrastructure Library (ITIL) glossary
-defines audit as “formal inspection and verification to check whether a standard or set of guidelines is being followed, that records are accurate, or that efficiency and
-effectiveness targets are being met”~\citep{hanna2011itil}
+% In contrast, a typical assessment might have a quantitative (i.e., score) or qualitative scale of ratings (e.g., poor, fair, good,
+% excellent) and produce findings and recommendations for improvement in areas
+% observed to be operating effectively or those considered deficient. Because auditors
+% work from an established standard or set of criteria, IT audits using comprehensive or well thought-out requirements may be less subjective and more reliable than
+% other types of evaluations or assessments \citep{GANTZ20141}.
 
-Such general interpretations are well suited to IT auditing, which comprises a wide range of standards, requirements, and other audit criteria corresponding to processes, systems, technologies, or entire organizations subject to IT audits.
+the International Organization for Standardization (ISO) guidelines on auditing use the term audit to mean: \begin{quote} A systematic, independent and documented process for obtaining objective evidence and evaluating it objectively to determine the extent to which the audit criteria are fulfilled \end{quote}
 
-IT auditing is a specialized discipline not only in its own right, with
-corresponding standards, methodologies, and professional certifications and experience requirements, but it also intersects significantly with other IT management and
-operational practices. The subject matter overlap between IT auditing and network
-monitoring, systems administration, service management, technical support, and
-information security makes familiarity with IT audit policies, practices, and standards essential for IT personnel and managers of IT operations and the business areas
-that IT supports.
+% the Information Technology Infrastructure Library (ITIL) glossary
+% defines audit as “formal inspection and verification to check whether a standard or set of guidelines is being followed, that records are accurate, or that efficiency and
+% effectiveness targets are being met”~\citep{hanna2011itil}
+
+In contrast to conventional dictionary definitions and sources focused on
+the accounting connotation of audit, definitions used by broad-scope audit standards bodies and in IT auditing contexts neither constrain nor presume the subject to which an audit applies. \citep{GANTZ20141}.
+
+Such general interpretations are well suited to IT auditing, which is the focuse of this work since it comprises a wide range of standards, requirements, and other audit criteria corresponding to processes, systems, technologies, or entire organizations subject to IT audits.
+
+Auditing IT differs in significant ways from auditing financial records, general operations, or business processes. Each of these auditing disciplines, however,
+shares a common foundation of auditing principles, standards of practice, and highlevel processes and activities.
+
+
+\section{IT Auditing}\label{sec:adt:it-audit}
 
 IT audit is the process of collecting and evaluating evidence of an organization's information technology (IT) systems, practices, and operations to determine whether they are adequate, efficient, and effective in meeting the organization's objectives. An IT audit typically includes a review of an organization's policies, procedures, and controls related to its IT systems, as well as an assessment of the security, reliability, and performance of its IT infrastructure. The goal of an IT audit is to identify any weaknesses or deficiencies in an organization's IT systems and recommend improvements that can help the organization achieve its goals.
 
-An audit is a systematic, objective examination of one or more aspects of an
-organization that compares what the organization does to a defined set of criteria or requirements. Information technology (IT) auditing examines processes,
-IT assets, and controls at multiple levels within an organization to determine the
-extent to which the organization adheres to applicable standards or requirements. 
+\includenamedimage[0.5]{figures/it_auditing_and_other_types.png} {test}
+IT auditing has much in common with other types of audit and overlaps in many respects with financial, operational, and quality audit practices.
+
+IT auditing is a specialized discipline not only in its own right, with
+corresponding standards, methodologies, and professional certifications and experience requirements, but it also intersects significantly with other IT management and
+operational practices. 
+
+It is important to use “IT” to qualify IT audit and distinguish it from the more common financial connotation of the word audit used alone. Official definitions emphasizing the financial context appear in many standards and even in the text of the Sarbanes–Oxley Act, which defines audit to mean “the examination of financial statements of any issuer” of securities (i.e., a publicly traded company). The Act also uses both the terms evaluation and assessment when referring to required audits of companies’ internal control structure and procedures.
+
+WHY
+
+Performing and supporting IT audits and managing an IT audit program are time-,
+effort-, and personnel-intensive activities, so in an age of cost-consciousness and
+competition for resources, it is reasonable to ask why organizations undertake IT
+auditing. The rationale for external audits is often clearer and easier to understand—
+publicly traded companies and organizations in many industries are subject to legal
+and regulatory requirements, compliance with which is often determined through an
+audit. Similarly, organizations seeking or having achieved various certifications for
+process or service quality, maturity, or control implementation and effectiveness typically must undergo certification audits by independent auditors. IT audits often provide information that helps organizations manage risk, confirm efficient allocation of
+IT-related resources, and achieve other IT and business objectives. Reasons used to
+justify internal IT audits may be more varied across organizations, but include:
+
+- 
+- 
+
+Further details on organizational motivation for conducting internal and external IT audits appear in Chapters  3 and 4, respectively. To generalize, internal IT
+auditing is often driven by organizational requirements for IT governance, risk
+management, or quality assurance, any of which may be used to determine what
+needs to be audited and how to prioritize IT audit activities. External IT auditing
+is more often driven by a need or desire to demonstrate compliance with externally
+imposed standards, regulations, or requirements applicable to the type of organization, industry, or operating environment.
 
 IT auditing helps organizations understand, assess, and improve
 their use of controls to safeguard IT, measure and correct performance, and achieve
@@ -57,62 +102,12 @@ assurance. Audits performed in the context of these broader programs have differ
 purposes and areas of focus than stand-alone IT-centric audits, and offer different
 benefits and expected outcomes to organizations.
 
-Auditing IT differs in significant ways from auditing financial records, general operations, or business processes. Each of these auditing disciplines, however,
-shares a common foundation of auditing principles, standards of practice, and highlevel processes and activities.
-
-\includenamedimage[0.5]{figures/it_auditing_and_other_types.png} {test}
-IT auditing has much in common with other types of audit and overlaps in many respects with financial, operational, and quality audit practices.
-
-% \section{Why audit?}
-
-Performing and supporting IT audits and managing an IT audit program are time-,
-effort-, and personnel-intensive activities, so in an age of cost-consciousness and
-competition for resources, it is reasonable to ask why organizations undertake IT
-auditing. The rationale for external audits is often clearer and easier to understand—
-publicly traded companies and organizations in many industries are subject to legal
-and regulatory requirements, compliance with which is often determined through an
-audit. Similarly, organizations seeking or having achieved various certifications for
-process or service quality, maturity, or control implementation and effectiveness typically must undergo certification audits by independent auditors. IT audits often provide information that helps organizations manage risk, confirm efficient allocation of
-IT-related resources, and achieve other IT and business objectives. Reasons used to
-justify internal IT audits may be more varied across organizations, but include:
-
-- 
-- 
-
-Further details on organizational motivation for conducting internal and external IT audits appear in Chapters  3 and 4, respectively. To generalize, internal IT
-auditing is often driven by organizational requirements for IT governance, risk
-management, or quality assurance, any of which may be used to determine what
-needs to be audited and how to prioritize IT audit activities. External IT auditing
-is more often driven by a need or desire to demonstrate compliance with externally
-imposed standards, regulations, or requirements applicable to the type of organization, industry, or operating environment.
-
-\section{IT Auditing}\label{sec:adt:it-audit}
-
-It is important to use “IT” to qualify IT audit and distinguish it from the more common financial connotation of the word audit used alone. Official definitions emphasizing the financial context appear in many standards and even in the text of the Sarbanes–Oxley Act, which defines audit to mean “the examination of financial statements of any issuer” of securities (i.e., a publicly traded company). The Act also uses both the terms evaluation and assessment when referring to required audits of companies’ internal control structure and procedures.
-
-chapter \ref{chap:adt} on page \pageref{chap:adt} Words like assessment, evaluation, and review are often used synonymously with the term audit and while it is certainly true that an audit is a type of
-evaluation, some specific characteristics of auditing distinguish it from concepts
-implied by the use of more general terms. An audit always has a baseline or standard of reference against which the subject of the audit is compared. An audit is not
-intended to check on the use of best practices or (with the possible exception of
-operational audits) to see if opportunities exist to improve or optimize processes
-or operational characteristics. Instead, there is a set standard providing a basis for
-comparison established prior to initiating the audit. Auditors compare the subjects of the audit—processes, systems, components, software, or organizations
-overall—explicitly to that predefined standard to determine if the subject satisfies the criteria. Audit determinations tend to be more binary than results of other
-types of assessments or evaluations, in the sense that a given item either meets or
-fails to meet applicable requirements—auditors often articulate audit findings in
-terms of controls’ conformity or nonconformity to criteria.
-
-In contrast, a typical assessment might have a quantitative (i.e., score) or qualitative scale of ratings (e.g., poor, fair, good,
-excellent) and produce findings and recommendations for improvement in areas
-observed to be operating effectively or those considered deficient. Because auditors
-work from an established standard or set of criteria, IT audits using comprehensive or well thought-out requirements may be less subjective and more reliable than
-other types of evaluations or assessments \citep{GANTZ20141}.
-
 \gls{gl:haw}
 \glspl{gl:test}
 \Glspl{gl:test}
 \gls{sy:ohm}
 \gls{gl:es}
+chapter \ref{chap:adt} on page \pageref{chap:adt} 
 
 \section{Auditing in Context}
 
