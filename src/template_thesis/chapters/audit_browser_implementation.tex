@@ -2,18 +2,15 @@
 %
 \chapter{Audit Browser}\label{chap:ab}
 
-Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
+When it comes to staying complaint ascertaining the validity and reliability of information in organizations and their associated processes is a very important job of the organization security officers. It is also customary to have yearly audit sessions done by external entities. However, waiting for the audit report to hit should not be an option. Especially when it comes to highly regulated industries.
 
-Process Discovery \citep{5427384}
-By analyzing frequent patterns, process mining techniques can extract from event logs models that describe the processes at hand. For example, the Alpha process mining algorithm can automatically extract a Petri net that concisely models behavior in the event log. This gives the auditor an unbiased view of what has actually happened.
+In chapter \ref{chap:adt} Table \ref{tab:eicctp} an example overview of the different internal auditing activities were showcased and discussed. The detective controls done by administrators like security officers rely on audit logs and the corresponding aggregation programs. Assuming a proper audit logging infrastructure there is still a dependency on the developer to properly log the relevant activities, which poses the responsibility to evaluate and reliably provide a consistent and complaint audit logs. Not only is this prone to human errors it is by design bond to to not provide the full picture and might lead to over logging. 
 
-Conformance Checking
-An auditor can use an a priori process model to check if reality, as recorded in the event log, conforms to the model and vice versa. For example, a model may indicate that purchase orders exceeding one million euros require two checks. Auditors can use conformance checking to detect deviations, locate and explain them, and measure their severity (A. Rozinat and W.M.P. van der Aalst, “Conformance Checking of Processes Based on Monitoring Real Behavior,” Information Systems, vol. 33, no. 1, 2008, pp. 64–95).
+With time the audit log file just becomes larger and larger and going through the logs becomes very tedious and tend to be avoided. Even when it comes the external controls it is customary to work with pre-recorded parteitonend samples, which might give a good overview but never the full one. 
 
-Toward Operational Support
-Although process mining has traditionally focused on offline analysis and is seldom used for operational decision support, it can consider running-process instances and compare them with models based on historic data or business rules (W. M. P. van der Aalst, M. Pesic, and M. Song, “Beyond Process Mining: From the Past to Present and Future,” tech. report BPM-09-18 BPMcenter.org, 2009). For example, an auditor can “replay” a running case on the process model in real time and check whether the observed behavior fits. The moment the case deviates, the auditor can alert an appropriate actor.
+Auditing 2.0 discussed in section~\ref{sec:adt2} describe practices to mitigate the mentioned problems and provides the basis for an auditing frameworks in attempt of continues auditing approach. Using \gls{gl:es} as a reliable audit logging mechanism and the \gls{gl:ac} to implement the different process mining modules all what is left is to provide a user friendly interface to the auditors while keeping the fact in mind, that most auditors have different technical backgrounds and some have none.
 
-Auditors can also use a process model based on historic data to make predictions about running cases—for example, to estimate the remaining processing time and a particular outcome's probability—or provide recommendations, such as an activity that will minimize the expected costs and completion time.
+This implementation attempts a basic \gls{ac:mvp} as a \gls{ac:poc} of the reading modules, that can be extended easily to handle actionable ones.
 
 \section{Requirements}
 
@@ -23,9 +20,11 @@ Auditors can also use a process model based on historic data to make predictions
 % Keine Anforderung darf im Folgenden vergessen werden (mindestens Erwähnung in "Weiter- entwicklungsmöglichkeiten").
 % • Jedes Feature des konzipierten bzw. realisierten Systems muss auf eine Anforderung zurück- geführt werden.
 
-The audit component implemented in chapter \ref{chap:ac} is to be utilised to offer an audit reporting \gls{ac:gui}. \gls{ac:m8} offer much more features, that can be utilised, thus the \gls{ac:gui} should be expandable to accommodate other use-cases and implementations.
+The \gls{gl:ac} implemented in chapter \ref{chap:ac} is to be utilised to offer an audit log reporting \gls{ac:gui} to enable continues auditing and lay the ground work for \hyperref[sec:adt2]{Auditing 2.0}.
 
-Upstream \gls{ac:iam} authenticators like onelogin are to be supported.
+\Gls{ac:m8} offer much more features, that can be utilised. Since \gls{ac:m8} has no official \gls{ac:gui} the base implementation for the \gls{gl:ab} should be expandable to accommodate other use-cases and implementations.
+
+Upstream \gls{ac:iam} providers like onelogin are to be supported by implementing \gls{ac:m8} authentication flow as described in section \todo{add section ref}.
 
 Since Auditors have different backgrounds and technical knowledge the \gls{ac:ux} should be intuitive and well thought out. The following is to be considered:
 
@@ -34,37 +33,33 @@ Since Auditors have different backgrounds and technical knowledge the \gls{ac:ux
   \item lack of events is not an error and musst be clearly represented
 \end{itemize}
 
-To ease auditors workflows and external auditing needs audit reports should be exportable and sendable via e-mail in a spread-sheet compatible format like \gls{ac:csv}. Automating these reports should be possible as well.
-
-% alerting and monitoring
-
-% End with a GUI, that the auditor can configure to her/his own requirements
+To ease auditors workflows and external auditing needs audit reports should be exportable and sendable via e-mail in a spread-sheet compatible format like \gls{ac:csv}. Automating these reports should be possible as well. \todo{see if this will be possible timewise}
 
 \subsection{Use-Cases}
 
-\begin{table}[H]
-  \begin{center}
-    \caption{Audit browser derived use-cases}
-    \label{tab:abuc}
-    \def\arraystretch{1.5}
-    \begin{tabularx}{\linewidth}{|l l X |}
-      \hline
-      \rowcolor{gray!20}
-      \textbf{ID} & \textbf{Use-Case} & \textbf{Description}\\
-      UC01 & \gls{ac:m8} \gls{ac:gui} & As a user, I want to use \gls{ac:m8} features through an easy to navigate \gls{ac:gui}\\
-      UC02 & Onelogin \gls{ac:iam} authentication & As a user, I want to authenticate using my onelogin \gls{ac:iam} account\\
-      UC04 & audit-log for date-range report & As an auditor, I want to see all actions taken within a specific date-range\\
-      UC05 & audit-log about a user report & As an auditor, I want see all actions taken on a user\\
-      UC06 & audit-log of user-actions report & As an auditor, I want see all actions taken by a user\\
-      UC07 & audit-log users overview & As an auditor, I want a report of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters\\
-      UC08 & \gls{ac:csv} audit-log reports export & As an auditor, I want to export audit-log reports in a \gls{ac:csv} formatted file \gls{ac:gui}\\
-      UC09 & Send audit-log reports via e-mail & As an auditor, I want to send audit-log reports via e-mail \gls{ac:gui}\\
-      \hline
-    \end{tabularx}
-  \end{center}
-\end{table}
+\mytable{tab:abuc}{
+  \begin{tabularx}{\linewidth}{| l l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{ID} & \textbf{Use-Case} & \textbf{Description}\\
+    UC01 & \Copy{abuc01}{Monoskope \gls{ac:gui}} & As a user, I want to use \gls{ac:m8} features through an easy to navigate \gls{ac:gui} \\
 
-% \subsection{Stakeholders}
+    UC02 & \Copy{abuc02}{\gls{ac:oidc} authentication} & As a user, I want to authenticate using my \gls{ac:oidc} provider account \\
+
+    UC03 & \Copy{abuc03}{Audit-log for date-range report} & As an auditor, I want to see all actions taken within a specific date-range \\
+
+    UC04 & \Copy{abuc04}{Audit-log about a user report} & As an auditor, I want see all actions taken on a user \\
+
+    UC05 & \Copy{abuc05}{Audit-log of user-actions report} & As an auditor, I want see all actions taken by a user \\
+
+    UC06 & \Copy{abuc06}{Audit-log users overview} & As an auditor, I want a report of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters \\
+
+    UC07 & \Copy{abuc07}{\gls{ac:csv} audit-log reports export} & As an auditor, I want to export audit-log reports in a \gls{ac:csv} formatted file \gls{ac:gui} \\
+
+    UC08 & \Copy{abuc08}{Send audit-log reports via e-mail} & As an auditor, I want to send audit-log reports via e-mail \gls{ac:gui} \\
+    \hline
+  \end{tabularx}
+}{\Gls{gl:ab} derived use-cases}
 
 \subsection{Architectural Constraints}
 
@@ -72,7 +67,6 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 \begin{table}[H]
   \begin{center}
-    \caption{Audit browser technical constraints}
     \label{tab:abtc}
     \def\arraystretch{1.5}
     \begin{tabularx}{\linewidth}{|l l X |}
@@ -84,6 +78,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
       TC03\label{tc:ab03} & Backend & Backend is written in \gls{gl:go}\\
       \hline
     \end{tabularx}
+    \caption{\Gls{gl:ab} technical constraints}
   \end{center}
 \end{table}
 
@@ -91,8 +86,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 \begin{table}[H]
   \begin{center}
-    \caption{Audit component organisational constraints}
-    \label{tab:acoc}
+    \label{tab:aboc}
     \def\arraystretch{1.5}
     \begin{tabularx}{\linewidth}{|l l X |}
       \hline
@@ -104,6 +98,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
       \hline
     \end{tabularx}
   \end{center}
+  \caption{\Gls{gl:ab} organisational constraints}
 \end{table}
 
 \section{System Design}
@@ -112,22 +107,259 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 \subsubsection{Business Context}
 
-\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_browser/audit_browser_business_context.drawio}{Audit Browser Business Context Diagram}
+\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_browser/audit_browser_business_context.drawio}{\Gls{gl:ab} business context diagram}
 
 \subsubsection{Technical Context}
 
-\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_browser/audit_browser_technical_context.drawio}{Audit Browser Business Context Diagram}
+\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_browser/audit_browser_technical_context.drawio}{\Gls{gl:ab} technical context diagram}
 
 % https://youtu.be/XdG0EujccHQ?t=748
 
 \subsection{Solution Strategy}
 
-JS/TS
+
+\begin{table}[H]
+  \begin{center}
+    \label{tab:abss}
+    \def\arraystretch{1.5}
+    \begin{tabularx}{\linewidth}{| X m{1cm} X X X |}
+      \hline
+      \rowcolor{gray!20}
+      \textbf{Function} & \textbf{UCID} & \textbf{Semantics} & \textbf{Precondition} & \textbf{Postcondition}\\
+
+      render(\-components) & UC01 & render components in the browser & user navigated to \gls{gl:monogui} based \gls{ac:uri} & requested components are rendered or user is redirected to authenticate himself \\
+
+      signIn(\-m8APIUrl) & UC02 & Kick in \gls{ac:m8} \gls{ac:oidc} authentication flow & user clicked the sign in button & user is redirected to \gls{ac:idp} authentication \gls{ac:url} \\
+
+      requestAuth(\-authCode) & UC02 & request authenticaton token from \gls{ac:m8} & user signed in using his \gls{ac:idp} account & user can access protected routes \\
+
+      getAuditLog(\-from, to, kargs) & UC03 UC04 UC05 UC06 & get audit log depending on the usecase as described in \ref{tab:abuc} & user provided date range and other inputs based on the usecase & user can browse the requested log entries \\
+
+      \hline
+    \end{tabularx}
+  \end{center}
+  \caption{\Gls{gl:ab} solution strategy}
+\end{table}
+
+\subsection{Building Block View}
+
+\subsubsection{Overall System White Box}
+
+\includenamedsvg{\includesvg[width=12cm,pretex=\relscale{0.4}]}{diagrams/audit_browser/audit_browser_component_diagram_white_box_level_1.drawio}{\Gls{gl:ab} overall system component diagram}
+
+\header{Contained Building Blocks}
+
+\header{MonoGUI}
+
+\mytable{abmguibbbb}{
+  \begin{tabularx}{\linewidth}{|l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Component} & \textbf{Description}\\
+    gRPC & handles comunication with \gls{gl:grpcweb} Proxy\\
+    \hline
+  \end{tabularx}
+}{\Gls{gl:ab} \gls{gl:monogui} contained building blocks black box}
+
+\header{Scenes}
+
+\mytable{abscbbbb}{
+  \begin{tabularx}{\linewidth}{|l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Component} & \textbf{Description}\\
+    Audit & handles rendering of the audit components and user inputs \\
+    Auth & handles rendering of the authentication components and user inputs \\
+    \hline
+  \end{tabularx}
+}{\Gls{gl:ab} scenes contained building blocks black box}
+
+\header{UseCases}
+
+\mytable{abuccbbbb}{
+  \begin{tabularx}{\linewidth}{|l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Component} & \textbf{Description}\\
+    Audit & handles communication with \gls{ac:m8}'s \gls{gl:ac} and data preparation \\
+    Auth & handles communication between \gls{ac:m8}'s Gateway, the user, the upstream \gls{ac:idp} \\
+    \hline
+  \end{tabularx}
+}{\Gls{gl:ab} UseCases contained building blocks black box}
+
+\header{API}
+
+\mytable{abapicbbbb}{
+  \begin{tabularx}{\linewidth}{|l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Component} & \textbf{Description}\\
+    Audit & \gls{ac:m8}'s \gls{gl:ac} stubs to handel \gls{ac:grpc} requests \\
+    Auth & \gls{ac:m8}'s Gateway stubs to handel \gls{ac:grpc} requests \\
+    \hline
+  \end{tabularx}
+}{\Gls{gl:ab} \gls{ac:api} contained building blocks black box}
+
+\subparagraph{Level 2}
+
+\header{\gls{gl:monogui} White Box}
+
+\subheader{\gls{ac:grpc}}
+
+\includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_monogui_grpc_class_diagram.drawio}{\gls{gl:ab} \gls{gl:monogui} \gls{ac:grpc} class diagram}
+
+\mytable{abmgcd}{
+  \begin{tabularx}{\linewidth}{|l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Object} & \textbf{Description}\\
+    GrpcConnectionFactory & creates preconfigured \gls{ac:grpc} connection based on the use case for example authenticated with timeout and retries connection \\
+    \hline
+  \end{tabularx}
+}{\Gls{gl:ab} \gls{gl:monogui} \gls{ac:grpc} class diagram}
+
+\header{Scenes White Box}
+
+\subheader{Audit}
+
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.6}]}{diagrams/audit_browser/audit_browser_scenes_audit_class_diagram.drawio}{\gls{gl:ab} scenes audit class diagram}
+
+\mytable{absacd}{
+  \begin{tabularx}{\linewidth}{|l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Object} & \textbf{Description}\\
+    Sidebar & composition component for sidebar presentation and interaction \\
+    Header & composition component for content header presentation and interaction \\
+    Topbar & composition component for topbar presentation and interaction \\
+    AuditDatePicker & composition component for date range presentation and interaction \\
+    Audit & composed component for get by date range use case UC03~\ref{tab:abuc} presentation and interaction \\
+    \hline
+  \end{tabularx}
+}{\Gls{gl:ab} scenes audit class diagram}
+
+\subheader{Auth}
+
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.8}]}{diagrams/audit_browser/audit_browser_scenes_auth_class_diagram.drawio}{\gls{gl:ab} scenes auth class diagram}
+
+\mytable{absacd}{
+  \begin{tabularx}{\linewidth}{|l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Object} & \textbf{Description}\\
+    ThemeButton & composition component for the sign in button presentation and interaction \\
+    Auth & composed component for the authentication use case UC02~\ref{tab:abuc} presentation and interaction \\
+    AuthContext & composition component to provide authentication context for composing components \\
+    useAuth & composed component to manage authentication flow components \\
+    AuthSecure & composition component to put composing components behind authentication wall \\
+    useAuthenticatedClient & composition component to provide preconfigured and authenticated \gls{ac:grpc} client for composing components \\
+    AuthPopup & composition component for upstream \gls{ac:idp} presentation and interaction \\
+    \hline
+  \end{tabularx}
+}{\Gls{gl:ab} scenes auth class diagram}
+
+\header{UseCases White Box}
+
+\subheader{Audit}
+
+\includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_usecases_audit_class_diagram.drawio}{\gls{gl:ab} usecases audit class diagram}
+
+\mytable{abucacd}{
+  \begin{tabularx}{\linewidth}{|l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Object} & \textbf{Description}\\
+    UseCase & use case base for \gls{ac:api} aggregation and data preparation for presentation components \\
+    GetAuditLogUseCase & request audit log events from the \gls{ac:api} and prepare them for presentation components \\
+    \hline
+  \end{tabularx}
+}{\Gls{gl:ab} usecases audit class diagram}
+
+\subheader{Auth}
+
+\includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_usecases_auth_class_diagram.drawio}{\gls{gl:ab} usecases auth class diagram}
+
+\mytable{abucathcd}{
+  \begin{tabularx}{\linewidth}{|l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Object} & \textbf{Description}\\
+    AuthUseCase & coordinate authentication flow initialisation and callbacks between the \gls{ac:api} and presentation components \\
+    \hline
+  \end{tabularx}
+}{\Gls{gl:ab} usecases auth class diagram}
+
+\subsection{Runtime View}
+
+\subsubsection{\hyperref[tab:abuc]{UC01}: \Paste{abuc01}}
+
+\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_browser/audit_browser_uc01_auth_sequence_diagram.drawio}{\gls{gl:ab} \hyperref[tab:abuc]{UC01} sequence diagram}
+
+\subsubsection{\hyperref[tab:abuc]{UC02}: \Paste{abuc02}}
+
+\includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_uc02_auth_sequence_diagram.drawio}{\gls{gl:ab} \hyperref[tab:abuc]{UC02} sequence diagram}
+
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.6}]}{diagrams/audit_browser/audit_browser_uc02_auth_signin_sequence_diagram.drawio}{\gls{gl:ab} \hyperref[tab:abuc]{UC02} sign in sequence diagram}
+
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.6}]}{diagrams/audit_browser/audit_browser_uc02_auth_state_machine.drawio}{\gls{gl:ab} \hyperref[tab:abuc]{UC02} auth state machine}
+
+\subsubsection{\hyperref[tab:abuc]{UC03}: \Paste{abuc03}}
+
+\includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_uc03_sequence_diagram.drawio}{\gls{gl:ab} \hyperref[tab:abuc]{UC03} sequence diagram}
+
+\section{Design Decisions}
+
+\subsection{DD01: \gls{ac:grpc} Client-Server Communication}
+
+\gls{ac:http}/2 comes with multiple advantages to handle \gls{ac:http}/1.1 limitations like multiplexing, \gls{gl:hpack} compression and server push mechanism, which allows the server to push streams of messages without waiting for an explicit client request~\citep{RFC7540}
+
+As of the time of writing Browsers do support \gls{ac:http}/2 but only for static files like images, javascript, css etc. XMLHttpRequest/Ajax calls are still carried over \gls{ac:http}/1.1. This is due to the fact, that browsers have no unified specification to handle \gls{ac:http}/2 trailers.
+
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.8}]}{diagrams/http1_vs_http2.drawio}{\gls{ac:http}/1.1 compared to \gls{ac:http}/2}
+
+\gls{ac:grpc} makes heavy use of trailers to send status messages when streaming responses~\citep{grpcspec}. Because of the browser \gls{ac:http}/2 limitations \gls{ac:js}, the programming language of the web, can not directly talk to a \gls{ac:grpc} \glspl{ac:api} as normally done with \gls{ac:rest} \glspl{ac:api}. 
+
+To mitigate this limitation a translation proxy has to be used to translate \gls{ac:grpc} to \gls{ac:rest} requests/responses~\citep{grpcBrowserState}.
+
+\includenamedimage[0.5]{figures/grpc-web-proxy}{\gls{gl:grpcweb} proxy to allow browser \gls{ac:grpc} support~\citep{grpcBrowserState}}
+
+\header{Why stick to gRPC?}
+
+Deciding weather or not it is worth the effort to go through the hassle of proxying all requests to mitigate browser support and navigating through mainly an edge technology when it comes to web-development with no clear guides and mediocre documentation comes back to the magic phrase "it depends". the gained efficiency compared to \gls{ac:rest} and the maintainability efforts, especially for production usecases, requires thorough evaluation.
+
+\begin{itemize}
+  \item Messages passing back and forth are encoded which makes them hard to read and debug
+  \item Production use is minimal at best since the effort is still not worth the gaines for already established services
+  \item there is still no Client-side and Bi-directional streaming support
+  \item official Protobuf compiler extensions are buggy and have no ECMAScript support (usage of third party extensions like protobuf-es is needed)
+\end{itemize}
+
+Despite the mentioned above \gls{ac:grpc} still shines when it comes to straightforward \gls{ac:api} definitions, efficient and compact mechanism to exchange big messages~\citep{richardson2018microservices}, streaming and \gls{ac:http}/2 advantages justify its usage in the right context. 
+
+\header{Other Options}
+
+The only other option is to actively provide backend \gls{ac:rest} support by Transcoding \gls{ac:http}/\gls{ac:json} to \gls{ac:grpc} and utilising a reverse proxy to to serve a \gls{gl:restfull} \gls{ac:api}~\citep{grpcgateway}
+
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.8}]}{figures/grpc-gateway_architecture_introduction_diagram}{\gls{ac:grpc}-Gateway architecture diagram~\citep{grpcgateway}}
+
+While this comes with the \gls{gl:restfull} \gls{ac:api} advantages and full support of the web development community it dose not differ in it's essnase to \gls{gl:grpcweb} yet comes with the disadvantage of the server transcoding overhead.
+
+\header{Conclusion}
+
+From the perspective of using a technology that is on the bleeding edge of its peers just getting the basic workflows working with it vs. the well established patterns of \gls{ac:rest} is challenging.
+
+However, since \gls{ac:m8} only speaks \gls{ac:grpc} and maintaining a \gls{ac:rest} \gls{ac:api} is not an options \hyperref[tab:actc]{TC03}, due to the fact that solutions do exists to to handle \gls{ac:rest}-\gls{ac:grpc} translation, until full \gls{ac:grpc} support by the browsers and the alternatives offers no real advantages in this case it was decided to go with \gls{ac:grpc} for client-server communication.
+
+\section{Technical Decisions}
+
+\subsection{TD01: \glsfirst{ac:js} and \gls{gl:react}}\label{abtd:01}
+
+% JS/TS
 % https://youtu.be/CAGuhVIOT2c?t=2449
 % https://medium.com/zeals-tech-blog/grpc-go-server-web-client-853daf40cdef
 % https://www.vinsguru.com/grpc-web-example/
 % https://blog.cloudflare.com/moving-k8s-communication-to-grpc/
-react
+% react
 % https://www.youtube.com/watch?v=NFZbTy_B4H0&t=423s
 % https://programmingpercy.tech/blog/using-grpc-tls-go-react-no-reverse-proxy/
 % https://www.youtube.com/watch?v=XdG0EujccHQ&t=3348s
@@ -137,172 +369,94 @@ react
 % https://medium.com/alva-labs/building-microapps-with-grpc-web-64b7cdf50313
 % https://www.polarsignals.com/blog/posts/2022/06/23/how-we-use-gRPC-to-build-our-frontend/
 % https://www.youtube.com/watch?v=NFZbTy_B4H0&t=1944s
-Vue.js
+% Vue.js
 % https://medium.com/@itachisasuke/using-grpc-web-vue-js-with-a-golang-backend-76dd9d6fd150
 % https://gustavohenrique.net/en/2020/02/grpc-web-with-golang-and-vuejs-an-alternative-to-rest-and-graphql/
 % https://torq.io/blog/grpc-web-using-grpc-in-your-front-end-application/
 % https://github.com/kostyay/grpc-web-example
-Angular
+% Angular
 % https://www.youtube.com/watch?v=fvFOBkR6GT8&t=1139s
 % https://github.com/search?q=user%3Avishipayyallore+grpc-web&type=code
 % https://itnext.io/a-complete-guide-to-grpc-web-with-angular-and-net-c4ae2500bd24
-WASM
+% WASM
 % https://www.youtube.com/watch?v=swZPL5PjkVU&t=187s
 %  youtube.com/watch?v=wUCCrrlzkPU&t=34s
 % https://www.youtube.com/watch?v=FBRbdpdK3lI&t=155s
 
+It is no secret that \gls{ac:js} is the language of the web and is almost always ranked first by multiple indexes compared to other web development programing languages.
 
-\subsection{Building Block View}
+\includenamedimage[0.7]{figures/Top-Programming-Languages-comparison-table}{Top programming languages - rankings in comparison \citep{ProgrammingLangRank}}
 
-\subsection{Runtime View}
+In a survey conducted on 39,472 person a clear trend towards \gls{ac:ts} can be seen as it improves the developer experience and provides various other features mainly based on the added typing support \citep{TheStateOfJs}
 
-\subsection{Deployment View}
+However writing vanilla \gls{ac:js} or \gls{ac:ts} tend to be very cumbersome and follow a scripting approach (hence the name). Depending on the use-case this might be much preferable, sense it offer total control and a declarative approach when it comes to handling \gls{ac:xml} and \gls{ac:html} elements. 
 
-\section{Design Decisions}
+On the other hand building and maintaining web applications requires a programming approach and patterns to achieve production level results, which lead to the development of many frontend development frameworks lke \gls{gl:react}, \gls{gl:angular}, \gls{gl:vuejs} and many others.
 
-Anguler tend to be overkill for small projects and monoskope is not GUI intesive produckt
-
-\subsection{DD01: \gls{ac:api} Gateway}
-
-frontend only talks \gls{ac:rest}
-
-% https://www.theseus.fi/bitstream/handle/10024/501885/Vo_Hoang.pdf?sequence=2
-
-\gls{ac:grpc} is not natively supported in the browser 
-% https://drive.google.com/drive/folders/1AOa1kWTnopeOQPy5mVXTJtRt_qqLBnVo
-- no way to use HTTP/2
-Before we continue, we need to discuss the current limitations of browsers. Browsers do support HTTP2 to get the static files like images, javascript, css etc. But for any XMLHttpRequest/Ajax calls, browsers still use HTTP/1.1. It is a limitation of browsers as of now. Because of this limitation, browser / client side javascript can not directly talk to the backend gRPC server as we normally talk to the backend REST API. 
-- no way of attaching gRPC-specific trailers (footers) at the end of every rqueste/response
-% https://youtu.be/UV-VnlcpDhU?t=288
-
-Messages passing back and forth are encoded which will be hard to read debug
-backend has to put an middleware which translates messages from http to grpc, is this middleware removable?
-how is the efficiency doing all this way compared to sending raw http request to backend, any reasonable comparison done so far?
-
-options
-
-- generate REST API
-- translate REST to gRPC and vice versa
-% Pattern: Backends For Frontends https://samnewman.io/patterns/architectural/bff/
-
-
-it’s common to use an API gateway to wrap all RPC’s into REST API. Kubernetes dose gRPC internally and REST externally, for lack of options back then?
-
-\header{The problem with REST}
-
-comparison: https://youtu.be/CAGuhVIOT2c?t=1829
-% https://blog.cloudflare.com/moving-k8s-communication-to-grpc/
-
-\todo{rest problems}
-
-readability comes with costs. there is no readability in ISO 25010
-https://youtu.be/CAGuhVIOT2c?t=841
-
-8 fallacies of distributed systems:
-
-- latency is zero
-normally multiple calls are needed a latency add up
-
-- bandwidth is infinite
-
-- transfer cost (the time it take to marshall and unmarshall)
-
-also reason...~\ref{tc:ac03}
-
-research json vs protbuff performance
-
-\header{why stick with gRPC}
-
-proto buffers are much more efficient etc...\todo{TODO}
-backword and forward compatibility
-
-Communicating using the synchronous Remote
-procedure invocation pattern \citep{richardson2018microservices}
-
-dealing with api changes
-
-
-
+Among the 3 stables mentioned above \gls{gl:react} has the higher usage across all years since 2016 \citep{TheStateOfJs} since it comes with many basic yet powerful features, that can be expanded depending on the use-case. \gls{gl:angular} on the other hand tend to be tailored towards enterprise usage and comes with greater complexity and steeper learning curve, while \gls{gl:vuejs} attempt to be the happy medium in between.
 
 \header{Conclusion}
 
-could be an overkill but maintining a REST API on top of gRPC in M8 won't be fun either
+While \gls{ac:ts} seems to be the smart choose to make, especially for production environments the added complexity requires more development time. Since \gls{gl:monogui} is meant to be a \gls{ac:poc} and is for now mainly developed as a base for the \gls{gl:ab} and due to the deadline set by \hyperref[tab:aboc]{OC01} it was decided to go with \gls{ac:js} in combination with \gls{gl:react} since they offer the perfect platform for the planned solution.
 
-From the perspective of using a technology that's a bit bleeding edge, this makes a lot of sense. Putting it on the public edge of your services would definitely be more problematic for load balancers and I imagine it was a struggle just getting basic things working with it vs. the well established patterns one would already have available for REST/HTTP.
+\subsection{TD02: Headless Use-Cases Implementation}
 
-\subsection{DD02: Micro Frontends}
+While \hyperref[abtd:01]{TD01} specifies usage of \gls{ac:js} and \gls{gl:react} \gls{gl:monogui} expansion and further development should be kept in mind as specified by \hyperref[tab:abtc]{TC01}. 
 
-\section{Technical Decisions}
+To stay flexible and framework independent it was decided to split the business logic from the presentation logic or as is commonly known follow a headless implementation approach. The latter specifies writing business logic in vanilla \gls{ac:js} and the presentation logic in the used framework notation. This allows for easier migration to \gls{gl:ts} while also staying framework independent. 
 
-Lösungsalternativen sind kritisch zu bewerten und Auswahl zu begründen.
+% \subsection{TD01: gRPC Web}
 
-\subsection{TD00: Javascript}
+% https://grpc.io/blog/grpc-web-ga/
 
-\subsection{TD01: gRPC Web}
+% gRPC REST gateway implementation.
 
-https://grpc.io/blog/grpc-web-ga/
+% options:
 
-gRPC REST gateway implementation.
+% - gRPC Gateway:
+% --- server need to know about it
+% --- -> more maintenance cost
+% --- -> basically REST API
+% % https://jbrandhorst.com/post/gopherjs-grpcweb/
+% % https://github.com/TanStack/query/discussions/978#discussioncomment-741259
+% Clients don’t know what types are used - the interface is HTTP JSON. This can be somewhat mitigated with the use of swagger generated interfaces, but it’s still not perfect.
+% The interface being JSON means marshalling and unmarshalling can become a significant part of the latency between the client and the server.
+% The gRPC-gateway requires specific changes to the proto definitions - it’s not as straightforward as just defining your RPC methods.
 
-options:
+% - gRPC Web: 
+% ---- only envoy support it
+% ---- still experimental
+% ---- only support unary and server streaming
 
-- gRPC Gateway:
---- server need to know about it
---- -> more maintenance cost
---- -> basically REST API
-% https://jbrandhorst.com/post/gopherjs-grpcweb/
-% https://github.com/TanStack/query/discussions/978#discussioncomment-741259
-Clients don’t know what types are used - the interface is HTTP JSON. This can be somewhat mitigated with the use of swagger generated interfaces, but it’s still not perfect.
-The interface being JSON means marshalling and unmarshalling can become a significant part of the latency between the client and the server.
-The gRPC-gateway requires specific changes to the proto definitions - it’s not as straightforward as just defining your RPC methods.
+% -- Connect-web
 
-- gRPC Web: 
----- only envoy support it
----- still experimental
----- only support unary and server streaming
+% since m8 is not a browser first system maintaining the connect protocol is not justified. 
 
--- Connect-web
+% Connect for Web is currently pre-v1, but we have been using it in production for a while. We plan to release a stable v1 in early 2023. However, you can get started with connect-web now.
 
-since m8 is not a browser first system maintaining the connect protocol is not justified. 
+% connect-web uses protoc-gen-es, which ommit service generation in faivour of serviceType and reflection... % https://github.com/bufbuild/protobuf-es/issues/252#issuecomment-1282549160
+% This generally requires deeper knowledge and make a bit tedious and cumbersome for contributors. 
 
-Connect for Web is currently pre-v1, but we have been using it in production for a while. We plan to release a stable v1 in early 2023. However, you can get started with connect-web now.
+% -- protobuf-ts
 
-connect-web uses protoc-gen-es, which ommit service generation in faivour of serviceType and reflection... % https://github.com/bufbuild/protobuf-es/issues/252#issuecomment-1282549160
-This generally requires deeper knowledge and make a bit tedious and cumbersome for contributors. 
+% is the root project that led the seeds for connect.... bla bla bla
+% it support service initializers
 
--- protobuf-ts
+% -- nice-grpc
 
-is the root project that led the seeds for connect.... bla bla bla
-it support service initializers
+% nice grpc is an alternativ typescript native implementation, which looks promising but....
 
--- nice-grpc
+% loadbalancing:
 
-nice grpc is an alternativ typescript native implementation, which looks promising but....
+% - nginx
 
-loadbalancing:
+% - envoy
+% \gls{ac:m8} comes with \gls{gl:ei} which is built on top of \gls{gl:envoy}
+% .Net seems have the most adaption and support for web-gRPC but due to the backend being written in \gls{gl:go} (TC03~ref{tc:ab03}) ...
 
-- nginx
+% \subsection{TD02: React}
+% % https://github.com/grpc/grpc-web/blob/master/doc/roadmap.md#web-framework-integration
 
-- envoy
-\gls{ac:m8} comes with \gls{gl:ei} which is built on top of \gls{gl:envoy}
-.Net seems have the most adaption and support for web-gRPC but due to the backend being written in \gls{gl:go} (TC03~ref{tc:ab03}) ...
+% Angular for UI heavy -> vue in the middle -> react for casual use
 
-\subsection{TD02: React}
-% https://github.com/grpc/grpc-web/blob/master/doc/roadmap.md#web-framework-integration
-
-Angular for UI heavy -> vue in the middle -> react for casual use
-
-\subsection{Enabling Technologies}
-
-the 8 fallacies of distributed computing
-
-protobuf vs json: https://youtu.be/CAGuhVIOT2c?t=1206
-
-Stand des Projekts und Weiterentwicklungsmöglichkeiten.
-• Anhang: Entwicklerdokumentation,Benutzerdokumentation
-Elektronischer Anhang: Sources, Projektdateien.
-
-\subsection{TD03: Headless usecasees implementation}
-
-laying down the ground work for micro-frontends or future framework change (framework-agnostic) by insuring all business logic is written in vanila js and. 
-
+% Anguler tend to be overkill for small projects and monoskope is not GUI intesive produckt
