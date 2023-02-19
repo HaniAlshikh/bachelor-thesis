@@ -11,23 +11,39 @@
 \newcommand\includenamedimage[3][]{
     \begin{figure}[H]
       \centering
+      \includegraphics[width=#1\textwidth]{#2}
       \caption{#3}
       \label{fig:#2}
-      \includegraphics[width=#1\textwidth]{#2}
     \end{figure}
 }
 
 \newcommand\includenamedsvg[3]{
     \begin{figure}[H]
       \centering
-      \caption{#3}
       \label{fig:#2}
       #1{#2}
+      \caption{#3}
     \end{figure}
 }
 
+\newcommand\mytable[3]{
+  \begin{table}[H]
+    \begin{center}
+      \def\arraystretch{1.5}
+      #2
+      \caption{#3}
+      \label{#1}
+    \end{center}
+  \end{table}
+  }
+
+
 \newcommand{\header}[1]{
   \paragraph{#1}\mbox{}\\
+  }
+
+\newcommand{\subheader}[1]{
+  \subparagraph{#1}\mbox{}\\
   }
 
 \newcommand{\newglsacronym}[4]{

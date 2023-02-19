@@ -29,21 +29,21 @@ CURL=wget make deploy
 
 And the following tools
 
-* [docker](https://docs.docker.com/get-docker/) to create isolated environments
-* [make](https://www.gnu.org/software/make/#download) to run deployment scripts
+- [docker](https://docs.docker.com/get-docker/) to create isolated environments
+- [make](https://www.gnu.org/software/make/#download) to run deployment scripts
 
 ### Automated
 
 the following will be downloaded and configured locally. If any should fail please follow the same instruction as the curl example above, when done downloading and installing manually.
 
-* [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to manage Kubernetes (k8s) resources
-* [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) to create a local k9s cluster
-* [helm](https://helm.sh/docs/intro/install/) to generate resource definitions
-* [step-cli](https://smallstep.com/docs/step-cli/installation) to generate m8 PKI's trust-anchor
+- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to manage Kubernetes (k8s) resources
+- [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) to create a local k9s cluster
+- [helm](https://helm.sh/docs/intro/install/) to generate resource definitions
+- [step-cli](https://smallstep.com/docs/step-cli/installation) to generate m8 PKI's trust-anchor
 
 ## Test Run
 
-> **_IMPORTENTE:_**  If you decided to make changes on the [setup files](setup) please make sure to do a wide search and replace all occurrences if applicable.
+> **_IMPORTENTE:_*-  If you decided to make changes on the [setup files](setup) please make sure to do a wide search and replace all occurrences if applicable.
 
 1. Deploy all resources to a local cluster:
 
@@ -60,20 +60,27 @@ the following will be downloaded and configured locally. If any should fail plea
     sudo security add-trusted-cert -d -r trustRoot -k "/Library/Keychains/System.keychain" tmp/domain-ca.crt
     ```
 
-3. Create port-forwards to route local request to backing services in the cluster: (Make sure `8443`, `5556` and `3000` are not in use)
-
-    ```shell
-    make port-forward
-    ```
-
-4. Add the following to your hosts file:
+3. Add the following to your hosts file:
 
     ```shell
     127.0.0.1 api.monoskope.dev
     127.0.0.1 dex
     ```
 
-5. Populate the EventStore with some mock data for a better user experience
+4. Create port-forwards to route local request to backing services in the cluster: (Make sure `8443`, `5556` and `3000` are not in use)
+
+    ```shell
+    make port-forward
+    ```
+
+5. navigate to [http://localhost:3000](http://localhost:3000) and sign in using the following codeinitials:
+
+    ```yaml
+    username: admin@monoskope.dev
+    password: password
+    ```
+
+6. Populate the EventStore with some mock data for a better user experience
 
     ```shell
     make mock-data

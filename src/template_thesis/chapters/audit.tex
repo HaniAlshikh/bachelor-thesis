@@ -86,7 +86,7 @@ needs to be audited and how to prioritize IT audit activities. External IT audit
 is more often driven by a need or desire to demonstrate compliance with externally
 imposed standards, regulations, or requirements applicable to the type of organization, industry, or operating environment.
 
-\section{IT Auditing}
+\section{IT Auditing}\label{sec:adt:it-audit}
 
 It is important to use “IT” to qualify IT audit and distinguish it from the more common financial connotation of the word audit used alone. Official definitions emphasizing the financial context appear in many standards and even in the text of the Sarbanes–Oxley Act, which defines audit to mean “the examination of financial statements of any issuer” of securities (i.e., a publicly traded company). The Act also uses both the terms evaluation and assessment when referring to required audits of companies’ internal control structure and procedures.
 
@@ -112,7 +112,7 @@ other types of evaluations or assessments \citep{GANTZ20141}.
 \glspl{gl:test}
 \Glspl{gl:test}
 \gls{sy:ohm}
-\gls{ac:es}
+\gls{gl:es}
 
 \section{Auditing in Context}
 
@@ -131,7 +131,7 @@ measured in terms of efficiency, effectiveness, and related performance metrics.
 
 |||compare architectures in the different contexts
 
-\section{Internal controls}
+\section{Internal controls}\label{sec:adt:internal-controls}
 
 From the perspective of planning and performing IT audits, internal controls
 represent the substance of auditing activities, as the controls are the items that are
@@ -146,7 +146,7 @@ purpose, by functional type, or both.
 \begin{table}[H]
   \begin{center}
     \caption{Examples of Internal Controls Categorized by Type and Purpose}
-    \label{tab:table1}
+    \label{tab:eicctp}
     \def\arraystretch{1.5}
     \begin{tabularx}{\linewidth}{|l X X X |}
       \hline
@@ -268,7 +268,7 @@ But it's the difficulty of processing Audit Log that is it's limitation. If you 
 
 Remember that you can use Audit Log in some parts of the model and other patterns elsewhere. You can also use Audit Log for one dimension of time and a different pattern for another dimension. So you might handle actual time history of a property with Temporal Property and use Audit Log to handle the record history.
 
-\section{Auditing 2.0}
+\section{Auditing 2.0}\label{sec:adt2}
 
 Meeting with CISO:
 no one read logs anymore
@@ -303,6 +303,19 @@ Business Provenance
 Process mining starts with the event log: a sequentially recorded collection of events, each of which refers to an activity (well-defined step) and is related to a particular case (process instance). Some mining techniques use other information such as the person or resource executing or initiating the activity, the event's time stamp, or data elements recorded with the event—for example, the size of an order.
 
 The systematic, reliable, and trustworthy recording of events, known as business provenance, is essential to auditing. This term acknowledges the importance of traceability by ensuring that history cannot be rewritten or obscured.
+
+\subsubsection{modules}
+
+Process Discovery \citep{5427384}
+By analyzing frequent patterns, process mining techniques can extract from event logs models that describe the processes at hand. For example, the Alpha process mining algorithm can automatically extract a Petri net that concisely models behavior in the event log. This gives the auditor an unbiased view of what has actually happened.
+
+Conformance Checking
+An auditor can use an a priori process model to check if reality, as recorded in the event log, conforms to the model and vice versa. For example, a model may indicate that purchase orders exceeding one million euros require two checks. Auditors can use conformance checking to detect deviations, locate and explain them, and measure their severity (A. Rozinat and W.M.P. van der Aalst, “Conformance Checking of Processes Based on Monitoring Real Behavior,” Information Systems, vol. 33, no. 1, 2008, pp. 64–95).
+
+Toward Operational Support
+Although process mining has traditionally focused on offline analysis and is seldom used for operational decision support, it can consider running-process instances and compare them with models based on historic data or business rules (W. M. P. van der Aalst, M. Pesic, and M. Song, “Beyond Process Mining: From the Past to Present and Future,” tech. report BPM-09-18 BPMcenter.org, 2009). For example, an auditor can “replay” a running case on the process model in real time and check whether the observed behavior fits. The moment the case deviates, the auditor can alert an appropriate actor.
+
+Auditors can also use a process model based on historic data to make predictions about running cases—for example, to estimate the remaining processing time and a particular outcome's probability—or provide recommendations, such as an activity that will minimize the expected costs and completion time.
 
 \subsection{Challenges}
 
