@@ -2,329 +2,249 @@
 %
 \chapter{Audit}\label{chap:adt}
 
-Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
+% Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
 
-An audit is often defined as an independent examination, inspection, or review.
-While the term applies to evaluations of many different subjects, the most frequent usage is with respect to examining an organization’s financial statements or accounts. In contrast to conventional dictionary definitions and sources focused on
-the accounting connotation of audit, definitions used by broad-scope audit standards bodies and in IT auditing contexts neither constrain nor presume the subject to which an audit applies.. \citep{GANTZ20141}.
+An audit is often defined as an independent examination, inspection, or review. While the term applies to evaluations of many different subjects, the most frequent usage is with respect to examining an organization’s financial statements or accounts. Words like assessment, evaluation, and review are often used synonymously with the term audit and while it is certainly true that an audit is a type of evaluation, some specific characteristics of auditing distinguish it from concepts implied by the use of more general terms. 
 
-the International Organization for
-Standardization (ISO) guidelines on auditing use the term audit to mean a “systematic, independent and documented process for obtaining objective evidence and evaluating it objectively to determine the extent to which the audit criteria are fulfilled” \citep{ISOISO1953}
+An audit always has a baseline or standard of reference against which the subject of the audit is compared. An audit is not intended to check on the use of best practices or to see if opportunities exist to improve or optimize processes or operational characteristics. Instead, there is a set of standards providing a basis for comparison established prior to initiating the audit. \citep{GANTZ20141}
 
-the Information Technology Infrastructure Library (ITIL) glossary
-defines audit as “formal inspection and verification to check whether a standard or set of guidelines is being followed, that records are accurate, or that efficiency and
-effectiveness targets are being met”~\citep{hanna2011itil}
+% Auditors compare the subjects of the audit (processes, systems, components, software, or organizations overall) explicitly to that predefined standard to determine if the subject satisfies the criteria. 
+Audit determinations tend to be more binary than results of other
+types of assessments or evaluations, in the sense that a given item either meets or fails to meet applicable requirements. Auditors often articulate audit findings in terms of controls’ conformity or nonconformity to criteria.
 
-Such general interpretations are well suited to IT auditing, which comprises a wide range of standards, requirements, and other audit criteria corresponding to processes, systems, technologies, or entire organizations subject to IT audits.
+% In contrast, a typical assessment might have a quantitative (i.e., score) or qualitative scale of ratings (e.g., poor, fair, good,
+% excellent) and produce findings and recommendations for improvement in areas
+% observed to be operating effectively or those considered deficient. Because auditors
+% work from an established standard or set of criteria, IT audits using comprehensive or well thought-out requirements may be less subjective and more reliable than
+% other types of evaluations or assessments \citep{GANTZ20141}.
 
-IT auditing is a specialized discipline not only in its own right, with
-corresponding standards, methodologies, and professional certifications and experience requirements, but it also intersects significantly with other IT management and
-operational practices. The subject matter overlap between IT auditing and network
-monitoring, systems administration, service management, technical support, and
-information security makes familiarity with IT audit policies, practices, and standards essential for IT personnel and managers of IT operations and the business areas
-that IT supports.
+The \gls{ac:iso} guidelines on auditing use the term audit to mean: \begin{quote} A systematic, independent and documented process for obtaining objective evidence and evaluating it objectively to determine the extent to which the audit criteria are fulfilled \citep{ISOISO1953}\end{quote}
 
-IT audit is the process of collecting and evaluating evidence of an organization's information technology (IT) systems, practices, and operations to determine whether they are adequate, efficient, and effective in meeting the organization's objectives. An IT audit typically includes a review of an organization's policies, procedures, and controls related to its IT systems, as well as an assessment of the security, reliability, and performance of its IT infrastructure. The goal of an IT audit is to identify any weaknesses or deficiencies in an organization's IT systems and recommend improvements that can help the organization achieve its goals.
+% the Information Technology Infrastructure Library (ITIL) glossary
+% defines audit as “formal inspection and verification to check whether a standard or set of guidelines is being followed, that records are accurate, or that efficiency and
+% effectiveness targets are being met”~\citep{hanna2011itil}
 
-An audit is a systematic, objective examination of one or more aspects of an
-organization that compares what the organization does to a defined set of criteria or requirements. Information technology (IT) auditing examines processes,
-IT assets, and controls at multiple levels within an organization to determine the
-extent to which the organization adheres to applicable standards or requirements. 
+In contrast to conventional dictionary definitions and sources focused on
+the accounting connotation of audit, definitions used by broad-scope audit standards bodies and in \gls{ac:it} auditing contexts neither constrain nor presume the subject to which an audit applies.
 
-IT auditing helps organizations understand, assess, and improve
-their use of controls to safeguard IT, measure and correct performance, and achieve
-objectives and intended outcomes. IT auditing consists of the use of formal audit
-methodologies to examine IT-specific processes, capabilities, and assets and their
-role in enabling an organization’s business processes. IT auditing also addresses IT
-components or capabilities that support other domains subject to auditing, such as
-financial management and accounting, operational performance, quality assurance,
-and governance, risk management, and compliance (GRC).
+Such general interpretations are well suited to \gls{ac:it} auditing, which comprises a wide range of standards, requirements, and other auditing criteria to audit \gls{ac:it} subjects.
+% which is the focus of this work,
+%  since it comprises a wide range of standards, requirements, and other audit criteria corresponding to processes, systems, technologies, or entire organizations subject to IT audits.
+
+% Auditing IT differs in significant ways from auditing financial records, general operations, or business processes. Each of these auditing disciplines, however,
+% shares a common foundation of auditing principles, standards of practice, and highlevel processes and activities.
 
 
+\section{\gls{ac:it} Audit}\label{sec:it-audit}
 
-IT audits are performed both by internal auditors working for the organization
-subject to audit and external auditors hired by the organization. The processes and
-procedures followed in internal and external auditing are often quite similar, but the
-roles of the audited organization and its personnel are markedly different. The audit
-criteria—the standards or requirements against which an organization is compared
-during an audit—also vary between internal and external audits and for audits of
-different types or conducted for different purposes.
+\gls{ac:it} audit is the process of collecting and evaluating evidence of an organization's \gls{ac:it} systems, practices, and operations to determine whether they are adequate, efficient, and effective in meeting the organization's objectives. \citep{GANTZ20141}
 
+An \gls{ac:it} audit typically includes a review of an organization's policies, procedures, and controls related to its \gls{ac:it} systems, as well as an assessment of the security, reliability, and performance of its \gls{ac:it} infrastructure. The goal of an \gls{ac:it} audit is to identify any weaknesses or deficiencies in an organization's \gls{ac:it} systems and recommend improvements that can help the organization achieve its goals.
 
-IT auditing often occurs as a component of a wider-scope audit not limited to IT concerns alone, or a means to support
-other organizational processes or functions such as GRC, certification, and quality
-assurance. Audits performed in the context of these broader programs have different
-purposes and areas of focus than stand-alone IT-centric audits, and offer different
-benefits and expected outcomes to organizations.
+\includenamedimage[0.5]{figures/it_auditing_and_other_types.png}{\gls{ac:it} auditing commonality with other types of audit \citep{GANTZ20141}}
 
-Auditing IT differs in significant ways from auditing financial records, general operations, or business processes. Each of these auditing disciplines, however,
-shares a common foundation of auditing principles, standards of practice, and highlevel processes and activities.
+\gls{ac:it} auditing has much in common with other types of audit and overlaps in many respects with financial, operational, and quality audit practices. It is important to use “\gls{ac:it}” to qualify \gls{ac:it} audit and distinguish it from the more common financial connotation of the word audit used alone. 
 
-\includenamedimage[0.5]{figures/it_auditing_and_other_types.png} {test}
-IT auditing has much in common with other types of audit and overlaps in many respects with financial, operational, and quality audit practices.
+% IT auditing is a specialized discipline not only in its own right, with
+% corresponding standards, methodologies, and professional certifications and experience requirements, but it also intersects significantly with other IT management and
+% operational practices. 
 
-% \section{Why audit?}
+% Official definitions emphasizing the financial context appear in many standards and even in the text of the Sarbanes–Oxley Act, which defines audit to mean “the examination of financial statements of any issuer” of securities (i.e., a publicly traded company). The Act also uses both the terms evaluation and assessment when referring to required audits of companies’ internal control structure and procedures.
 
-Performing and supporting IT audits and managing an IT audit program are time-,
-effort-, and personnel-intensive activities, so in an age of cost-consciousness and
-competition for resources, it is reasonable to ask why organizations undertake IT
-auditing. The rationale for external audits is often clearer and easier to understand—
-publicly traded companies and organizations in many industries are subject to legal
-and regulatory requirements, compliance with which is often determined through an
-audit. Similarly, organizations seeking or having achieved various certifications for
-process or service quality, maturity, or control implementation and effectiveness typically must undergo certification audits by independent auditors. IT audits often provide information that helps organizations manage risk, confirm efficient allocation of
-IT-related resources, and achieve other IT and business objectives. Reasons used to
-justify internal IT audits may be more varied across organizations, but include:
+% IT audits are performed both by internal auditors working for the organization and external auditors hired by it. The processes and procedures followed in internal and external auditing are often quite similar, but the roles of the audited organization and its personnel are markedly different. The audit
+% criteria—the standards or requirements against which an organization is compared
+% during an audit—also vary between internal and external audits and for audits of
+% different types or conducted for different purposes.
 
-- 
-- 
+% IT auditing often occurs as a component of a wider-scope audit not limited to IT concerns alone, or a means to support
+% other organizational processes or functions such as GRC, certification, and quality
+% assurance. Audits performed in the context of these broader programs have different
+% purposes and areas of focus than stand-alone IT-centric audits, and offer different
+% benefits and expected outcomes to organizations.
 
-Further details on organizational motivation for conducting internal and external IT audits appear in Chapters  3 and 4, respectively. To generalize, internal IT
-auditing is often driven by organizational requirements for IT governance, risk
-management, or quality assurance, any of which may be used to determine what
-needs to be audited and how to prioritize IT audit activities. External IT auditing
-is more often driven by a need or desire to demonstrate compliance with externally
-imposed standards, regulations, or requirements applicable to the type of organization, industry, or operating environment.
+\section{\gls{ac:it} Auditing in Context}
 
-\section{IT Auditing}\label{sec:adt:it-audit}
+From the perspective of planning and performing IT audits, controls represent the substance of auditing activities, as the controls are the items that are examined, tested, analyzed, or otherwise evaluated \citep{GANTZ20141}.
 
-It is important to use “IT” to qualify IT audit and distinguish it from the more common financial connotation of the word audit used alone. Official definitions emphasizing the financial context appear in many standards and even in the text of the Sarbanes–Oxley Act, which defines audit to mean “the examination of financial statements of any issuer” of securities (i.e., a publicly traded company). The Act also uses both the terms evaluation and assessment when referring to required audits of companies’ internal control structure and procedures.
+\includenamedimage[0.8]{figures/it_audit_activities}{IT audit activities and scopes \citep{GANTZ20141}}
 
-chapter \ref{chap:adt} on page \pageref{chap:adt} Words like assessment, evaluation, and review are often used synonymously with the term audit and while it is certainly true that an audit is a type of
-evaluation, some specific characteristics of auditing distinguish it from concepts
-implied by the use of more general terms. An audit always has a baseline or standard of reference against which the subject of the audit is compared. An audit is not
-intended to check on the use of best practices or (with the possible exception of
-operational audits) to see if opportunities exist to improve or optimize processes
-or operational characteristics. Instead, there is a set standard providing a basis for
-comparison established prior to initiating the audit. Auditors compare the subjects of the audit—processes, systems, components, software, or organizations
-overall—explicitly to that predefined standard to determine if the subject satisfies the criteria. Audit determinations tend to be more binary than results of other
-types of assessments or evaluations, in the sense that a given item either meets or
-fails to meet applicable requirements—auditors often articulate audit findings in
-terms of controls’ conformity or nonconformity to criteria.
+IT audits are performed both by internal auditors working for the organization and external auditors hired by it. The processes and procedures followed in internal and external auditing are often quite similar
+% IT audit activities represent an integral part of several key enterprise management
+% functions, which collectively contribute to the scope of the IT audit program and receive
+% input from the output of audit processes.
 
-In contrast, a typical assessment might have a quantitative (i.e., score) or qualitative scale of ratings (e.g., poor, fair, good,
-excellent) and produce findings and recommendations for improvement in areas
-observed to be operating effectively or those considered deficient. Because auditors
-work from an established standard or set of criteria, IT audits using comprehensive or well thought-out requirements may be less subjective and more reliable than
-other types of evaluations or assessments \citep{GANTZ20141}.
+% - IT governance
+% - Risk management
+% - Legal and regulatory compliance
+% - Quality management and quality assurance
+% - Information security management
 
-\gls{gl:haw}
-\glspl{gl:test}
-\Glspl{gl:test}
-\gls{sy:ohm}
-\gls{gl:es}
+% measured in terms of efficiency, effectiveness, and related performance metrics. 
 
-\section{Auditing in Context}
+% |||compare architectures in the different contexts
 
-\includenamedimage[0.5]{figures/it_audit_activities} {test}
-IT audit activities represent an integral part of several key enterprise management
-functions, which collectively contribute to the scope of the IT audit program and receive
-input from the output of audit processes.
+% \section{Internal controls}\label{sec:adt:internal-controls}
 
-- IT governance
-- Risk management
-- Legal and regulatory compliance
-- Quality management and quality assurance
-- Information security management
+The following is a one of the wide spread control categorization schemes used in internal control frameworks. Controls are normally classified by purpose, functional type, or both.
 
-measured in terms of efficiency, effectiveness, and related performance metrics. 
+\mytable{eicctp}{
+  \begin{tabularx}{\linewidth}{|l X X X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{} & \textbf{Preventive} & \textbf{Detective} & \textbf{Corrective}\\
+    Administrative & Acceptable use policy; Security awareness training & Audit log review procedures; IT audit program & Disaster recovery plan; Plan of action and milestones\\
+    Technical & Application firewall; Logical access control & Network monitoring; Vulnerability scanning & Incident response center; Data and system backup\\
+    Physical & Locked doors and server cabinets; Biometric access control& Video surveillance; Burglar alarm & Alternate processing facility; Sprinkler system\\
+    \hline
+  \end{tabularx}
+}{Examples of Internal Controls Categorized by Type and Purpose \citep{GANTZ20141}}
 
-|||compare architectures in the different contexts
+Administrative controls specify what an organization intends to do to safeguard the integrity of its operations, information, and other assets.
 
-\section{Internal controls}\label{sec:adt:internal-controls}
+IT audits and the approaches used to conduct them may consider internal controls from multiple perspectives by focusing on different IT elements. For now the focus will lay on audit log reviews and audit logging.
 
-From the perspective of planning and performing IT audits, internal controls
-represent the substance of auditing activities, as the controls are the items that are
-examined, tested, analyzed, or otherwise evaluated. Organizations often implement
-large numbers of internal controls intended to achieve a wide variety of control
-objectives.
-
-The prevalent control categorization schemes used in internal control frameworks,
-IT audit, and assessment guidance, and applicable legislation classify controls by
-purpose, by functional type, or both.
-
-\begin{table}[H]
-  \begin{center}
-    \caption{Examples of Internal Controls Categorized by Type and Purpose}
-    \label{tab:eicctp}
-    \def\arraystretch{1.5}
-    \begin{tabularx}{\linewidth}{|l X X X |}
-      \hline
-      \rowcolor{gray!20}
-      \textbf{} & \textbf{Preventive} & \textbf{Detective} & \textbf{Corrective}\\
-      Administrative & Acceptable use policy; Security awareness training & Audit log review procedures; IT audit program & Disaster recovery plan; Plan of action and milestones\\
-      Technical & Application firewall; Logical access control & Network monitoring; Vulnerability scanning & Incident response center; Data and system backup\\
-      Physical & Locked doors and server cabinets; Biometric access control& Video surveillance; Burglar alarm & Alternate processing facility; Sprinkler system\\
-      \hline
-    \end{tabularx}
-  \end{center}
-\end{table}
-
-Just as financial, quality, and operational audits can be executed entity-wide or at
-different levels within an organization, IT audits can evaluate entire organizations,
-individual business units, mission functions and business processes, services, systems, infrastructure, or technology components. As described in detail in Chapter 5,
-different types of IT audits and the approaches used to conduct them may consider internal controls from multiple perspectives by focusing on the IT elements
+% In this work we will focus on the administrative controls for detective purposes.
 
 % \section{FinTech}
 
-In this work we will focus on the administrative controls for detective purposes.
+% bei der Ausgestaltung der IT-Systeme und der dazugehörigen IT-Prozesse grundsätzlich auf gängige Standards abzustellen. Zu diesen zählen bspw. der IT-Grundschutz des Bundesamts für Sicherheit in der Informationstechnik, die
+% internationalen Sicherheitsstandards ISO/IEC 270XX der International Organization for Standardization und der Payment Card Industry Data Security
+% Standard (PCI-DSS). \citep{BaFinZAIT}.
 
-administrative controls specify what an organization intends to do to safeguard the integrity of its operations, information, and other assets.
-
-
-Taking a more related example where users are saved in a database and one might get the impression that user X also created 
-
-bei der Ausgestaltung der IT-Systeme und der dazugehörigen IT-Prozesse grundsätzlich auf gängige Standards abzustellen. Zu diesen zählen bspw. der IT-Grundschutz des Bundesamts für Sicherheit in der Informationstechnik, die
-internationalen Sicherheitsstandards ISO/IEC 270XX der International Organization for Standardization und der Payment Card Industry Data Security
-Standard (PCI-DSS). \citep{BaFinZAIT}.
-
-Anforderungsdokumente können sich je nach Vorgehensmodell unterscheiden und beinhalten bspw.:
-- Fachkonzept (Lastenheft)
-- Technisches Fachkonzept (Pflichtenheft)
-- User-Story/Product Back-Log
-Nichtfunktionale Anforderungen an IT-Systeme sind bspw.:
-- Anforderungen an die Informationssicherheit
-- Zugriffsregelungen
-- Ergonomie
-- Wartbarkeit
-- Antwortzeiten
-- Resilienz.
-
-Im Rahmen der Anwendungsentwicklung sind je nach Schutzbedarf
-angemessene Vorkehrungen zu treffen, dass auch nach jeder
-Produktivsetzung einer Anwendung die Vertraulichkeit, Integrität, Verfügbarkeit und Authentizität der zu verarbeitenden Daten nachvollziehbar sichergestellt werden \citep{BaFinZAIT}.
-
-Geeignete Vorkehrungen sind z. B.:
-- Prüfung der Eingabedaten
-- Systemzugangskontrolle Benutzerauthentifizierung
-- Transaktionsautorisierung
-- Protokollierung der Systemaktivität
-- Prüfpfade (Audit Logs)
-- Verfolgung von sicherheitsrelevanten Ereignissen
-- Behandlung von Ausnahmen.
+% Anforderungsdokumente können sich je nach Vorgehensmodell unterscheiden und beinhalten bspw.:
+% - Fachkonzept (Lastenheft)
+% - Technisches Fachkonzept (Pflichtenheft)
+% - User-Story/Product Back-Log
+% Nichtfunktionale Anforderungen an IT-Systeme sind bspw.:
+% - Anforderungen an die Informationssicherheit
+% - Zugriffsregelungen
+% - Ergonomie
+% - Wartbarkeit
+% - Antwortzeiten
+% - Resilienz.
 
 
-Das Institut hat nach Maßgabe des Schutzbedarfs und der SollAnforderungen Prozesse zur Protokollierung und Überwachung einzurichten, die überprüfbar machen, dass die Berechtigungen nur wie
-vorgesehen eingesetzt werden. Aufgrund der damit verbundenen
-weitreichenden Eingriffsmöglichkeiten hat das Institut insbesondere
-für die Aktivitäten mit privilegierten (besonders kritischen)
-Benutzer-/ Zutrittsrechten angemessene Prozesse zur Protokollierung
-und Überwachung einzurichten
-Die übergeordnete Verantwortung für die Prozesse zur Protokollierung und
-Überwachung von Berechtigungen wird einer Stelle zugeordnet, die unabhängig vom berechtigten Benutzer oder dessen Organisationseinheit ist. Zu
-privilegierten Zutrittsrechten zählen in der Regel die Rechte zum Zutritt zu
-Rechenzentren, Technikräumen sowie sonstigen sensiblen Bereichen \citep{BaFinZAIT}.
+% Just as financial, quality, and operational audits can be executed entity-wide or at
+% different levels within an organization, IT audits can evaluate entire organizations,
+% individual business units, mission functions and business processes, services, systems, infrastructure, or technology components. As described in detail in Chapter 5,
+% different types of IT audits and the approaches used to conduct them may consider internal controls from multiple perspectives by focusing on the IT elements
 
-Durch begleitende technisch-organisatorische Maßnahmen ist einer
-Umgehung der Vorgaben der Berechtigungskonzepte vorzubeugen.
-Technisch-organisatorische Maßnahmen sind bspw.:
-die Auswahl angemessener Authentifizierungsverfahren (u. a. starke
-Authentifizierung im Falle von Fernzugriffen)
-- die Implementierung einer Richtlinie zur Wahl sicherer Passwörter
-- die automatische passwortgesicherte Bildschirmsperre
-- die Verschlüsselung von Daten
-- die manipulationssichere Implementierung der Protokollierung
-- die Maßnahmen zur Sensibilisierung der Mitarbeiter
-
-Planning
-and executing the processes associated with these programs influences the design
-and implementation of the IT audit program and helps organizations identify and
-prioritize various aspects of their operations that constitute the subject of needed
-IT audits. Conversely, weaknesses or deficiencies in internal controls, gaps in
-meeting compliance requirements, or other potential IT audit findings influence
-organizational decisions made at the enterprise program level about allocation of
-resources, risk response, corrective action, or opportunities for process or control
-improvement.
+% Planning
+% and executing the processes associated with these programs influences the design
+% and implementation of the IT audit program and helps organizations identify and
+% prioritize various aspects of their operations that constitute the subject of needed
+% IT audits. Conversely, weaknesses or deficiencies in internal controls, gaps in
+% meeting compliance requirements, or other potential IT audit findings influence
+% organizational decisions made at the enterprise program level about allocation of
+% resources, risk response, corrective action, or opportunities for process or control
+% improvement.
 
 % \section{IT process maturity}
 
-The effectiveness and efficiency with which organizations implement and execute
-IT processes is often expressed in terms of process maturity, a relative measure of
-how well processes are fully defined, documented, implemented, and optimized
-for use in an organization.
+% The effectiveness and efficiency with which organizations implement and execute
+% IT processes is often expressed in terms of process maturity, a relative measure of
+% how well processes are fully defined, documented, implemented, and optimized
+% for use in an organization.
 
 \section{Audit log} 
 
-Audit logging—Log user actions.
+The purpose of audit logging is to record each state change. An audit log is typically used to help customer support, ensure compliance, and detect suspicious behaviors. Each audit log entry records at minimum the identity of the entity, the action performed, and the business object(s)~\citep{richardson2018microservices}
 
-The purpose of audit logging is to record each user’s actions. An audit log is typically
-used to help customer support, ensure compliance, and detect suspicious behavior.
-Each audit log entry records the identity of the user, the action they performed, and
-the business object(s). An application usually stores the audit log in a database table.~\citep{richardson2018microservices}
+Depending on the requirements maintaining and ensuring a comprehensive and immutable audit log is mandatory and might dictates the way a system is architected and developed. An example will be showcased in chapter \ref{chap:ac}.
+
+The Federal Financial Supervisory Authority (short BaFin in german) requires appropriate precautions to be taken within the framework of application development, so that the confidentiality, integrity, availability and authenticity of the data to be processed are transparently ensured even after each deployment of an application \citep{BaFinZAIT}. 
+
+% Im Rahmen der Anwendungsentwicklung sind je nach Schutzbedarf
+% angemessene Vorkehrungen zu treffen, dass auch nach jeder
+% Produktivsetzung einer Anwendung die Vertraulichkeit, Integrität, Verfügbarkeit und Authentizität der zu verarbeitenden Daten nachvollziehbar sichergestellt werden \citep{BaFinZAIT}.
+
+% Geeignete Vorkehrungen sind z. B.:
+% - Prüfung der Eingabedaten
+% - Systemzugangskontrolle Benutzerauthentifizierung
+% - Transaktionsautorisierung
+% - Protokollierung der Systemaktivität
+% - Prüfpfade (Audit Logs)
+% - Verfolgung von sicherheitsrelevanten Ereignissen
+% - Behandlung von Ausnahmen.
+
+One of the appropriate precautions suggested by \gls{gl:bafin} is Audit logs. Audit logging is not only a suggestion but also an indirect requirement:
+
+\begin{quote}
+In accordance with the target protection requirements the institution must set up processes for logging and monitoring, which make it possible to verify, that authorizations are only used as intended \citep{BaFinZAIT}.
+\end{quote}
+
+% Das Institut hat nach Maßgabe des Schutzbedarfs und der SollAnforderungen Prozesse zur Protokollierung und Überwachung einzurichten, die überprüfbar machen, dass die Berechtigungen nur wie vorgesehen eingesetzt werden. Aufgrund der damit verbundenen
+% weitreichenden Eingriffsmöglichkeiten hat das Institut insbesondere für die Aktivitäten mit privilegierten (besonders kritischen) Benutzer-/ Zutrittsrechten angemessene Prozesse zur Protokollierung und Überwachung einzurichten
+% Die übergeordnete Verantwortung für die Prozesse zur Protokollierung und
+% Überwachung von Berechtigungen wird einer Stelle zugeordnet, die unabhängig vom berechtigten Benutzer oder dessen Organisationseinheit ist. Zu
+% privilegierten Zutrittsrechten zählen in der Regel die Rechte zum Zutritt zu
+% Rechenzentren, Technikräumen sowie sonstigen sensiblen Bereichen 
+
+% Durch begleitende technisch-organisatorische Maßnahmen ist einer
+% Umgehung der Vorgaben der Berechtigungskonzepte vorzubeugen.
+% Technisch-organisatorische Maßnahmen sind bspw.:
+% die Auswahl angemessener Authentifizierungsverfahren (u. a. starke
+% Authentifizierung im Falle von Fernzugriffen)
+% - die Implementierung einer Richtlinie zur Wahl sicherer Passwörter
+% - die automatische passwortgesicherte Bildschirmsperre
+% - die Verschlüsselung von Daten
+% - die manipulationssichere Implementierung der Protokollierung
+% - die Maßnahmen zur Sensibilisierung der Mitarbeiter
 
 % https://martinfowler.com/eaaDev/AuditLog.html
 
-An audit log can take many physical forms. The most common form is a file. However a database table also makes a fine audit log. If you use a file you need a format. An ASCII form helps in making it readable to humans without special software. If it's a simple tabular structure, then tab delimited text is simple and effective. More complex structures can be handled nicely by XML.
+An audit log can take many forms. The most common form is a file. A database table is also an option. However most problems comes mainly from the kind of logs written and the way they are processed. More on that is discussed in chapter \ref{chap:sadt}
 
-Audit Log is easy to write but harder to read, especially as it grows large. Occasional ad hoc reads can be done by eye and simple text processing tools. More complicated or repetitive tasks can be automated with scripts. Many scripting languages are well suited to churning though text files. If you use a database table you can save SQL scripts to get at the information.
+Audit Log is easy to write but harder to read, especially as it grows large. Occasional ad-hoc reads can be done by eye and simple text processing tools. More complicated or repetitive tasks can be automated \citep{AuditLog}. Audit log entries lack the context and describe an action, that may or may not be related to other entries in a specific period of time. Keeping track of changes without proper automation becomes harder and harder to the point it becomes imposable.
 
-When you use Audit Log you should always consider writing out both the actual and record dates. They are easy to produce and even though they may be the same 99\% of the time, the 1\% can save your bacon. As you do this remember that the record date is always the current processing date.
+For some organizations logging system changes alone might not be enough. Suspicious activates might originate from read attempts Logging such activities increases the complexity of the audit log and poses the question of how to make sense of such data?
 
-When to Use It
-
-The glory of Audit Log is its simplicity. As you compare Audit Log to other patterns such as Temporal Property and Temporal Object you quickly realize that these alternatives add a lot of complexity to an object model, although these are both often better at hiding that complexity than using Effectivity everywhere.
-
-But it's the difficulty of processing Audit Log that is it's limitation. If you are producing bills every week based on combinations of historic data, then all the code to churn through the logs will be slow and difficult to maintain. So it all depends how tightly the accessing of temporal information is integrated into your regular software process. The tighter the integration, the less useful is Audit Log.
-
-Remember that you can use Audit Log in some parts of the model and other patterns elsewhere. You can also use Audit Log for one dimension of time and a different pattern for another dimension. So you might handle actual time history of a property with Temporal Property and use Audit Log to handle the record history.
+% Meeting with CISO:
+% no one read logs anymore
+% auditing 2.0 will eventually become the standerd
+% how do utilise all the logs
+% logging queries is ver hard and comes with costs
+% how do you make sense of this enormes amount of logs
 
 \section{Auditing 2.0}\label{sec:adt2}
 
-Meeting with CISO:
-no one read logs anymore
-auditing 2.0 will eventually become the standerd
-how do utilise all the logs
-logging queries is ver hard and comes with costs
-how do you make sense of this enormes amount of logs
+Auditing 2.0, also known as continuous auditing, is a modern approach to auditing that uses technology and data analytics to continuously monitor and assess an organization's processes. Unlike traditional auditing, which is typically conducted on a periodic basis, continuous auditing is a continuous process that uses, but not limited to, real-time data to identify and address potential risks and issues as they arise.~\citep{5427384}
 
-Auditing 2.0, also known as continuous auditing, is a modern approach to auditing that uses technology and data analytics to continuously monitor and assess an organization's financial and operational processes. Unlike traditional auditing, which is typically conducted on a periodic basis, continuous auditing is a continuous process that uses real-time data to identify and address potential risks and issues as they arise.
+% Auditing 2.0 allows organizations to continuously monitor and assess their financial and operational processes, identify potential risks and issues, and take timely and appropriate action to address them. This can help organizations to improve their risk management practices, enhance their internal controls, and ultimately reduce the risk of financial and operational errors and failures.
 
-One of the key features of Auditing 2.0 is the use of data analytics to analyze and interpret large volumes of data. By using advanced algorithms and machine learning techniques, auditors can identify patterns and trends in the data that may indicate potential risks or issues. This allows auditors to proactively identify and address problems before they escalate, rather than waiting for them to be discovered during a periodic audit.
+% The omnipresence of electronically recorded business events coupled with process mining techno logy enable a new form of auditing that will dramatically change the role of auditors: Auditing 2.0.
 
-Auditing 2.0 also makes use of technology such as artificial intelligence, blockchain, and cloud computing to automate and streamline the audit process. For example, AI-powered systems can be used to analyze and interpret data in real-time, while blockchain technology can be used to provide a secure and transparent record of transactions. Cloud computing can also be used to store and manage large volumes of data, making it easier for auditors to access and analyze the data they need.
+% One of the key features of Auditing 2.0 is the use of data analytics to analyze and interpret large volumes of data. By using advanced algorithms and machine learning techniques, auditors can identify patterns and trends in the data that may indicate potential risks or issues. This allows auditors to proactively identify and address problems before they escalate, rather than waiting for them to be discovered during a periodic audit.
 
-Overall, Auditing 2.0 represents a significant shift in the way that audits are conducted, moving from a reactive approach to a proactive one. By using advanced technologies and data analytics, Auditing 2.0 allows organizations to continuously monitor and assess their financial and operational processes, identify potential risks and issues, and take timely and appropriate action to address them. This can help organizations to improve their risk management practices, enhance their internal controls, and ultimately reduce the risk of financial and operational errors and failures.
+Auditing 2.0 makes use of technologies such as \gls{ac:ai} to automate and streamline the audit process. For example, AI-powered systems can be used to analyze and interpret data in real-time, while patterns like \gls{gl:es} provide a transparent and immutable record of events. 
 
-Auditors can use process mining techniques to evaluate all events in a business process, and do so while it is still running.~\citep{5427384}
+\subsection{Business Provenance}
 
-Auditors validate information about organizations and their business processes. Reliable information is needed to determine whether these processes are executed within certain boundaries set by managers, governments, and other stakeholders. Violations of specific rules enforced by law or company policies may indicate fraud, malpractice, risks, or inefficiencies.
+The systematic, reliable, and trustworthy recording of events, known as business provenance, is essential to auditing in general and \gls{gl:adt2} in particular. This term acknowledges the importance of traceability by ensuring that history cannot be rewritten or obscured \citep{5427384}.
 
-Traditionally, an audit can only provide reasonable assurance that business processes are executed within the given set of boundaries. Auditors assess the operating effectiveness of process controls, and when these controls are not in place or functioning as expected, they typically check samples of factual data.
+Traditionally, an audit can only provide reasonable assurance that business processes are executed within the given set of boundaries. Auditors assess the operating effectiveness of process controls, and when these controls are not in place or functioning as expected, they typically check samples of factual data. However, with detailed information about processes increasingly available in high-quality event logs, auditors no longer have to rely on a small set of samples offline. Instead, using process mining techniques, they can evaluate all events in a business process, and do so while it is still running.
 
-However, with detailed information about processes increasingly available in high-quality event logs, auditors no longer have to rely on a small set of samples offline. Instead, using process mining techniques, they can evaluate all events in a business process, and do so while it is still running.
+% Cloud computing can also be used to store and manage large volumes of data, making it easier for auditors to access and analyze the data they need.
 
-The omnipresence of electronically recorded business events coupled with process mining techno logy enable a new form of auditing that will dramatically change the role of auditors: Auditing 2.0.
+% Overall, Auditing 2.0 represents a significant shift in the way that audits are conducted, moving from a reactive approach to a proactive one. ~\citep{5427384}.
 
 \subsection{Process Mining}
 
-The goal of process mining is to discover, monitor, and improve real (not assumed) processes by extracting knowledge from event logs. Over the past decade, process mining techniques have matured and are being integrated into commercial software products (W.M.P. van der Aalst et al., “Business Process Mining: An Industrial Application,” Information Systems, vol. 32, no. 5, 2007, pp. 713–732).
+The goal of process mining is to discover, monitor, and improve real (not assumed) processes by extracting knowledge from event logs. 
 
-Business Provenance
-Process mining starts with the event log: a sequentially recorded collection of events, each of which refers to an activity (well-defined step) and is related to a particular case (process instance). Some mining techniques use other information such as the person or resource executing or initiating the activity, the event's time stamp, or data elements recorded with the event—for example, the size of an order.
+Process mining starts with the event log: a sequentially recorded collection of events, each of which refers to an activity (well-defined step) and is related to a particular case (process instance). Some mining techniques use other information such as the person or resource initiating the activity, the event's time stamp, or data elements recorded with the event \citep{5427384}.
 
-The systematic, reliable, and trustworthy recording of events, known as business provenance, is essential to auditing. This term acknowledges the importance of traceability by ensuring that history cannot be rewritten or obscured.
+Auditors can use process mining techniques to evaluate all events in a business process, and do so while it is still running. With the help of \gls{ac:ai} potential compliance violation and suspicious behaviour can be be detected while in the making and prevented before even happening. Reliable information is needed to determine whether these processes are executed within certain boundaries set by managers, governments, and other stakeholders. 
+% Violations of specific rules enforced by law or company policies may indicate fraud, malpractice, risks, or inefficiencies.
 
-\subsubsection{modules}
-
-Process Discovery \citep{5427384}
-By analyzing frequent patterns, process mining techniques can extract from event logs models that describe the processes at hand. For example, the Alpha process mining algorithm can automatically extract a Petri net that concisely models behavior in the event log. This gives the auditor an unbiased view of what has actually happened.
-
-Conformance Checking
-An auditor can use an a priori process model to check if reality, as recorded in the event log, conforms to the model and vice versa. For example, a model may indicate that purchase orders exceeding one million euros require two checks. Auditors can use conformance checking to detect deviations, locate and explain them, and measure their severity (A. Rozinat and W.M.P. van der Aalst, “Conformance Checking of Processes Based on Monitoring Real Behavior,” Information Systems, vol. 33, no. 1, 2008, pp. 64–95).
-
-Toward Operational Support
-Although process mining has traditionally focused on offline analysis and is seldom used for operational decision support, it can consider running-process instances and compare them with models based on historic data or business rules (W. M. P. van der Aalst, M. Pesic, and M. Song, “Beyond Process Mining: From the Past to Present and Future,” tech. report BPM-09-18 BPMcenter.org, 2009). For example, an auditor can “replay” a running case on the process model in real time and check whether the observed behavior fits. The moment the case deviates, the auditor can alert an appropriate actor.
-
-Auditors can also use a process model based on historic data to make predictions about running cases—for example, to estimate the remaining processing time and a particular outcome's probability—or provide recommendations, such as an activity that will minimize the expected costs and completion time.
+Process mining techniques as well as an auditing framework as suggested by \citep{5427384} are addressed and discussed in chapter \ref{chap:sadt}
 
 \subsection{Challenges}
 
-The application of process mining to auditing depends on the availability of relevant data, which is primarily stored in enterprise resource planning (ERP) systems. Mining such systems is challenging because they are not, despite having built-in workflow engines, process-oriented. Because data related to a particular process it usually scattered over dozens of tables, extracting it for auditing is nontrivial.\todo{Test todo test} % TODO
+\todo{Move to Conclusion or evaluate if this is really relevent?}
 
-A second challenge of Auditing 2.0 concerns the so-called “auditing materiality” principle that guides current auditing practices. According to this principle, auditors typically consider only a small subset of data, and if they see no deviations take no further actions. By looking at all the data, auditors will inevitably find more exceptions requiring follow-up, increasing quality but also the audit's time and cost.
+The main challenge of \gls{gl:adt2} is the introduced complexity and required skill. Process mining depends on the availability of relevant data, which is Traditionally stored in \gls{ac:erp} systems. While modern pattern like \gls{gl:es} offer better integrations to couples detailed event logs with process mining mining \gls{ac:erp} systems is challenging because they are not, despite having built-in workflow engines, process-oriented. Because data related to a particular process it usually scattered over dozens of tables, extracting it for auditing is nontrivial \citep{5427384}.
 
-Finally, widespread adoption of process mining as an accepted auditing approach would require organizations such as the International Federation of Accountants to change their methodologies and issue new guidelines to companies that rely on them.
+Further more adaption of \gls{gl:adt2} will lead to an increase in the so-called “auditing materiality”. Considering only a small subset of data will not be an option anymore. Optimizing and improving the current audit practices will inevitably lead to more exceptions requiring follow-ups, which increases auditing time and cost.
 
-Major corporate and accounting scandals including those affecting Enron, Tyco, Adelphia, Peregrine, and WorldCom have fueled interest in more rigorous auditing practices. Legislation such as the Sarbanes-Oxley Act of 2002 and the Basel II Accord of 2004 were enacted in response to such scandals. The recent financial crisis also underscores the importance of verifying that organizations operate “within their boundaries.” Process mining techniques offer a means to more rigorously check compliance and ascertain the validity and reliability of information about an organization's core processes.
-
-Auditing 2.0—a more rigorous form of auditing that couples detailed event logs with process mining techniques—will dramatically change the auditing profession. Auditors will need better analytical and IT skills, and their role will shift as they work on the fly. Provenance data will make it possible to “replay” history reliably and accurately and to predict problems, thereby improving business processes.
+% Auditing 2.0—a more rigorous form of auditing that couples detailed event logs with process mining techniques—will dramatically change the auditing profession. Auditors will need better analytical and IT skills, and their role will shift as they work on the fly. 
