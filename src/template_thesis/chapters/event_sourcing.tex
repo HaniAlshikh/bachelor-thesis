@@ -2,6 +2,17 @@
 %
 \chapter{Event Sourcing}\label{chap:es}
 
+Conformance checking
+If there is an a-priori model, then this model can be used to check if reality, as recorded in the log,
+conforms to the model and vice versa. For example, there may be a process model indicating that
+purchase orders of more than one million Euros require two checks. Another example is the checking of
+the four-eye principle. Conformance checking may be used to detect deviations, to locate and explain
+these deviations, and to measure the severity of these deviations. An example is the conformance
+checking algorithm described in (A. Rozinat and W.M.P. van der Aalst. Conformance Checking of
+Processes Based on Monitoring Real Behavior. Information Systems, 33(1):64-95, 2008).
+
+Provenance data will make it possible to “replay” history reliably and accurately and to predict problems, thereby improving business processes.
+
 \gls{gl:es} is a software architecture pattern that insures a complete log of changes made to a system as a series of events. Instead of storing the current state in a traditional database, \gls{gl:es} stores the history of changes made over time. This allows developers to rebuild the current state at any point in time by replaying the stored events.
 
 One of the primary benefits of \gls{gl:es} is that it provides a complete audit trail. Because the log of events is comprehensive and immutable, it is possible to trace the history of any given piece of data and see exactly how it has changed over time. This is extremely useful for auditing purposes, as it allows organizations to track and monitor changes to sensitive data and ensure that they are in compliance with regulations and standards.

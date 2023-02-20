@@ -1,6 +1,6 @@
 % @author Hani Alshikh
 %
-\chapter{Software Architecture and Auditing}
+\chapter{Software Architecture and Auditing}\label{chap:sadt}
 Design patterns
 
 Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
@@ -19,6 +19,22 @@ structure \citep{SAIP}.
 \section{Implementing audit logging}
 
 There are a few different ways to implement audit logging:~\citep{richardson2018microservices}
+
+When you use Audit Log you should always consider writing out both the actual and record dates. They are easy to produce and even though they may be the same 99\% of the time, the 1\% can save your bacon. As you do this remember that the record date is always the current processing date. \citep{AuditLog}
+
+Taking a more related example where users are saved in a database and one might get the impression that user X also created 
+
+Audit logging—Log user actions.
+
+The glory of Audit Log is its simplicity. As you compare Audit Log to other patterns such as Temporal Property and Temporal Object you quickly realize that these alternatives add a lot of complexity to an object model, although these are both often better at hiding that complexity than using Effectivity everywhere.
+
+But it's the difficulty of processing Audit Log that is it's limitation. If you are producing bills every week based on combinations of historic data, then all the code to churn through the logs will be slow and difficult to maintain. So it all depends how tightly the accessing of temporal information is integrated into your regular software process. The tighter the integration, the less useful is Audit Log.
+
+Remember that you can use Audit Log in some parts of the model and other patterns elsewhere. You can also use Audit Log for one dimension of time and a different pattern for another dimension. So you might handle actual time history of a property with Temporal Property and use Audit Log to handle the record history.
+
+Audit Log is easy to write but harder to read, especially as it grows large. Occasional ad hoc reads can be done by eye and simple text processing tools. More complicated or repetitive tasks can be automated with scripts. Many scripting languages are well suited to churning though text files. If you use a database table you can save SQL scripts to get at the information.
+
+Provenance data will make it possible to “replay” history reliably and accurately and to predict problems, thereby improving business processes.
 
 \subsection{Audit logging code in business logic}
 
@@ -132,3 +148,57 @@ https://eventuate.io/whyeventsourcing.html
 Anh et al. (2018) describes another append-only data structure: blockchain. While the data structure is similar to event sourcing, the goals of the two techniques are different. A blockchain focuses on solving problems related to distribution, consensus, and trust, while event sourcing solves problems with history, temporal complexity, and audit trails. The blockchain approach enforces the immutability of the data to solve its problems, while in event sourcing this immutability is self imposed. Event sourced systems could be build using a blockchain solution. However, the distribution and consensus features offered by blockchain do not improve the goals targeted by event sourcing.
 
 \section{Auditing 2.0}
+
+Auditors can utilise process mining techniques to address multiple use-cases/process mining techniques like 
+passive auditing
+process discovery, Conformance checking, model extension, etc.
+active auditing
+one can “replay” a running
+case on the process model at real-time and check whether the observed behavior fits. The moment the
+case deviates, an appropriate actor can be alerted. The process model based on historic data can also be
+used to make predictions for running cases, e.g., it is possible to estimate the remaining processing time
+and the probability of a particular outcome. . Similarly, this information can be used to provide
+recommendations, e.g., proposing the activity that will minimize the expected costs and completion
+time.
+
+\subsection{\gls{gl:adt2} Framework}
+
+This will be further discussed in \ref{chap:es}
+
+The presence of event logs and process mining techniques enables new forms of auditing. Rather than
+sampling a small set of cases, the whole process and all of its instances can be considered. Moreover,
+this can be done continuously.
+
+WHY
+
+Performing and supporting IT audits and managing an IT audit program are time-,
+effort-, and personnel-intensive activities, so in an age of cost-consciousness and
+competition for resources, it is reasonable to ask why organizations undertake IT
+auditing. The rationale for external audits is often clearer and easier to understand—
+publicly traded companies and organizations in many industries are subject to legal
+and regulatory requirements, compliance with which is often determined through an
+audit. Similarly, organizations seeking or having achieved various certifications for
+process or service quality, maturity, or control implementation and effectiveness typically must undergo certification audits by independent auditors. IT audits often provide information that helps organizations manage risk, confirm efficient allocation of
+IT-related resources, and achieve other IT and business objectives. Reasons used to
+justify internal IT audits may be more varied across organizations, but include:
+
+- 
+- 
+
+Further details on organizational motivation for conducting internal and external IT audits appear in Chapters  3 and 4, respectively. To generalize, internal IT
+auditing is often driven by organizational requirements for IT governance, risk
+management, or quality assurance, any of which may be used to determine what
+needs to be audited and how to prioritize IT audit activities. External IT auditing
+is more often driven by a need or desire to demonstrate compliance with externally
+imposed standards, regulations, or requirements applicable to the type of organization, industry, or operating environment.
+
+IT auditing helps organizations understand, assess, and improve
+their use of controls to safeguard IT, measure and correct performance, and achieve
+objectives and intended outcomes. IT auditing consists of the use of formal audit
+methodologies to examine IT-specific processes, capabilities, and assets and their
+role in enabling an organization’s business processes. IT auditing also addresses IT
+components or capabilities that support other domains subject to auditing, such as
+financial management and accounting, operational performance, quality assurance,
+and governance, risk management, and compliance (GRC).
+
+
