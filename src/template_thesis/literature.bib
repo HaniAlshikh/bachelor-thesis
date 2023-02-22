@@ -126,12 +126,12 @@ abstract = {Event sourced systems are increasing in popularity because they are 
   year={2010}
 }
 
-@article{fowler2022es,
+@article{fowleres,
 title={Event Sourcing},
 url={https://martinfowler.com/eaaDev/EventSourcing.html},
 journal={martinfowler.com},
 author={Fowler, Martin},
-year={2022},
+year={2005},
 note = {(Accessed on 12/24/2022)}
 }
 
@@ -243,4 +243,67 @@ url = {https://martinfowler.com/eaaDev/AuditLog.html},
 month = {03},
 year = {2004},
 note = {(Accessed on 02/20/2023)}
+}
+
+@misc{esvsed,
+author = {Martin Fowler},
+title = {What do you mean by “Event-Driven”?},
+howpublished = {\url{https://martinfowler.com/articles/201701-event-driven.html}},
+url = {https://martinfowler.com/articles/201701-event-driven.html},
+month = {02},
+year = {2017},
+note = {(Accessed on 02/21/2023)}
+}
+
+@book{evans2004domain,
+  title={Domain-driven design: tackling complexity in the heart of software},
+  author={Evans, Eric},
+  year={2004},
+  publisher={Addison-Wesley Professional}
+}
+
+@inproceedings{10.1145/3210284.3219767,
+author = {Erb, Benjamin and Mei\ss{}ner, Dominik and Ogger, Ferdinand and Kargl, Frank},
+title = {Log Pruning in Distributed Event-Sourced Systems},
+year = {2018},
+isbn = {9781450357821},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3210284.3219767},
+doi = {10.1145/3210284.3219767},
+abstract = {Event sourcing is increasingly used and implemented in event-based systems for maintaining the evolution of application state. However, unbounded event logs are impracticable for many systems, as it is difficult to align scalability requirements and long-term runtime behavior with the corresponding storage requirements. To this end, we explore the design space of log pruning approaches suitable for event-sourced systems. Furthermore, we survey specific log pruning mechanisms for event-sourced logs. In a brief evaluation, we point out the trade-offs when applying pruning to event logs and highlight the applicability of log pruning to event-sourced systems.},
+booktitle = {Proceedings of the 12th ACM International Conference on Distributed and Event-Based Systems},
+pages = {230–233},
+numpages = {4},
+keywords = {event sourcing, event processing, log pruning},
+location = {Hamilton, New Zealand},
+series = {DEBS '18}
+}
+
+@misc{Art17GDP3,
+author = {EU},
+title = {Art. 17 GDPR – Right to erasure (‘right to be forgotten’) - General Data Protection Regulation (GDPR)},
+howpublished = {\url{https://gdpr-info.eu/art-17-gdpr/}},
+url = {https://gdpr-info.eu/art-17-gdpr/},
+journal={Official Journal of the European Union},
+month = {05},
+year = {2016},
+note = {(Accessed on 02/21/2023)}
+}
+
+@article{avery2017scaling,
+  title={Scaling event sourcing for netflix downloads},
+  author={Avery, Phillipa and Reta, Robert},
+  journal={URL: https://www.infoq.com/presentations/netflix-scale-event-sourcing},
+  year={2017}
+}
+
+@article{jet2017scaling,
+author = {Leo Gorodinski},
+title = {Scaling Event-Sourcing at Jet. At Jet, we’ve been using event-sourcing… | by Leo Gorodinski | Medium},
+howpublished = {\url{https://medium.com/@eulerfx/scaling-event-sourcing-at-jet-9c873cac33b8}},
+url = {https://medium.com/@eulerfx/scaling-event-sourcing-at-jet-9c873cac33b8},
+month = {10},
+year = {2017},
+note = {(Accessed on 02/22/2023)}
 }

@@ -150,6 +150,8 @@ IT audits and the approaches used to conduct them may consider internal controls
 
 The purpose of audit logging is to record each state change. An audit log is typically used to help customer support, ensure compliance, and detect suspicious behaviors. Each audit log entry records at minimum the identity of the entity, the action performed, and the business object(s)~\citep{richardson2018microservices}
 
+% An audit log is the simplest, yet also one of the most effective forms of tracking temporal information. The idea is that any time something significant happens you write some record indicating what happened and when it happened.
+
 Depending on the requirements maintaining and ensuring a comprehensive and immutable audit log is mandatory and might dictates the way a system is architected and developed. An example will be showcased in chapter \ref{chap:ac}.
 
 The Federal Financial Supervisory Authority (short BaFin in german) requires appropriate precautions to be taken within the framework of application development, so that the confidentiality, integrity, availability and authenticity of the data to be processed are transparently ensured even after each deployment of an application \citep{BaFinZAIT}. 
@@ -228,7 +230,7 @@ Traditionally, an audit can only provide reasonable assurance that business proc
 
 % Overall, Auditing 2.0 represents a significant shift in the way that audits are conducted, moving from a reactive approach to a proactive one. ~\citep{5427384}.
 
-\subsection{Process Mining}
+\subsection{Process Mining}\label{sec:psmin}
 
 The goal of process mining is to discover, monitor, and improve real (not assumed) processes by extracting knowledge from event logs. 
 

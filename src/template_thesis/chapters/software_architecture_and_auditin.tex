@@ -16,6 +16,9 @@ different types of requirements, the quality requirements are the most important
 the specification of an architecture since it exerts considerable influence over it
 structure \citep{SAIP}.
 
+comparison table why event-sourced/driven \citep{richards2015software}
+% https://isip.piconepress.com/courses/temple/ece_1111/resources/articles/20211201_software_architecture_patterns.pdf
+
 \section{Implementing audit logging}
 
 There are a few different ways to implement audit logging:~\citep{richardson2018microservices}
@@ -35,6 +38,8 @@ Remember that you can use Audit Log in some parts of the model and other pattern
 Audit Log is easy to write but harder to read, especially as it grows large. Occasional ad hoc reads can be done by eye and simple text processing tools. More complicated or repetitive tasks can be automated with scripts. Many scripting languages are well suited to churning though text files. If you use a database table you can save SQL scripts to get at the information.
 
 Provenance data will make it possible to “replay” history reliably and accurately and to predict problems, thereby improving business processes.
+
+however, logging is mostly associated with debugging and has no direct relation to the system state. Logging style, verbosity....
 
 \subsection{Audit logging code in business logic}
 
@@ -60,6 +65,8 @@ other options as well.
 
 \section{traditional persistence}
 
+Firstly, event sourcing provides a more detailed and comprehensive audit trail compared to traditional architectures. In traditional architectures, the current state of an application is typically stored in a database, and any changes to this state are recorded as updates to the database. This means that the only information available for auditing is the current state of the application and any changes made to it. In contrast, event sourcing records every change to the state of the application as an individual event, providing a complete history of the application's behavior and allowing for a much more detailed audit trail.
+
 The traditional approach to persistence maps classes to database tables, fields of those
 classes to table columns, and instances of those classes to rows in those tables. For
 example, figure 6.1 shows how the Order aggregate, described in chapter 5, is mapped to the ORDER table. Its OrderLineItems are mapped to the ORDER\_LINE\_ITEM table.
@@ -74,6 +81,8 @@ this way. But it has several drawbacks and limitations:
 - Event publishing is bolted on to the business logic.
 Let’s look at each of these problems, starting with the Object-Relational impedance
 mismatch problem. \citep{richardson2018microservices}
+
+Thirdly, event sourcing provides a more robust and flexible approach to auditing. In traditional architectures, the audit trail is typically limited to the information stored in the database, and any changes to the database schema or data model can affect the audit trail. In contrast, event sourcing uses an event log as the source of truth, which is separate from the application's data model and is not affected by changes to the data model. This means that the audit trail is more robust and flexible, and is not subject to the same limitations as traditional approaches.
 
 \subsection{Problems}
 
@@ -161,7 +170,18 @@ and the probability of a particular outcome. . Similarly, this information can b
 recommendations, e.g., proposing the activity that will minimize the expected costs and completion
 time.
 
-\subsection{\gls{gl:adt2} Framework}
+Conformance checking
+If there is an a-priori model, then this model can be used to check if reality, as recorded in the log,
+conforms to the model and vice versa. For example, there may be a process model indicating that
+purchase orders of more than one million Euros require two checks. Another example is the checking of
+the four-eye principle. Conformance checking may be used to detect deviations, to locate and explain
+these deviations, and to measure the severity of these deviations. An example is the conformance
+checking algorithm described in (A. Rozinat and W.M.P. van der Aalst. Conformance Checking of
+Processes Based on Monitoring Real Behavior. Information Systems, 33(1):64-95, 2008).
+
+Provenance data will make it possible to “replay” history reliably and accurately and to predict problems, thereby improving business processes.
+
+\subsection{\gls{gl:adt2} Framework}\label{sec:saadt2}
 
 This will be further discussed in \ref{chap:es}
 
@@ -202,3 +222,14 @@ financial management and accounting, operational performance, quality assurance,
 and governance, risk management, and compliance (GRC).
 
 
+Event sourcing can be used to implement Auditing 2.0 in a number of ways. Here are a few examples:
+
+Storing a log of events: As mentioned earlier, event sourcing involves storing a log of events that represent changes made to the data over time. This log can be used to reconstruct the state of the data at any point in the past, which can be useful for auditing purposes. By storing a comprehensive and immutable log of events, organizations can use event sourcing to track and monitor changes to sensitive data and ensure compliance with regulations and standards.
+
+Analyzing event data: In addition to storing the log of events, organizations can also use data analytics and machine learning techniques to analyze the event data and identify patterns and trends that may indicate potential risks or issues. By continuously analyzing the event data, organizations can proactively identify and address potential problems as they arise, rather than waiting for them to be discovered during a periodic audit.
+
+Automating the audit process: Event sourcing can also be used to automate the audit process by using technologies such as artificial intelligence and blockchain. For example, AI-powered systems can be used to analyze the event data and identify potential risks or issues, while blockchain technology can be used to provide a secure and transparent record of transactions. This can help to streamline the audit process and make it more efficient.
+
+Overall, event sourcing can be a powerful tool for implementing Auditing 2.0. By storing a comprehensive log of events and using advanced technologies and data analytics to analyze the data, organizations can continuously monitor and assess their financial and operational processes, identify potential risks and issues, and take timely and appropriate action to address them.
+
+Event sourcing is related to database systems techniques used for persistence guarantees and replication. Gray and Reuter (1992) describe how transaction logs can be used to replicate state between database systems. Every state change is recorded as a transaction, which is similar to event sourcing where every state change is recorded as an event. Kleppmann (2017) discusses event sourcing in the context of data-intensive applications, he relates the pattern to the change data capture approach, often used in Extract-Transform-Load (or ETL) processes (Vassiliadis, 2009). ETL solutions are often used for creating data warehouses. The primary difference between event sourcing and these techniques is that a transaction or a data change is a technical entity without relation to the real world, while an event in event sourcing resembles an event in the real world.
