@@ -1,235 +1,234 @@
 % @author Hani Alshikh
 %
 \chapter{Software Architecture and Auditing}\label{chap:sadt}
-Design patterns
 
-Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
+Software architecture is the structure, or set of structures, which comprises software elements, the externally visible properties of those elements, and the relationships among them \citep{SAIP}. 
 
-Software architecture is the structure, or set of structures, which comprises
-software elements, the externally visible properties of those elements, and the
-relationships among them \citep{SAIP}. This structure is an artifact from a software
-development process and is represented by a document composed by one or more
-models, which represent different perspectives about how the system will be
-structured, and information sets that facilitate the understanding of the proposed
-computational solution. It is defined based on the software requirements. Among the
-different types of requirements, the quality requirements are the most important for
-the specification of an architecture since it exerts considerable influence over it
-structure \citep{SAIP}.
+This structure is an artifact from a software development process and is represented by a document composed by one or more models, which represent different perspectives about how the system will be structured, and information sets that facilitate the understanding of the proposed computational solution. 
 
-comparison table why event-sourced/driven \citep{richards2015software}
-% https://isip.piconepress.com/courses/temple/ece_1111/resources/articles/20211201_software_architecture_patterns.pdf
+The software architecture is defined based on the software requirements. Among the different types of requirements, the quality requirements are the most important for the specification of an architecture since it exerts considerable influence over it structure \citep{SAIP}.
 
-\section{Implementing audit logging}
+Having a system that is designed and built from the ground up to offer the highest inclusion of auditing standards and capabilities starts by choosing the right architectural components. Auditing functionalities is often added as an afterthought, resulting in an inherent risk of incompleteness. 
 
-There are a few different ways to implement audit logging:~\citep{richardson2018microservices}
+Avoiding such risk and insuring compatibility by design can be done in many different ways. Ultimately, the choice of architecture patterns for auditing will depend on the specific needs of the system and the requirements of the audit process.
 
-When you use Audit Log you should always consider writing out both the actual and record dates. They are easy to produce and even though they may be the same 99\% of the time, the 1\% can save your bacon. As you do this remember that the record date is always the current processing date. \citep{AuditLog}
+As discussed in section \ref{sec:adtlog} audit logging is one of the simplest way to have an auditable system, that satisfies regulators specifications.
 
-Taking a more related example where users are saved in a database and one might get the impression that user X also created 
+% With event sourcing, each state change corresponds to one or more events, providing 100\% accurate audit logging.~\citep{richardson2018microservices} % https://eventuate.io/whyeventsourcing.html
 
-Audit logging—Log user actions.
+% comparison table why event-sourced/driven \citep{richards2015software}
+% % https://isip.piconepress.com/courses/temple/ece_1111/resources/articles/20211201_software_architecture_patterns.pdf
 
-The glory of Audit Log is its simplicity. As you compare Audit Log to other patterns such as Temporal Property and Temporal Object you quickly realize that these alternatives add a lot of complexity to an object model, although these are both often better at hiding that complexity than using Effectivity everywhere.
+\section{Implementing audit logging}\label{sec:adtimpl}
 
-But it's the difficulty of processing Audit Log that is it's limitation. If you are producing bills every week based on combinations of historic data, then all the code to churn through the logs will be slow and difficult to maintain. So it all depends how tightly the accessing of temporal information is integrated into your regular software process. The tighter the integration, the less useful is Audit Log.
+The glory of the Audit Log pattern is its simplicity. Comparing Audit Log to other patterns such as Temporal Property~\citep{TemporalProperty} and Temporal Object~\citep{TemporalObject} shows, that these alternatives add a lot of complexity to an object model, although these are both often better at hiding that complexity than using Effectivity~\citep{Effectiv17} everywhere~\citep{AuditLog}.
 
-Remember that you can use Audit Log in some parts of the model and other patterns elsewhere. You can also use Audit Log for one dimension of time and a different pattern for another dimension. So you might handle actual time history of a property with Temporal Property and use Audit Log to handle the record history.
+As described in section \ref{sec:adtlog} simply writing log entries into a file is not enough. At least when ensuring business provenance [\ref{sec:bsprov}] is a requirement. Provenance data will make it possible to replay history reliably and accurately and to predict problems, thereby improving business processes.
 
-Audit Log is easy to write but harder to read, especially as it grows large. Occasional ad hoc reads can be done by eye and simple text processing tools. More complicated or repetitive tasks can be automated with scripts. Many scripting languages are well suited to churning though text files. If you use a database table you can save SQL scripts to get at the information.
+% Audit Log is easy to write but harder to read, especially as it grows large. Occasional ad hoc reads can be done by eye and simple text processing tools. More complicated or repetitive tasks can be automated with scripts. Many scripting languages are well suited to churning though text files. If you use a database table you can save SQL scripts to get at the information.
 
-Provenance data will make it possible to “replay” history reliably and accurately and to predict problems, thereby improving business processes.
+% The difficulty of processing Audit Log that is it's limitation. If you are producing bills every week based on combinations of historic data, then all the code to churn through the logs will be slow and difficult to maintain. So it all depends how tightly the accessing of temporal information is integrated into your regular software process. The tighter the integration, the less useful is Audit Log.
 
-however, logging is mostly associated with debugging and has no direct relation to the system state. Logging style, verbosity....
+Using Audit Log in some parts of the system and other patterns elsewhere is common and sometimes necessary. For example Audit Log can be used in combination with \gls{gl:es} for state changes and a different pattern for read operations.
 
-\subsection{Audit logging code in business logic}
+% When you use Audit Log you should always consider writing out both the actual and record dates. They are easy to produce and even though they may be the same 99\% of the time, the 1\% can save your bacon. As you do this remember that the record date is always the current processing date. \citep{AuditLog}
 
-The first and most straightforward option is to sprinkle audit logging code throughout your service’s business logic. Each service method, for example, can create an
-audit log entry and save it in the database. The drawback with this approach is that it
-intertwines auditing logging code and business logic, which reduces maintainability.
-The other drawback is that it’s potentially error prone, because it relies on the developer writing audit logging code.
+\citep{richardson2018microservices} describes three main ways to implement audit logging:
 
-\subsection{Aspect-Oriented programming}
+\begin{enumerate}
+  \item Add audit logging code to the business logic.
+  \item Use \gls{ac:aop}.
+  \item Use \gls{gl:es}.
+\end{enumerate}
 
-The second option is to use AOP. You can use an AOP framework, such as Spring
-AOP, to define advice that automatically intercepts each service method call and persists an audit log entry. This is a much more reliable approach, because it automatically records every service method invocation. The main drawback of using AOP is
-that the advice only has access to the method name and its arguments, so it might be
-challenging to determine the business object being acted upon and generate a businessoriented audit log entry.
+\subsection{Audit Logging Code in Business Logic}
+
+The first and most straightforward option is to sprinkle audit logging code throughout the service’s business logic. Each service method, for example, can create an audit log entry and save it in the database. 
+
+The drawback with this approach is that it intertwines audi logging code and business logic, which reduces maintainability.
+The other drawback is that it is potentially error prone, because it relies on the developer writing audit logging code and insuring compliance.
+
+Logging in general is mostly associated with debugging and has no direct relation to the system state. Logging style and verbosity might negatively effect the integrity and completeness of the Audit Log.
+
+\subsection{\acrlong{ac:aop}}
+
+The second option is to use \gls{ac:aop}. Frameworks like spring offer \gls{ac:aop} support, which automatically intercepts each service method call and persists an audit log entry.
+
+This is a much more reliable approach, because it automatically records every service method invocation, which insures a complete Audit Log of both reading and writing operations.
+
+The main drawback of using \gls{ac:aop} is that it only has access to the method name and its arguments, thus it might be challenging to determine the business object being acted upon and generate a business-oriented audit log entry.
 
 \subsection{Event Sourcing}
 
-The third and final option is to implement your business logic using event sourcing.
-As mentioned in chapter 6, event sourcing automatically provides an audit log for create and update operations. You need to record the identity of the user in each event.
-One limitation with using event sourcing, though, is that it doesn’t record queries. If
-your service must create log entries for queries, then you’ll have to use one of the
-other options as well.
+The third option is to implement the business logic with auditability as a first class property of the system by utilising \gls{gl:es} and its complementary patterns as discussed in chapter \ref{chap:es}. 
 
-\section{traditional persistence}
+\gls{gl:es} offer an Audit Log by design for all state changing operations. The main limitation when using \gls{gl:es} is the missing records for read operations.
 
-Firstly, event sourcing provides a more detailed and comprehensive audit trail compared to traditional architectures. In traditional architectures, the current state of an application is typically stored in a database, and any changes to this state are recorded as updates to the database. This means that the only information available for auditing is the current state of the application and any changes made to it. In contrast, event sourcing records every change to the state of the application as an individual event, providing a complete history of the application's behavior and allowing for a much more detailed audit trail.
+If logging read operations is a requirement, using one of the other options is a must. Patterns like \gls{ac:cqrs} help encapsulate the different implementations and unify the auditing \gls{ac:api}
 
-The traditional approach to persistence maps classes to database tables, fields of those
-classes to table columns, and instances of those classes to rows in those tables. For
-example, figure 6.1 shows how the Order aggregate, described in chapter 5, is mapped to the ORDER table. Its OrderLineItems are mapped to the ORDER\_LINE\_ITEM table.
+% \subsection{Blockchain}
 
-The application persists an order instance as rows in the ORDER and ORDER\_LINE\_ITEM
-tables. It might do that using an ORM framework such as JPA or a lower-level framework such as MyBATIS.
- This approach clearly works well because most enterprise applications store data
-this way. But it has several drawbacks and limitations:
-- Object-Relational impedance mismatch.
-- Lack of aggregate history.
-- Implementing audit logging is tedious and error prone.
-- Event publishing is bolted on to the business logic.
-Let’s look at each of these problems, starting with the Object-Relational impedance
-mismatch problem. \citep{richardson2018microservices}
+% Anh et al. (2018) describes another append-only data structure: blockchain. While the data structure is similar to event sourcing, the goals of the two techniques are different. A blockchain focuses on solving problems related to distribution, consensus, and trust, while event sourcing solves problems with history, temporal complexity, and audit trails. The blockchain approach enforces the immutability of the data to solve its problems, while in event sourcing this immutability is self imposed. Event sourced systems could be build using a blockchain solution. However, the distribution and consensus features offered by blockchain do not improve the goals targeted by event sourcing.
 
-Thirdly, event sourcing provides a more robust and flexible approach to auditing. In traditional architectures, the audit trail is typically limited to the information stored in the database, and any changes to the database schema or data model can affect the audit trail. In contrast, event sourcing uses an event log as the source of truth, which is separate from the application's data model and is not affected by changes to the data model. This means that the audit trail is more robust and flexible, and is not subject to the same limitations as traditional approaches.
+\section{What to Consider}
 
-\subsection{Problems}
+\subsection{Traditional Persistence}
 
-OBJECT-RELATIONAL IMPEDANCE MISMATCH
+When it comes to auditing a limitation of the traditional persistence methods is that, they only store the current state of a business object. Once the object has been updated, its previous state is lost. 
 
-One age-old problem is the so-called Object-Relational impedance mismatch problem.
-There’s a fundamental conceptual mismatch between the tabular relational schema
-and the graph structure of a rich domain model with its complex relationships.
-Some aspects of this problem are reflected in polarized debates over the suitability of
-Object/Relational mapping (ORM) frameworks. For example, Ted Neward has said
-that “Object-Relational mapping is the Vietnam of Computer Science” (http://blogs
-.tedneward.com/post/the-vietnam-of-computer-science/). To be fair, I’ve used
-Hibernate successfully to develop applications where the database schema has been
-derived from the object model. But the problems are deeper than the limitations of
-any particular ORM framework. 
+Such historical records are the base for services like Asana or Jira. Keeping track of such changes, while insuring association to the correct object and actor is a challenge, that comes with its added complexity.
 
-LACK OF AGGREGATE HISTORY
+Simply logging different kind of operations is not enough. If tracking objects history and insuring association between each log entry, the object involved and the actor initiating the operation is a requirement choosing the right pattern makes all the difference.
 
-Another limitation of traditional persistence is that it only stores the current state of
-an aggregate. Once an aggregate has been updated, its previous state is lost. If an
-application must preserve the history of an aggregate, perhaps for regulatory purposes, then developers must implement this mechanism themselves. It is time consuming to implement an aggregate history mechanism and involves duplicating code
-that must be synchronized with the business logic.
+The challenge of implementing auditing as an added feature like the case with the first two options discussed in section \ref{sec:adtimpl} is that, besides being a time-consuming chore, the audit logging code and the business logic can diverge, resulting in all different kind of bugs.
 
-\subsubsection{implementing audit logging is tedious and error prone}
+% Taking a more related example where users are saved in a database and one might get the impression that user X also created 
 
-Another issue is audit logging. Many applications must maintain an audit log that
-tracks which users have changed an aggregate. Some applications require auditing for
-security or regulatory purposes. In other applications, the history of user actions is an
-important feature. For example, issue trackers and task-management applications
-such as Asana and JIRA display the history of changes to tasks and issues. The challenge of implementing auditing is that besides being a time-consuming chore, the
-auditing logging code and the business logic can diverge, resulting in bugs.
+% perhaps for regulatory purposes
+% ....Simply logging different kind of operations is not enough.... LACK OF AGGREGATE HISTORY
+% Another issue is audit logging. Many applications must maintain an audit log that tracks which users have changed an aggregate. Some applications require auditing for security or regulatory purposes. In other applications, the history of user actions is an important feature. For example, issue trackers and task-management applications
+% such as Asana and JIRA display the history of changes to tasks and issues. The challenge of implementing auditing is that besides being a time-consuming chore, the auditing logging code and the business logic can diverge, resulting in bugs.
 
-event publishing is bolted on to the business logic
+% The system must preserve the history of an aggregate, , then developers must implement this mechanism themselves. It is time consuming to implement an aggregate history mechanism and involves duplicating code
+% that must be synchronized with the business logic.
 
-Another limitation of traditional persistence is that it usually doesn’t support publishing
-domain events. Domain events, discussed in chapter 5, are events that are published by
-an aggregate when its state changes. They’re a useful mechanism for synchronizing data
-and sending notifications in microservice architecture. Some ORM frameworks, such
-as Hibernate, can invoke application-provided callbacks when data objects change.
-But there’s no support for automatically publishing messages as part of the transaction that updates the data. Consequently, as with history and auditing, developers
-must bolt on event-generation logic, which risks not being synchronized with the business logic. Fortunately, there’s a solution to these issues: event sourcing
 
-\section{Event Sourcing}
 
-% \section{Auditing in other Architectures}
+% Firstly, event sourcing provides a more detailed and comprehensive audit trail compared to traditional architectures. In traditional architectures, the current state of an application is typically stored in a database, and any changes to this state are recorded as updates to the database. This means that the only information available for auditing is the current state of the application and any changes made to it. In contrast, event sourcing records every change to the state of the application as an individual event, providing a complete history of the application's behavior and allowing for a much more detailed audit trail.
 
-Event sourcing is an architecture pattern that involves storing the history of events that have occurred in a system as a sequence of records. This allows the system to reconstruct past states and to track changes over time.
+% The traditional approach to persistence maps classes to database tables, fields of those classes to table columns, and instances of those classes to rows in those tables. For
+% example, figure 6.1 shows how the Order aggregate, described in chapter 5, is mapped to the ORDER table. Its OrderLineItems are mapped to the ORDER\_LINE\_ITEM table.
 
-One way in which event sourcing can be used for auditing is by providing a complete record of all events that have occurred in the system, including information about when the events occurred and who was responsible for them. This can be useful for identifying and analyzing trends, identifying patterns of behavior, and reconstructing past states of the system.
+% The application persists an order instance as rows in the ORDER and ORDER\_LINE\_ITEM
+% tables. It might do that using an ORM framework such as JPA or a lower-level framework such as MyBATIS.
+%  This approach clearly works well because most enterprise applications store data
+% this way. But it has several drawbacks and limitations:
+% - Object-Relational impedance mismatch.
+% - Lack of aggregate history.
+% - Implementing audit logging is tedious and error prone.
+% - Event publishing is bolted on to the business logic.
+% Let’s look at each of these problems, starting with the Object-Relational impedance
+% mismatch problem. \citep{richardson2018microservices}
 
-There are several other architecture patterns that can also be used for auditing, including:
+% Thirdly, event sourcing provides a more robust and flexible approach to auditing. In traditional architectures, the audit trail is typically limited to the information stored in the database, and any changes to the database schema or data model can affect the audit trail. In contrast, event sourcing uses an event log as the source of truth, which is separate from the application's data model and is not affected by changes to the data model. This means that the audit trail is more robust and flexible, and is not subject to the same limitations as traditional approaches.
 
-Command and Query Responsibility Segregation (CQRS): This pattern involves separating the responsibilities of reading and writing data, allowing for better scalability and security. CQRS can be used to maintain a separate audit log of all write operations, which can be used for auditing purposes.
+% Taking a more related example where users are saved in a database and one might get the impression that user X also created 
 
-Change Data Capture (CDC): This pattern involves capturing and storing changes to data as they occur, allowing for real-time analytics and data integration. CDC can be used to track changes to data over time, which can be useful for auditing purposes.
+% Audit logging—Log user actions.
 
-Two-Phase Commit (2PC): This pattern involves coordinating the execution of transactions across multiple systems, ensuring that either all or none of the changes are made. 2PC can be used to maintain a record of all transactions that have been committed, which can be useful for auditing purposes.
+% \subsection{Problems}
 
-Ultimately, the choice of architecture pattern for auditing will depend on the specific needs of the system and the requirements of the audit process.
+% OBJECT-RELATIONAL IMPEDANCE MISMATCH
 
-100\% accurate audit logging - Auditing functionality is often added as an afterthought, resulting in an inherent risk of incompleteness. With event sourcing, each state change corresponds to one or more events, providing 100\% accurate audit logging.~\citep{richardson2018microservices} % https://eventuate.io/whyeventsourcing.html
+% One age-old problem is the so-called Object-Relational impedance mismatch problem.
+% There’s a fundamental conceptual mismatch between the tabular relational schema
+% and the graph structure of a rich domain model with its complex relationships.
+% Some aspects of this problem are reflected in polarized debates over the suitability of
+% Object/Relational mapping (ORM) frameworks. For example, Ted Neward has said
+% that “Object-Relational mapping is the Vietnam of Computer Science” (http://blogs
+% .tedneward.com/post/the-vietnam-of-computer-science/). To be fair, I’ve used
+% Hibernate successfully to develop applications where the database schema has been
+% derived from the object model. But the problems are deeper than the limitations of
+% any particular ORM framework. 
 
-\subsection{Database Driven}
+% LACK OF AGGREGATE HISTORY
+
+% Another limitation of traditional persistence is that it only stores the current state of
+% an aggregate. Once an aggregate has been updated, its previous state is lost. If an
+% application must preserve the history of an aggregate, perhaps for regulatory purposes, then developers must implement this mechanism themselves. It is time consuming to implement an aggregate history mechanism and involves duplicating code
+% that must be synchronized with the business logic.
+
+% \subsubsection{implementing audit logging is tedious and error prone}
+
+% Another issue is audit logging. Many applications must maintain an audit log that tracks which users have changed an aggregate. Some applications require auditing for security or regulatory purposes. In other applications, the history of user actions is an important feature. For example, issue trackers and task-management applications
+% such as Asana and JIRA display the history of changes to tasks and issues. The challenge of implementing auditing is that besides being a time-consuming chore, the auditing logging code and the business logic can diverge, resulting in bugs.
+
+% event publishing is bolted on to the business logic
+
+% Another limitation of traditional persistence is that it usually doesn’t support publishing
+% domain events. Domain events, discussed in chapter 5, are events that are published by
+% an aggregate when its state changes. They’re a useful mechanism for synchronizing data
+% and sending notifications in microservice architecture. Some ORM frameworks, such
+% as Hibernate, can invoke application-provided callbacks when data objects change.
+% But there’s no support for automatically publishing messages as part of the transaction that updates the data. Consequently, as with history and auditing, developers
+% must bolt on event-generation logic, which risks not being synchronized with the business logic. Fortunately, there’s a solution to these issues: event sourcing
+
+% \section{Event Sourcing}
+
+% % \section{Auditing in other Architectures}
+
+% Event sourcing is an architecture pattern that involves storing the history of events that have occurred in a system as a sequence of records. This allows the system to reconstruct past states and to track changes over time.
+
+% One way in which event sourcing can be used for auditing is by providing a complete record of all events that have occurred in the system, including information about when the events occurred and who was responsible for them. This can be useful for identifying and analyzing trends, identifying patterns of behavior, and reconstructing past states of the system.
+
+% There are several other architecture patterns that can also be used for auditing, including:
+
+% Command and Query Responsibility Segregation (CQRS): This pattern involves separating the responsibilities of reading and writing data, allowing for better scalability and security. CQRS can be used to maintain a separate audit log of all write operations, which can be used for auditing purposes.
+
+% Change Data Capture (CDC): This pattern involves capturing and storing changes to data as they occur, allowing for real-time analytics and data integration. CDC can be used to track changes to data over time, which can be useful for auditing purposes.
+
+% Two-Phase Commit (2PC): This pattern involves coordinating the execution of transactions across multiple systems, ensuring that either all or none of the changes are made. 2PC can be used to maintain a record of all transactions that have been committed, which can be useful for auditing purposes.
+
+% Ultimately, the choice of architecture pattern for auditing will depend on the specific needs of the system and the requirements of the audit process.
+
+% \subsection{Database Driven}
 
 % To see how event sourcing works, consider the Order entity. Traditionally, each order maps to a row in an ORDER table along with rows in another table like the ORDER_LINE_ITEM table. But when using event sourcing, the Order Service stores an Order by persisting its state changing events: Created, Approved, Shipped, Cancelled. Each event would contain sufficient data to reconstruct the Orders state.
 
-https://eventuate.io/whyeventsourcing.html
+% https://eventuate.io/whyeventsourcing.html
 
 % \subsection{Blockchain}
-\section{Blockchain}
 
-Anh et al. (2018) describes another append-only data structure: blockchain. While the data structure is similar to event sourcing, the goals of the two techniques are different. A blockchain focuses on solving problems related to distribution, consensus, and trust, while event sourcing solves problems with history, temporal complexity, and audit trails. The blockchain approach enforces the immutability of the data to solve its problems, while in event sourcing this immutability is self imposed. Event sourced systems could be build using a blockchain solution. However, the distribution and consensus features offered by blockchain do not improve the goals targeted by event sourcing.
+\subsection{Auditing 2.0}
 
-\section{Auditing 2.0}
+Performing and supporting IT audits and managing IT audit programs are time-, effort-, and personnel-intensive activities~\citep{GANTZ20141-T}. In an age of cost-consciousness and competition for resources, it is reasonable to keep \gls{gl:adt2} in mind when implementing Audit Log. Having an Audit Log, that can be utilised by the different process mining techniques as described in section \ref{sec:psmin} enables new forms of auditing. Rather than sampling a small set of cases, the whole process and all of its instances can be considered. Moreover, this can be done continuously.
 
-Auditors can utilise process mining techniques to address multiple use-cases/process mining techniques like 
-passive auditing
-process discovery, Conformance checking, model extension, etc.
-active auditing
-one can “replay” a running
-case on the process model at real-time and check whether the observed behavior fits. The moment the
-case deviates, an appropriate actor can be alerted. The process model based on historic data can also be
-used to make predictions for running cases, e.g., it is possible to estimate the remaining processing time
-and the probability of a particular outcome. . Similarly, this information can be used to provide
-recommendations, e.g., proposing the activity that will minimize the expected costs and completion
-time.
+Auditors can utilise process mining techniques to address multiple use-cases/processes. By implementing patterns like \gls{gl:es} organizations can use data analytics and machine learning techniques to analyze the event data and identify patterns and trends that may indicate potential risks or issues. By continuously analyzing the event data, organizations can proactively identify and address potential problems as they arise, rather than waiting for them to be discovered during a periodic audit.
 
-Conformance checking
-If there is an a-priori model, then this model can be used to check if reality, as recorded in the log,
-conforms to the model and vice versa. For example, there may be a process model indicating that
-purchase orders of more than one million Euros require two checks. Another example is the checking of
-the four-eye principle. Conformance checking may be used to detect deviations, to locate and explain
-these deviations, and to measure the severity of these deviations. An example is the conformance
-checking algorithm described in (A. Rozinat and W.M.P. van der Aalst. Conformance Checking of
-Processes Based on Monitoring Real Behavior. Information Systems, 33(1):64-95, 2008).
+% to ask why organizations undertake IT auditing. The rationale for external audits is often clearer and easier to understand publicly traded companies and organizations in many industries are subject to legal
+% and regulatory requirements, compliance with which is often determined through an audit. Similarly, organizations seeking or having achieved various certifications for process or service quality, maturity, or control implementation and effectiveness typically must undergo certification audits by independent auditors. IT audits often provide information that helps organizations manage risk, confirm efficient allocation of
+% IT-related resources, and achieve other IT and business objectives. Reasons used to
+% justify internal IT audits may be more varied across organizations, but include:
 
-Provenance data will make it possible to “replay” history reliably and accurately and to predict problems, thereby improving business processes.
+% The presence of event logs and process mining techniques enables new forms of auditing. Rather than sampling a small set of cases, the whole process and all of its instances can be considered. Moreover,
+% this can be done continuously.
 
-\subsection{\gls{gl:adt2} Framework}\label{sec:saadt2}
+% Auditors can utilise process mining techniques to address multiple use-cases/process. 
 
-This will be further discussed in \ref{chap:es}
+% Mining techniques like passive auditing
+% process discovery, Conformance checking, model extension, etc.
 
-The presence of event logs and process mining techniques enables new forms of auditing. Rather than
-sampling a small set of cases, the whole process and all of its instances can be considered. Moreover,
-this can be done continuously.
+% active auditing
+% one can “replay” a running
+% case on the process model at real-time and check whether the observed behavior fits. The moment the
+% case deviates, an appropriate actor can be alerted. The process model based on historic data can also be
+% used to make predictions for running cases, e.g., it is possible to estimate the remaining processing time
+% and the probability of a particular outcome. . Similarly, this information can be used to provide
+% recommendations, e.g., proposing the activity that will minimize the expected costs and completion
+% time.
 
-WHY
+% Conformance checking
+% If there is an a-priori model, then this model can be used to check if reality, as recorded in the log,
+% conforms to the model and vice versa. For example, there may be a process model indicating that
+% purchase orders of more than one million Euros require two checks. Another example is the checking of
+% the four-eye principle. Conformance checking may be used to detect deviations, to locate and explain
+% these deviations, and to measure the severity of these deviations. An example is the conformance
+% checking algorithm described in (A. Rozinat and W.M.P. van der Aalst. Conformance Checking of
+% Processes Based on Monitoring Real Behavior. Information Systems, 33(1):64-95, 2008).
 
-Performing and supporting IT audits and managing an IT audit program are time-,
-effort-, and personnel-intensive activities, so in an age of cost-consciousness and
-competition for resources, it is reasonable to ask why organizations undertake IT
-auditing. The rationale for external audits is often clearer and easier to understand—
-publicly traded companies and organizations in many industries are subject to legal
-and regulatory requirements, compliance with which is often determined through an
-audit. Similarly, organizations seeking or having achieved various certifications for
-process or service quality, maturity, or control implementation and effectiveness typically must undergo certification audits by independent auditors. IT audits often provide information that helps organizations manage risk, confirm efficient allocation of
-IT-related resources, and achieve other IT and business objectives. Reasons used to
-justify internal IT audits may be more varied across organizations, but include:
+% Provenance data will make it possible to “replay” history reliably and accurately and to predict problems, thereby improving business processes.
 
-- 
-- 
-
-Further details on organizational motivation for conducting internal and external IT audits appear in Chapters  3 and 4, respectively. To generalize, internal IT
-auditing is often driven by organizational requirements for IT governance, risk
-management, or quality assurance, any of which may be used to determine what
-needs to be audited and how to prioritize IT audit activities. External IT auditing
-is more often driven by a need or desire to demonstrate compliance with externally
-imposed standards, regulations, or requirements applicable to the type of organization, industry, or operating environment.
-
-IT auditing helps organizations understand, assess, and improve
-their use of controls to safeguard IT, measure and correct performance, and achieve
-objectives and intended outcomes. IT auditing consists of the use of formal audit
-methodologies to examine IT-specific processes, capabilities, and assets and their
-role in enabling an organization’s business processes. IT auditing also addresses IT
-components or capabilities that support other domains subject to auditing, such as
-financial management and accounting, operational performance, quality assurance,
-and governance, risk management, and compliance (GRC).
+% \subsection{\gls{gl:adt2} Framework}\label{sec:saadt2}
 
 
-Event sourcing can be used to implement Auditing 2.0 in a number of ways. Here are a few examples:
+% Event sourcing can be used to implement Auditing 2.0 in a number of ways. Here are a few examples:
 
-Storing a log of events: As mentioned earlier, event sourcing involves storing a log of events that represent changes made to the data over time. This log can be used to reconstruct the state of the data at any point in the past, which can be useful for auditing purposes. By storing a comprehensive and immutable log of events, organizations can use event sourcing to track and monitor changes to sensitive data and ensure compliance with regulations and standards.
+% Storing a log of events: As mentioned earlier, event sourcing involves storing a log of events that represent changes made to the data over time. This log can be used to reconstruct the state of the data at any point in the past, which can be useful for auditing purposes. By storing a comprehensive and immutable log of events, organizations can use event sourcing to track and monitor changes to sensitive data and ensure compliance with regulations and standards.
 
-Analyzing event data: In addition to storing the log of events, organizations can also use data analytics and machine learning techniques to analyze the event data and identify patterns and trends that may indicate potential risks or issues. By continuously analyzing the event data, organizations can proactively identify and address potential problems as they arise, rather than waiting for them to be discovered during a periodic audit.
+% Analyzing event data: In addition to storing the log of events, organizations can also use data analytics and machine learning techniques to analyze the event data and identify patterns and trends that may indicate potential risks or issues. By continuously analyzing the event data, organizations can proactively identify and address potential problems as they arise, rather than waiting for them to be discovered during a periodic audit.
 
-Automating the audit process: Event sourcing can also be used to automate the audit process by using technologies such as artificial intelligence and blockchain. For example, AI-powered systems can be used to analyze the event data and identify potential risks or issues, while blockchain technology can be used to provide a secure and transparent record of transactions. This can help to streamline the audit process and make it more efficient.
+% Automating the audit process: Event sourcing can also be used to automate the audit process by using technologies such as artificial intelligence and blockchain. For example, AI-powered systems can be used to analyze the event data and identify potential risks or issues, while blockchain technology can be used to provide a secure and transparent record of transactions. This can help to streamline the audit process and make it more efficient.
 
-Overall, event sourcing can be a powerful tool for implementing Auditing 2.0. By storing a comprehensive log of events and using advanced technologies and data analytics to analyze the data, organizations can continuously monitor and assess their financial and operational processes, identify potential risks and issues, and take timely and appropriate action to address them.
+% Overall, event sourcing can be a powerful tool for implementing Auditing 2.0. By storing a comprehensive log of events and using advanced technologies and data analytics to analyze the data, organizations can continuously monitor and assess their financial and operational processes, identify potential risks and issues, and take timely and appropriate action to address them.
 
-Event sourcing is related to database systems techniques used for persistence guarantees and replication. Gray and Reuter (1992) describe how transaction logs can be used to replicate state between database systems. Every state change is recorded as a transaction, which is similar to event sourcing where every state change is recorded as an event. Kleppmann (2017) discusses event sourcing in the context of data-intensive applications, he relates the pattern to the change data capture approach, often used in Extract-Transform-Load (or ETL) processes (Vassiliadis, 2009). ETL solutions are often used for creating data warehouses. The primary difference between event sourcing and these techniques is that a transaction or a data change is a technical entity without relation to the real world, while an event in event sourcing resembles an event in the real world.
+% Event sourcing is related to database systems techniques used for persistence guarantees and replication. Gray and Reuter (1992) describe how transaction logs can be used to replicate state between database systems. Every state change is recorded as a transaction, which is similar to event sourcing where every state change is recorded as an event. Kleppmann (2017) discusses event sourcing in the context of data-intensive applications, he relates the pattern to the change data capture approach, often used in Extract-Transform-Load (or ETL) processes (Vassiliadis, 2009). ETL solutions are often used for creating data warehouses. The primary difference between event sourcing and these techniques is that a transaction or a data change is a technical entity without relation to the real world, while an event in event sourcing resembles an event in the real world.
