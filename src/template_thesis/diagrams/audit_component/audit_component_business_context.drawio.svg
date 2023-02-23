@@ -1,146 +1,70 @@
-<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="334px" height="502px" viewBox="-0.5 -0.5 334 502" content="&lt;mxfile&gt;&lt;diagram name=&quot;Page-1&quot; id=&quot;5f0bae14-7c28-e335-631c-24af17079c00&quot;&gt;1VjJbtswEP0aH2NIpNajlyQ9pECAoGh7pC1aYkOJBkV56dd3aFGbZSdqIGQxspCPHFIzb+aR8gQv0sO9JNvku4gonyArOkzwcoKQ7/rwVwPHEggcA8SSRSVkN8AT+0sNaBm0YBHNOxOVEFyxbRdciyyja9XBiJRi3522Eby765bEtAc8rQnvoz9ZpBKD2pbVDHyjLE7M1oFrBlZk/RxLUWRmvwnCm9OnHE5JtZaZnyckEvsWhG8neCGFUGUrPSwo16Gtwlba3V0ZrZ9b0kwNMUDYK012hBe0emaPg/F8BY1YN2ZFxFSFwlr1gPFBHau4nTynem0LhvcJU/RpS9Z6dA+JAliiUg49G5q5kuK5ji+4Pt9RqRiwMOMszgBTYlvv0vbJuKmn00MLMj7eU5FSJY8wxYwi5JYmJh/tiq99w26dfEmLWLdinJiMiuu1m6hCwwT2WpDDXqRoBAlnupnI4N+8GzwhVSJikRH+IHQYTiH7Q5U6mnIhhRLdgG5Epu5Iyrj28hvlO6qjaQaMla3jTLNopquk2RuQO6YdOO3dZ+YqB7ko5Nr4hBwTZUVkTM085AYlqD1+kStJOVFs1y3BS3E3po+CwcM0HPvhNGx9cJdxFE59J0Su+bFxd/3ykc2SZ9TWzziMbcd6F7aBCXn8ZexPnd+6M3Wr7vLQHlweTe9zZoljj50lg6uz2volCfyxsNBlBTQTZQ+pAO0jPKHW0Bsu4olW5HMjshLFaRb8FjmVg8QW3IDzkL5FaMeQVN/qFBi23SlyAuTbnuWEOMA9gbXRBYGFonUtz/ZRgEPdCEYg1LP7seoXIBy9W901dwghe0XZCiEnK8rn9eG+EFzPX0Z0Q4oTU4OrSvf75sNqrW83rlKHH1aDnj86ZY0+Tm1YvqORyEWvqOSp90glA1+oNOBXy4IzIt+YFh56NyV2B15GH0S84Ey7MkQoq7QpUj4zWVPdNB80o48iZ4oJfeNcCaVEevUq2kovEGzOMiCjegP5zyNxuNLa+Exp/f7lFV+QVm+Mq2t1e3vlcMT9M61/7omNOd5uyFrHO/+Cx5yDPs0xV8n1K9TYo91bNlA68E5PFL2RJANp+Xr0IatLHwo+8JqCxistXVW5LjEIzY7R/ftQ0+PhAluDqXGRfn/7gMqCbvOFS/nC13yphW//AQ==&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="310px" height="501px" viewBox="-0.5 -0.5 310 501" content="&lt;mxfile&gt;&lt;diagram name=&quot;Page-1&quot; id=&quot;5f0bae14-7c28-e335-631c-24af17079c00&quot;&gt;5VjbjpswEP0aHjfCNiTwmMteHrbSSquq7aMTHOKuw0TG5NKvrx1MgHXYJlJaVmqUCz72YPuc8cwQj0zX+0dJN6svkDDhYT/Ze2TmYYxDor8NcCiBKIhLIJU8KSFUA6/8F7Ogb9GCJyxvDVQAQvFNG1xAlrGFamFUSti1hy1BtGfd0JQ5wOuCChf9xhO1sijy/brjifF0ZaeOQtsxp4u3VEKR2fk8TJbHV9m9ptW97Ph8RRPYNSBy75GpBFDl1Xo/ZcJQW9FW2j109J7WLVmmLjHAZFiabKko7ObHRcKVXZ46VJQcN8WMme+RSa4kvJ24QRrZMqm4ZnAseJppTMFGo+567BLNcLZvQHZ9jwzWTMmDHlI5Ew5LE+tLqOJ6VytzcpxVQ5SwUotab0hP964Z0ReWlC6CYocghxuWaO+xzQwy/TNp0wVSrSCFjIpnMLwcGfvJlDpY36eFAg0tIVMPdM2F2esTE1tmOLUddijSXE1YloyNn9cTauSBm2106NOpRA6FXNiN4MByrahMmapOc1SCZpsfKiaZoIpv24foHPvW9AW4Xkyt9CgexI0XaeuO48EoiHFo34i0718u2d7yncCnNV6meeD/Q821HvLw3RodGz9MYxBWzdm+2Tk72Nbn9JUA3dpXLj6p1dQN1b5OfY3oEEeQ2ekxst09Q+qZsHiC6RwK44ZUf4qcSVdrIXTmYddxdUWEG/ktTycoHOAgwiM09IOYRMSJdwifiXf69IT+EI1wRGJzEd2A06HL6SUnQae1jWna/AzSOR2CzpmYnLLlFIQZNEvYkhZCXePepu2aX+b0rt1tA2fc22EYjv6ScHW4GiA9SStk4RD/IWgdWy9Mcr0jJv8nXxji/gJjeL7GAzfSVfoXazG28leF3bNR6QVyrjiYAm8OSsG6s/LTIVXwTLNaVehXpprLwyci78LnyC0QyZl4ObxFeVjVRu2kQzqSDiwbHd4Ue+NjwrmjC0Nq3nfiCfCnSTyhW3ZrXlEHr0vjys2UnlDF7iTN9FnrmVPstznFUY/ZHJ8jNegg1Xhm7vgraCq2nO365jXE5mGhB1/Vzfr5vHy6qP8DIfe/AQ==&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
     <defs/>
     <g>
-        <rect x="123" y="1" width="210" height="500" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-width="2" pointer-events="all"/>
-        <g transform="translate(-0.5 -0.5)">
-            <switch>
-                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 208px; height: 1px; padding-top: 8px; margin-left: 124px;">
-                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                <b>
-                                    Audit
-                                </b>
-                            </div>
-                        </div>
-                    </div>
-                </foreignObject>
-                <text x="228" y="20" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
-                    Audit
-                </text>
-            </switch>
+        <rect x="99" y="0" width="210" height="500" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="203.5" y="17.5">
+                Audit
+            </text>
         </g>
-        <path d="M 58 256.27 L 174.99 297.38" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
-        <path d="M 58 245.6 L 168 206" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
-        <ellipse cx="228" cy="206" rx="60" ry="39.75308641975309" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-width="2" pointer-events="all"/>
-        <g transform="translate(-0.5 -0.5)">
-            <switch>
-                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 206px; margin-left: 169px;">
-                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                <b>
-                                    UC02
-                                </b>
-                                <br/>
-                                <b>
-                                    get audit-log
-                                    <br/>
-                                    about a user
-                                </b>
-                            </div>
-                        </div>
-                    </div>
-                </foreignObject>
-                <text x="228" y="210" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
-                    UC02...
-                </text>
-            </switch>
+        <path d="M 34 255.27 L 150.99 296.38" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 34 244.6 L 144 205" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <ellipse cx="204" cy="205" rx="60" ry="39.75308641975309" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="203.5" y="195.5">
+                UC02
+            </text>
+            <text x="203.5" y="209.5">
+                Audit-Log
+            </text>
+            <text x="203.5" y="223.5">
+                about a user
+            </text>
         </g>
-        <path d="M 58 238.41 L 190.64 127.11" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
-        <path d="M 58 266.52 L 188.04 401.03" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/>
-        <ellipse cx="43" cy="228.5" rx="7.5" ry="7.5" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-width="2" pointer-events="all"/>
-        <path d="M 43 236 L 43 261 M 43 241 L 28 241 M 43 241 L 58 241 M 43 261 L 28 281 M 43 261 L 58 281" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
-        <g transform="translate(-0.5 -0.5)">
-            <switch>
-                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 288px; margin-left: 43px;">
-                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: nowrap;">
-                                <b>
-                                    AuditLogClient
-                                </b>
-                            </div>
-                        </div>
-                    </div>
-                </foreignObject>
-                <text x="43" y="300" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
-                    Audit...
-                </text>
-            </switch>
+        <path d="M 34 237.41 L 166.64 126.11" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 34 265.52 L 164.04 400.03" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <ellipse cx="19" cy="227.5" rx="7.5" ry="7.5" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <path d="M 19 235 L 19 260 M 19 240 L 4 240 M 19 240 L 34 240 M 19 260 L 4 280 M 19 260 L 34 280" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="18.5" y="297.5">
+                Auditor
+            </text>
         </g>
-        <ellipse cx="228" cy="316" rx="60" ry="39.75308641975309" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-width="2" pointer-events="all"/>
-        <g transform="translate(-0.5 -0.5)">
-            <switch>
-                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 316px; margin-left: 169px;">
-                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                <b>
-                                    UC03
-                                    <br/>
-                                    get audit-log of user-actions
-                                </b>
-                            </div>
-                        </div>
-                    </div>
-                </foreignObject>
-                <text x="228" y="320" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
-                    UC03...
-                </text>
-            </switch>
+        <ellipse cx="204" cy="315" rx="60" ry="39.75308641975309" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="203.5" y="305.5">
+                UC03
+            </text>
+            <text x="203.5" y="319.5">
+                Audit-Log of
+            </text>
+            <text x="203.5" y="333.5">
+                user-actions
+            </text>
         </g>
-        <ellipse cx="228" cy="96" rx="60" ry="39.75308641975309" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-width="2" pointer-events="all"/>
-        <g transform="translate(-0.5 -0.5)">
-            <switch>
-                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 96px; margin-left: 169px;">
-                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                <b>
-                                    UC01
-                                </b>
-                                <br/>
-                                <b>
-                                    get audit-log for date-range
-                                </b>
-                            </div>
-                        </div>
-                    </div>
-                </foreignObject>
-                <text x="228" y="100" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
-                    UC01...
-                </text>
-            </switch>
+        <ellipse cx="204" cy="95" rx="60" ry="39.75308641975309" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="203.5" y="85.5">
+                UC01
+            </text>
+            <text x="203.5" y="99.5">
+                Audit-Log for
+            </text>
+            <text x="203.5" y="113.5">
+                date-range
+            </text>
         </g>
-        <ellipse cx="228" cy="420.75" rx="60" ry="39.75308641975309" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-width="2" pointer-events="all"/>
-        <g transform="translate(-0.5 -0.5)">
-            <switch>
-                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 421px; margin-left: 169px;">
-                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
-                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-                                <b>
-                                    UC03
-                                    <br/>
-                                    get audit-log users overview
-                                </b>
-                            </div>
-                        </div>
-                    </div>
-                </foreignObject>
-                <text x="228" y="424" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
-                    UC03...
-                </text>
-            </switch>
+        <ellipse cx="204" cy="419.75" rx="60" ry="39.75308641975309" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="203.5" y="410.25">
+                UC04
+            </text>
+            <text x="203.5" y="424.25">
+                Audit-Log users
+            </text>
+            <text x="203.5" y="438.25">
+                overview
+            </text>
         </g>
     </g>
-    <switch>
-        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
-        <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
-            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
-                Viewer does not support full SVG 1.1
-            </text>
-        </a>
-    </switch>
 </svg>

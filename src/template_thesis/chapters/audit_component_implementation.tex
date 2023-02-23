@@ -1,62 +1,70 @@
 % @author Hani Alshikh
 %
-\chapter{Audit Component}\label{chap:ac}
+\chapter{\gls{gl:ac}}\label{chap:ac}
 
-Wenn mehrere Teil-Kapitel zu strukturieren sind: Schreiben Sie zu jedem Teil-Kapitel eine Ein- leitung ("Hier wird die folgende Fragestellung untersucht...") und eine Ausleitung ("Hiermit ist erreicht: ... Die folgenden Probleme sind aber noch offen:...").
+As discussed in chapter \ref{chap:sadt} choosing the correct architecture for auditing is an important choice to make. Handling auditing and audit logging as first class citizens comes with its owen constraints and requirements.
 
-The event sourced system \citep{OVEREEM2021110970}
+In an industry where strict auditing requirements apply using patterns like \gls{gl:es} not only ensures a complaint audit log but also lays the ground work for broader auditing technologies like \gls{gl:adt2}
 
-Auditing Framework \citep{5427384}
-Event logs and process mining techniques enable new forms of auditing. Rather than sampling a small set of cases, auditors can consider the whole process and all of its instances. Moreover, they can do this continuously.
+Combining \gls{ac:ddd}, \gls{gl:es}, and \gls{ac:cqrs} produces an architecture that is praised by many, when it comes to building audit first cloud systems.
 
-Figure 1 shows an Auditing 2.0 framework based on process mining. “Current data” events are cases that are still running, while “Historic data” events are completed cases. The figure also shows two types of process models: De jure models describe a desired or required way of working, while de facto models aim to describe reality with potential violations of the boundaries defined in de jure models (W. M. P. van der Aalst et al., “Conceptual Model for On Line Auditing,” tech. report BPM-09-19 BPMcenter.org, 2009).
+To showcase the capabilities of such architecture and evaluate the development overhead compared to the gained benefits a real word example was chosen as a base to implement the \gls{gl:ac} from scratch.
+
+The \gls{gl:ac} utilises the produced event log by the \gls{gl:es} implementation to offer an auditing \gls{ac:api}, that can be utilised by all kind of clients like auditing programs as described in section \ref{sec:adt2sa} or in this case by the \gls{gl:ab} implemented in chapter \ref{chap:ab}
 
 \section{Monoskope}\label{sec:m8}
 
-\gls{ac:m8} implements the management and operation of tenants, users and their roles in a Kubernetes multi-cluster environment. It fulfills the needs of operators of the clusters as well as the needs of developers using the cloud infrastructure provided by the operators.~\todo{rewrite m8 overview}
+Monoskope (short m8 spelled "mate") implements the management and operation of authenticating and authorizing entities in a \gls{gl:k8s} multi-cloud multi-cluster environments. It fulfills the needs of operators of the clusters as well as the needs of developers using the cloud infrastructure provided by the operators~\citep{monoskope}.
 
-\gls{ac:m8} is an event-sourced system...~\todo{TODO}
+\subsection{Architecture}
+
+\Gls{ac:m8} was designed with auditing in mind. It uses the event-sourced architecture [\ref{sec:esa}] with a purpose built implementation of the \gls{gl:est} as well as the \gls{ac:cqrs} pattern.
+
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.005}]}{diagrams/monoskope-architecture.drawio}{Monoskope Architecture ~\citep{monoskope}}
+
+Since \gls{ac:m8} is meant to be used as the single source of truth authority for authenticating and authorizing users into different clusters on different cloud providers ensuring auditability and complying with different regulators requirements was not an option.
+
+While the base system was implemented and the main features were complete \gls{ac:m8} still lacked a proper implementation to utilise the gained event log and offer an auditing \gls{ac:api}, that answers Auditors questions.
+
+% m8 was designed and developed to run mainly in a fintech enviorment where ensuring auditibalty is mandetory and detrmining roles permissions and actions of any user at any point of time is Complaint audits are 
+
+\Gls{ac:m8} has no classic \acrshort{ac:crud} database with tables for storing state, however, the transient state built based on that has. The following is the data model for the projected transient state:
+
+\includenamedimage[1]{figures/monoskope_data_module}{Monoskope data module}
+
+Generally users represent developers that are bound/a part of one or many teams/tenants that are bound/have access to one or many clusters.
 
 \section{Requirements}
 
-\todo{clreaify how this should be  written? meeting, disscussion parties, etc...}
-
-\gls{ac:m8} has by nature a full audit log of every change to the system.This should be utilised to provide auditors and operators the ability to get detailed information of who is allowed to do what and why to answer questions like:
+\Gls{ac:m8} has by nature a full audit log of every change to the system. This should be utilised to provide auditors and operators the ability to get detailed information of who is allowed to do what and why to answer questions like:
 
 \begin{itemize}
   \item How did a user get a specific role?
   \item How did a user become a tenant member?
   \item What actions were taken by a user?
-  \item \dots
+  \item etc\dots
 \end{itemize}
 
 Auditors have different backgrounds and technical knowledge thus all events musst have a human-readable representation.
 
-It should be possible to utilise \gls{gl:es}'s temporal quires \todo{add chapter refrence} to get a system overview at a specific date and time 
-
-...~\citep{SAIP}
+It should be possible to utilise \gls{gl:es}'s temporal quires [\ref{sec:escp}] to get a users overview at any date and time 
 
 \subsection{Use-Cases}
 
-From the requirements overview the following use-cases are derived
+From the requirements overview the following use-cases were derived:
 
-\begin{table}[H]
-  \begin{center}
-    \caption{Audit component derived use-cases}
-    \label{tab:acuc}
-    \def\arraystretch{1.5}
-    \begin{tabularx}{\linewidth}{|l l X |}
-      \hline
-      \rowcolor{gray!20}
-      \textbf{ID} & \textbf{Use-Case} & \textbf{Description}\\
-      UC01 & get audit-log for date-range & As an auditor, I want to get all actions taken within a specific date-range\\
-      UC02 & get audit-log about a user & As an auditor, I want to get all actions taken on a user\\
-      UC03 & get audit-log of user-actions & As an auditor, I want to get all actions taken by a user\\
-      UC04 & get audit-log users overview & As an auditor, I want to get an overview of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters\\
-      \hline
-    \end{tabularx}
-  \end{center}
-\end{table}
+\mytable{acuc}{
+  \begin{tabularx}{\linewidth}{|l l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{ID} & \textbf{Use-Case} & \textbf{Description}\\
+    UC01 & Audit-Log for date-range & As an Auditor, I want to get all actions taken within a specific date-range\\
+    UC02 & Audit-Log about a user & As an Auditor, I want to get all actions taken on a user\\
+    UC03 & Audit-Log of user-actions & As an Auditor, I want to get all actions taken by a user\\
+    UC04 & Audit-Log users overview & As an Auditor, I want to get an overview of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters\\
+    \hline
+  \end{tabularx}
+}{\gls{gl:ac} Derived Use-Cases}
 
 % \subsection{Stakeholders}
 
@@ -64,177 +72,137 @@ From the requirements overview the following use-cases are derived
 
 \subsubsection{Technical Constraints}
 
-\begin{table}[H]
-  \begin{center}
-    \caption{Audit component technical constraints}
-    \label{tab:actc}
-    \def\arraystretch{1.5}
-    \begin{tabularx}{\linewidth}{|l l X |}
-      \hline
-      \rowcolor{gray!20}
-      \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
-      TC01 & human-readable representation & log structs musst contain a human-readable representation\\
-      TC02 & Programming language & \gls{ac:m8} is written in \gls{gl:go}. No reason to use other language\\
-      TC03 & Middleware & \gls{ac:m8} uses \gls{ac:grpc}. No reason to use or support any other framework\\
-      \hline
-    \end{tabularx}
-  \end{center}
-\end{table}
+\mytable{actc}{
+  \begin{tabularx}{\linewidth}{|l l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
+    TC01 & Human-Readable representation & Event objects musst contain a human-readable representation \\
+    TC02 & Programming language & \Gls{ac:m8} is written in \gls{gl:go}. No reason to use other languages \\
+    TC03 & Middleware & \Gls{ac:m8} uses \gls{ac:grpc}. No reason to use or support any other framework \\
+    \hline
+  \end{tabularx}
+}{\gls{gl:ac} Technical Constraints}
 
 \subsubsection{Organisational Constraints}
 
-\begin{table}[H]
-  \begin{center}
-    \caption{Audit component organisational constraints}
-    \label{tab:acoc}
-    \def\arraystretch{1.5}
-    \begin{tabularx}{\linewidth}{|l l X |}
-      \hline
-      \rowcolor{gray!20}
-      \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
-      OC01 & Deadline & implementation musst be finalised before 31.01.2023\\
-      OC02~\label{oc:ac02} & \gls{gl:12faktor} & adhere to the \gls{gl:12faktor} methodology\\
-      \hline
-    \end{tabularx}
-  \end{center}
-\end{table}
+\mytable{acoc}{
+  \begin{tabularx}{\linewidth}{|l l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
+    OC01 & Deadline & Implementation musst be finalised before 31.01.2023\\
+    OC02~\label{oc:ac02} & \gls{gl:12faktor} & Implementation musst adhere to the \gls{gl:12faktor} methodology\\
+    \hline
+  \end{tabularx}
+}{\gls{gl:ac} Organisational Constraints}
 
 \section{System Design}
-
-% \subsection{Enabling Technologies}
 
 \subsection{Scope and Context}
 
 \subsubsection{Business Context}
 
-\includenamedsvg{\includesvg}{diagrams/audit_component/audit_component_business_context.drawio}{Audit Component Business Context Diagram}
+\includenamedsvg{\includesvg}{diagrams/audit_component/audit_component_business_context.drawio}{\gls{gl:ac} Business Context Diagram}
 
 \subsubsection{Technical Context}
 
-\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_component/audit_component_technical_context.drawio}{ Audit Component Technical Context Diagram}
+\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_component/audit_component_technical_context.drawio}{ \gls{gl:ac} Technical Context Diagram}
 
 \subsection{Solution Strategy}
 
-\begin{table}[H]
-  \footnotesize
-  \begin{center}
-    \caption{Audit component solution strategy}
-    \label{tab:acss}
-    \def\arraystretch{1.5}
-    \begin{tabularx}{\linewidth}{|l X l X X X |}
-      \hline
-      \rowcolor{gray!20}
-      \textbf{Actor} & \textbf{Funktion} & \textbf{UCID} & \textbf{Semantics} & \textbf{Pre-condition} & \textbf{Post-condition}\\
-      QueryHandler & New\-Audit\-Log\-Server\-(Event\-Store\-Client, Event\-Formatter\-Registry) & All & Creates server instance of the audit log component to handle grpc client requests & \gls{gl:ef} server is running and \glspl{gl:ef} are registered & Audit-log server is ready to handle client requests  \\
-      AuditLogClient & Get\-By\-Date\-Range(Range\-Request, Stream) & UC01 & streams formatted events & Audit\-Log\-Server is running & human-readable events were streamed to the client  \\
-      ... & ... & ... & ... & ... & ...  \\
-      \hline
-    \end{tabularx}
-  \end{center}
-\end{table}
-...\todo{finish the table}
+\def\arraystretch{1.5}
+\begin{xltabular}[H]{\linewidth}{|X l X X X |}
+  \hline
+  \rowcolor{gray!20}
+  \textbf{Funktion} & \textbf{UCID} & \textbf{Semantics} & \textbf{Pre-condition} & \textbf{Post-condition}\\
+  
+  new\-Event\-Formatter\-Registry\-() & All & Creates a new EventFormatterRegistry & QueryHandler is initializing & EventFormatters can be registered \\
+
+  register\-Event\-Formatter(\-eventFormatter,\-eventType\-) & All & Register EventFormatter for an event type & EventFormatter registry is initiated & EventFormatter can be used to format events of eventType \\
+
+  new\-Audit\-Log\-Server\-(event\-Store\-Client, event\-Formatter\-Registry) & All & Creates server instance of the \gls{gl:ac} to handle client requests & \gls{gl:est}Client and EventFormatterRegistry are initialized & Audit-log server is ready to handle client requests  \\
+
+  get\-By\-Date\-Range(date\-Range\-Request) & UC01 & Streams human-readable events within a date-range & Audit\-Log\-Server is running & Human-readable events were streamed to the client  \\
+
+  new\-Human\-Readable\-Event(\-event\-) & All & creates a human-readable event of an event & EventFormatter for the corresponding event type was registered & A new event with human-readable details is created \\
+
+  get\-By\-User(get\-By\-User\-Request) & UC02 & Streams formatted events caused by others actions on the given user & Audit\-Log\-Server is running & Human-readable events were streamed to the client  \\
+
+  get\-Users\-Actions(get\-User\-Actions\-Request) & UC03 & Streams formatted events caused by the given user actions & Audit\-Log\-Server is running & Human-readable events were streamed to the client  \\
+
+  get\-Users\-Overview(get\-Users\-Overview\-Request) & UC04 & Streams formatted events at the specified timestamp of users, tenants/clusters they belong to, and their roles & Audit\-Log\-Server is running & Human-readable events were streamed to the client  \\
+
+  \hline
+  \caption{\gls{gl:ac} Solution Strategy\label{tab:acst}}\\
+\end{xltabular}
 
 \subsection{Building Block View}
 
 \subsubsection{Overall System White Box}
 
-\includenamedsvg{\includesvg[pretex=\footnotesize]}{diagrams/audit_component/audit_component_component_diagram_white_box_level_1.drawio}{Overall System Component Diagram}
+\includenamedsvg{\includesvg[pretex=\footnotesize]}{diagrams/audit_component/audit_component_component_diagram_white_box_level_1.drawio}{\gls{gl:ac} overall system component diagram}
 
 \subparagraph{Level 1}
 
 \header{Contained Building Blocks}
 
-\begin{table}[H]
-  \begin{center}
-    \caption{Audit component overall system contained building blocks white box}
-    \label{tab:acoscbbwb}
-    \def\arraystretch{1.5}
-    \begin{tabularx}{\linewidth}{|l X |}
-      \hline
-      \rowcolor{gray!20}
-      \textbf{Component} & \textbf{Description}\\
-      Audit & handles aggregating and formatting events for audit related queries\\
-      \hline
-    \end{tabularx}
-  \end{center}
-\end{table}
+\subheader{\gls{gl:ac} Black Box}
 
-\header{Audit Component Black Box}
+\mytable{acsacoscbbwbs}{
+  \begin{tabularx}{\linewidth}{|l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Component} & \textbf{Description}\\
+    Audit & handles aggregating and formatting events for audit related queries\\
+    \hline
+  \end{tabularx}
+}{\gls{gl:ac} contained building blocks component black box}
 
-\begin{table}[H]
-  \begin{center}
-    \caption{Audit component black box}
-    \label{tab:acbb}
-    \def\arraystretch{1.5}
-    \begin{tabularx}{\linewidth}{|l X |}
-      \hline
-      \rowcolor{gray!20}
-      \textbf{Interface} & \textbf{Description}\\
-      AuditLogClient & handles communication with the audit log server\\
-      \hline
-    \end{tabularx}
-  \end{center}
-\end{table}
+\mytable{acsacdoscbbwbs}{
+  \begin{tabularx}{\linewidth}{|l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Interface} & \textbf{Description}\\
+    AuditLogClient & handles communication with the audit log server\\
+    \hline
+  \end{tabularx}
+}{\gls{gl:ac} contained building blocks interface black box}
 
 \subparagraph{Level 2}
 
-\header{Audit Component White Box}
+\header{\gls{gl:ac} White Box}
 
-% \caption{Audit Component White Box}
-\includenamedsvg{\includesvg[width=\textwidth,pretex=\footnotesize]}{diagrams/audit_component/audit_component_component_diagram_white_box_level_2.drawio}{Audit Component Diagram}
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.2}]}{diagrams/audit_component/audit_component_component_diagram_white_box_level_2.drawio}{\gls{gl:ac} class diagram}
 
-\begin{table}[H]
-  \begin{center}
-    \caption{Audit component contained building blocks white box}
-    \label{tab:accbbwb}
-    \def\arraystretch{1.5}
-    \begin{tabularx}{\linewidth}{|l X |}
-      \hline
-      \rowcolor{gray!20}
-      \textbf{Component} & \textbf{Description}\\
-      Audit & handles audit client queries\\
-      EventFormatterRegistry & register and initialise \glspl{gl:ef} based on the event type\\
-      EventFormatter & formats an event in human-readable format\\
-      \hline
-    \end{tabularx}
-  \end{center}
-\end{table}
-
-\subparagraph{Event Component Black Box}.
-
-\begin{table}[H]
-  \begin{center}
-    \caption{Event component black box}
-    \label{tab:ecbb}
-    \def\arraystretch{1.5}
-    \begin{tabularx}{\linewidth}{|l X |}
-      \hline
-      \rowcolor{gray!20}
-      \textbf{Interface} & \textbf{Description}\\
-      EventFormatterRegistry & register and initialise \glspl{gl:ef} based on the event type\\
-      EventFormatter & formats an event in human-readable format\\
-      \hline
-    \end{tabularx}
-  \end{center}
-\end{table}
-
-\subparagraph{Level 3}
-
-\todo{Class Digram}
+\mytable{accbbwb}{
+  \begin{tabularx}{\linewidth}{|l X |}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Object} & \textbf{Description}\\
+    CertificateEventFormatter & Formates certificate events in human-readable format \\
+    ClusterEventFormatter & Formates cluster events in human-readable format \\
+    TenantEventFormatter & Formates tenant events in human-readable format \\
+    UserEventFormatter & Formates user events in human-readable format \\
+    BaseEventFormatter & Base implementation of the EventFormatter interface to generalize common methods \\
+    EventFormatterRegistry & Register EventFormatter for event type \\
+    AuditFormatter & Creates a human-readable event of a given event \\
+    AuditLogServer & Handles communication with the AuditLogClient \\
+    \hline
+  \end{tabularx}
+}{\gls{gl:ac} class diagram}
 
 \subsection{Runtime View}
 
-\subsection{Deployment View}
+\subsubsection{UC01-04: Audit-Log *}
 
-\section{Design Decisions}
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relsize{-10}]}{diagrams/audit_component/audit_component_uc01-04_get_audit-log_sequence_diagram.drawio}{\gls{gl:ac} \hyperref[tab:abuc]{UC01-04} sequence diagram}
 
-\subsection{DD01: Registry pattern}
+% \section{Technical Decisions}
 
-\section{Technical Decisions}
+% \subsection{TD01: Limit get user actions query to max 1 year}
 
-\subsection{TD01: Limit get user actions query to max 1 year}
-
-a general restructure for the event structure will happen sooner or later (which should allow for a much better implementation)
-for now, limiting the query to a max 1 year should be enough as a preventive measure until the restructuring to filter on the store level is implemented
-All queries are bound to a time-out which will stop the query if it takes too long In case there are too many events within the limiting period.
+% a general restructure for the event structure will happen sooner or later (which should allow for a much better implementation)
+% for now, limiting the query to a max 1 year should be enough as a preventive measure until the restructuring to filter on the store level is implemented
+% All queries are bound to a time-out which will stop the query if it takes too long In case there are too many events within the limiting period.
 

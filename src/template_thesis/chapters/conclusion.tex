@@ -2,9 +2,40 @@
 %
 \chapter{Conclusion}
 
-Weiterentwicklungsmöglichkeiten
+AUDIT, SE
+
+IT-Auditing is a part of every regulated organisation lifecycle. Not only dose it insure the organisation compliance with requlators requirments it also allow organisations to identify patterns and trends that poses potential risks ....
+
+However not only the organisation the 
+
+Architecting and developing a system, especially the critical ones, requires a good understanding of the requirments. This also including the passive one, that might not be of a problem at the begining. Auditibility tend to be one of them. 
+
+A great care should be takin when handling such decsens. Choosing the right architecture might make or break the system.
+
+As discussed in chapter \ref{chap:sadt} auditing might be build as an audit feature, which deligate the complexity on the developer and comes with its owen risk or built to be auditiable by design.
+
+ES
+
+\gls{gl:es} and the event-sourced architecture disscussed in chapter \ref{chap:es} and showcased in chapter \ref{chap:ac} and \ref{chap:ab} tend to be on top of the list, when talking about audit first systems. Chapter \ref{chap:ac} shows, how effective it could be to have an Audit Log by design. No complex association nor care was given to the bussnisse logic. The events are there and all information are insured to be included. Events can be easily retrived from the \gls{gl:est} and manipluated as desired. The \gls{gl:ac} can be taken as is and integrated into another \gls{gl:es} system. The only thing to adapt are the Domain specific formatters. Satisfing all Audit Log requirments as described in \ref{chap:adt} make it also possible for all kind of integration like the case with \gls{gl:adt2} disscussed in \ref{sec:adt2}. Use-cases like \Paste{UC02} required nothing more than a store request and the user id. Maintaining all relevant metadata and assosiations between the busnise object and the diffrent events was handled already by \gls{gl:es}.
+
+However one of the stakeholders request was answering questions like who attempted accessing restricted information or tried deleting business objects, without having any bussnise doing so. Such questions were intentionly skipped, as this is a knowen limitation of \gls{gl:es} and the current \gls{ac:m8} implementation has no logic to log such requests. This limitation must be handled with or without \gls{gl:es} as descried in section \ref{sec:saes}
+
+\Gls{ac:m8} uses the event-sourced architecture [\ref{sec:esa}] to offer a resilient and auditable cloud system. Utilising \gls{ac:cqrs} and separating the QueryHandler from the CommandHandler comes in handy when implementing the \gls{gl:ac}. It ensures a higher level of separation of concerns and encapsulate the \gls{gl:ac} in a separate micro-service.
+
+compared to the other options, if done correctly (which is the hard part) the implementation shouldn't differ much. Collect log entries is the same wether they coming from an \gls{gl:est} or an Audit Log database. It all comes done to the system requirments. Is auditing an added feature? and human errors and bugs are not much of a harm and other architecture is of a greater benfit then there is no extra advantage to use \gls{gl:es} when it comes to audit logging. However having a log of all changes by desing and the assuernce that the history audited is the actuel system history and represent the acutal bussnisse object with ability to restore it and tested on a real system with needing to replay commads or script any behavior gives \gls{gl:es} the bigger advantage. Especially when that moment comes, as put by one of the engeeners of the study:
 
 In this case the \gls{gl:ab} was implemented as a part of \gls{gl:monogui} and used for \gls{ac:m8} only. As discussed in chapter ~\ref{chap:adt} section \ref{sec:adt2} Having a central and unified home for log monitoring and further processing especially on an organisation level further improve and complies with \gls{gl:adt2} vision. querring raw events from \gls{ac:m8} or any event-sourced system is and should be possible. Depending on the use-case further processing upon ingestion might be needed to allow for some unification .....
+
+FINAL
+
+It goes without saying, that the mentioned is valid for all options and ways of implementing the Audit Log, the only thing the differ is the complexity deligation. Either at the begining as is the case with \gls{gl:es} or throughout the entire lifecycle of the system.
+
+As one might expect utilising the event-sourced architecture [\ref{sec:esa}] made for an easy and straightforward implementation of different auditing use-cases. 
+
+
+As demoinstroited by the \gls{gl:ab} implementation utlilising the resulting \gls{ac:api}
+
+
 
 
 Process mining poses a lot of possibilities and combained with \gls{gl:es} allow for very advanced log analisys and bhaviour control .........
@@ -14,4 +45,5 @@ In summary, event sourcing offers several advantages over traditional database s
 In conclusion, event sourcing offers several advantages in terms of auditing and accountability compared to other architectures. Its detailed and comprehensive audit trail, ability to reconstruct past states, and robust and flexible approach make it a powerful tool for ensuring transparency and accountability in applications.
 
 the studie contudcted by ..... on 25 engineers of different backgrounds and roles by applying appling Grounded Theory (GT). Adolph et al. (2011) which showcase how event sourcing is ganging on popularity especially when it comes to satisfying auditory needs. As put by one of the engineers when asked about event sourcing ""
+
 The reasons for applying event sourcing can be grouped into four categories. Remarkably, all systems under study benefit from event sourcing, and no system returned to a current state model. Still, most engineers state that they would not apply event sourcing in every system. The reason given for this opinion is the added complexity of introducing event sourcing. Engineer E2 would apply event sourcing by default, because of the benefits it gives.~\citep{OVEREEM2021110970}

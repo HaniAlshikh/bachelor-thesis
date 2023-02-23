@@ -58,7 +58,7 @@ This is a much more reliable approach, because it automatically records every se
 
 The main drawback of using \gls{ac:aop} is that it only has access to the method name and its arguments, thus it might be challenging to determine the business object being acted upon and generate a business-oriented audit log entry.
 
-\subsection{Event Sourcing}
+\subsection{Event Sourcing}\label{sec:saes}
 
 The third option is to implement the business logic with auditability as a first class property of the system by utilising \gls{gl:es} and its complementary patterns as discussed in chapter \ref{chap:es}. 
 
@@ -179,7 +179,7 @@ The challenge of implementing auditing as an added feature like the case with th
 
 % \subsection{Blockchain}
 
-\subsection{Auditing 2.0}
+\subsection{Auditing 2.0}\label{sec:adt2sa}
 
 Performing and supporting IT audits and managing IT audit programs are time-, effort-, and personnel-intensive activities~\citep{GANTZ20141-T}. In an age of cost-consciousness and competition for resources, it is reasonable to keep \gls{gl:adt2} in mind when implementing Audit Log. Having an Audit Log, that can be utilised by the different process mining techniques as described in section \ref{sec:psmin} enables new forms of auditing. Rather than sampling a small set of cases, the whole process and all of its instances can be considered. Moreover, this can be done continuously.
 
