@@ -110,7 +110,7 @@ Snapshots can also be used to mark a state just like a tag in version-control sy
 
 % Another problem in the evolution of event sourced systems is the amount of data that is stored, not only the current state, but also every change leading up to that state. This huge amount of data makes the problem of performing a seamless upgrade even more important: upgrades may need more time, but they are required to be imperceptible.
 
-\section{The Core Pattern}
+\section{The Core Pattern}\label{sec:escp}
 
 The fundamental idea of \gls{gl:es} is that of ensuring every change to the state of a system is captured in an event object, and that these event objects are themselves stored in the sequence they were applied for the same lifetime as the system state itself.
 
@@ -152,7 +152,7 @@ not having a representation of current state. With \gls{ac:cqrs} the only query 
 GetById which is supported with \gls{gl:es}~\citep{young2010cqrs}.
 \end{quote}
 
-The loosely coupled nature of \gls{ac:cqrs} combined with the benefits of the \gls{gl:es} approach makes it a fitting architectural pattern for cloud systems. \gls{gl:es} itself is not tied exclusively to CQRS, the coupling based on events is similar to that in more general event-driven architectures.
+The loosely coupled nature of \gls{ac:cqrs} combined with the benefits of the \gls{gl:es} approach makes it a fitting architectural pattern for cloud systems. \gls{gl:es} itself is not tied exclusively to \gls{ac:cqrs}, the coupling based on events is similar to that in more general event-driven architectures.
 
 The justification for \gls{ac:cqrs} is that in complex domains, a single model to handle both reads and writes gets too complicated, and can be simplified by separating the models. This is particularly appealing when difference in access patterns is observed, such as lots of reads and very few writes. However the gain for using \gls{ac:cqrs} has to be balanced against the additional complexity of having separate models~\citep{esvsed}.
 

@@ -1,0 +1,58 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="711px" height="521px" viewBox="-0.5 -0.5 711 521" content="&lt;mxfile&gt;&lt;diagram name=&quot;Page-1&quot; id=&quot;5f0bae14-7c28-e335-631c-24af17079c00&quot;&gt;5Vlbc6IwGP01PG5HQEAfq9X2oTvTme7MPqckYrbAx4RodX/9JpBwMdjiyjq225eSk5DL+c53CVruPNndM5StvwMmseWM8M5y7yzHsSeBK/5JZF8i3+yyHTGK1ZgaeKa/iQJHCt1QTPLWQA4Qc5q1wRDSlIS8hSHG4K09bAVxe9UMRcQAnkMUm+hPivlaofZoVHc8EBqt1dITT3W8oPA1YrBJ1XqW466Kv7I7QXouNT5fIwxvDchdWO6cAfDyKdnNSSyp1bSV7y2P9Fb7ZiTlvV7wlKG2KN6ow1tzx7qdhZBkkMppRHM2sxxfnEXYx53dbjDljbY6Cd9r9jCD7AdiEZFbkCNyzuC1YtIWCIpplIrnUCxAmAC2hHEqDHCrOjhk1dTN46gTyuFk14DU8e4JJISzvRiy08objRXZSotTTf5bbdpAK2/dsKqnByIlp6iavaZUPChWjzE8Nhk+ZEzIIJOPCeCNxGa/COd7TdhEA5Xkxn9HakIxLqbv4LUSQm9mbYNFp4NEjTESI063bQfrIlat9wRU7K02oxO0jBi0J4DVKhdyO7RLtemepvIMUy22kqLrVvg08G8cr63xqalxRx+vaR53OojG/c+hce9Ubr+gxqcfm4pgkQ1VExhfQwQpihc1OtPGVAkYpCWKtEew8ogYvZB4VqXDOcRy0B0mK7SJBW+zFaR8iRIay9M+kHhLpB1VhyoJbEe1zddJim9lphdgKvJUiSypPHjDI833TEkddcEcNizUxvR1HaLdvgCViSRh78rpTGW4jn3o4b7ttWcpN6ZePE8j/mgIjfwLPdh99AAZSc/QA0b5utj2ueLwhxZH73is9/OeAYfIYe8F29PTmDu5Cdoir2u3RgS2Jx0heJA05jufIo35J3P79dKY33Fvud401itsXSaNja8sUpm3o6LkXgITl2XpG58ybjneReOWeW+5yrg1PpXbLxi3zJvSB3oXE9Asl5SiPCs/dq3oTgaoDvsU4eoJcsopdNrp8WDAC3AOSf/7ap6hkKaRaHt9ouMQ/jXxTf+yA9O/xh3SGA/iXkGPXPO/W8n3XbN604HpElYKetS8F6kIjqXsMyuFXKRsflArFFijWvj4EiTGq6X8sre5cM8SYtpVQgx+E+7vnh1fNIpP2PMY5Xn35+tHiJ4J23aE2xMKqxO8w/Pa36CFa3QUCIFj+oZ3um+IZv0LQpmk6l9p3MUf&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
+    <defs/>
+    <g>
+        <rect x="0" y="0" width="710" height="520" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="354.5" y="17.5">
+                «component»
+            </text>
+            <text x="354.5" y="31.5">
+                Audit
+            </text>
+        </g>
+        <path d="M 687 7 L 703 7 L 703 27 L 687 27 L 687 23 L 683 23 L 683 19 L 687 19 L 687 15 L 683 15 L 683 11 L 687 11 Z" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 687 11 L 691 11 L 691 15 L 687 15 M 687 19 L 691 19 L 691 23 L 687 23" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="63.75" y="70" width="255" height="390" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="190.75" y="87.5">
+                Event
+            </text>
+        </g>
+        <path d="M 295.75 77 L 311.75 77 L 311.75 97 L 295.75 97 L 295.75 93 L 291.75 93 L 291.75 89 L 295.75 89 L 295.75 85 L 291.75 85 L 291.75 81 L 295.75 81 Z" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 295.75 81 L 299.75 81 L 299.75 85 L 295.75 85 M 295.75 89 L 299.75 89 L 299.75 93 L 295.75 93" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 281.25 165 L 376.25 165" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 191.25 210 L 191.25 247.76" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
+        <path d="M 187.75 241.88 L 191.25 248.88 L 194.75 241.88" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="101.25" y="120" width="180" height="90" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <path d="M 258.25 127 L 274.25 127 L 274.25 147 L 258.25 147 L 258.25 143 L 254.25 143 L 254.25 139 L 258.25 139 L 258.25 135 L 254.25 135 L 254.25 131 L 258.25 131 Z" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 258.25 131 L 262.25 131 L 262.25 135 L 258.25 135 M 258.25 139 L 262.25 139 L 262.25 143 L 258.25 143" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 191.25 330 L 191.25 290" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <rect x="101.25" y="330" width="180" height="90" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="190.75" y="379.5">
+                EventFormatter
+            </text>
+        </g>
+        <path d="M 258.25 337 L 274.25 337 L 274.25 357 L 258.25 357 L 258.25 353 L 254.25 353 L 254.25 349 L 258.25 349 L 258.25 345 L 254.25 345 L 254.25 341 L 258.25 341 Z" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 258.25 341 L 262.25 341 L 262.25 345 L 258.25 345 M 258.25 349 L 262.25 349 L 262.25 353 L 258.25 353" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <ellipse cx="191.25" cy="270" rx="20" ry="20" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <rect fill="rgb(255, 255, 255)" stroke="none" x="149" y="301" width="85" height="15" stroke-width="0"/>
+            <text x="190.75" y="310.5">
+                EventFormatter
+            </text>
+        </g>
+        <ellipse cx="396.25" cy="165" rx="20" ry="20" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <path d="M 490 165 L 418.49 165" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 429.37 159 L 417.37 165 L 429.37 171" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="490" y="140" width="172" height="50" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="575.5" y="162.5">
+                «Class»
+            </text>
+            <text x="575.5" y="176.5">
+                AuditLogServer
+            </text>
+        </g>
+    </g>
+</svg>
