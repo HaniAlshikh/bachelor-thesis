@@ -35,31 +35,9 @@ Since Auditors have different backgrounds and technical knowledge the \gls{ac:ux
 
 To ease auditors workflows and external auditing needs audit reports should be exportable and sendable via e-mail in a spread-sheet compatible format like \gls{ac:csv}. Automating these reports should be possible as well. \todo{see if this will be possible timewise}
 
+\pagebreak
+
 \subsection{Use-Cases}
-
-% \mytable{tab:abuc}{
-%   \begin{tabularx}{\linewidth}{| l l X |}
-%     \hline
-%     \rowcolor{gray!20}
-%     \textbf{ID} & \textbf{Use-Case} & \textbf{Description}\\
-%     UC01 & \Copy{abuc01}{Monoskope \gls{ac:gui}} & As a user, I want to use \gls{ac:m8} features through an easy to navigate \gls{ac:gui} \\
-
-%     UC02 & \Copy{abuc02}{\gls{ac:oidc} authentication} & As a user, I want to authenticate using my \gls{ac:oidc} provider account \\
-
-%     UC03 & \Copy{abuc03}{Audit-log for date-range report} & As an auditor, I want to see all actions taken within a specific date-range \\
-
-%     UC04 & \Copy{abuc04}{Audit-log about a user report} & As an auditor, I want see all actions taken on a user \\
-
-%     UC05 & \Copy{abuc05}{Audit-log of user-actions report} & As an auditor, I want see all actions taken by a user \\
-
-%     UC06 & \Copy{abuc06}{Audit-log users overview} & As an auditor, I want a report of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters \\
-
-%     UC07 & \Copy{abuc07}{\gls{ac:csv} audit-log reports export} & As an auditor, I want to export audit-log reports in a \gls{ac:csv} formatted file \gls{ac:gui} \\
-
-%     UC08 & \Copy{abuc08}{Send audit-log reports via e-mail} & As an auditor, I want to send audit-log reports via e-mail \gls{ac:gui} \\
-%     \hline
-%   \end{tabularx}
-% }{\Gls{gl:ab} derived use-cases}
 
 \def\arraystretch{1.5}
 \begin{xltabular}[H]{\linewidth}{| l l X |}
@@ -200,6 +178,8 @@ To ease auditors workflows and external auditing needs audit reports should be e
   \end{tabularx}
 }{\Gls{gl:ab} scenes contained building blocks black box}
 
+\pagebreak
+
 \header{UseCases}
 
 \mytable{abuccbbbb}{
@@ -224,7 +204,9 @@ To ease auditors workflows and external auditing needs audit reports should be e
     Auth & \gls{ac:m8}'s Gateway stubs to handel \gls{ac:grpc} requests \\
     \hline
   \end{tabularx}
-}{\Gls{gl:ab} \gls{ac:api} contained building blocks black box}
+}{\Gls{gl:ab} API contained building blocks black box}
+
+\pagebreak
 
 \subparagraph{Level 2}
 
@@ -243,6 +225,8 @@ To ease auditors workflows and external auditing needs audit reports should be e
     \hline
   \end{tabularx}
 }{\Gls{gl:ab} \gls{gl:monogui} \gls{ac:grpc} class diagram}
+
+\pagebreak
 
 \header{Scenes White Box}
 
@@ -284,6 +268,8 @@ To ease auditors workflows and external auditing needs audit reports should be e
   \end{tabularx}
 }{\Gls{gl:ab} scenes auth class diagram}
 
+\pagebreak
+
 \header{UseCases White Box}
 
 \subheader{Audit}
@@ -300,6 +286,8 @@ To ease auditors workflows and external auditing needs audit reports should be e
     \hline
   \end{tabularx}
 }{\Gls{gl:ab} usecases audit class diagram}
+
+\pagebreak
 
 \subheader{Auth}
 
@@ -333,9 +321,11 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 \includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_uc03_sequence_diagram.drawio}{\gls{gl:ab} \hyperref[tab:abuc]{UC03} sequence diagram}
 
+\pagebreak
+
 \section{Design Decisions}
 
-\subsection{DD01: \gls{ac:grpc} Client-Server Communication}
+\subsection{DD01: gRPC Client-Server Communication}
 
 \gls{ac:http}/2 comes with multiple advantages to handle \gls{ac:http}/1.1 limitations like multiplexing, \gls{gl:hpack} compression and server push mechanism, which allows the server to push streams of messages without waiting for an explicit client request~\citep{RFC7540}
 

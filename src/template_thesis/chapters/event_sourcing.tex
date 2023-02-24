@@ -128,6 +128,8 @@ A common example of an application that uses \gls{gl:es} is version control. Suc
 
 The main introduction to the inner workings of \gls{gl:es} by \citep{fowleres} gives a clear impression on the general implementation of the different building blocks of the pattern. More details and advanced concepts are covered by~\citep{richardson2018microservices}.
 
+\pagebreak
+
 % An example of this would be a system with lots of readers and a few writers. Using \gls{gl:es} this could be delivered as a cluster of systems with in-memory databases, kept up to date with each other through a stream of events. If updates are needed, they can be routed to a single master system (or a tighter cluster of servers around a single database or message queue) which applies the updates to the system of record and then broadcasts the resulting events to the wider cluster of readers. Even when the system of record is the application state in a database this could be a very appealing structure. If the system of record is the event log, there is are plenty of options for very high performance since the event log is a purely additive structure that requires minimal locking.
 
 % Using event streams like this also allows new applications to be added easily by tapping into the event streams and populating their own models, which don't need to be the same for all systems. It's an approach that fits in very well with a messaging approach to integration.
@@ -244,6 +246,8 @@ Getting people to understand eventual consistency is not easy. Eventual consiste
 However, eventual consistency is a weaker form of consistency. The system guarantees that the query-side eventually will reflect the events produced in the command-side. However, there are no guarantees on how fast this will happen. 
 
 A system with a large delay is unfeasible, because in that case queries will often return data that does not reflect the latest changes
+
+\pagebreak
 
 % Engineer E12 states that “a lot of developers had to get used to information not being in place”, and E2 adds that “getting people to understand eventual consistency is the biggest hurdle”. Eventual consistency forces developers to rethink the basic interactions of the user with the system.
 % Such an architecture isn't flawless, of course. The reader systems are liable to be out of sync with the master (and each other) due to differences in timing with event propagation. However this broad style of architecture is used and I've heard almost entirely favorable comment about it.
