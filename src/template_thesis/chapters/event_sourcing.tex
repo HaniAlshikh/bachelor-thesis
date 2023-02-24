@@ -6,9 +6,9 @@
 
 Traditionally applications use the current state to answer various queries, however in most cases such quires fails, when the path leading to the current state is required.
 
-\gls{gl:es} ensures that all changes to application state are stored as a sequence of events. Writing an event to the log is one single, therefore atomic, operation. These events can be aggregated in multiple ways not only can they be quired, reconstructing past states is also possible. \gls{gl:es} can be thought of as the version-control way of working with systems state. Each change is committed and can be traced back and/or revisited.
+\gls{gl:es} ensures that all changes to application state are stored as a sequence of events. Writing an event to the log is one single, therefore atomic, operation. These events can be aggregated in multiple ways not only can they be quired, reconstructing past states is also possible. \gls{gl:es} can be thought of as the version-control way of working with system's state. Each change is committed and can be traced back and/or revisited.
 
-\gls{gl:es} is a superior pattern for auditing compared to other architectures. Just like accounting transactions events are never deleted nor modified. \gls{gl:es} provides a complete and immutable record of all actions taken within a system, allowing for thorough and accurate auditing. Unlike traditional architectures that rely on snapshots of data at a specific point in time, \gls{gl:es} captures every individual event and action, providing a more comprehensive and transparent record. This allows for more effective detection and investigation of potential issues or irregularities, ensuring the integrity and reliability of the auditing process. Additionally, the use of \gls{gl:es} allows for greater flexibility and scalability in auditing, as it allows for easy replay and reconstruction of past states. Alternative histories can also be explored by injecting hypothetical events when reconstructing the state.
+\gls{gl:es} is a superior pattern for auditing compared to other architectures. Just like accounting transactions, events are never deleted nor modified. \gls{gl:es} provides a complete and immutable record of all actions taken within a system, allowing for thorough and accurate auditing. Unlike traditional architectures that rely on snapshots of data at a specific point in time, \gls{gl:es} captures every individual event and action, providing a more comprehensive and transparent record. This allows for more effective detection and investigation of potential issues or irregularities, ensuring the integrity and reliability of the auditing process. Additionally, the use of \gls{gl:es} allows for greater flexibility and scalability in auditing, as it allows for easy replay and reconstruction of past states. Alternative histories can also be explored by injecting hypothetical events when reconstructing the state.
 
 % The event log provides a strong audit capabilities. Just like accounting transactions events are never deleted nor modified. Alternative histories can be explored by injecting hypothetical events when reconstructing stats e.g. for auditing purposes.
 
@@ -92,7 +92,7 @@ A stream have a unique identifier present in all corresponding events. Detecting
 
 Projections provide a view of the underlying stream as a form of a transient state. They represent the logic of translating the source events into a representation of the object state.
 
-In many applications it is more common to request recent application states, if so a faster alternative is to store the current application projections and upsert on new changes.
+In many applications it is more common to request recent application states, if so, a faster alternative is to store the current application projections and upsert on new changes.
 
 \subsection{Snapshots}\label{subsec:snap}
 
@@ -138,7 +138,7 @@ Using \gls{gl:es} as a design pattern within a wider architecture allows for the
 
 \header{\glsfirst{ac:ddd}}
 
-Using \gls{ac:ddd} with \gls{gl:es} is not mandatory. However, in \gls{gl:es} events are modeled as first-class objects and closely resemble real world business processes. The better business processes are understood, the more precise the business information will be in the events and thus the audit log. Concepts like speaking the same language as the business and using events as a design tool when modelling a system are advocate by \gls{ac:ddd}~\citep{evans2004domain} as well, which makes \gls{gl:es} a natural fit for \gls{ac:ddd}.
+Using \gls{ac:ddd} with \gls{gl:es} is not mandatory. However, in \gls{gl:es} events are modeled as first-class objects and closely resemble real world business processes. The better business processes are understood, the more precise the business information will be in the events and thus the Audit Log. Concepts like speaking the same language as the business and using events as a design tool when modelling a system are advocated by \gls{ac:ddd}~\citep{evans2004domain} as well, which makes \gls{gl:es} a natural fit for \gls{ac:ddd}.
 
 \header{\glsfirst{ac:cqrs}}
 
@@ -156,7 +156,7 @@ The loosely coupled nature of \gls{ac:cqrs} combined with the benefits of the \g
 
 The justification for \gls{ac:cqrs} is that in complex domains, a single model to handle both reads and writes gets too complicated, and can be simplified by separating the models. This is particularly appealing when difference in access patterns is observed, such as lots of reads and very few writes. However the gain for using \gls{ac:cqrs} has to be balanced against the additional complexity of having separate models~\citep{esvsed}.
 
-While using \gls{ac:cqrs} is also not mandatory the strong relation and added benefits do justify the cost. Aggregating the \gls{gl:est} to satisfy the \gls{gl:ac} use-cases is an example, where \gls{ac:cqrs} shines. More on that in chapter \ref{chap:ac}
+While using \gls{ac:cqrs} is also not mandatory the strong relation and added benefits do justify the cost. Aggregating the \gls{gl:est} to satisfy the \gls{gl:ac} use-cases is an example, where \gls{ac:cqrs} shines. More on this in chapter \ref{chap:ac}
 
 % \subsection{Command Query Responsibility Segregation}
 
@@ -173,7 +173,7 @@ While using \gls{ac:cqrs} is also not mandatory the strong relation and added be
 
 \section{Challenges}
 
-\gls{gl:es} does have its problems. Replaying events becomes problematic when results depend on interactions with outside systems. Dealing with changes in the schema of events over time is not an easy task. Event processing adds complexity to the system (mostly when improperly done)~\citep{esvsed}
+\gls{gl:es} does have its problems. Replaying events becomes problematic when results depend on interactions with outside systems. Dealing with changes in the schema of events over time is not an easy task and event processing adds complexity to the system (mostly when improperly done)~\citep{esvsed}.
 
 \subsection{Event Storage}
 
@@ -200,8 +200,7 @@ Other approaches like log pruning are discussed by \citep{10.1145/3210284.321976
 
 % Table 6.1 shows the different types of changes that can occur at each level.~\citep{richardson2018microservices}
 
-With \gls{gl:es}, the schema of events (and snapshots) will evolve over time. Because events are stored forever, aggregates potentially need to fold events corresponding to multiple schema versions. There is a real risk that aggregates may become
-bloated with code to deal with all the different versions~\citep{richardson2018microservices}. 
+With \gls{gl:es}, the schema of events (and snapshots) will evolve over time. Because events are stored forever, business objects potentially need to fold events corresponding to multiple schema versions. There is a real risk that the objects may become bloated with code to deal with all the different versions~\citep{richardson2018microservices}. 
 
 Upgrading events to the latest version when they are loaded from the \gls{gl:est} insures, that the system only ever deals with the current event schema. A component commonly called an \sh{upcaster} as described by~\citep{richardson2018microservices} updates individual events from an old version to a newer one.
 
@@ -213,7 +212,7 @@ Upgrading events to the latest version when they are loaded from the \gls{gl:est
 
 \subsection{Deleting Data is Tricky}
 
-One of the key characteristics of \gls{gl:es} is the immutable event log. The traditional way to delete data is to do a soft delete~\citep{richardson2018microservices}. The system deletes an aggregate by setting a deleted flag. The aggregate will typically emit a deleted event, which notifies any interested consumers. Any code that accesses that aggregate can check the flag and act accordingly.
+One of the key characteristics of \gls{gl:es} is the immutable event log. The traditional way to delete data is to do a soft delete~\citep{richardson2018microservices}. The system deletes an object by setting a deleted flag. The object will typically emit a deleted event, which notifies any interested consumers. Any code that accesses that object can check the flag and act accordingly.
 
 However complying with \gls{ac:gdpr} grants individuals the right to erasure~\citep{Art17GDP3}. An application must have the ability to forget a user’s personal information. One way of doing so is to ensure, that user data are encapsulated in an independent data object, that can either be encrypted by per user encryption key, which is discarded on request or iteratively overwritten, which is against the immutability aspect of the event.
 
@@ -236,11 +235,15 @@ Which highlight the benefits of implementing a pattern like ~\gls{ac:cqrs}, but 
 
 \subsection{Eventual Consistency}
 
-Eventual consistency forces developers to let go of guarantees that they would have in a system using current state and synchronous processing. In a \gls{ac:cqrs} system, an update sent through a command will not immediately be reflected in the result of a query. The system first needs to process the event into one or more projections~\citep{OVEREEM2021110970}, which leads to difficulties such as returning items to a client that in fact are already deleted. The reader systems are liable to be out of sync with the master (and each other) due to differences in timing with event propagation.
+Eventual consistency forces developers to let go of guarantees that they would have in a system using current state and synchronous processing. In a \gls{ac:cqrs} system, an update sent through a command will not immediately be reflected in the result of a query. 
+
+The system first needs to process the event into one or more projections~\citep{OVEREEM2021110970}, which leads to difficulties such as returning items to a client that in fact are already deleted. The reader systems are liable to be out of sync with the master (and each other) due to differences in timing with event propagation.
 
 Getting people to understand eventual consistency is not easy. Eventual consistency forces developers to rethink the basic interactions of the user with the system. 
 
-However, eventual consistency is a weaker form of consistency. The system guarantees that the query-side eventually will reflect the events produced in the command-side. However, there are no guarantees on how fast this will happen. A system with a large delay is unfeasible, because in that case queries will often return data that does not reflect the latest changes
+However, eventual consistency is a weaker form of consistency. The system guarantees that the query-side eventually will reflect the events produced in the command-side. However, there are no guarantees on how fast this will happen. 
+
+A system with a large delay is unfeasible, because in that case queries will often return data that does not reflect the latest changes
 
 % Engineer E12 states that “a lot of developers had to get used to information not being in place”, and E2 adds that “getting people to understand eventual consistency is the biggest hurdle”. Eventual consistency forces developers to rethink the basic interactions of the user with the system.
 % Such an architecture isn't flawless, of course. The reader systems are liable to be out of sync with the master (and each other) due to differences in timing with event propagation. However this broad style of architecture is used and I've heard almost entirely favorable comment about it.
@@ -258,7 +261,7 @@ However, eventual consistency is a weaker form of consistency. The system guaran
 
 \gls{gl:es} introduces a lot of challenges and complexity. As with any other pattern \gls{gl:es} is not always the solution. However a study conducted on 25 engineers with different roles and experiences reveled, that all systems under study benefit from \gls{gl:es}. Flexibility, debug-ability, reliability and auditability are common rational given for using \gls{gl:es}~\citep{OVEREEM2021110970}.
 
-It is obvious, that the most repeated and almost always mentioned benefit of \gls{gl:es} is the events serialization into an audit log, that satisfies all characteristics as defined in chapter \ref{chap:adt}. Beside all other benefits, this makes \gls{gl:es} an optimized pattern to implement \gls{gl:adt2} as discussed in the next chapter section \ref{sec:saadt2}
+It is obvious, that the most repeated and almost always mentioned benefit of \gls{gl:es} is the events serialization into an Audit Log, that satisfies all characteristics as defined in chapter \ref{chap:adt}. Beside all other benefits, this makes \gls{gl:es} an optimized pattern to utilise when implementing \gls{gl:adt2} as discussed in section \ref{sec:adt2}
 
 \gls{gl:es} also comes with debug-ability and customer support advantages. As put by~\citep{fowleres}:
 
@@ -275,7 +278,7 @@ Furthermore, \gls{gl:es} allows developers and auditors to consider multiple tim
 
 Having the entire history of the state comes with the advantage of preserving the context, which allows for evidence based explanations of when and why something happened. Events can also be analysed for patterns in usage. Such information is impossible to extract from a store that only persists the latest state of the data.
 
-As long as the stores criteria are meet a diverse range of databases can be used, such as relational, graph, or NoSql databases. The main goal of this store is to support the easy and fast retrieval of data, in whatever form the system requires.
+As long as the stores criteria are meet a diverse range of databases can be used, such as relational, graph, or NoSql databases. The main goal of this store is to support the easy and fast retrieval of the data, in whatever form the system requires.
 
 % Easy temporal queries - Because \gls{gl:es} maintains the complete history of each business object, implementing temporal queries and reconstructing the historical state of an entity is straightforward. % https://eventuate.io/whyeventsourcing.html
 
