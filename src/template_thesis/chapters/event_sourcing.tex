@@ -1,4 +1,4 @@
-% @author Thomas Lehmann
+% @author Hani Alshikh
 %
 \chapter{Event Sourcing}\label{chap:es}
 
@@ -9,51 +9,6 @@ Traditionally applications use the current state to answer various queries, howe
 \gls{gl:es} ensures that all changes to application state are stored as a sequence of events. Writing an event to the log is one single, therefore atomic, operation. These events can be aggregated in multiple ways not only can they be quired, reconstructing past states is also possible. \gls{gl:es} can be thought of as the version-control way of working with system's state. Each change is committed and can be traced back and/or revisited.
 
 \gls{gl:es} is a superior pattern for auditing compared to other architectures. Just like accounting transactions, events are never deleted nor modified. \gls{gl:es} provides a complete and immutable record of all actions taken within a system, allowing for thorough and accurate auditing. Unlike traditional architectures that rely on snapshots of data at a specific point in time, \gls{gl:es} captures every individual event and action, providing a more comprehensive and transparent record. This allows for more effective detection and investigation of potential issues or irregularities, ensuring the integrity and reliability of the auditing process. Additionally, the use of \gls{gl:es} allows for greater flexibility and scalability in auditing, as it allows for easy replay and reconstruction of past states. Alternative histories can also be explored by injecting hypothetical events when reconstructing the state.
-
-% The event log provides a strong audit capabilities. Just like accounting transactions events are never deleted nor modified. Alternative histories can be explored by injecting hypothetical events when reconstructing stats e.g. for auditing purposes.
-
-% \gls{gl:es} make it plausible to have non-durable working copies, such as a Memory Image~\citep{esvsed}..
-
-% The core idea of \gls{gl:es} is that whenever we make a change to the state of a system, we record that state change as an event, and we can confidently rebuild the system state by reprocessing the events at any time in the future. The event store becomes the principal source of truth, and the system state is purely derived from it. For programmers, the best example of this is a version-control system. The log of all the commits is the event store and the working copy of the source tree is the system state.
-
-% \gls{gl:es} is a design approach where distributed applications keep their state as a sequence of state-changing operations. Instead of storing mutable objects, applications keep an immutable sequence of changes to such objects. Changing state and writing an event to the log is one single, therefore atomic, operation. The log becomes the authoritative source of truth, offering eventual consistency, as events propagate to different parts of the distributed application. This design entails a strongly decoupled architecture, typical of publish–subscribe systems (Clayman et al., 2010), while providing reliable auditing and logging functionality. For example, developers may bring the application back to a previous execution state, by replaying the events in the log. This feature is particularly powerful, not only for the sake of failure recovery and state management (most services can be stateless), but also for debugging and to experiment alternative what-if scenarios. Furthermore, it makes the system’s data schema more flexible, as it becomes possible to recover field values or even calculate additional ones from the log.
-
-% \gls{gl:es} is a software architecture pattern that is gaining popularity as an alternative to traditional database systems. It is based on the idea of storing every change made to a system's data as a sequence of immutable events, rather than storing the current state of the data. This approach has several benefits, including providing a complete history of changes.
-
-% One of the key advantages of \gls{gl:es} is that it allows for a more thorough and detailed audit trail than traditional database systems. Because every change to the data is stored as an individual event, it is possible to track the exact sequence of events that led to a given state of the data. This can provide a level of detail and transparency that is not possible with traditional systems, that only store the current state of the data.
-
-% Event driven, CQRS and Evnet Sourcing are complementary patterns so it makes sense to consider them both as a set and individually. This article is the latter - a focus on \gls{gl:es}.
-
-
-% The foundational idea of \gls{gl:es} is the domain event as described by Evans (2015). His seminal book on Domain-Driven Design (DDD), however, does not mention the pattern. Vernon (2013) describes \gls{gl:es} only briefly in his book on the implementation of various DDD patterns. Young (2017), as one of the original proposers of \gls{gl:es}, discusses the challenge of versioning ESSs. \gls{gl:es} is also discussed in the context of CQRS (Young, 2010), a pattern strongly related to \gls{gl:es}. Recent academic literature (Erb, 2019, Zhong et al., 2019) shows an interest in applying \gls{gl:es} for research projects.
-
-
-% Our study regards a new research area, therefore, we apply Grounded Theory (GT). Adolph et al. (2011) describe GT as a useful approach for research in areas that have not previously been studied. A GT explains how people resolve their main concern by employing a certain process. That process is called the ‘core category’ of the GT. The core category of the work presented in this article is the process of designing and implementing event sourced systems, as performed by software engineers. The theoretical definition of \gls{gl:es} helps both researchers and practitioners to understand, reason about, and teach the pattern and its consequences. Section 2 explains how we applied GT to form a basis for conceptualization of ESSs from 25 interviews, and how the three essential elements are covered. From the gathered data we distill the pattern description and its consequences. This work has the following contributions:
-
-
-% Together with this description we identify four categories of rationale for the application of \gls{gl:es}, such as a decrease of complexity. In this “In Practice” submission, we also identify five engineering challenges around the pattern, with schema evolution being one of the most complex challenges. With the pattern description and its liabilities presented in this article, we enable engineers to make a considered choice. \citep{OVEREEM2021110970}
-
-% \gls{gl:es} is an approach to store data in an application and was originally established by
-% Fowler (2005a). This differs from the traditional approach of storing data which, is to store the
-% current state of an application in a database. Fowler (2002) describes this approach as active
-% records. With the traditional approach, the data is accessed or modified by four operations,
-% Create, Read, Update and Delete, these operations are generally referred to as CRUD operations
-% (Betts et al. 2013). The idea behind \gls{gl:es} is to treat each change to the state as an
-% event where each event is part of a sequence of events in the order they occurred. The sequence
-% of events can be used to recreate the application state at any point in time (Fowler 2005a).
-% Figure 1 illustrates how the state of two shapes can be represented with active records and with
-% \gls{gl:es}. In Figure 1a the current X and Y values, together with the type of shape, are
-% stored in a specific row associated with the shape identification number. In Figure 1b the same
-% shapes are stored as a series of events. Each row consists of the type of event and the parameters
-% for the event, together with an aggregate number which describes to which shape the event is
-% associated. The series of events can be used to rebuild the current state which would result in
-% the same state as in Figure 1a. One difference between the two approaches is that in Figure 1b it
-% is possible to see that shape number 1 has moved from the original position which is information
-% is lost when using active records.
-
-% As with any other design pattern \gls{gl:es} is not always the answer. 
-
-% \gls{gl:es} desrive its owen seprate the following is just a scratch in the the surfce deeper analisis and experments are required but for a the context of this work the following should suffice.
 
 \section{Terminology}\label{sec:term}
 
@@ -68,8 +23,6 @@ While \gls{gl:es} and Event-Driven might sound similar they differ in multiple a
 
 An event is a class with a name formed using a past-participle verb. It has properties that meaningfully convey the event. Each property is either a primitive value or a value object~\citep{richardson2018microservices}. Events typically also have metadata, such as the event ID and a timestamp. The metadata can be part of the event object or, alternatively, in a separate envelope object. It might also have the identity of the entity who made the change. Such details will come in handy when utilising process mining as described in section~\ref{sec:psmin}. Examples of such events are showcased later in chapter \ref{chap:ac}.
 
-% \gls{gl:es} also raises some possibilities for your overall architecture, particularly if you are looking for something that is very scalable. There is a fair amount of interest in 'event-driven architecture' these days. This term covers a fair range of ideas, but most of centers around systems communicating through event messages. Such systems can operate in a very loosely coupled parallel style which provides excellent horizontal scalability and resilience to systems failure.
-
 \subsection{Event Store}\label{subsec:est}
 
 The event store is the database storing the events. The event store is the principal source of truth, and the system state is purely derived from it~\citep{esvsed}. Thus the database musst satisfy the following criteria:
@@ -79,8 +32,6 @@ The event store is the database storing the events. The event store is the princ
   \item New events are appended to the previous event.
   \item Events are stored in chronological order.
 \end{itemize}
-
-% Fowler [8] explains \gls{gl:es} by comparing it to an audit trail: every data change is stored without removing or changing earlier events. The events stored in an event store are stored as schema-less data, because the different events often do not share properties. A store with an explicit schema would make it more difficult to append events in the store to a single stream.
 
 \subsection{Streams}
 
@@ -102,19 +53,9 @@ A common mistake is the assumption, that accessing the \gls{gl:est} is required 
 
 Snapshots can also be used to mark a state just like a tag in version-control systems. Depending on the use-case, this becomes helpful if the event log became too large in size.
 
-% The simplest way to think of using \gls{gl:es} is to calculate a requested application state by starting from a blank application state and then applying the events to reach the desired state. It's equally simple to see why this is a slow process, particularly if there are many events.
-
-% Application states can be stored either in memory or on disk. Since an application state is purely derivable from the event log, you can cache it anywhere you like. A system in use during a working day could be started at the beginning of the day from an overnight snapshot and hold the current application state in memory. Should it crash it replays the events from the overnight store. At the end of the working day a new snapshot can be made of the state. New snapshots can be made at any time in parallel without bringing down the running application.
-
-% The official system of record can either be the event logs or the current application state. If the current application state is held in a database, then the event logs may only be there for audit and special processing. Alternatively the event logs can be the official record and databases can be built from them whenever needed.
-
-% Another problem in the evolution of event sourced systems is the amount of data that is stored, not only the current state, but also every change leading up to that state. This huge amount of data makes the problem of performing a seamless upgrade even more important: upgrades may need more time, but they are required to be imperceptible.
-
 \section{The Core Pattern}\label{sec:escp}
 
 The fundamental idea of \gls{gl:es} is that of ensuring every change to the state of a system is captured in an event object, and that these event objects are themselves stored in the sequence they were applied for the same lifetime as the system state itself.
-
-% The key to \gls{gl:es} is guaranteeing that all changes to the domain objects are initiated by the event objects. 
 
 This leads to a number of facilities that can be built on top of the event log~\citep{fowleres}:
 
@@ -129,10 +70,6 @@ A common example of an application that uses \gls{gl:es} is version control. Suc
 The main introduction to the inner workings of \gls{gl:es} by \citep{fowleres} gives a clear impression on the general implementation of the different building blocks of the pattern. More details and advanced concepts are covered by~\citep{richardson2018microservices}.
 
 \pagebreak
-
-% An example of this would be a system with lots of readers and a few writers. Using \gls{gl:es} this could be delivered as a cluster of systems with in-memory databases, kept up to date with each other through a stream of events. If updates are needed, they can be routed to a single master system (or a tighter cluster of servers around a single database or message queue) which applies the updates to the system of record and then broadcasts the resulting events to the wider cluster of readers. Even when the system of record is the application state in a database this could be a very appealing structure. If the system of record is the event log, there is are plenty of options for very high performance since the event log is a purely additive structure that requires minimal locking.
-
-% Using event streams like this also allows new applications to be added easily by tapping into the event streams and populating their own models, which don't need to be the same for all systems. It's an approach that fits in very well with a messaging approach to integration.
 
 \section{Event-Sourced Architecture}\label{sec:esa}
 
@@ -160,19 +97,6 @@ The justification for \gls{ac:cqrs} is that in complex domains, a single model t
 
 While using \gls{ac:cqrs} is also not mandatory the strong relation and added benefits do justify the cost. Aggregating the \gls{gl:est} to satisfy the \gls{gl:ac} use-cases is an example, where \gls{ac:cqrs} shines. More on this in chapter \ref{chap:ac}
 
-% \subsection{Command Query Responsibility Segregation}
-
-% Command Query Responsibility Segregation (CQRS) is the notion of having separate data structures for reading and writing information. Strictly CQRS isn't really about events, since you can use CQRS without any events present in your design. But commonly people do combine CQRS with the earlier patterns here, hence their presence at the summit.
-
-
-% One of the architectural patterns that in recent years emerged in the development of cloud systems is Command Query Responsibility Segregation (CQRS). The pattern was introduced by Young [5] and Dahan [6], and the goal of the pattern is to handle actions that change data (those are called commands) in different parts in the system than requests that ask for data (called queries). By separating the command-side (the part that validates and accepts changes) from the query-side (the part that answers queries), the system can optimize the two parts for their very different tasks.
-
-% Young [7] describes CQRS as a stepping stone for \gls{gl:es}. \gls{gl:es} is a data storage model that does not store the current (or last) state, but all changes leading up to the current state. 
-
-% The foundations of CQRS were laid by Meyer [11] in the Command-Query Separation (CQS) principle. He defined a command as “serving to modify objects” and a query is “to return information about objects”, or informally worded “asking a question should not change the answer”. Figure 1 shows the CQRS pattern: commands are accepted by the command-side and produce events which are processed by the query-side. The query-side projects these events into a form that is suitable for querying and presenting. The command-side and the query-side both have their own data store: the first store is used to maintain data that is used in validating requested changes, and the second store is used to retrieve data for displaying or reporting.
-
-% figure to showcase CQRS
-
 \section{Challenges}
 
 \gls{gl:es} does have its problems. Replaying events becomes problematic when results depend on interactions with outside systems. Dealing with changes in the schema of events over time is not an easy task and event processing adds complexity to the system (mostly when improperly done)~\citep{esvsed}.
@@ -183,34 +107,11 @@ While using \gls{ac:cqrs} is also not mandatory the strong relation and added be
 
 Other approaches like log pruning are discussed by \citep{10.1145/3210284.3219767} including an assessment of the impact of such mechanisms on state reconstructibility.
 
-% Unbounded command and \gls{gl:es} approaches enable
-% a full reconstruction of previous states, but come with high costs
-% in terms of storage. In practice, pure command sourcing is often
-% not feasible due to complex re-computations. Bounded approaches
-% restrict the log sizes, but enable reconstructions primarily for more
-% recent states. Additional periodic checkpoints can help to maintain
-% some older states as reference. The probabilistic approach provides
-% a configurable bias to determine what to prune. Eventually, the
-% choice of a log pruning approach has to reflect the application-level
-% requirements — which entity states should be kept, how far the
-% application needs to go back in time, and in which resolution.
-% Application-based and user-defined pruning mechanisms as well
-% as a detailed analysis of pruning parameters constitute future work.
-% (https://dl.acm.org/doi/pdf/10.1145/3210284.3219767)
-
 \subsection{Event Schema Evolution}
-
-% Table 6.1 shows the different types of changes that can occur at each level.~\citep{richardson2018microservices}
 
 With \gls{gl:es}, the schema of events (and snapshots) will evolve over time. Because events are stored forever, business objects potentially need to fold events corresponding to multiple schema versions. There is a real risk that the objects may become bloated with code to deal with all the different versions~\citep{richardson2018microservices}. 
 
 Upgrading events to the latest version when they are loaded from the \gls{gl:est} insures, that the system only ever deals with the current event schema. A component commonly called an \sh{upcaster} as described by~\citep{richardson2018microservices} updates individual events from an old version to a newer one.
-
-% \gls{gl:es} is a pattern that stores every state change, immutability is thus at the core of the pattern. Helland (2015) states that immutability of data is a crucial aspect for distributed systems. Although often seen as the defining characteristic of \gls{gl:es}, immutability is not enforced in any manner, as opposed to a blockchain. In a number of the systems under study, immutability is sacrificed for a simpler schema evolution technique (see Section 7). We observed different degrees of immutability. The first degree is strict, 8 out of the 19 ESSs never change an event. The second degree of immutability is used by 3 out of 19 systems, which allow for cut-off moments. In such a cut-off moment, the event store is changed, but back-ups guarantee that no information is deleted. The goal of these back-ups is to satisfy regulations or service-level agreements, therefore, they are kept around forever. This degree of immutability still guarantees an audit trail, because the back-ups can be used to retrieve all the state changes. The last degree level of immutability is mutable, 8 out of 19 systems allow events to change. In these systems, the event store is changed on some occasions, and the back-ups are not kept forever. These systems do not satisfy the goal of a complete audit trail. However, the events can still be used to explain how the current state was reached. None of the ESSs lose information regarding the current state of a system. Events that are changed, or transformed, are in most cases changed because of technical reasons.
-
-% Fowler [8] explains \gls{gl:es} by comparing it to an audit trail: every data change is stored without removing or changing earlier events. The events stored in an event store are stored as schema-less data, because the different events often do not share properties. A store with an explicit schema would make it more difficult to append events in the store to a single stream.
-
-% Data in schema-less stores is not without schema, but the schema is implicit: the application assumes a certain schema. This makes the problem of schema evolution and data conversion more difficult as observed by Scherzinger et al. [9]. Schema-less data is more difficult to evolve as the store is unaware of structure and thus cannot offer tools to transform the data into a new structure. Relational data stores that have explicit knowledge of the structure of the data can use the standardized data definition language (DDL) to upgrade the schema and convert the data. 
 
 \subsection{Deleting Data is Tricky}
 
@@ -219,11 +120,6 @@ One of the key characteristics of \gls{gl:es} is the immutable event log. The tr
 However complying with \gls{ac:gdpr} grants individuals the right to erasure~\citep{Art17GDP3}. An application must have the ability to forget a user’s personal information. One way of doing so is to ensure, that user data are encapsulated in an independent data object, that can either be encrypted by per user encryption key, which is discarded on request or iteratively overwritten, which is against the immutability aspect of the event.
 
 Some form of anonymization and removal of information are two techniques mentioned by the engineers of the study conducted by \citep{OVEREEM2021110970}. The system separates the events and the personal information in two different stores. When events are read, they are supplemented with the personal information. If that information is no longer present (because of removal requests), default values are supplied.
-
-% such as their email address. The issue with an \gls{gl:es}-based
-% application is that the email address might either be stored in an AccountCreated event or used as the primary key of an aggregate. The application somehow must forget about the user without deleting the events. Encryption is one mechanism you can use to solve this problem. Each user has an encryption key, which is stored in a separate database table. The application uses that
-% encryption key to encrypt any events containing the user’s personal information before storing them in an event store. When a user requests to be erased, the application deletes the encryption key record from the database table. The user’s personal information is effectively deleted, because the events can no longer be decrypted. Encrypting events solves most problems with erasing a user’s personal information. But if some aspect of a user’s personal information, such as email address, is used as an aggregate ID, throwing away the encryption key may not be sufficient. For example, section 6.2 describes an event store that has an entities table whose primary key is the aggregate ID. One solution to this problem is to use the technique of pseudonymization, replacing the email address with a UUID token and using that as the aggregate ID. The application stores the association between the UUID token and the
-% email address in a database table. When a user requests to be erased, the application deletes the row for their email address from that table. This prevents the application from mapping the UUID back to the email address. ~\citep{richardson2018microservices}
 
 \subsection{Querying the \gls{gl:est} is Challenging.}
 
@@ -249,18 +145,6 @@ A system with a large delay is unfeasible, because in that case queries will oft
 
 \pagebreak
 
-% Engineer E12 states that “a lot of developers had to get used to information not being in place”, and E2 adds that “getting people to understand eventual consistency is the biggest hurdle”. Eventual consistency forces developers to rethink the basic interactions of the user with the system.
-% Such an architecture isn't flawless, of course. The reader systems are liable to be out of sync with the master (and each other) due to differences in timing with event propagation. However this broad style of architecture is used and I've heard almost entirely favorable comment about it.
-
-% The command-side communicates with the query-side through asynchronously sending events. These events are used by the query-side to build a view of the state that can be used to query and present data. By doing this asynchronously the query-side does not influence the performance of the command-side. However, this does lead to eventual consistency. This is a weaker form of consistency that Vogels [12] defines as “when no updates are made to the object, the object will eventually have the last updated value”. The system guarantees that the query-side eventually will reflect the events produced in the command-side. However, there are no guarantees on how fast this will be done. A system with a large delay is unfeasible, because in that case queries will often return data that does not reflect the latest changes send to the command-side. There are difficulties introduced by eventual consistency, such as returning items to a client that in fact are already deleted through commands send to the command-side. The patterns to overcome this difficulty and others are out of scope for the current paper.
-
-% We give two examples of interactions that force developers to rethink system design. The first example is that of the expectation of users to retrieve data that they previously submitted into the system. However, in a CQRS system, the query system might not directly return the data that was submitted through a command. The user interface of the system should make it clear to the user what is going on, or even try to hide the fact that the system is eventual consistent. The second example is that of developers that more or less have the same expectation. Often developers try to use the result of the query to make decisions in an aggregate. However, the query system might not have processed all events and misses recent updates. If developers overlook this principle, the decisions lead to bugs in the system.
-
-% \subsection{Transactions}
-
-% https://www.youtube.com/watch?v=RGqr1cXjS5o
-
-
 \section{Benefits}
 
 \gls{gl:es} introduces a lot of challenges and complexity. As with any other pattern \gls{gl:es} is not always the solution. However a study conducted on 25 engineers with different roles and experiences reveled, that all systems under study benefit from \gls{gl:es}. Flexibility, debug-ability, reliability and auditability are common rational given for using \gls{gl:es}~\citep{OVEREEM2021110970}.
@@ -276,25 +160,11 @@ It is obvious, that the most repeated and almost always mentioned benefit of \gl
 Providing such capability means exposing the audit trail to the support group so they can walk through a user's interaction. \citep{fowleres} acknowledge, that using \gls{gl:es} is not a requirement for such capabilities. Regular logging mechanisms are more than capable of achieving such results. However this assumes a logging infrastructure and utilisation that is capable of providing such information at ease, which is not always the case. More on this in chapter \ref{chap:sadt}
 
 Furthermore, \gls{gl:es} allows developers and auditors to consider multiple time-lines (analogous to branching in version control systems) and recreate historic states or explore alternative histories by injecting hypothetical events when replaying. This means that even if the current tarnsaite state of the data has been corrupted or lost, it is still possible to recreate it from the event log. In contrast, traditional systems rely on the current state of the data. If this state is lost or corrupted, there is no way to recover the data's history without extensive backups.
-% \gls{gl:es} make it plausible to have non-durable working copies, such as a Memory Image.
-
-% Secondly, \gls{gl:es} allows for the reconstruction of past states of the application. In traditional architectures, once a change has been made to the application's state, it is often impossible to reconstruct the state of the application before the change was made without extensive backups. This means that if there is a need to investigate past behavior or to undo a change, it can be difficult or impossible to do so. In contrast, \gls{gl:es} allows for the replay of events and the reconstruction of past states, making it much easier to investigate and undo changes.
 
 Having the entire history of the state comes with the advantage of preserving the context, which allows for evidence based explanations of when and why something happened. Events can also be analysed for patterns in usage. Such information is impossible to extract from a store that only persists the latest state of the data.
 
 As long as the stores criteria are meet a diverse range of databases can be used, such as relational, graph, or NoSql databases. The main goal of this store is to support the easy and fast retrieval of the data, in whatever form the system requires.
 
-% Easy temporal queries - Because \gls{gl:es} maintains the complete history of each business object, implementing temporal queries and reconstructing the historical state of an entity is straightforward. % https://eventuate.io/whyeventsourcing.html
-
-% when using the \gls{gl:es} Architecture showcased in section \ref{sec:esa}
-
-% The asynchronous sending of events between the command-side and query-side results in a weak coupling. The resulting freedom and flexibility in designing the system leads to availability, scalability, and performance among other advantages. The store used in the command-side is often an event store, because it is natural to store the events that are produced by the command-side. This proposed data storage model has a number of benefits that make it specifically useful as a store for the command-side of a CQRS system. First of all, the command-side is only used for accepting changes and never for queries, and the performance of the store is not thus not hampered by concurring reads and writes. Second, the store contains every change ever accepted into the system, making it easy to inspect when and by whom a change was done. A third benefit is the possibility to rebuild the current state (for instance the query-store) in the system by replaying the events. The replaying of events also enables easy debugging. 
-% The fourth benefit is the possibility to analyze the events for patterns in usage. This information is impossible to extract from a store that only persists the last state of the data. In the query-side a diverse range of stores can be used, such as relational, graph, or NoSql databases. The main goal of this store is to support the easy and fast retrieval of data, in whatever form the application requires.
-
-% Furthermore, \gls{gl:es} provides a more reliable and consistent way to audit data, as it allows for the reconstruction of the data's history from the event log. This means that even if the current tarnsaite state of the data has been corrupted or lost, it is still possible to recreate it from the event log. In contrast, traditional systems rely on the current state of the data, which means that if this state is lost or corrupted, there is no way to recover the data's history.
-
 Another advantage of \gls{gl:es} is that it allows for easy implementation of fine-grained access controls. Because each event is stored as an individual record, it is possible to apply different access controls to different events, allowing for more precise control over who can access the data. This is in contrast to traditional systems, which typically apply access controls at the level of the entire database or table.
-
-% \gls{gl:es} is a pattern for storing data as events in an append-only log. This simple definition misses the fact that by storing the events, you also keep the context of the events; you know an invoice was sent and for what reason from the same piece of information. In other storage patterns, the business operation context is usually lost, or sometimes stored elsewhere. % https://www.eventstore.com/event-sourcing#:~:text=What%20is%20Event%20Sourcing%3F,the%20same%20piece%20of%20information.
 
 \gls{gl:es} can be a key element of a system, and that system can be as simple or as complex as the business domain requires it to be. It is useful to consider putting an event-sourced system in a part of the architecture that requires the preservation of context for all events, as this is where \gls{gl:es} is most effective. 

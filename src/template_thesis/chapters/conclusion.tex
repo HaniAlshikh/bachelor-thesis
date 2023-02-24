@@ -2,84 +2,16 @@
 %
 \chapter{Conclusion}
 
-% to determine whether they are adequate, efficient,
-% and effective in meeting the organization’s objectives.
-
-% dentify any
-% weaknesses or deficiencies in an organization’s IT systems
-% recommend improvements
-% that can help the organization achieve its goals.
-
-% From the perspective of planning and performing IT audits, 
-
-% xamined, tested,
-% analyzed, or otherwise evaluated
-
-% Administrative controls specify what an organization intends to do to safeguard the
-% integrity of its operations, information, and other assets
-
-% the confidentiality, integrity, availability and authenticity of the data t
-
-% also allow organisations to identify patterns and trends that poses potential risks ....
-
-% The systematic, reliable, and trustworthy recording of events,
-% by ensuring that history cannot be rewritten
-% or obscured
-
-% indirect requirment by bafin
-
 IT-Auditing is a part of every regulated organisation lifecycle. Not only dose it insure the organisation compliance with regulators requirements it gives the organisation credibility and trustworthiness.  However awaiting periodic audits and hopping for the best outcome is not advisable nor reflect the real world. Auditors have an important role in ensuring confidentiality, integrity and authenticity of various systems.
 
 Supporting Auditors is their mission not only shows teamwork, it is almost always mandatory. Building a complaint system requires a well thought out architecture, that is adequate, efficient, and effective in meeting the organization’s objectives. Architecting and developing such system, especially the critical ones, requires a good understanding of the requirements. Especially, the non-functional ones, that might not be of a problem at the beginning.
 
 Auditability tend to be one of them. A great care should be takin when handling such decisions. Choosing the right architecture might make or break the system. As discussed in chapter \ref{chap:sadt} auditing might be build as a feature, which delegates the complexity on the developer and comes with its owen risk, or built in by design.
 
-% The systematic, reliable, and trustworthy recording of events,
-% by ensuring that history cannot be rewritten
-% or obscured
-
-% No complex association nor care was given to the business logic.
-
 \gls{gl:es} and the event-sourced architecture discussed in chapter \ref{chap:es} and showcased in chapter \ref{chap:ac} and \ref{chap:ab} tend to be on top of the list, when talking about audit first systems. Chapter \ref{chap:ac} shows, how effective it could be to have an Audit Log by design. Systematic, reliable, and trustworthy recording of events is insured. No complex association nor care was given to the business logic. Events can be easily retrieved from the \gls{gl:est} and manipulated as desired. The \gls{gl:ac} can be taken as is and integrated into another \gls{gl:es} system. The only thing to adapt are the domain specific formatters. satisfying all Audit Log specification as described in chapter \ref{chap:adt} make it also possible for all kind of integrations like the case with \gls{gl:adt2} discussed in section \ref{sec:adt2}. 
-% Use-cases like \Paste{UC02} required nothing more than a store request and the user id. Maintaining all relevant metadata and assosiations between the busnise object and the diffrent events was handled already by \gls{gl:es}.
 
 However one of the stakeholders request was answering questions like who attempted accessing restricted information or tried deleting business objects, without having any business doing so. Such questions were intentionale skipped, as this is a known limitation of \gls{gl:es} and mainly as it contradict with the definition of Audit Log [\ref{sec:adtlog}]. And even if required, this limitation must be handled with or without \gls{gl:es} as descried in section \ref{sec:saes}.
 
-% yet as defined in section \ref{sec:adtlog} The purpose of audit logging is to record each state change
-
-% ensure compliance, and detect suspicious behaviors.
-
-% \Gls{ac:m8} uses the event-sourced architecture [\ref{sec:esa}] to offer a resilient and auditable cloud system. Utilising \gls{ac:cqrs} and separating the QueryHandler from the CommandHandler comes in handy when implementing the \gls{gl:ac}. It ensures a higher level of separation of concerns and encapsulate the \gls{gl:ac} in a separate micro-service.
-
 If done correctly (which is the hard part) the implementation of other options compared to \gls{gl:es} shouldn't differ much. Collecting log entries is the same wether they are coming from an \gls{gl:est} or an Audit Log database. It all comes down to the system requirements. Is auditing an added feature? and human errors and bugs are not much of a harm and other architectures are of a greater benefit, then there is no extra advantage to use \gls{gl:es} when it comes to audit logging. However having a log of all changes by design and the assurance that the history audited is the actual system history and represent the actual business objects with ability to restore it and tested on a real system without needing to replay commands or script any behavior gives \gls{gl:es} the bigger advantage. 
 
-% Especially when that moment comes, as put by one of the engeeners of the study:
-
-% In this case the \gls{gl:ab} was implemented as a part of \gls{gl:monogui} and used for \gls{ac:m8} only. As discussed in chapter ~\ref{chap:adt} section \ref{sec:adt2} Having a central and unified home for log monitoring and further processing especially on an organisation level further improve and complies with \gls{gl:adt2} vision. querring raw events from \gls{ac:m8} or any event-sourced system is and should be possible. Depending on the use-case further processing upon ingestion might be needed to allow for some unification .....
-
-% FINAL
-
-% Business Provenance
-
-% added as an afterthought, resulting in an
-% inherent risk of incompleteness
-
 It goes without saying, that the mentioned is valid for all options and ways of implementing an audit first system. The only thing that differ is the complexity delegation. Either at the beginning, as is the case with \gls{gl:es}, or throughout the entire lifecycle of the system. Other features like \gls{gl:es}'s complete rebuild, temporal query and event replay are much harder to implement if not planned correctly.
-
-% As one might expect utilising the event-sourced architecture [\ref{sec:esa}] made for an easy and straightforward implementation of different auditing use-cases. 
-
-
-% As demoinstroited by the \gls{gl:ab} implementation utlilising the resulting \gls{ac:api}
-
-
-
-
-% Process mining poses a lot of possibilities and combained with \gls{gl:es} allow for very advanced log analisys and bhaviour control .........
-
-% In summary, event sourcing offers several advantages over traditional database systems when it comes to auditing. It provides a more detailed and transparent audit trail, allows for the reconstruction of the data's history from the event log, and allows for the implementation of fine-grained access controls. These advantages make event sourcing a valuable tool for organizations that need to ensure the integrity and transparency of their data.
-
-% In conclusion, event sourcing offers several advantages in terms of auditing and accountability compared to other architectures. Its detailed and comprehensive audit trail, ability to reconstruct past states, and robust and flexible approach make it a powerful tool for ensuring transparency and accountability in applications.
-
-% the studie contudcted by ..... on 25 engineers of different backgrounds and roles by applying appling Grounded Theory (GT). Adolph et al. (2011) which showcase how event sourcing is ganging on popularity especially when it comes to satisfying auditory needs. As put by one of the engineers when asked about event sourcing ""
-
-% The reasons for applying event sourcing can be grouped into four categories. Remarkably, all systems under study benefit from event sourcing, and no system returned to a current state model. Still, most engineers state that they would not apply event sourcing in every system. The reason given for this opinion is the added complexity of introducing event sourcing. Engineer E2 would apply event sourcing by default, because of the benefits it gives.~\citep{OVEREEM2021110970}

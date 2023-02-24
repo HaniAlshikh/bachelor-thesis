@@ -22,13 +22,10 @@ Monoskope (short m8 spelled "mate") implements the management and operation of a
 
 \Gls{ac:m8} was designed with auditing in mind. It uses the event-sourced architecture [\ref{sec:esa}] with a purpose built implementation of the \gls{gl:est} as well as the \gls{ac:cqrs} pattern.
 
-% \includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.005}]}{diagrams/monoskope-architecture.drawio}{Monoskope Architecture ~\citep{monoskope}}
 \includenamedimage[1]{figures/monoskope-architecture}{Monoskope Architecture ~\citep{monoskope}}
 Since \gls{ac:m8} is meant to be used as the single source of truth authority for authenticating and authorizing users into different clusters on different cloud providers ensuring auditability and complying with different regulators requirements was not an option.
 
 While the base system was implemented and the main features were complete \gls{ac:m8} still lacked a proper implementation to utilise the gained event log and offer an auditing \gls{ac:api}, that answers Auditors questions.
-
-% m8 was designed and developed to run mainly in a fintech enviorment where ensuring auditibalty is mandetory and detrmining roles permissions and actions of any user at any point of time is Complaint audits are 
 
 \Gls{ac:m8} has no classic \acrshort{ac:crud} database with tables for storing state, however, the transient state built based on that has. The following is the data model for the projected transient state:
 
@@ -68,8 +65,6 @@ From the requirements overview the following use-cases were derived:
     \hline
   \end{tabularx}
 }{\gls{gl:ac} Derived Use-Cases}
-
-% \subsection{Stakeholders}
 
 \subsection{Architectural Constraints}
 
@@ -200,12 +195,3 @@ From the requirements overview the following use-cases were derived:
 \subsubsection{UC01-04: Audit-Log *}
 
 \includenamedsvg{\includesvg[width=\textwidth,pretex=\relsize{-10}]}{diagrams/audit_component/audit_component_uc01-04_get_audit-log_sequence_diagram.drawio}{\gls{gl:ac} \hyperref[tab:abuc]{UC01-04} sequence diagram}
-
-% \section{Technical Decisions}
-
-% \subsection{TD01: Limit get user actions query to max 1 year}
-
-% a general restructure for the event structure will happen sooner or later (which should allow for a much better implementation)
-% for now, limiting the query to a max 1 year should be enough as a preventive measure until the restructuring to filter on the store level is implemented
-% All queries are bound to a time-out which will stop the query if it takes too long In case there are too many events within the limiting period.
-
