@@ -162,13 +162,13 @@ IT audits and the approaches used to conduct them may consider internal controls
 % how well processes are fully defined, documented, implemented, and optimized
 % for use in an organization.
 
-\section{Audit log}\label{sec:adtlog}
+\section{Audit Log}\label{sec:adtlog}
 
 The purpose of audit logging is to record each state change. An audit log is typically used to help customer support, ensure compliance, and detect suspicious behaviors. Each audit log entry records at minimum the identity of the entity, the action performed, and the business object(s)~\citep{richardson2018microservices}
 
 % An audit log is the simplest, yet also one of the most effective forms of tracking temporal information. The idea is that any time something significant happens you write some record indicating what happened and when it happened.
 
-Depending on the requirements maintaining and ensuring a comprehensive and immutable audit log is mandatory and might dictates the way a system is architected and developed. An example will be showcased in chapter \ref{chap:ac}.
+Depending on the requirements maintaining and ensuring a comprehensive and immutable Audit Log is mandatory and might dictates the way a system is architected and developed. An example will be showcased in chapter \ref{chap:ac}.
 
 The Federal Financial Supervisory Authority (short BaFin in german) requires appropriate precautions to be taken within the framework of application development, so that the confidentiality, integrity, availability and authenticity of the data to be processed are transparently ensured even after each deployment of an application \citep{BaFinZAIT}. 
 
@@ -185,7 +185,7 @@ The Federal Financial Supervisory Authority (short BaFin in german) requires app
 % - Verfolgung von sicherheitsrelevanten Ereignissen
 % - Behandlung von Ausnahmen.
 
-One of the appropriate precautions suggested by \gls{gl:bafin} is Audit logs. Audit logging is not only a suggestion but also an indirect requirement:
+One of the appropriate precautions suggested by \gls{gl:bafin} is audit logs. Audit logging is not only a suggestion but also an indirect requirement:
 
 \begin{quote}
 In accordance with the target protection requirements the institution must set up processes for logging and monitoring, which make it possible to verify, that authorizations are only used as intended \citep{BaFinZAIT}.
@@ -211,11 +211,11 @@ In accordance with the target protection requirements the institution must set u
 
 % https://martinfowler.com/eaaDev/AuditLog.html
 
-An audit log can take many forms. The most common form is a file. A database table is also an option. However most problems comes mainly from the kind of logs written and the way they are processed. More on that is discussed in chapter \ref{chap:sadt}
+An Audit Log can take many forms. The most common form is a file. A database table is also an option. However most problems comes mainly from the kind of logs written and the way they are processed. More on this is discussed in chapter \ref{chap:sadt}
 
 Audit Log is easy to write but harder to read, especially as it grows large. Occasional ad-hoc reads can be done by eye and simple text processing tools. More complicated or repetitive tasks can be automated \citep{AuditLog}. Audit log entries lack the context and describe an action, that may or may not be related to other entries in a specific period of time. Keeping track of changes without proper automation becomes harder and harder to the point it becomes imposable.
 
-For some organizations logging system changes alone might not be enough. Suspicious activates might originate from read attempts Logging such activities increases the complexity of the audit log and poses the question of how to make sense of such data?
+For some organizations logging system changes alone is not enough. Suspicious activates might originate from read attempts. Logging such activities increases the complexity of the Audit Log, violates the Audit Log definition and poses the question of how to make sense of such data?
 
 % Meeting with CISO:
 % no one read logs anymore
@@ -255,14 +255,14 @@ Process mining starts with the event log: a sequentially recorded collection of 
 Auditors can use process mining techniques to evaluate all events in a business process, and do so while it is still running. With the help of \gls{ac:ai} potential compliance violation and suspicious behaviour can be be detected while in the making and prevented before even happening. Reliable information is needed to determine whether these processes are executed within certain boundaries set by managers, governments, and other stakeholders. 
 % Violations of specific rules enforced by law or company policies may indicate fraud, malpractice, risks, or inefficiencies.
 
-Process mining techniques as well as an auditing framework as suggested by \citep{5427384} are addressed and discussed in chapter \ref{chap:sadt}
+% Process mining techniques as well as an auditing framework as suggested by \citep{5427384} are addressed and discussed in chapter \ref{chap:sadt}
 
-\subsection{Challenges}
+% \subsection{Challenges}
 
-\todo{Move to Conclusion or evaluate if this is really relevent?}
+% \todo{Move to Conclusion or evaluate if this is really relevent?}
 
-The main challenge of \gls{gl:adt2} is the introduced complexity and required skill. Process mining depends on the availability of relevant data, which is Traditionally stored in \gls{ac:erp} systems. While modern pattern like \gls{gl:es} offer better integrations to couples detailed event logs with process mining mining \gls{ac:erp} systems is challenging because they are not, despite having built-in workflow engines, process-oriented. Because data related to a particular process it usually scattered over dozens of tables, extracting it for auditing is nontrivial \citep{5427384}.
+% The main challenge of \gls{gl:adt2} is the introduced complexity and required skill. Process mining depends on the availability of relevant data, which is Traditionally stored in \gls{ac:erp} systems. While modern pattern like \gls{gl:es} offer better integrations to couples detailed event logs with process mining mining \gls{ac:erp} systems is challenging because they are not, despite having built-in workflow engines, process-oriented. Because data related to a particular process it usually scattered over dozens of tables, extracting it for auditing is nontrivial \citep{5427384}.
 
-Further more adaption of \gls{gl:adt2} will lead to an increase in the so-called “auditing materiality”. Considering only a small subset of data will not be an option anymore. Optimizing and improving the current audit practices will inevitably lead to more exceptions requiring follow-ups, which increases auditing time and cost.
+% Further more adaption of \gls{gl:adt2} will lead to an increase in the so-called “auditing materiality”. Considering only a small subset of data will not be an option anymore. Optimizing and improving the current audit practices will inevitably lead to more exceptions requiring follow-ups, which increases auditing time and cost.
 
 % Auditing 2.0—a more rigorous form of auditing that couples detailed event logs with process mining techniques—will dramatically change the auditing profession. Auditors will need better analytical and IT skills, and their role will shift as they work on the fly. 

@@ -4,13 +4,13 @@
 
 Software architecture is the structure, or set of structures, which comprises software elements, the externally visible properties of those elements, and the relationships among them \citep{SAIP}. 
 
-This structure is an artifact from a software development process and is represented by a document composed by one or more models, which represent different perspectives about how the system will be structured, and information sets that facilitate the understanding of the proposed computational solution. 
+This structure is an artifact from a software development process and is represented by a document composed by one or more models, which represent different perspectives about how the system will be structured, and information sets, that facilitate the understanding of the proposed computational solution. 
 
 The software architecture is defined based on the software requirements. Among the different types of requirements, the quality requirements are the most important for the specification of an architecture since it exerts considerable influence over it structure \citep{SAIP}.
 
 Having a system that is designed and built from the ground up to offer the highest inclusion of auditing standards and capabilities starts by choosing the right architectural components. Auditing functionalities is often added as an afterthought, resulting in an inherent risk of incompleteness. 
 
-Avoiding such risk and insuring compatibility by design can be done in many different ways. Ultimately, the choice of architecture patterns for auditing will depend on the specific needs of the system and the requirements of the audit process.
+Avoiding such risk and insuring auditability by design can be done in many different ways. Ultimately, the choice of architecture patterns for auditing will depend on the specific needs of the system and the requirements of the audit process.
 
 As discussed in section \ref{sec:adtlog} audit logging is one of the simplest way to have an auditable system, that satisfies regulators specifications.
 
@@ -60,7 +60,7 @@ The main drawback of using \gls{ac:aop} is that it only has access to the method
 
 \subsection{Event Sourcing}\label{sec:saes}
 
-The third option is to implement the business logic with auditability as a first class property of the system by utilising \gls{gl:es} and its complementary patterns as discussed in chapter \ref{chap:es}. 
+The third option is to implement the business logic with auditability as a first class property by utilising \gls{gl:es} and its complementary patterns as discussed in chapter \ref{chap:es}. 
 
 \gls{gl:es} offer an Audit Log by design for all state changing operations. The main limitation when using \gls{gl:es} is the missing records for read operations.
 

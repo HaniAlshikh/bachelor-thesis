@@ -4,13 +4,13 @@
 
 When it comes to staying complaint ascertaining the validity and reliability of information in organizations and their associated processes is a very important job of the organization security officers. It is also customary to have yearly audit sessions done by external entities. However, waiting for the audit report to hit should not be an option. Especially when it comes to highly regulated industries.
 
-In chapter \ref{chap:adt} Table \ref{tab:eicctp} an example overview of the different internal auditing activities were showcased and discussed. The detective controls done by administrators like security officers rely on audit logs and the corresponding aggregation programs. Assuming a proper audit logging infrastructure there is still a dependency on the developer to properly log the relevant activities, which poses the responsibility to evaluate and reliably provide a consistent and complaint audit logs. Not only is this prone to human errors it is by design bond to to not provide the full picture and might lead to over logging. 
+In chapter \ref{chap:adt} an example overview of the different internal auditing activities were showcased and discussed. The detective controls done by administrators like security officers rely on audit logs and the corresponding aggregation programs. Assuming a proper audit logging infrastructure there is still a dependency on the developer to properly log the relevant activities, which poses the responsibility to evaluate and reliably provide a consistent and complaint audit logs. Not only is this prone to human errors it is by design bond to to not provide the full picture and might lead to over logging. 
 
-With time the audit log file just becomes larger and larger and going through the logs becomes very tedious and tend to be avoided. Even when it comes the external controls it is customary to work with pre-recorded parteitonend samples, which might give a good overview but never the full one. 
+With time the audit log file just becomes larger and larger and going through the logs becomes very tedious and tend to be avoided. Even when it comes to external controls it is customary to work with pre-recorded parteitonend samples, which might give a good overview but never the full one. 
 
-Auditing 2.0 discussed in section~\ref{sec:adt2} describe practices to mitigate the mentioned problems and provides the basis for an auditing frameworks in attempt of continues auditing approach. Using \gls{gl:es} as a reliable audit logging mechanism and the \gls{gl:ac} to implement the different process mining modules all what is left is to provide a user friendly interface to the auditors while keeping the fact in mind, that most auditors have different technical backgrounds and some have none.
+Auditing 2.0 discussed in section~\ref{sec:adt2} describe practices to mitigate the mentioned problems and provides the basis for an auditing frameworks in attempt of continues auditing approach. Using \gls{gl:es} as a reliable audit logging mechanism and the \gls{gl:ac} to implement the the underlying \gls{ac:api} all what is left is to provide a user friendly interface to the auditors while keeping the fact in mind, that most auditors have different technical backgrounds and some have none.
 
-This implementation attempts a basic \gls{ac:mvp} as a \gls{ac:poc} of the reading modules, that can be extended easily to handle actionable ones.
+% This implementation attempts a basic \gls{ac:mvp} as a \gls{ac:poc} of the reading modules, that can be extended easily to handle actionable ones.
 
 \section{Requirements}
 
@@ -24,12 +24,12 @@ The \gls{gl:ac} implemented in chapter \ref{chap:ac} is to be utilised to offer 
 
 \Gls{ac:m8} offer much more features, that can be utilised. Since \gls{ac:m8} has no official \gls{ac:gui} the base implementation for the \gls{gl:ab} should be expandable to accommodate other use-cases and implementations.
 
-Upstream \gls{ac:iam} providers like onelogin are to be supported by implementing \gls{ac:m8} authentication flow as described in section \todo{add section ref}.
+Upstream \gls{ac:iam} providers like Onelogin are to be supported.
 
 Since Auditors have different backgrounds and technical knowledge the \gls{ac:ux} should be intuitive and well thought out. The following is to be considered:
 
 \begin{itemize}
-  \item The same event view musst be ensured to ease dealing with deferent events and allow for a sense of familiarity. For example if a table is used to showcase the event, the table structure is preserved for all types.
+  \item The same event view musst be ensured to ease dealing with different events and allow for a sense of familiarity. For example if a table is used to showcase the event, the table structure is preserved for all types.
   \item lack of events is not an error and musst be clearly represented
 \end{itemize}
 
@@ -37,10 +37,34 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 \subsection{Use-Cases}
 
-\mytable{tab:abuc}{
-  \begin{tabularx}{\linewidth}{| l l X |}
-    \hline
-    \rowcolor{gray!20}
+% \mytable{tab:abuc}{
+%   \begin{tabularx}{\linewidth}{| l l X |}
+%     \hline
+%     \rowcolor{gray!20}
+%     \textbf{ID} & \textbf{Use-Case} & \textbf{Description}\\
+%     UC01 & \Copy{abuc01}{Monoskope \gls{ac:gui}} & As a user, I want to use \gls{ac:m8} features through an easy to navigate \gls{ac:gui} \\
+
+%     UC02 & \Copy{abuc02}{\gls{ac:oidc} authentication} & As a user, I want to authenticate using my \gls{ac:oidc} provider account \\
+
+%     UC03 & \Copy{abuc03}{Audit-log for date-range report} & As an auditor, I want to see all actions taken within a specific date-range \\
+
+%     UC04 & \Copy{abuc04}{Audit-log about a user report} & As an auditor, I want see all actions taken on a user \\
+
+%     UC05 & \Copy{abuc05}{Audit-log of user-actions report} & As an auditor, I want see all actions taken by a user \\
+
+%     UC06 & \Copy{abuc06}{Audit-log users overview} & As an auditor, I want a report of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters \\
+
+%     UC07 & \Copy{abuc07}{\gls{ac:csv} audit-log reports export} & As an auditor, I want to export audit-log reports in a \gls{ac:csv} formatted file \gls{ac:gui} \\
+
+%     UC08 & \Copy{abuc08}{Send audit-log reports via e-mail} & As an auditor, I want to send audit-log reports via e-mail \gls{ac:gui} \\
+%     \hline
+%   \end{tabularx}
+% }{\Gls{gl:ab} derived use-cases}
+
+\def\arraystretch{1.5}
+\begin{xltabular}[H]{\linewidth}{| l l X |}
+  \hline
+  \rowcolor{gray!20}
     \textbf{ID} & \textbf{Use-Case} & \textbf{Description}\\
     UC01 & \Copy{abuc01}{Monoskope \gls{ac:gui}} & As a user, I want to use \gls{ac:m8} features through an easy to navigate \gls{ac:gui} \\
 
@@ -54,12 +78,12 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
     UC06 & \Copy{abuc06}{Audit-log users overview} & As an auditor, I want a report of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters \\
 
-    UC07 & \Copy{abuc07}{\gls{ac:csv} audit-log reports export} & As an auditor, I want to export audit-log reports in a \gls{ac:csv} formatted file \gls{ac:gui} \\
+    UC07 & \Copy{abuc07}{\gls{ac:csv} audit-log reports export} & As an auditor, I want to export audit-log reports in a \gls{ac:csv} formatted file \\
 
-    UC08 & \Copy{abuc08}{Send audit-log reports via e-mail} & As an auditor, I want to send audit-log reports via e-mail \gls{ac:gui} \\
+    UC08 & \Copy{abuc08}{Send audit-log reports via e-mail} & As an auditor, I want to send audit-log reports via Email \\
     \hline
-  \end{tabularx}
-}{\Gls{gl:ab} derived use-cases}
+  \caption{\Gls{gl:ab} derived use-cases\label{tab:abuc}}\\
+\end{xltabular}
 
 \subsection{Architectural Constraints}
 
@@ -75,7 +99,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
       \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
       TC01 & Expandable \gls{ac:gui} & \gls{ac:gui} implementation allow for other \gls{ac:m8} features support\\
       TC02 & Unified event view & Audit-log reports have unified event views\\
-      TC03\label{tc:ab03} & Backend & Backend is written in \gls{gl:go}\\
+      TC03\label{tc:ab03} & Backend & \Gls{ac:m8} is written in \gls{gl:go}\\
       \hline
     \end{tabularx}
     \caption{\Gls{gl:ab} technical constraints}
@@ -92,8 +116,8 @@ To ease auditors workflows and external auditing needs audit reports should be e
       \hline
       \rowcolor{gray!20}
       \textbf{ID} & \textbf{Constraint} & \textbf{Description}\\
-      OC01 & Deadline & implementation musst be finalised before 28.02.2023\\
-      OC02 & \gls{gl:12faktor} & adhere to the \gls{gl:12faktor} methodology\\
+      OC01 & Deadline & Implementation musst be finalised before 24.02.2023\\
+      OC02 & \gls{gl:12faktor} & Implementation musst adhere to the \gls{gl:12faktor} methodology\\
       OC03 & Userbase & Userbase is mainly desktop users\\
       \hline
     \end{tabularx}
@@ -107,11 +131,11 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 \subsubsection{Business Context}
 
-\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_browser/audit_browser_business_context.drawio}{\Gls{gl:ab} business context diagram}
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relsize{-10}]}{diagrams/audit_browser/audit_browser_business_context.drawio}{\Gls{gl:ab} business context diagram}
 
 \subsubsection{Technical Context}
 
-\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_browser/audit_browser_technical_context.drawio}{\Gls{gl:ab} technical context diagram}
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relsize{-10}]}{diagrams/audit_browser/audit_browser_technical_context.drawio}{\Gls{gl:ab} technical context diagram}
 
 % https://youtu.be/XdG0EujccHQ?t=748
 
