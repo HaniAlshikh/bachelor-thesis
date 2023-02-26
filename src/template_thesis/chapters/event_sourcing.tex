@@ -103,7 +103,7 @@ While using \gls{ac:cqrs} is also not mandatory the strong relation and added be
 
 \subsection{Event Storage}
 
-\gls{gl:es} enables the reconstruction of arbitrary past states. However, an entirely unbounded log size can conflict with other system requirements. As discussed in section \ref{subsec:snap}, snapshots offer a mitigation when the history in not relevant anymore for further processing as for example described in section \ref{sec:psmin}.
+\gls{gl:es} enables the reconstruction of arbitrary past states. However, an entirely unbounded log size can conflict with other system requirements. As discussed in section \ref{subsec:snap}, snapshots offer a mitigation when the history is not relevant anymore for further processing as for example described in section \ref{sec:psmin}.
 
 Other approaches like log pruning are discussed by \citep{10.1145/3210284.3219767} including an assessment of the impact of such mechanisms on state reconstructibility.
 
@@ -130,6 +130,12 @@ As discussed in section \ref{sec:esa} implementing the core \gls{gl:es} pattern 
 \end{quote}
 
 Which highlight the benefits of implementing a pattern like ~\gls{ac:cqrs}, but also a big limitation of \gls{gl:es}, especially when the produced event log need to be utilized for auditing.
+
+By implementing \gls{ac:cqrs} a separate query handler service is maintained. The query side keeps its data model synchronized with the command-side data model by subscribing to the events published by the command side and thus have direct access to the current transient state to efficiently handle such queries.
+
+The following digram showcase how \gls{ac:cqrs} can be be implemented in a microservices system.
+
+\includenamedimage[1]{figures/cqrs_microservices.png}{\gls{ac:cqrs} implementation in a microservices system \citep{richards2015software}}
 
 \subsection{Eventual Consistency}
 
