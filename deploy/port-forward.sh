@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -eu
 
 echo "Forwarding m8 API at 8443..."
 $KUBECTL --kubeconfig $KUBECONFIG -n emissary port-forward svc/ei-emissary-ingress 8443:443 &

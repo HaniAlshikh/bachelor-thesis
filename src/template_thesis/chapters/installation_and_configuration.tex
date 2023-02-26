@@ -4,13 +4,13 @@
 
 Installing and configuring the \gls{gl:ac} and \gls{gl:ab} spans multiple resources and requires intricate yet clear and logical orchestration.
 
-Such processes tend to be automated in production environments to insure auditable and reversible actions through \gls{gl:vc}, speed up development, reduce human errors, and benefits from \gls{ac:ci}/\gls{ac:cd} practices.
+Such processes tend to be automated in production environments to insure auditable and reversible actions through \gls{gl:vc} systems, speed up development, reduce human errors, and benefits from \gls{ac:ci}/\gls{ac:cd} practices.
 
 Utilizing \gls{gl:docker}, \gls{ac:k8s}, \gls{gl:helm} and various backing technologies while keeping \gls{gl:12faktor}~\citep{TheTwelv47} rules in check (\hyperref[oc:ac02]{OC02}) the entire installation and configuration process also known as a deployment can be trimmed down to just a few steps.
 
 \subsection{Deployment View}
 
-The following is a general overview of the main resources and services to successfully deploy and use the \ref{chap:ac} and \ref{chap:ab} 
+The following is a general overview of the main resources and services to successfully deploy and use the \gls{gl:ac} and \gls{gl:ab} 
 
 \includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.1}]}{diagrams/deployment_view.drawio}{Deployment view diagram}
 
@@ -18,14 +18,13 @@ Running \gls{gl:monogui} and the \gls{gl:grpcweb} proxy on separate nodes is not
 
 \section{Test Run}
 
-For the local installation all resources and services will be deployed on the same node. Since \gls{ac:m8} already uses \gls{gl:emissary} it will be used as a \gls{gl:grpcweb} proxy. \Gls{gl:dex} will be used as the \gls{ac:idp}.
+For the local installation all resources and services will be deployed on the same \gls{ac:k8s} node. Since \gls{ac:m8} already uses \gls{gl:emissary} it will be used as the \gls{gl:grpcweb} proxy. \Gls{gl:dex} will be used as the \gls{ac:idp}.
 
 To deploy \gls{ac:m8} and \gls{gl:monogui} along all other resources to a local cluster and experiment with the \gls{gl:ac} and \gls{gl:ab} a script is provided, that will:
 
 \begin{enumerate}
   \item take care of the preparation work and installing the automated~(\ref{hdr:auto}) tools
   \item create local \gls{ac:k8s} cluster using \gls{gl:kind}
-  \item add \gls{ac:m8} and \gls{gl:monogui} dependencies to \gls{gl:helm}
   \item setup and deploy all needed resources
 \end{enumerate}
 
@@ -33,21 +32,23 @@ All while making sure to stay \gls{gl:idpt} and localized.
 
 \header{Prerequisite}
 
-A supported system from the following:
+- A supported system from the following:
 
 \begin{itemize}
   \item MacOS
-  \item Linux (tested on ubuntu)
-  \item Windows (WSL)
+  \item Linux (tested on Ubuntu)
+  \item Windows (WSL should work but not tested)
 \end{itemize}
 
-Standard userspace utilities like \lstinline[columns=fixed]{bash}, \lstinline[columns=fixed]{curl}, \lstinline[columns=fixed]{tar}, etc.... You can always change to alternatives by setting the corresponding environment variable. For example replacing \sh{curl} with \sh{wget} will be as follows:
+For a sandboxed run \gls{gl:vb} and Ubuntu can be used. Providers like \gls{gl:vmimg} offer a ready to boot images, that runs with zero installation and configuration efforts
+
+- Standard userspace utilities like \lstinline[columns=fixed]{bash}, \lstinline[columns=fixed]{curl}, \lstinline[columns=fixed]{tar}, etc... should be available natively but can always be changed to alternatives by setting the corresponding environment variable. For example replacing \sh{curl} with \sh{wget} will be as follows:
 
 \begin{lstlisting}[language=bash, caption={Deploy with custom command}, label={sh:dwcc}]
     $ CURL=wget make deploy
 \end{lstlisting}
 
-The following tools:
+- The following tools:
 
 \begin{table}[H]
   \begin{center}
@@ -87,21 +88,17 @@ The following will be downloaded and configured locally. If any should fail plea
   \end{center}
 \end{table}
 
-\header{Configure}
+\subsection{Configure}
 
-Depending on the version on hand open the provided CD-drive or navigate to \href{https://thesis.alshikh.de}{https://thesis.alshikh.de} and clone the repository.
+Depending on the version on hand open the provided CD-Drive or navigate to \url{https://thesis.alshikh.de} and clone the repository.
 
 As specified by \gls{gl:12faktor}~\citep{TheTwelv47} methodology (\hyperref[oc:ac02]{OC02}) all configuration are environment specifc and can be configured locally or using \gls{ac:k8s} resource definiations by setting the the corresponding enviorment variable.
 
-All variables are documented under the directory \sh{deploy/setup} and set with defaults for ease of use.
+All variables can be found under the directory \sh{deploy/setup} and set with defaults for ease of use.
 
-\header{Install}
+\subsection{Install}
 
-Open the directory \sh{deploy} and follow the following instruction. Just retry.
-
-If for some reason a command should fail the system and commands are ensured to be \gls{gl:idpt}.\todo{note style}
-
-\todo{test on windows and ubuntu}
+Open the directory \sh{deploy} and follow the following instruction\footnote{If for some reason a command should fail the system and commands are ensured to be \gls{gl:idpt}. Just retry.}.
 
 \begin{enumerate}
   \item Create a local cluster and deploy all resources:
@@ -109,16 +106,19 @@ If for some reason a command should fail the system and commands are ensured to 
   \begin{lstlisting}[language=bash, caption={Deploy all resources to a local cluster}, label={sh:dartlc}]
     
     $ make deploy
-    # you can also run the following to monitor the state of the resources
+    # you can also run the following 
+    # to monitor the state of the resources
     $ make kind-watch
   \end{lstlisting}
 
-  \item Trust \gls{ac:m8} domain certificate: \sh{tmp/domain-ca.crt}, otherwise the browser will block communication with \gls{ac:m8} \gls{ac:api}
+  \item Trust \gls{ac:m8} \acrshort{ac:ca}: \sh{tmp/ca.crt}, otherwise the browser will block communication with \gls{ac:m8} \gls{ac:api}
 
   \begin{lstlisting}[language=bash, caption={Trust \gls{ac:m8} domain certificate}, label={sh:tmdc}]
     
     # MacOS
-    $ sudo security add-trusted-cert -d -r trustRoot -k "/Library/Keychains/System.keychain" tmp/domain-ca.crt
+    $ make turst-m8-ca
+    # on ubunte please add the \gls{ac:ca} 
+    # to the browser specific store
   \end{lstlisting}
 
   \item Add the following to your hosts file:
@@ -126,7 +126,7 @@ If for some reason a command should fail the system and commands are ensured to 
   \begin{lstlisting}[language=bash, caption={Update hosts file}, label={sh:uhf}]
     
     # Linux & MacOS: /etc/hosts
-    # windows: c:\Windows\System32\Drivers\etc\hosts
+    # Windows: c:\Windows\System32\Drivers\etc\hosts
     127.0.0.1 api.monoskope.dev
     127.0.0.1 dex
   \end{lstlisting}
@@ -147,7 +147,7 @@ If for some reason a command should fail the system and commands are ensured to 
     \item \sh{password:} password
   \end{itemize}
 
-  \item Populate the \gls{gl:est} with some mock data for a better \gls{ac:ux}
+  \item Populate the \gls{gl:est} with some data for a better \gls{ac:ux}
 
   \begin{lstlisting}[language=bash, caption={Populate the \gls{gl:est} with some mock}, label={sh:pemd}]
     
