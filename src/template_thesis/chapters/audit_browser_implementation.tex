@@ -369,7 +369,7 @@ However, since \gls{ac:m8} only speaks \gls{ac:grpc} and maintaining a \gls{ac:r
 
 \section{Technical Decisions}
 
-\subsection{TD01: \glsfirst{ac:js} and \gls{gl:react}}\label{abtd:01}
+\subsection{TD01: \acrlong{ac:js} and \gls{gl:react}}\label{abtd:01}
 
 It is no secret that \gls{ac:js} is the language of the web and is almost always ranked first by multiple indexes compared to other web development programing languages.
 
@@ -383,7 +383,7 @@ On the other hand building and maintaining web applications requires a programmi
 
 Among the 3 stables mentioned above \gls{gl:react} has the higher usage across all years since 2016 \citep{TheStateOfJs} since it comes with many basic yet powerful features, that can be expanded depending on the use-case. \gls{gl:angular} on the other hand tend to be tailored towards enterprise usage and comes with greater complexity and steeper learning curve, while \gls{gl:vuejs} attempt to be the happy medium in between.
 
-\header{Conclusion}
+\textbf{Conclusion}
 
 While \gls{ac:ts} seems to be the smart choice to make, especially for production environments the added complexity requires more development time. Since \gls{gl:monogui} is meant to be a \gls{ac:poc} and is for now mainly developed as a base for the \gls{gl:ab} and due to the deadline set by \hyperref[tab:aboc]{OC01} it was decided to go with \gls{ac:js} in combination with \gls{gl:react} since they offer the perfect platform for the planned solution.
 
@@ -391,4 +391,4 @@ While \gls{ac:ts} seems to be the smart choice to make, especially for productio
 
 While \hyperref[abtd:01]{TD01} specifies usage of \gls{ac:js} and \gls{gl:react} \gls{gl:monogui} expansion and further development should be kept in mind as specified by \hyperref[tab:abtc]{TC01}. 
 
-To stay flexible and framework independent it was decided to split the business logic from the presentation logic or as is commonly known follow a headless implementation approach. The latter specifies writing business logic in vanilla \gls{ac:js} and the presentation logic in the used framework notation. This allows for easier migration to \gls{ac:ts} while also staying framework independent. 
+To stay flexible and framework independent it was decided to split the business logic from the presentation logic or as is commonly known follow a headless implementation approach. The latter specifies writing business logic in vanilla \gls{ac:js} and the presentation logic in the used framework notation. This allows for easier migration to \acrlong{ac:ts} while also staying framework independent. 
