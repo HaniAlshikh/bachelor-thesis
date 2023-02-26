@@ -153,7 +153,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
     gRPC & handles comunication with \gls{gl:grpcweb} Proxy\\
     \hline
   \end{tabularx}
-}{\Gls{gl:ab} \gls{gl:monogui} contained building blocks black box}
+}{\Gls{gl:ab} contained building blocks \gls{gl:monogui} black box}
 
 \header{Scenes}
 
@@ -166,7 +166,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
     Auth & handles rendering of the authentication components and user inputs \\
     \hline
   \end{tabularx}
-}{\Gls{gl:ab} scenes contained building blocks black box}
+}{\Gls{gl:ab} contained building blocks scenes black box}
 
 \pagebreak
 
@@ -181,7 +181,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
     Auth & handles communication between \gls{ac:m8}'s Gateway, the user and the upstream \gls{ac:idp} \\
     \hline
   \end{tabularx}
-}{\Gls{gl:ab} UseCases contained building blocks black box}
+}{\Gls{gl:ab} contained building blocks use-cases black box}
 
 \header{API}
 
@@ -194,7 +194,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
     Auth & \gls{ac:m8}'s Gateway stubs to handel \gls{ac:grpc} requests \\
     \hline
   \end{tabularx}
-}{\Gls{gl:ab} API contained building blocks black box}
+}{\Gls{gl:ab} contained building blocks \acrshort{ac:api} black box}
 
 \pagebreak
 
@@ -204,7 +204,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 \subheader{\gls{ac:grpc}}
 
-\includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_monogui_grpc_class_diagram.drawio}{\gls{gl:ab} \gls{gl:monogui} \gls{ac:grpc} class diagram}
+\includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_monogui_grpc_class_diagram.drawio}{\gls{gl:ab} \gls{gl:monogui} \acrshort{ac:grpc} class diagram}
 
 \mytable{abmgcd}{
   \begin{tabularx}{\linewidth}{|l X |}
@@ -214,7 +214,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
     GrpcConnectionFactory & creates preconfigured \gls{ac:grpc} connection based on the use case for example authenticated with timeout and retries connection \\
     \hline
   \end{tabularx}
-}{\Gls{gl:ab} \gls{gl:monogui} \gls{ac:grpc} class diagram}
+}{\Gls{gl:ab} \gls{gl:monogui} \acrshort{ac:grpc} class diagram}
 
 \pagebreak
 
@@ -332,13 +332,13 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 As of the time of writing Browsers do support \gls{ac:http}/2 but only for static files like images, javascript, css etc. XMLHttpRequest/Ajax calls are still carried over \gls{ac:http}/1.1. This is due to the fact, that browsers have no unified specification to handle \gls{ac:http}/2 trailers.
 
-\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.8}]}{diagrams/http1_vs_http2.drawio}{\gls{ac:http}/1.1 compared to \gls{ac:http}/2}
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.8}]}{diagrams/http1_vs_http2.drawio}{\acrshort{ac:http}/1.1 compared to \acrshort{ac:http}/2}
 
 \gls{ac:grpc} makes heavy use of trailers to send status messages when streaming responses~\citep{grpcspec}. Because of the browser \gls{ac:http}/2 limitations \gls{ac:js}, the programming language of the web, can not directly talk to a \gls{ac:grpc} \glspl{ac:api} as normally done with \gls{ac:rest} \glspl{ac:api}. 
 
 To mitigate this limitation a translation proxy has to be used to translate \gls{ac:grpc} to \gls{ac:rest} requests/responses~\citep{grpcBrowserState}.
 
-\includenamedimage[0.5]{figures/grpc-web-proxy}{\gls{gl:grpcweb} proxy to allow browser \gls{ac:grpc} support~\citep{grpcBrowserState}}
+\includenamedimage[0.5]{figures/grpc-web-proxy}{\gls{gl:grpcweb} proxy to allow browser \acrshort{ac:grpc} support~\citep{grpcBrowserState}}
 
 \header{Why stick to gRPC?}
 
@@ -357,7 +357,7 @@ Despite the mentioned above \gls{ac:grpc} still shines when it comes to straight
 
 The only other option is to actively provide backend \gls{ac:rest} support by Transcoding \gls{ac:http}/\gls{ac:json} to \gls{ac:grpc} and utilising a reverse proxy to to serve a \gls{gl:restfull} \gls{ac:api}~\citep{grpcgateway}
 
-\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.8}]}{figures/grpc-gateway_architecture_introduction_diagram}{\gls{ac:grpc}-Gateway architecture diagram~\citep{grpcgateway}}
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.8}]}{figures/grpc-gateway_architecture_introduction_diagram}{\acrshort{ac:grpc}-Gateway architecture diagram~\citep{grpcgateway}}
 
 While this comes with the \gls{gl:restfull} \gls{ac:api} advantages and full support of the web development community it dose not differ in it's essnase to \gls{gl:grpcweb} yet comes with the disadvantage of the server transcoding overhead.
 
@@ -391,4 +391,4 @@ While \gls{ac:ts} seems to be the smart choose to make, especially for productio
 
 While \hyperref[abtd:01]{TD01} specifies usage of \gls{ac:js} and \gls{gl:react} \gls{gl:monogui} expansion and further development should be kept in mind as specified by \hyperref[tab:abtc]{TC01}. 
 
-To stay flexible and framework independent it was decided to split the business logic from the presentation logic or as is commonly known follow a headless implementation approach. The latter specifies writing business logic in vanilla \gls{ac:js} and the presentation logic in the used framework notation. This allows for easier migration to \gls{gl:ts} while also staying framework independent. 
+To stay flexible and framework independent it was decided to split the business logic from the presentation logic or as is commonly known follow a headless implementation approach. The latter specifies writing business logic in vanilla \gls{ac:js} and the presentation logic in the used framework notation. This allows for easier migration to \gls{ac:ts} while also staying framework independent. 

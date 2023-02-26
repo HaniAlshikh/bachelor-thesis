@@ -113,11 +113,11 @@ Open the directory \sh{deploy} and follow the following instruction\footnote{If 
 
   \item Trust \gls{ac:m8} \acrshort{ac:ca}: \sh{tmp/ca.crt}, otherwise the browser will block communication with \gls{ac:m8} \gls{ac:api}
 
-  \begin{lstlisting}[language=bash, caption={Trust \gls{ac:m8} domain certificate}, label={sh:tmdc}]
+  \begin{lstlisting}[language=bash, caption={Trust \gls{ac:m8} certificate authority}, label={sh:tmdc}]
     
     # MacOS
     $ make turst-m8-ca
-    # on ubunte please add the \gls{ac:ca} 
+    # on Ubunte please add the \gls{ac:ca} 
     # to the browser specific store
   \end{lstlisting}
 
@@ -149,7 +149,7 @@ Open the directory \sh{deploy} and follow the following instruction\footnote{If 
 
   \item Populate the \gls{gl:est} with some data for a better \gls{ac:ux}
 
-  \begin{lstlisting}[language=bash, caption={Populate the \gls{gl:est} with some mock}, label={sh:pemd}]
+  \begin{lstlisting}[language=bash, caption={Populate the \gls{gl:est} with some data}, label={sh:pemd}]
     
     $ make mock-data
   \end{lstlisting}

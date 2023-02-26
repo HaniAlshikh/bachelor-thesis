@@ -6,103 +6,102 @@
 % Warning: Lable must only be used once
 
 % Glossary entries
-\newglossaryentry{gl:haw}{
-  name={HAW Hamburg},
-  description={Die HAW Hamburg ist die vormalige Fachhochschule am Berliner Tor}
-  }
+% \newglossaryentry{gl:haw}{
+%   name={HAW Hamburg},
+%   description={Die HAW Hamburg ist die vormalige Fachhochschule am Berliner Tor}
+%   }
 
 \newglossaryentry{gl:adt2}{
   name={Auditing 2.0},
-  description={\todo{TODO}}
+  description={also knowen as continuous auditing, describes the usage of advanced process mining techniques to enable a new form of auditing. More under section~\ref{sec:adt2}}
   }
   
 
 \newglossaryentry{gl:go}{
   name={GO},
-  description={\todo{TODO}}
+  description={is a statically typed, compiled high-level programming language designed at Google. It is syntactically similar to C, but with memory safety, garbage collection, structural typing, and CSP-style concurrency.}
   }
 
-\newglossaryentry{gl:ef}{
-  name={EventFormatter},
-  description={An event formatter is responsible for creating a human-readable representation of a given event},
-  plural={EventFormatters}
-  }
+% \newglossaryentry{gl:ef}{
+%   name={EventFormatter},
+%   description={An event formatter is responsible for creating a human-readable representation of a given event},
+%   plural={EventFormatters}
+%   }
 
-\newglossaryentry{gl:ei}{
-  name={emissary ingress},
-  description={\todo{TODO}},
-  }
+% \newglossaryentry{gl:ei}{
+%   name={Emissary-Ingress},
+%   description={is an open-source Kubernetes-native API Gateway + Layer 7 load balancer + Kubernetes Ingress built on Envoy Proxy.},
+%   }
 
-\newglossaryentry{gl:envoy}{
-  name={envoy},
-  description={\todo{TODO}},
-  }
+% \newglossaryentry{gl:envoy}{
+%   name={envoy},
+%   description={\todo{TODO}},
+%   }
 
 \newglossaryentry{gl:es}{
   name={Event-Sourcing},
-  description={\todo{TODO}... more under chapter~\ref{chap:es}},
+  description={is a pattern for storing data as events in an append-only log... more under chapter~\ref{chap:es}},
   }
 
 
 \newglossaryentry{gl:est}{
   name={Event Store},
-  description={\todo{TODO}... more under chapter~\ref{subsec:est}},
+  description={is the database behind \gls{gl:es} to store the state events... more under section~\ref{subsec:est}},
   }
 
 \newglossaryentry{gl:ac}{
   name={Audit Component},
-  description={\todo{TODO}... more under chapter~\ref{chap:ac}},
+  description={is the technical implementation of an audit log \gls{ac:api} for \gls{gl:es} in \gls{ac:m8}... more under chapter~\ref{chap:ac}},
   }
 
 \newglossaryentry{gl:ab}{
   name={Audit Browser},
-  description={\todo{TODO}... more under chapter~\ref{chap:ab}},
+  description={is a \gls{ac:poc} implementation to utilise the audit \gls{ac:api} provided by the \gls{gl:ac}... more under chapter~\ref{chap:ab}},
   }
 
 \newglossaryentry{gl:docker}{
   name={Docker},
-  description={\todo{TODO}},
+  description={is a platform designed to help developers build, share, and run modern applications.},
   }
 
 \newglossaryentry{gl:make}{
   name={Make},
-  description={\todo{TODO}},
+  description={is a tool which controls the generation of executables and other non-source files of a program from the program's source files.},
   }
-
 
 \newglossaryentry{gl:helm}{
   name={Helm},
-  description={\todo{TODO}},
+  description={helps you manage Kubernetes applications — Helm Charts help you define, install, and upgrade even the most complex Kubernetes application.},
   }
 
 \newglossaryentry{gl:kubectl}{
   name={Kubectl},
-  description={\todo{TODO}},
+  description={The Kubernetes command-line tool, kubectl, allows you to run commands against Kubernetes clusters},
   }
 
 \newglossaryentry{gl:kind}{
   name={Kind},
-  description={\todo{TODO}},
+  description={is a tool for running local Kubernetes clusters using Docker container “nodes”.},
   }
 
 \newglossaryentry{gl:step}{
   name={Step-cli},
-  description={\todo{TODO}},
+  description={ is an easy-to-use CLI tool for building, operating, and automating Public Key Infrastructure (PKI) systems and workflows.},
   }
 
 \newglossaryentry{gl:idpt}{
   name={idempotent},
-  description={Idempotency is a property of a system or operation where the result of performing that operation multiple times is the same as performing it once. In other words, if an idempotent operation is performed multiple times, the end result is the same as performing it only once.},
+  description={idempotency is a property of a system or operation where the result of performing that operation multiple times is the same as performing it once. In other words, if an idempotent operation is performed multiple times, the end result is the same as performing it only once.},
   }
 
 \newglossaryentry{gl:vc}{
   name={Version Control},
-  description={\todo{TODO}},
+  description={also known as source control, is the practice of tracking and managing changes to software code},
   }
 
 \newglossaryentry{gl:grpcweb}{
   name={gRPC-Web},
-  description={\todo{TODO}},
+  description={A JavaScript implementation of gRPC for browser clients.},
   }
 
 \newglossaryentry{gl:monogui}{
@@ -112,47 +111,47 @@
 
 \newglossaryentry{gl:12faktor}{
   name={The Twelve-Faktor App},
-  description={\todo{TODO}}
+  description={is a methodology for building software-as-a-service applications. These best practices are designed to enable applications to be built with portability and resilience when deployed to the web.}
   }
 
 \newglossaryentry{gl:emissary}{
   name={Emissary-Ingress},
-  description={\todo{TODO}}
+  description={is an open-source Kubernetes-native API Gateway + Layer 7 load balancer + Kubernetes Ingress built on Envoy Proxy.},
   }
 
 \newglossaryentry{gl:dex}{
   name={Dex},
-  description={\todo{TODO}}
+  description={is an identity service that uses OpenID Connect to drive authentication for other apps.}
   }
 
 \newglossaryentry{gl:hpack}{
   name={HPACK},
-  description={\todo{TODO}}
+  description={a compression format for efficiently representing HTTP header fields, to be used in HTTP/2}
   }
 
 \newglossaryentry{gl:restfull}{
-  name={\gls{ac:rest}full},
-  description={\todo{TODO}}
+  name={\gls{ac:rest}ful},
+  description={the REST architectural style defines six guiding constraints. When these constraints are applied to the system architecture, it gains desirable non-functional properties, such as performance, scalability, simplicity, modifiability, visibility, portability, and reliability. A system that complies with some or all of these constraints is loosely referred to as RESTful}
   }
 
 \newglossaryentry{gl:react}{
   name={React},
-  description={\todo{TODO}}
+  description={is a free and open-source front-end JavaScript library for building user interfaces based on components.}
   }
 
 \newglossaryentry{gl:angular}{
   name={Angular},
-  description={\todo{TODO}}
+  description={is a TypeScript-based, free and open-source web application framework}
   }
 
 \newglossaryentry{gl:vuejs}{
   name={Vue.js},
-  description={\todo{TODO}}
+  description={is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications.}
   }
 
 \newglossaryentry{gl:vb}{
   name={VirtualBox},
-  description={\todo{TODO}}
+  description={ox is a powerful x86 and AMD64/Intel64 virtualization product for enterprise as well as home use.}
   }
 
 \newglossaryentry{gl:vmimg}{
@@ -166,38 +165,20 @@
   }
 
 % Hybrid
-\newglsacronym{ci}{CI}{Continuous Integration}{\todo{TODO}}
-\newglsacronym{cd}{CD}{Continuous Delivery}{\todo{TODO}}
 \newglsacronym{k8s}{k8s}{Kubernetes}{
-  \begin{quote}
-  also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
-  \end{quote}\citep{Kubernetes}
-  }
-\newglsacronym{crd}{CRD}{Custom Resource Definition}{\todo{TODO}}
-\newglsacronym{pki}{PKI}{Public Key Infrastructure}{\todo{TODO}}
+  also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.}
 \newglsacronym{m8}{m8}{Monoskope}{(short m8 spelled "mate") implements the management and operation of tenants, users and their roles in a Kubernetes multi-cloud multi-cluster environment.}
-\newglsacronym{oidc}{OIDC}{Open-ID Connect}{\todo{TODO}}
-\newglsacronym{js}{JS}{Javascript}{\todo{TODO}}
-\newglsacronym{ts}{TS}{Typescript}{\todo{TODO}}
-\newglsacronym{ddd}{DDD}{Domain-Driven Design}{\todo{TODO}}
-\newglsacronym{cqrs}{CQRS}{Command Query Responsibility Segregation}{\todo{TODO}}
-
-\newglossaryentry{gl:test}{
-    name={Test},
-    description={Test description}
-  }
-  
-%%% define the acronym and use the see= option
-\newglossaryentry{ac:test}{
-  type=\acronymtype, 
-  name={tst}, 
-  description={Test, \emph{Glossary:} \gls{gl:test}},
-  first={Test (tst)\glsadd{gl:test}}, 
-  }
+\newglsacronym{oidc}{OIDC}{Open-ID Connect}{is a simple identity layer on top of the OAuth 2.0 protocol. It allows Clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner.}
+\newglsacronym{ddd}{DDD}{Domain-Driven Design}{is an approach to software development that centers the development on programming a domain model that has a rich understanding of the processes and rules of a domain.}
+\newglsacronym{cqrs}{CQRS}{Command Query Responsibility Segregation}{a pattern that separates read and update operations for a data store.}
 
 % Acronyms
 \newacronym{ac:haw}{HAW}{Hochschule für Angewandte Wissenschaften}
 \newacronym{ac:iso}{ISO}{International Organization for Standardization}
+\newacronym{ac:ci}{CI}{Continuous Integration}
+\newacronym{ac:cd}{CD}{Continuous Delivery}
+\newacronym{ac:crd}{CRD}{Custom Resource Definition}
+\newacronym{ac:pki}{PKI}{Public Key Infrastructure}
 \newacronym{ac:it}{IT}{Information-Technologie}
 \newacronym{ac:poc}{POC}{Proof Of Concept}
 \newacronym{ac:poc1}{POC}{Proof Of Concept}
@@ -222,10 +203,12 @@
 \newacronym{ac:aop}{AOP}{Aspect-Oriented Programming}
 \newacronym{ac:crud}{CRUD}{Create, Read, Update and Delete}
 \newacronym{ac:ca}{CA}{Certificate Authority}
+\newacronym{ac:js}{JS}{Javascript}
+\newacronym{ac:ts}{TS}{Typescript}
 
 % Symbols
-\newglossaryentry{sy:ohm}{
-  type=symbols,
-  name={\ensuremath{\Omega}},
-  sort=Ohm, symbol={\ensuremath{\Omega}},
-  description={unit of electrical resistance}}
+% \newglossaryentry{sy:ohm}{
+%   type=symbols,
+%   name={\ensuremath{\Omega}},
+%   sort=Ohm, symbol={\ensuremath{\Omega}},
+%   description={unit of electrical resistance}}

@@ -22,7 +22,7 @@ Monoskope (short m8 spelled "mate") implements the management and operation of a
 
 \Gls{ac:m8} was designed with auditing in mind. It uses the event-sourced architecture [\ref{sec:esa}] with a purpose built implementation of the \gls{gl:est} as well as the \gls{ac:cqrs} pattern.
 
-\includenamedimage[1]{figures/monoskope-architecture}{Monoskope Architecture ~\citep{monoskope}}
+\includenamedimage[1]{figures/monoskope-architecture}{Monoskope architecture ~\citep{monoskope}}
 Since \gls{ac:m8} is meant to be used as the single source of truth authority for authenticating and authorizing users into different clusters on different cloud providers ensuring auditability and complying with different regulators requirements was not an option.
 
 While the base system was implemented and the main features were complete \gls{ac:m8} still lacked a proper implementation to utilise the gained event log and offer an auditing \gls{ac:api}, that answers Auditors questions.
@@ -64,7 +64,7 @@ From the requirements overview the following use-cases were derived:
     UC04 & Audit-Log users overview & As an Auditor, I want to get an overview of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters\\
     \hline
   \end{tabularx}
-}{\gls{gl:ac} Derived Use-Cases}
+}{\gls{gl:ac} derived use-cases}
 
 \subsection{Architectural Constraints}
 
@@ -80,7 +80,7 @@ From the requirements overview the following use-cases were derived:
     TC03 & Middleware & \Gls{ac:m8} uses \gls{ac:grpc}. No reason to use or support any other framework \\
     \hline
   \end{tabularx}
-}{\gls{gl:ac} Technical Constraints}
+}{\gls{gl:ac} technical constraints}
 
 \subsubsection{Organisational Constraints}
 
@@ -93,7 +93,7 @@ From the requirements overview the following use-cases were derived:
     OC02~\label{oc:ac02} & \gls{gl:12faktor} & Implementation musst adhere to the \gls{gl:12faktor} methodology\\
     \hline
   \end{tabularx}
-}{\gls{gl:ac} Organisational Constraints}
+}{\gls{gl:ac} organisational constraints}
 
 \section{System Design}
 
@@ -101,11 +101,11 @@ From the requirements overview the following use-cases were derived:
 
 \subsubsection{Business Context}
 
-\includenamedsvg{\includesvg}{diagrams/audit_component/audit_component_business_context.drawio}{\gls{gl:ac} Business Context Diagram}
+\includenamedsvg{\includesvg}{diagrams/audit_component/audit_component_business_context.drawio}{\gls{gl:ac} business context diagram}
 
 \subsubsection{Technical Context}
 
-\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_component/audit_component_technical_context.drawio}{ \gls{gl:ac} Technical Context Diagram}
+\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_component/audit_component_technical_context.drawio}{ \gls{gl:ac} technical context diagram}
 
 \subsection{Solution Strategy}
 
@@ -132,7 +132,7 @@ From the requirements overview the following use-cases were derived:
   get\-Users\-Overview(get\-Users\-Overview\-Request) & UC04 & Streams formatted events at the specified timestamp of users, tenants/clusters they belong to, and their roles & Audit\-Log\-Server is running & Human-readable events were streamed to the client  \\
 
   \hline
-  \caption{\gls{gl:ac} Solution Strategy\label{tab:acst}}\\
+  \caption{\gls{gl:ac} solution strategy\label{tab:acst}}\\
 \end{xltabular}
 
 \subsection{Building Block View}
