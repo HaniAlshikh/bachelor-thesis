@@ -7,7 +7,7 @@ vaultOperator:
   enabled: false
 
 hosting:
-  issuer: selfsigned
+  issuer: m8-ca
   domain: monoskope.dev
 
 pki:
