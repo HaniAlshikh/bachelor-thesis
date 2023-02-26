@@ -25,7 +25,7 @@ Since Auditors have different backgrounds and technical knowledge the \gls{ac:ux
   \item lack of events is not an error and musst be clearly represented
 \end{itemize}
 
-To ease auditors workflows and external auditing needs audit reports should be exportable and sendable via e-mail in a spread-sheet compatible format like \gls{ac:csv}. Automating these reports should be possible as well. \todo{see if this will be possible timewise}
+To ease auditors workflows and external auditing needs audit reports should be exportable in a spread-sheet compatible format like \gls{ac:csv}.
 
 \pagebreak
 
@@ -50,7 +50,6 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
     UC07 & \Copy{abuc07}{\gls{ac:csv} audit-log reports export} & As an auditor, I want to export audit-log reports in a \gls{ac:csv} formatted file \\
 
-    UC08 & \Copy{abuc08}{Send audit-log reports via e-mail} & As an auditor, I want to send audit-log reports via Email \\
     \hline
   \caption{\Gls{gl:ab} derived use-cases\label{tab:abuc}}\\
 \end{xltabular}
@@ -113,7 +112,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
   \begin{center}
     \label{tab:abss}
     \def\arraystretch{1.5}
-    \begin{tabularx}{\linewidth}{| X m{1cm} X X X |}
+    \begin{tabularx}{\linewidth}{| X l X X X |}
       \hline
       \rowcolor{gray!20}
       \textbf{Function} & \textbf{UCID} & \textbf{Semantics} & \textbf{Precondition} & \textbf{Postcondition}\\
@@ -124,7 +123,9 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
       requestAuth(\-authCode) & UC02 & request authenticaton token from \gls{ac:m8} & user signed in using his \gls{ac:idp} account & user can access protected routes \\
 
-      getAuditLog(\-from, to, kargs) & UC03 UC04 UC05 UC06 & get audit log depending on the usecase as described in \ref{tab:abuc} & user provided date range and other inputs based on the usecase & user can browse the requested log entries \\
+      getAuditLog(\-from, to, kargs) & UC03-06 & get audit log depending on the usecase as described in \ref{tab:abuc} & user provided date range and other inputs based on the usecase & user can browse the requested log entries \\
+
+      exportCSV(table) & UC07 & export a table as \gls{ac:csv} file & user requested audit log & \gls{ac:csv} formatted file of the table is downloaded \\
 
       \hline
     \end{tabularx}
@@ -177,7 +178,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
     \rowcolor{gray!20}
     \textbf{Component} & \textbf{Description}\\
     Audit & handles communication with \gls{ac:m8}'s \gls{gl:ac} and data preparation \\
-    Auth & handles communication between \gls{ac:m8}'s Gateway, the user, the upstream \gls{ac:idp} \\
+    Auth & handles communication between \gls{ac:m8}'s Gateway, the user and the upstream \gls{ac:idp} \\
     \hline
   \end{tabularx}
 }{\Gls{gl:ab} UseCases contained building blocks black box}
@@ -232,7 +233,11 @@ To ease auditors workflows and external auditing needs audit reports should be e
     Header & composition component for content header presentation and interaction \\
     Topbar & composition component for topbar presentation and interaction \\
     AuditDatePicker & composition component for date range presentation and interaction \\
-    Audit & composed component for get by date range use case UC03~\ref{tab:abuc} presentation and interaction \\
+    AuditLog & composed component for all audit log usecases presentation and interaction \\
+    AuditLogByDateRange & composition component for get by date-range use-case presentation and interaction \\
+    AuditLogByUser & composition component for get by user use-case presentation and interaction \\
+    AuditLogUserActions & composition component for get user actions use-case presentation and interaction \\
+    AuditLogUsersOverview & composition component for get users overview use-case presentation and interaction \\
     \hline
   \end{tabularx}
 }{\Gls{gl:ab} scenes audit class diagram}
@@ -263,15 +268,22 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 \subheader{Audit}
 
-\includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_usecases_audit_class_diagram.drawio}{\gls{gl:ab} usecases audit class diagram}
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.2}]}{diagrams/audit_browser/audit_browser_usecases_audit_class_diagram.drawio}{\gls{gl:ab} usecases audit class diagram}
 
 \mytable{abucacd}{
   \begin{tabularx}{\linewidth}{|l X |}
     \hline
     \rowcolor{gray!20}
     \textbf{Object} & \textbf{Description}\\
-    UseCase & use case base for \gls{ac:api} aggregation and data preparation for presentation components \\
-    GetAuditLogUseCase & request audit log events from the \gls{ac:api} and prepare them for presentation components \\
+    UseCase & Use-case base for \gls{ac:api} aggregation and data preparation for presentation components \\
+
+    GetAuditLogUseCase & Request audit log events from the \gls{ac:api} and prepare them for presentation components \\
+
+    GetAuditLogByUserUseCase & Request audit log events about a user from the \gls{ac:api} and prepare them for presentation components \\
+
+    GetAuditLogUserActionsUseCase & Request audit log events of a user's actions from the \gls{ac:api} and prepare them for presentation components \\
+
+    GetAuditLogUsersOverviewUseCase & Request audit log overview events of all users from the \gls{ac:api} and prepare them for presentation components \\
     \hline
   \end{tabularx}
 }{\Gls{gl:ab} usecases audit class diagram}
@@ -306,9 +318,9 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 \includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.6}]}{diagrams/audit_browser/audit_browser_uc02_auth_state_machine.drawio}{\gls{gl:ab} \hyperref[tab:abuc]{UC02} auth state machine}
 
-\subsubsection{\hyperref[tab:abuc]{UC03}: \Paste{abuc03}}
+\subsubsection{\hyperref[tab:abuc]{UC03-06}: Audit Log Use-Cases}
 
-\includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_uc03_sequence_diagram.drawio}{\gls{gl:ab} \hyperref[tab:abuc]{UC03} sequence diagram}
+\includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_uc03-06_sequence_diagram.drawio}{\gls{gl:ab} \hyperref[tab:abuc]{UC03-06} sequence diagram}
 
 \pagebreak
 

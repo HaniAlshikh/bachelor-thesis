@@ -1,0 +1,90 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="484px" height="477px" viewBox="-0.5 -0.5 484 477" content="&lt;mxfile&gt;&lt;diagram name=&quot;Page-1&quot; id=&quot;5f0bae14-7c28-e335-631c-24af17079c00&quot;&gt;7VnbbuM2EP0aA+lDDFEXW370Jbst4ALBbhdtH2mJlonIokpRid2v71CiLtQtWkdJC3T9YItDajScOXNmRM+s7fnymeP49CvzSTgzDf8ys3Yz03RsF76l4JoLlpYSBJz6uQhVgq/0b6KEhpKm1CeJtlAwFgoa60KPRRHxhCbDnLMXfdmRhfpTYxyQluCrh8O29Hfqi1Mudc1lJf+Z0OBUPBktVvnMAXtPAWdppJ43M61j9smnz7jQpTaanLDPXmoi62FmbTljIr86X7YklK4t3Jbf96lntrSbk0iMucFWdj/jMFV7T4jYYYHvfPj6SVkproVniA+OUkPGxYkFLMLhQyXd4JAGEcx6YALhIEhi7NEo2JOjNAm2uCGRv5ZRguEhZN4TiDKfEWmVkS0Q/PoHDFAx+FPNJIKzpzIocrq9ZeUFaWpNoBzwmbAzAYWwQKH13pgbi4UKrQKspfzCSYgFfdZhgRW6glJVqf2RUbCiVG25xtw1V+VHf4ht2fNV7ePq6hOWco8ojVUMwXP4WlsWywVJvw020m1YNWxw6srhItfftx9naD/O4H4E5gERrf1UDykWsuMRQNgwqxa5SpShuQfZLWDPtuZsvUkAl0AtcL0B6CwgQZHE1Tr1qdizoCZqYR+SNZaX6Tnc0yMJaSTxHhNOwS4J9V2oxI+VbAMcJTDIuMKrx8IQxwk9ZGrlgzjxUp4Ayr6QJKdCKWWpkKq2JcV1w/+ZcEGBudYq7QSLh5JCLieXMWlh2oYWXUcNXypCRIaSnWpkaBbCrjTRAjoQPWvZDt8QFUUsi0XvtvNcUroXI/nhjcmP0GruaC5ETsM1PSneUmW6ryjqya0b8qao1DXPR/iZBliQrArLh8pcgd9vX37pDMoeH6Ad6KgETayeqe9nNYNL4OMqIxSngUZnM3N2nZEtIdJEdNkWKIVaae0rAE0uu7cmKQALXSlydAXTMB1qRcxj55glMmAYOhHwGzhYOq4ityKGWSf0Pyjyxhx4ydQJbZoab66Gajxa6jVxuXyXIm+ZQ0UeLb+nyJuroSKPVsMb+tgqX3B5DftZJWd8bPXGkpJojDNcwdzakze/X1lvcuCBCcHOVQb9Juv3DvY1ugMIJd0+soQKyjrpdt9YkLcIrRSeoGdAr/cM5nu1DMh8vWVo15V6mCuqqwf6I1uuZpm3unqutv/QFP6zO/z3o2N+C/qhMnSErwv/5hTxc/5r+C8RNdqDto5/dxz83Sm8Z7W8x6IC4t8SssUJgO2vlCTirn0q0kvqHU1Q258J1ExRLGNgQSH7RKW9ww1QXm91973aFNUcWjjvrS87OvSt1Y1vOshtvjRZ7rhzhFs6575DgjQPeD/pKUT84L6yATVGcN/i3biv3Qb+29xnf68Hl43aj8aRXzPRbnLfbact5Qtc+TaXvcDNEfCQEuwu9endtT6qOXpnDKGwfnhTUJxGe5Mf6Ix2XPuwhKfRnScuMxNuNo4cqkB2JQ9O5K86Xc8HT7CJpPuM/WPOUOzJzlCMuaXB9x5NUlbuzcaxDLJ0Fbe8RcKw+oclX179i2U9/AM=&lt;/diagram&gt;&lt;/mxfile&gt;" style="background-color: rgb(255, 255, 255);">
+    <defs/>
+    <g>
+        <path d="M 378.83 400 L 408.87 399.96 L 408.87 419.96 L 391.95 419.99" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 384.95 420 L 391.94 416.49 L 391.95 423.49 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="11px">
+            <rect fill="rgb(255, 255, 255)" stroke="none" x="415" y="399" width="69" height="14" stroke-width="0"/>
+            <text x="448.37" y="408.7">
+                setData(data)
+            </text>
+        </g>
+        <rect x="238" y="15" width="100" height="40" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <path d="M 288 55 L 288 215" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="287.5" y="32.5">
+                «scenes»
+            </text>
+            <text x="287.5" y="46.5">
+                AuditLog
+            </text>
+        </g>
+        <path d="M 147.63 115 L 276.63 115" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 281.88 115 L 274.88 118.5 L 276.63 115 L 274.88 111.5 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="11px">
+            <rect fill="rgb(255, 255, 255)" stroke="none" x="163" y="97" width="105" height="14" stroke-width="0"/>
+            <text x="214.43" y="107.43">
+                navigate to audit URI
+            </text>
+        </g>
+        <path d="M 288.83 140 L 318.87 139.96 L 318.87 159.96 L 301.95 159.99" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 294.95 160 L 301.94 156.49 L 301.95 163.49 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="11px">
+            <rect fill="rgb(255, 255, 255)" stroke="none" x="325" y="143" width="108" height="27" stroke-width="0"/>
+            <text x="378.37" y="152.63">
+                compose and present
+            </text>
+            <text x="378.37" y="165.63">
+                audit page
+            </text>
+        </g>
+        <ellipse cx="148" cy="20" rx="5" ry="5" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <path d="M 148 25 L 148 41.67 M 148 28.33 L 138 28.33 M 148 28.33 L 158 28.33 M 148 41.67 L 138 55 M 148 41.67 L 158 55" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 148 55 L 148 215" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="147.5" y="9.5">
+                Auditor
+            </text>
+        </g>
+        <rect x="283" y="95" width="10" height="100" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <rect x="138" y="255" width="100" height="40" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <path d="M 188 295 L 188 475" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="187.5" y="272.5">
+                «scenes»
+            </text>
+            <text x="187.5" y="286.5">
+                AuditLog
+            </text>
+        </g>
+        <rect x="183" y="335" width="10" height="80" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <path d="M 11 355 L 174.88 355" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <ellipse cx="8" cy="355" rx="3" ry="3" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <path d="M 181.88 355 L 174.88 358.5 L 174.88 351.5 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="11px">
+            <rect fill="rgb(255, 255, 255)" stroke="none" x="21" y="340" width="151" height="14" stroke-width="0"/>
+            <text x="95.33" y="349.5">
+                onAuditLogUseCaseRequest()
+            </text>
+        </g>
+        <rect x="298" y="255" width="160" height="40" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <path d="M 378 295 L 378 475" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="377.5" y="272.5">
+                «useCases»
+            </text>
+            <text x="377.5" y="286.5">
+                AuditLogUseCase
+            </text>
+        </g>
+        <rect x="373" y="365" width="10" height="90" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <path d="M 193 378.05 L 366.63 378.05" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 371.88 378.05 L 364.88 381.55 L 366.63 378.05 L 364.88 374.55 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="11px">
+            <rect fill="rgb(255, 255, 255)" stroke="none" x="204" y="360" width="160" height="14" stroke-width="0"/>
+            <text x="283.33" y="370.48">
+                run(ctx, from, to, setData, kargs)
+            </text>
+        </g>
+    </g>
+</svg>
