@@ -39,13 +39,13 @@ The first and most straightforward option is to sprinkle audit logging code thro
 The drawback with this approach is that it intertwines audi logging code and business logic, which reduces maintainability.
 The other drawback is that it is potentially error prone, because it relies on the developer writing audit logging code and insuring compliance.
 
-Logging in general is mostly associated with debugging and has no direct relation to the system state. Logging style and verbosity might negatively effect the integrity and completeness of the Audit Log.
+Logging in general is mostly associated with debugging and has no direct relation to the system state. Logging style and verbosity might negatively effect the integrity and completeness of the audit log.
 
 \subsection{\acrlong{ac:aop}}
 
 The second option is to use \gls{ac:aop}. Frameworks like spring offer \gls{ac:aop} support, which automatically intercepts each service method call and persists an audit log entry.
 
-This is a much more reliable approach, because it automatically records every service method invocation, which insures a complete Audit Log of both reading and writing operations.
+This is a much more reliable approach, because it automatically records every service method invocation, which insures a complete audit log of both reading and writing operations.
 
 The main drawback of using \gls{ac:aop} is that it only has access to the method name and its arguments, thus it might be challenging to determine the business object being acted upon and generate a business-oriented audit log entry.
 
@@ -53,7 +53,7 @@ The main drawback of using \gls{ac:aop} is that it only has access to the method
 
 The third option is to implement the business logic with auditability as a first class property by utilising \gls{gl:es} and its complementary patterns as discussed in chapter \ref{chap:es}. 
 
-\gls{gl:es} offer an Audit Log by design for all state changing operations. The main limitation when using \gls{gl:es} is the missing records for read operations.
+\gls{gl:es} offer an audit log by design for all state changing operations. The main limitation when using \gls{gl:es} is the missing records for read operations.
 
 If logging read operations is a requirement, using one of the other options is a must. Patterns like \gls{ac:cqrs} help encapsulate the different implementations and unify the auditing \gls{ac:api}
 
@@ -71,6 +71,6 @@ The challenge of implementing auditing as an added feature like the case with th
 
 \subsection{Auditing 2.0}\label{sec:adt2sa}
 
-Performing and supporting IT audits and managing IT audit programs are time-, effort-, and personnel-intensive activities~\citep{GANTZ20141-T}. In an age of cost-consciousness and competition for resources, it is reasonable to keep \gls{gl:adt2} in mind when implementing Audit Log. Having an Audit Log, that can be utilised by the different process mining techniques as described in section \ref{sec:psmin} enables new forms of auditing. Rather than sampling a small set of cases, the whole process and all of its instances can be considered. Moreover, this can be done continuously.
+Performing and supporting IT audits and managing IT audit programs are time-, effort-, and personnel-intensive activities~\citep{GANTZ20141-T}. In an age of cost-consciousness and competition for resources, it is reasonable to keep \gls{gl:adt2} in mind when implementing Audit Log. Having an audit log, that can be utilised by the different process mining techniques as described in section \ref{sec:psmin} enables new forms of auditing. Rather than sampling a small set of cases, the whole process and all of its instances can be considered. Moreover, this can be done continuously.
 
 Auditors can utilise process mining techniques to address multiple use-cases/processes. By implementing patterns like \gls{gl:es} organizations can use data analytics and machine learning techniques to analyze the event data and identify patterns and trends that may indicate potential risks or issues. By continuously analyzing the event data, organizations can proactively identify and address potential problems as they arise, rather than waiting for them to be discovered during a periodic audit.

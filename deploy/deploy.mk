@@ -41,8 +41,8 @@ mock-data: monoctl ## create some aggregates in monoskope to enrich UX
 	@echo $(MONOCTL)
 	@MONOCTL=$(MONOCTL) MONOSKOPECONFIG=$(MONOSKOPECONFIG) $(BASH) ./mock-data.sh
 
-.PHONY: turst-m8-ca
-turst-m8-ca: ## trust monoskope certificate authority (OSX only)
+.PHONY: trust-m8-ca
+trust-m8-ca: ## trust monoskope certificate authority (OSX only)
 	sudo security add-trusted-cert -d -r trustRoot -k "/Library/Keychains/System.keychain" $(LOCALTMP)/ca.crt
 
 ##@ Deploy

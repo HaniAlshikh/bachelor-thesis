@@ -77,7 +77,7 @@ Using \gls{gl:es} as a design pattern within a wider architecture allows for the
 
 \header{\glsfirst{ac:ddd}}
 
-Using \gls{ac:ddd} with \gls{gl:es} is not mandatory. However, in \gls{gl:es} events are modeled as first-class objects and closely resemble real world business processes. The better business processes are understood, the more precise the business information will be in the events and thus the Audit Log. Concepts like speaking the same language as the business and using events as a design tool when modelling a system are advocated by \gls{ac:ddd}~\citep{evans2004domain} as well, which makes \gls{gl:es} a natural fit for \gls{ac:ddd}.
+Using \gls{ac:ddd} with \gls{gl:es} is not mandatory. However, in \gls{gl:es} events are modeled as first-class objects and closely resemble real world business processes. The better business processes are understood, the more precise the business information will be in the events and thus the audit log. Concepts like speaking the same language as the business and using events as a design tool when modelling a system are advocated by \gls{ac:ddd}~\citep{evans2004domain} as well, which makes \gls{gl:es} a natural fit for \gls{ac:ddd}.
 
 \header{\glsfirst{ac:cqrs}}
 
@@ -155,7 +155,7 @@ A system with a large delay is unfeasible, because in that case queries will oft
 
 \gls{gl:es} introduces a lot of challenges and complexity. As with any other pattern \gls{gl:es} is not always the solution. However a study conducted on 25 engineers with different roles and experiences reveled, that all systems under study benefit from \gls{gl:es}. Flexibility, debug-ability, reliability and auditability are common rational given for using \gls{gl:es}~\citep{OVEREEM2021110970}.
 
-It is obvious, that the most repeated and almost always mentioned benefit of \gls{gl:es} is the events serialization into an Audit Log, that satisfies all characteristics as defined in chapter \ref{chap:adt}. Beside all other benefits, this makes \gls{gl:es} an optimized pattern to utilise when implementing \gls{gl:adt2} as discussed in section \ref{sec:adt2}
+It is obvious, that the most repeated and almost always mentioned benefit of \gls{gl:es} is the events serialization into an audit log, that satisfies all characteristics as defined in chapter \ref{chap:adt}. Beside all other benefits, this makes \gls{gl:es} an optimized pattern to utilise when implementing \gls{gl:adt2} as discussed in section \ref{sec:adt2}
 
 \gls{gl:es} also comes with debug-ability and customer support advantages. As put by~\citep{fowleres}:
 

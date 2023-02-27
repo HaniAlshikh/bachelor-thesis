@@ -58,7 +58,7 @@ IT audits and the approaches used to conduct them may consider internal controls
 
 The purpose of audit logging is to record each state change. An audit log is typically used to help customer support, ensure compliance, and detect suspicious behaviors. Each audit log entry records at minimum the identity of the entity, the action performed, and the business object(s)~\citep{richardson2018microservices}
 
-Depending on the requirements maintaining and ensuring a comprehensive and immutable Audit Log is mandatory and might dictate the way a system is architected and developed. An example will be showcased in chapter \ref{chap:ac}.
+Depending on the requirements maintaining and ensuring a comprehensive and immutable audit log is mandatory and might dictate the way a system is architected and developed. An example will be showcased in chapter \ref{chap:ac}.
 
 The Federal Financial Supervisory Authority (short BaFin in german) requires appropriate precautions to be taken within the framework of application development, so that the confidentiality, integrity, availability and authenticity of the data to be processed are transparently ensured even after each deployment of an application \citep{BaFinZAIT}. 
 
@@ -68,11 +68,11 @@ One of the appropriate precautions suggested by \gls{gl:bafin} is audit logs. Au
 In accordance with the target protection requirements the institution must set up processes for logging and monitoring, which make it possible to verify, that authorizations are only used as intended \citep{BaFinZAIT}.
 \end{quote}
 
-An Audit Log can take many forms. The most common form is a file. A database table is also an option. However most problems comes mainly from the kind of logs written and the way they are processed. More on this is discussed in chapter \ref{chap:sadt}
+An audit log can take many forms. The most common form is a file. A database table is also an option. However most problems come mainly from the kind of logs written and the way they are processed. More on this is discussed in chapter \ref{chap:sadt}
 
-Audit Log is easy to write but harder to read, especially as it grows large. Occasional ad-hoc reads can be done by eye and simple text processing tools. More complicated or repetitive tasks can be automated \citep{AuditLog}. Audit log entries lack the context and describe an action, that may or may not be related to other entries in a specific period of time. Keeping track of changes without proper automation becomes harder and harder to the point it becomes imposable.
+An audit log is easy to write but harder to read, especially as it grows large. Occasional ad-hoc reads can be done by eye and simple text processing tools. More complicated or repetitive tasks can be automated \citep{AuditLog}. Audit log entries lack the context and describe an action, that may or may not be related to other entries in a specific period of time. Keeping track of changes without proper automation becomes harder and harder to the point it becomes impossible.
 
-For some organizations logging system changes alone is not enough. Suspicious activates might originate from read attempts. Logging such activities increases the complexity of the Audit Log, violates the Audit Log definition and poses the question of how to make sense of such data?
+For some organizations logging system changes alone is not enough. Suspicious activities might originate from read attempts. Logging such activities increase the complexity of the audit log, as it might introduce false positives, when analysing for suspicious patterns, violate the audit log definition [\ref{sec:adtlog}] and pose the question of how to make sense of such data.
 
 \section{Auditing 2.0}\label{sec:adt2}
 

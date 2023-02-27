@@ -8,7 +8,13 @@ Audits are systematic and objective examinations of one or more aspects of an or
 
 Having a comprehensive and immutable audit trail makes \gls{gl:es} particularly well-suited for systems with complex business processes, that need to track and audit changes to sensitive data and ensure they are in compliance with regulations and standards without relying on traditional logging mechanisms.
 
-In addition to providing a detailed audit trail, \gls{gl:es} also offers a number of other benefits. Since the events are stored in a chronological order, it is possible to implement time-based queries and manipulations, which lays the base for Auditing 2.0.
+In addition to providing a detailed audit trail, \gls{gl:es} also offers a number of other benefits. Since the events are stored in a chronological order, it is possible to implement time-based queries and manipulations, which lays the base for \gls{gl:adt2} [\ref{sec:adt2}].
 
-Beside evaluating \gls{gl:es} in regards to auditing and audit logging 
-this work handles a real world use-case of auditors needs to track users authentication and authorisation activities in \gls{ac:k8s} multi-cloud multi-cluster environments in an easy and intuitive way for auditors with all kind of technical backgrounds by implementing an \gls{gl:ac} to serialize the event log of an event-sourced system used by a \gls{gl:fintech} organization into human-readable audit log and offer an audit \gls{ac:api} for the \gls{gl:ab} implemented to ease auditors interactions with the system and help answers various compliance questions with minimal overhead.
+Besides evaluating \gls{gl:es} in regards to auditing and audit logging 
+this work handles a real world use-case of auditors needs to track users authentication and authorization activities in \gls{ac:k8s} (a system for automating deployment, scaling, and management of containerized applications).
+
+Not only dose this apply to different environments users activities may span multiple \gls{ac:k8s} instances, also known as clusters, that are hosted by multiple hosting providers (Clouds).
+
+The event-sourced authentication and authorization management system in use by a \gls{gl:fintech} organization will be extended by implementing an \gls{gl:ac} to serialize the event log into human-readable audit log and offer an audit \gls{ac:api}, that can be utilised by various clients.
+
+Since auditors tend to have all kind of technical backgrounds an \gls{gl:ab} is also implemented, which should ease auditors interactions with the system and help answer various compliance questions with minimal overhead.

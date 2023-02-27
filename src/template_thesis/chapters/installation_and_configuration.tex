@@ -115,10 +115,14 @@ Open the directory \sh{deploy} and follow the following instruction\footnote{If 
 
   \begin{lstlisting}[language=bash, caption={Trust \gls{ac:m8} certificate authority}, label={sh:tmdc}]
     
-    # MacOS
-    $ make turst-m8-ca
-    # on Ubunte please add the \gls{ac:ca} 
+    # Linux/Ubuntu
+    # Please add the CA
     # to the browser specific store
+    # usually under advanced settings -> ceritifcates
+    # MacOS
+    # the following works for chrome and safari. 
+    # Firefox manages its owen store. Please add manually
+    $ make trust-m8-ca
   \end{lstlisting}
 
   \item Add the following to your hosts file:

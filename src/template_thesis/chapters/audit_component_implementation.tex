@@ -18,6 +18,20 @@ The \gls{gl:ac} utilises the produced event log by the \gls{gl:es} implementatio
 
 Monoskope (short m8 spelled "mate") implements the management and operation of authenticating and authorizing entities in a \gls{gl:k8s} multi-cloud multi-cluster environments. It fulfills the needs of operators of the clusters as well as the needs of developers using the cloud infrastructure provided by the operators~\citep{monoskope}.
 
+Monoskope was developed at \gls{gl:fc} with the primary use-case of managing developers access and permission requests to the \gls{gl:fc} cloud infrastructure. 
+
+The \gls{gl:fc} cloud infrastructure spans multiple clusters, clouds and environments. Allowing compliant access, monitoring and logging authorisation as required by \citep{BaFinZAIT} is not an easy task.
+
+The complex orchestration to allow for a coherent development experience powered by \gls{ac:k8s} regardless of the hosting provider meant dealing with multiple cluster and cloud instances with various setup requirements.
+
+The cloud team at \gls{gl:fc} was faced with the challenge of satisfying all users requests while also ensuring a systematic and complaint trace of all authentication and authorization activities regardless of the backing setup complexity or compatibility.
+
+Managing user roles and permissions while ensuring traceability and auditability required dealing with multiple \glspl{ac:api} on many different levels of complexity to eventually collect the produced logs and seilrize them into compliant audit logs using complex automation setups.
+
+Ultimately this lead to the development of \gls{ac:m8} as an audit first system to ease and unify the different processes involved. The event-sourced architecture [\ref{sec:esa}] was chosen, as it satisfied all of the system requirements.
+
+\pagebreak
+
 \subsection{Architecture}
 
 \Gls{ac:m8} was designed with auditing in mind. It uses the event-sourced architecture [\ref{sec:esa}] with a purpose built implementation of the \gls{gl:est} as well as the \gls{ac:cqrs} pattern.
