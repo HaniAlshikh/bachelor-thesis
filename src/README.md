@@ -1,6 +1,6 @@
 #
 
-## Setup environment
+## Environment Setup
 
 ### SVG
 
