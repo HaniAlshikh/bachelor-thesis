@@ -4,7 +4,7 @@
 
 As discussed in chapter \ref{chap:sadt} choosing the correct architecture for auditing is an important choice to make. Handling auditing and audit logging as first class citizens comes with its owen constraints and requirements.
 
-In an industry where strict auditing requirements apply using patterns like \gls{gl:es} not only ensures a complaint audit log but also lays the ground work for broader auditing technologies like \gls{gl:adt2}
+In an industry where strict auditing requirements apply using patterns like \gls{gl:es} not only ensures a compliant audit log but also lays the ground work for broader auditing technologies like \gls{gl:adt2}
 
 Combining \gls{ac:ddd}, \gls{gl:es}, and \gls{ac:cqrs} produces an architecture that is praised by many, when it comes to building audit first cloud systems.
 
@@ -18,11 +18,25 @@ The \gls{gl:ac} utilises the produced event log by the \gls{gl:es} implementatio
 
 Monoskope (short m8 spelled "mate") implements the management and operation of authenticating and authorizing entities in a \gls{gl:k8s} multi-cloud multi-cluster environments. It fulfills the needs of operators of the clusters as well as the needs of developers using the cloud infrastructure provided by the operators~\citep{monoskope}.
 
+Monoskope was developed at \gls{gl:fc} with the primary use-case of managing developers access and permission requests to the \gls{gl:fc} cloud infrastructure. 
+
+The \gls{gl:fc} cloud infrastructure spans multiple clusters, clouds and environments. Allowing compliant access, monitoring and logging authorisation as required by \citep{BaFinZAIT} is not an easy task.
+
+The complex orchestration to allow for a coherent development experience powered by \gls{ac:k8s} regardless of the hosting provider meant dealing with multiple cluster and cloud instances with various setup requirements.
+
+The cloud team at \gls{gl:fc} was faced with the challenge of satisfying all users requests while also ensuring a systematic and complaint trace of all authentication and authorization activities regardless of the backing setup complexity or compatibility.
+
+Managing user roles and permissions while ensuring traceability and auditability required dealing with multiple \glspl{ac:api} on many different levels of complexity to eventually collect the produced logs and seilrize them into compliant audit logs using complex automation setups.
+
+Ultimately this lead to the development of \gls{ac:m8} as an audit first system to ease and unify the different processes involved. The event-sourced architecture [\ref{sec:esa}] was chosen, as it satisfied all of the system requirements.
+
+\pagebreak
+
 \subsection{Architecture}
 
 \Gls{ac:m8} was designed with auditing in mind. It uses the event-sourced architecture [\ref{sec:esa}] with a purpose built implementation of the \gls{gl:est} as well as the \gls{ac:cqrs} pattern.
 
-\includenamedimage[1]{figures/monoskope-architecture}{Monoskope Architecture ~\citep{monoskope}}
+\includenamedimage[1]{figures/monoskope-architecture}{Monoskope architecture ~\citep{monoskope}}
 Since \gls{ac:m8} is meant to be used as the single source of truth authority for authenticating and authorizing users into different clusters on different cloud providers ensuring auditability and complying with different regulators requirements was not an option.
 
 While the base system was implemented and the main features were complete \gls{ac:m8} still lacked a proper implementation to utilise the gained event log and offer an auditing \gls{ac:api}, that answers Auditors questions.
@@ -64,7 +78,7 @@ From the requirements overview the following use-cases were derived:
     UC04 & Audit-Log users overview & As an Auditor, I want to get an overview of all users at a specific timestamp, tenants they belongs to, and their roles within the system or tenants/clusters\\
     \hline
   \end{tabularx}
-}{\gls{gl:ac} Derived Use-Cases}
+}{\gls{gl:ac} derived use-cases}
 
 \subsection{Architectural Constraints}
 
@@ -80,7 +94,7 @@ From the requirements overview the following use-cases were derived:
     TC03 & Middleware & \Gls{ac:m8} uses \gls{ac:grpc}. No reason to use or support any other framework \\
     \hline
   \end{tabularx}
-}{\gls{gl:ac} Technical Constraints}
+}{\gls{gl:ac} technical constraints}
 
 \subsubsection{Organisational Constraints}
 
@@ -93,7 +107,7 @@ From the requirements overview the following use-cases were derived:
     OC02~\label{oc:ac02} & \gls{gl:12faktor} & Implementation musst adhere to the \gls{gl:12faktor} methodology\\
     \hline
   \end{tabularx}
-}{\gls{gl:ac} Organisational Constraints}
+}{\gls{gl:ac} organisational constraints}
 
 \section{System Design}
 
@@ -101,11 +115,11 @@ From the requirements overview the following use-cases were derived:
 
 \subsubsection{Business Context}
 
-\includenamedsvg{\includesvg}{diagrams/audit_component/audit_component_business_context.drawio}{\gls{gl:ac} Business Context Diagram}
+\includenamedsvg{\includesvg}{diagrams/audit_component/audit_component_business_context.drawio}{\gls{gl:ac} business context diagram}
 
 \subsubsection{Technical Context}
 
-\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_component/audit_component_technical_context.drawio}{ \gls{gl:ac} Technical Context Diagram}
+\includenamedsvg{\includesvg[width=\textwidth]}{diagrams/audit_component/audit_component_technical_context.drawio}{ \gls{gl:ac} technical context diagram}
 
 \subsection{Solution Strategy}
 
@@ -132,7 +146,7 @@ From the requirements overview the following use-cases were derived:
   get\-Users\-Overview(get\-Users\-Overview\-Request) & UC04 & Streams formatted events at the specified timestamp of users, tenants/clusters they belong to, and their roles & Audit\-Log\-Server is running & Human-readable events were streamed to the client  \\
 
   \hline
-  \caption{\gls{gl:ac} Solution Strategy\label{tab:acst}}\\
+  \caption{\gls{gl:ac} solution strategy\label{tab:acst}}\\
 \end{xltabular}
 
 \subsection{Building Block View}

@@ -20,7 +20,7 @@ EMISSARY_VERSION ?= 3.4.0
 EMISSARY_INGRESS_CHART_VERSION ?= 8.4.0
 DEX_VERSION ?= 0.8.2
 MONOSKOPE_VERSION ?= v0.5.2
-MONOGUI_VERSION ?= v0.1.0-rc06
+MONOGUI_VERSION ?= v0.1.0
 
 MONOSKOPECONFIG ?= $(LOCALTMP)/monoctl-devconfig
 KIND_KUBECTL ?= $(KUBECTL) --kubeconfig ${KIND_KUBECONFIG}
@@ -41,8 +41,8 @@ mock-data: monoctl ## create some aggregates in monoskope to enrich UX
 	@echo $(MONOCTL)
 	@MONOCTL=$(MONOCTL) MONOSKOPECONFIG=$(MONOSKOPECONFIG) $(BASH) ./mock-data.sh
 
-.PHONY: turst-m8-ca
-turst-m8-ca: ## trust monoskope certificate authority (OSX only)
+.PHONY: trust-m8-ca
+trust-m8-ca: ## trust monoskope certificate authority (OSX only)
 	sudo security add-trusted-cert -d -r trustRoot -k "/Library/Keychains/System.keychain" $(LOCALTMP)/ca.crt
 
 ##@ Deploy

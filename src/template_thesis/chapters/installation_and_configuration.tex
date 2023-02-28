@@ -30,7 +30,9 @@ To deploy \gls{ac:m8} and \gls{gl:monogui} along all other resources to a local 
 
 All while making sure to stay \gls{gl:idpt} and localized.
 
-\header{Prerequisite}
+\section{Prerequisite}
+
+\textbf{Required}
 
 - A supported system from the following:
 
@@ -40,7 +42,7 @@ All while making sure to stay \gls{gl:idpt} and localized.
   \item Windows (WSL should work but not tested)
 \end{itemize}
 
-For a sandboxed run \gls{gl:vb} and Ubuntu can be used. Providers like \gls{gl:vmimg} offer a ready to boot images, that runs with zero installation and configuration efforts
+For a sandboxed run \gls{gl:vb} and Ubuntu can be used. Providers like \gls{gl:vmimg} offer a ready to boot images, that runs with zero installation and configuration efforts.
 
 - Standard userspace utilities like \lstinline[columns=fixed]{bash}, \lstinline[columns=fixed]{curl}, \lstinline[columns=fixed]{tar}, etc... should be available natively but can always be changed to alternatives by setting the corresponding environment variable. For example replacing \sh{curl} with \sh{wget} will be as follows:
 
@@ -113,12 +115,16 @@ Open the directory \sh{deploy} and follow the following instruction\footnote{If 
 
   \item Trust \gls{ac:m8} \acrshort{ac:ca}: \sh{tmp/ca.crt}, otherwise the browser will block communication with \gls{ac:m8} \gls{ac:api}
 
-  \begin{lstlisting}[language=bash, caption={Trust \gls{ac:m8} domain certificate}, label={sh:tmdc}]
+  \begin{lstlisting}[language=bash, caption={Trust \gls{ac:m8} certificate authority}, label={sh:tmdc}]
     
-    # MacOS
-    $ make turst-m8-ca
-    # on ubunte please add the \gls{ac:ca} 
+    # Linux/Ubuntu
+    # Please add the CA
     # to the browser specific store
+    # usually under advanced settings -> ceritifcates
+    # MacOS
+    # the following works for chrome and safari. 
+    # Firefox manages its owen store. Please add manually
+    $ make trust-m8-ca
   \end{lstlisting}
 
   \item Add the following to your hosts file:
@@ -140,7 +146,7 @@ Open the directory \sh{deploy} and follow the following instruction\footnote{If 
     $ make port-forward
   \end{lstlisting}
 
-  \item navigate to \href{http://localhost:3000}{http://localhost:3000} and sign in using the following credintials:
+  \item navigate to \url{http://localhost:3000} and sign in using the following credintials:
   
   \begin{itemize}
     \item \sh{username:} admin@monoskope.dev
@@ -149,7 +155,7 @@ Open the directory \sh{deploy} and follow the following instruction\footnote{If 
 
   \item Populate the \gls{gl:est} with some data for a better \gls{ac:ux}
 
-  \begin{lstlisting}[language=bash, caption={Populate the \gls{gl:est} with some mock}, label={sh:pemd}]
+  \begin{lstlisting}[language=bash, caption={Populate the \gls{gl:est} with some data}, label={sh:pemd}]
     
     $ make mock-data
   \end{lstlisting}

@@ -4,10 +4,9 @@ Deploy Monoskope and MonoGUI to a local cluster.
 
 The [deploy](deploy.mk) makefile will:
 
-1. take care of the preparation work
-2. create local Kubernetes cluster using `kind`
-3. add Monoskope and MonoGUI dependencies to `helm`
-4. setup and deploy all needed resources
+1. take care of the preparation work and installing the automated~
+2. create local k8s cluster using `kind`
+3. setup and deploy all needed resources
 
 All while making sure to stay idempotent and localized.
 
@@ -15,22 +14,24 @@ All while making sure to stay idempotent and localized.
 
 ### Required
 
-A supported system from the following:
+- A supported system from the following:
 
-- MacOS
-- Linux (tested on ubuntu)
-- Windows (WSL)
+  - MacOS
+  - Linux (tested on Ubuntu)
+  - Windows (WSL should work but not tested)
 
-Standard userspace utilities like `bash`, `curl`, `sh`, etc.... You can always change to alternatives by setting the corresponding environment variable. For example replacing `curl` with `wget` will be as follows:
+  For a sandboxed run [VirtualBox](https://www.virtualbox.org/) and [Ubuntu](https://www.linuxvmimages.com/images/ubuntu-2004/) can be used. Providers like [LinuxVMImages](https://www.linuxvmimages.com/) offer a ready to boot images, that runs with zero installation and configuration efforts.
 
-```shell
-CURL=wget make deploy
-```
+  Standard userspace utilities like `bash`, `curl`, `sh`, etc.... should be available natively but can always be changed to alternatives by setting the corresponding environment variable. For example replacing curl with wget will be as  follows:
 
-And the following tools
+  ```shell
+  $ CURL=wget make deploy
+  ```
 
-- [docker](https://docs.docker.com/get-docker/) to create isolated environments
-- [make](https://www.gnu.org/software/make/#download) to run deployment scripts
+- The following tools
+
+  - [docker](https://docs.docker.com/get-docker/) to create isolated environments
+  - [make](https://www.gnu.org/software/make/#download) to run deployment scripts
 
 ### Automated
 
@@ -45,24 +46,33 @@ the following will be downloaded and configured locally. If any should fail plea
 
 > **_IMPORTENTE:_*-  If you decided to make changes on the [setup files](setup) please make sure to do a wide search and replace all occurrences if applicable.
 
-1. Deploy all resources to a local cluster:
+1. Create a local cluster and deploy all resources
 
     ```shell
-    make deploy
-    # you can also run the following to monitor the state of the resources
-    make kind-watch
+    $ make deploy
+    # you can also run the following 
+    # to monitor the state of the resources
+    $ make kind-watch
     ```
 
-2. Trust m8 domain certificate: `tmp/domain-ca.crt`, otherwise the browser will block communication with m8 API
+2. Trust m8 CA: `tmp/ca.crt`, otherwise the browser will block communication with m8 API
 
     ```shell
+    # Linux/Ubuntu
+    # Please add the CA
+    # to the browser specific store
+    # usually under advanced settings -> ceritifcates
     # MacOS
-    sudo security add-trusted-cert -d -r trustRoot -k "/Library/Keychains/System.keychain" tmp/domain-ca.crt
+    # the following works for chrome and safari. 
+    # Firefox manages its owen store. Please add manually
+    $ make trust-m8-ca
     ```
 
 3. Add the following to your hosts file:
 
     ```shell
+    # Linux & MacOS: /etc/hosts
+    # Windows: c:\Windows\System32\Drivers\etc\hosts
     127.0.0.1 api.monoskope.dev
     127.0.0.1 dex
     ```
@@ -70,7 +80,7 @@ the following will be downloaded and configured locally. If any should fail plea
 4. Create port-forwards to route local request to backing services in the cluster: (Make sure `8443`, `5556` and `3000` are not in use)
 
     ```shell
-    make port-forward
+    $ make port-forward
     ```
 
 5. navigate to [http://localhost:3000](http://localhost:3000) and sign in using the following codeinitials:
@@ -83,7 +93,7 @@ the following will be downloaded and configured locally. If any should fail plea
 6. Populate the EventStore with some mock data for a better user experience
 
     ```shell
-    make mock-data
+    $ make mock-data
     ```
 
 ## Makefile
@@ -93,28 +103,30 @@ Usage:
   make <target>
 
 General
-  help                      Display this help.
+  help             Display this help.
 
 Manage
-  kind-watch                watch monoskope beain deployed
-  port-forward              create a port-forward to the m8Api, dex and monogui
-  mock-data                 restore mocked data into monoskope backing database
+  kind-watch       watch monoskope beain deployed
+  port-forward     create a port-forward to the m8Api, dex and monogui
+  mock-data        create some aggregates in monoskope to enrich UX
+  trust-m8-ca      trust monoskope certificate authority (OSX only)
 
 Deploy
-  deploy                    deploy monoskope and monogui
-  kind-create-cluster       create kind cluster
-  deploy-m8-trust-anchor    create trust-anchor in kind cluster
-  deploy-cert-manager       deploy dex
-  deploy-emissary-ingress   deploy emissary-ingress
-  deploy-dex                deploy dex
-  deploy-monoskope          deploy monoskope
-  deploy-monogui            deploy monoskope
-  deploy-cleanup            uninstall everything again
+  deploy           deploy monoskope and monogui
+  kind-create-cluster  create kind cluster
+  deploy-m8-trust-anchor  create trust-anchor in kind cluster
+  deploy-cert-manager  deploy dex
+  deploy-emissary-ingress  deploy emissary-ingress
+  deploy-dex       deploy dex
+  deploy-monoskope  deploy monoskope
+  deploy-monogui   deploy monoskope
+  deploy-cleanup   uninstall everything again
 
-Build Dependencies          
-  kubectl                   Download kubectl locally if necessary.
-  kind                      Download kind locally if necessary.
-  step                      Download step locally if necessary.
-  helm                      Download helm locally if necessary.
-  helm-repo                 add necessary chart repos
+Build Dependencies
+  kubectl          Download kubectl locally if necessary.
+  kind             Download kind locally if necessary.
+  step             Download step locally if necessary.
+  monoctl          Download monoctl locally if necessary.
+  helm             Download helm locally if necessary.
+  helm-repo        add necessary chart repos
 ```

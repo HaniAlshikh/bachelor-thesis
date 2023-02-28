@@ -2,9 +2,9 @@
 %
 \chapter{Audit Browser}\label{chap:ab}
 
-When it comes to staying complaint ascertaining the validity and reliability of information in organizations and their associated processes is a very important job of the organization security officers. It is also customary to have yearly audit sessions done by external entities. However, waiting for the audit report to hit should not be an option. Especially when it comes to highly regulated industries.
+When it comes to staying compliant ascertaining the validity and reliability of information in organizations and their associated processes is a very important job of the organization security officers. It is also customary to have yearly audit sessions done by external entities. However, waiting for the audit report to hit should not be an option. Especially when it comes to highly regulated industries.
 
-In chapter \ref{chap:adt} an example overview of the different internal auditing activities were showcased and discussed. The detective controls done by administrators like security officers rely on audit logs and the corresponding aggregation programs. Assuming a proper audit logging infrastructure there is still a dependency on the developer to properly log the relevant activities, which poses the responsibility to evaluate and reliably provide a consistent and complaint audit logs. Not only is this prone to human errors it is by design bond to to not provide the full picture and might lead to over logging. 
+In chapter \ref{chap:adt} an example overview of the different internal auditing activities were showcased and discussed. The detective controls done by administrators like security officers rely on audit logs and the corresponding aggregation programs. Assuming a proper audit logging infrastructure there is still a dependency on the developer to properly log the relevant activities, which poses the responsibility to evaluate and reliably provide a consistent and compliant audit logs. Not only is this prone to human errors it is by design bond to to not provide the full picture and might lead to over logging. 
 
 With time the audit log file just becomes larger and larger and going through the logs becomes very tedious and tend to be avoided. Even when it comes to external controls it is customary to work with pre-recorded parteitonend samples, which might give a good overview but never the full one. 
 
@@ -153,7 +153,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
     gRPC & handles comunication with \gls{gl:grpcweb} Proxy\\
     \hline
   \end{tabularx}
-}{\Gls{gl:ab} \gls{gl:monogui} contained building blocks black box}
+}{\Gls{gl:ab} contained building blocks \gls{gl:monogui} black box}
 
 \header{Scenes}
 
@@ -166,7 +166,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
     Auth & handles rendering of the authentication components and user inputs \\
     \hline
   \end{tabularx}
-}{\Gls{gl:ab} scenes contained building blocks black box}
+}{\Gls{gl:ab} contained building blocks scenes black box}
 
 \pagebreak
 
@@ -181,7 +181,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
     Auth & handles communication between \gls{ac:m8}'s Gateway, the user and the upstream \gls{ac:idp} \\
     \hline
   \end{tabularx}
-}{\Gls{gl:ab} UseCases contained building blocks black box}
+}{\Gls{gl:ab} contained building blocks use-cases black box}
 
 \header{API}
 
@@ -194,7 +194,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
     Auth & \gls{ac:m8}'s Gateway stubs to handel \gls{ac:grpc} requests \\
     \hline
   \end{tabularx}
-}{\Gls{gl:ab} API contained building blocks black box}
+}{\Gls{gl:ab} contained building blocks \acrshort{ac:api} black box}
 
 \pagebreak
 
@@ -204,7 +204,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 \subheader{\gls{ac:grpc}}
 
-\includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_monogui_grpc_class_diagram.drawio}{\gls{gl:ab} \gls{gl:monogui} \gls{ac:grpc} class diagram}
+\includenamedsvg{\includesvg}{diagrams/audit_browser/audit_browser_monogui_grpc_class_diagram.drawio}{\gls{gl:ab} \gls{gl:monogui} \acrshort{ac:grpc} class diagram}
 
 \mytable{abmgcd}{
   \begin{tabularx}{\linewidth}{|l X |}
@@ -214,7 +214,7 @@ To ease auditors workflows and external auditing needs audit reports should be e
     GrpcConnectionFactory & creates preconfigured \gls{ac:grpc} connection based on the use case for example authenticated with timeout and retries connection \\
     \hline
   \end{tabularx}
-}{\Gls{gl:ab} \gls{gl:monogui} \gls{ac:grpc} class diagram}
+}{\Gls{gl:ab} \gls{gl:monogui} \acrshort{ac:grpc} class diagram}
 
 \pagebreak
 
@@ -332,13 +332,13 @@ To ease auditors workflows and external auditing needs audit reports should be e
 
 As of the time of writing Browsers do support \gls{ac:http}/2 but only for static files like images, javascript, css etc. XMLHttpRequest/Ajax calls are still carried over \gls{ac:http}/1.1. This is due to the fact, that browsers have no unified specification to handle \gls{ac:http}/2 trailers.
 
-\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.8}]}{diagrams/http1_vs_http2.drawio}{\gls{ac:http}/1.1 compared to \gls{ac:http}/2}
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.8}]}{diagrams/http1_vs_http2.drawio}{\acrshort{ac:http}/1.1 compared to \acrshort{ac:http}/2}
 
 \gls{ac:grpc} makes heavy use of trailers to send status messages when streaming responses~\citep{grpcspec}. Because of the browser \gls{ac:http}/2 limitations \gls{ac:js}, the programming language of the web, can not directly talk to a \gls{ac:grpc} \glspl{ac:api} as normally done with \gls{ac:rest} \glspl{ac:api}. 
 
 To mitigate this limitation a translation proxy has to be used to translate \gls{ac:grpc} to \gls{ac:rest} requests/responses~\citep{grpcBrowserState}.
 
-\includenamedimage[0.5]{figures/grpc-web-proxy}{\gls{gl:grpcweb} proxy to allow browser \gls{ac:grpc} support~\citep{grpcBrowserState}}
+\includenamedimage[0.5]{figures/grpc-web-proxy}{\gls{gl:grpcweb} proxy to allow browser \acrshort{ac:grpc} support~\citep{grpcBrowserState}}
 
 \header{Why stick to gRPC?}
 
@@ -357,7 +357,7 @@ Despite the mentioned above \gls{ac:grpc} still shines when it comes to straight
 
 The only other option is to actively provide backend \gls{ac:rest} support by Transcoding \gls{ac:http}/\gls{ac:json} to \gls{ac:grpc} and utilising a reverse proxy to to serve a \gls{gl:restfull} \gls{ac:api}~\citep{grpcgateway}
 
-\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.8}]}{figures/grpc-gateway_architecture_introduction_diagram}{\gls{ac:grpc}-Gateway architecture diagram~\citep{grpcgateway}}
+\includenamedsvg{\includesvg[width=\textwidth,pretex=\relscale{0.8}]}{figures/grpc-gateway_architecture_introduction_diagram}{\acrshort{ac:grpc}-Gateway architecture diagram~\citep{grpcgateway}}
 
 While this comes with the \gls{gl:restfull} \gls{ac:api} advantages and full support of the web development community it dose not differ in it's essnase to \gls{gl:grpcweb} yet comes with the disadvantage of the server transcoding overhead.
 
@@ -369,7 +369,7 @@ However, since \gls{ac:m8} only speaks \gls{ac:grpc} and maintaining a \gls{ac:r
 
 \section{Technical Decisions}
 
-\subsection{TD01: \glsfirst{ac:js} and \gls{gl:react}}\label{abtd:01}
+\subsection{TD01: \acrlong{ac:js} and \gls{gl:react}}\label{abtd:01}
 
 It is no secret that \gls{ac:js} is the language of the web and is almost always ranked first by multiple indexes compared to other web development programing languages.
 
@@ -383,12 +383,12 @@ On the other hand building and maintaining web applications requires a programmi
 
 Among the 3 stables mentioned above \gls{gl:react} has the higher usage across all years since 2016 \citep{TheStateOfJs} since it comes with many basic yet powerful features, that can be expanded depending on the use-case. \gls{gl:angular} on the other hand tend to be tailored towards enterprise usage and comes with greater complexity and steeper learning curve, while \gls{gl:vuejs} attempt to be the happy medium in between.
 
-\header{Conclusion}
+\textbf{Conclusion}
 
-While \gls{ac:ts} seems to be the smart choose to make, especially for production environments the added complexity requires more development time. Since \gls{gl:monogui} is meant to be a \gls{ac:poc} and is for now mainly developed as a base for the \gls{gl:ab} and due to the deadline set by \hyperref[tab:aboc]{OC01} it was decided to go with \gls{ac:js} in combination with \gls{gl:react} since they offer the perfect platform for the planned solution.
+While \gls{ac:ts} seems to be the smart choice to make, especially for production environments the added complexity requires more development time. Since \gls{gl:monogui} is meant to be a \gls{ac:poc} and is for now mainly developed as a base for the \gls{gl:ab} and due to the deadline set by \hyperref[tab:aboc]{OC01} it was decided to go with \gls{ac:js} in combination with \gls{gl:react} since they offer the perfect platform for the planned solution.
 
 \subsection{TD02: Headless Use-Cases Implementation}
 
 While \hyperref[abtd:01]{TD01} specifies usage of \gls{ac:js} and \gls{gl:react} \gls{gl:monogui} expansion and further development should be kept in mind as specified by \hyperref[tab:abtc]{TC01}. 
 
-To stay flexible and framework independent it was decided to split the business logic from the presentation logic or as is commonly known follow a headless implementation approach. The latter specifies writing business logic in vanilla \gls{ac:js} and the presentation logic in the used framework notation. This allows for easier migration to \gls{gl:ts} while also staying framework independent. 
+To stay flexible and framework independent it was decided to split the business logic from the presentation logic or as is commonly known follow a headless implementation approach. The latter specifies writing business logic in vanilla \gls{ac:js} and the presentation logic in the used framework notation. This allows for easier migration to \acrlong{ac:ts} while also staying framework independent. 

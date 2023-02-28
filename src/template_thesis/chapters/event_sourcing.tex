@@ -77,7 +77,7 @@ Using \gls{gl:es} as a design pattern within a wider architecture allows for the
 
 \header{\glsfirst{ac:ddd}}
 
-Using \gls{ac:ddd} with \gls{gl:es} is not mandatory. However, in \gls{gl:es} events are modeled as first-class objects and closely resemble real world business processes. The better business processes are understood, the more precise the business information will be in the events and thus the Audit Log. Concepts like speaking the same language as the business and using events as a design tool when modelling a system are advocated by \gls{ac:ddd}~\citep{evans2004domain} as well, which makes \gls{gl:es} a natural fit for \gls{ac:ddd}.
+Using \gls{ac:ddd} with \gls{gl:es} is not mandatory. However, in \gls{gl:es} events are modeled as first-class objects and closely resemble real world business processes. The better business processes are understood, the more precise the business information will be in the events and thus the audit log. Concepts like speaking the same language as the business and using events as a design tool when modelling a system are advocated by \gls{ac:ddd}~\citep{evans2004domain} as well, which makes \gls{gl:es} a natural fit for \gls{ac:ddd}.
 
 \header{\glsfirst{ac:cqrs}}
 
@@ -103,7 +103,7 @@ While using \gls{ac:cqrs} is also not mandatory the strong relation and added be
 
 \subsection{Event Storage}
 
-\gls{gl:es} enables the reconstruction of arbitrary past states. However, an entirely unbounded log size can conflict with other system requirements. As discussed in section \ref{subsec:snap}, snapshots offer a mitigation when the history in not relevant anymore for further processing as for example described in section \ref{sec:psmin}.
+\gls{gl:es} enables the reconstruction of arbitrary past states. However, an entirely unbounded log size can conflict with other system requirements. As discussed in section \ref{subsec:snap}, snapshots offer a mitigation when the history is not relevant anymore for further processing as for example described in section \ref{sec:psmin}.
 
 Other approaches like log pruning are discussed by \citep{10.1145/3210284.3219767} including an assessment of the impact of such mechanisms on state reconstructibility.
 
@@ -131,6 +131,12 @@ As discussed in section \ref{sec:esa} implementing the core \gls{gl:es} pattern 
 
 Which highlight the benefits of implementing a pattern like ~\gls{ac:cqrs}, but also a big limitation of \gls{gl:es}, especially when the produced event log need to be utilized for auditing.
 
+By implementing \gls{ac:cqrs} a separate query handler service is maintained. The query side keeps its data model synchronized with the command-side data model by subscribing to the events published by the command side and thus have direct access to the current transient state to efficiently handle such queries.
+
+The following digram showcase how \gls{ac:cqrs} can be be implemented in a microservices system.
+
+\includenamedimage[1]{figures/cqrs_microservices.png}{\gls{ac:cqrs} implementation in a microservices system \citep{richards2015software}}
+
 \subsection{Eventual Consistency}
 
 Eventual consistency forces developers to let go of guarantees that they would have in a system using current state and synchronous processing. In a \gls{ac:cqrs} system, an update sent through a command will not immediately be reflected in the result of a query. 
@@ -149,7 +155,7 @@ A system with a large delay is unfeasible, because in that case queries will oft
 
 \gls{gl:es} introduces a lot of challenges and complexity. As with any other pattern \gls{gl:es} is not always the solution. However a study conducted on 25 engineers with different roles and experiences reveled, that all systems under study benefit from \gls{gl:es}. Flexibility, debug-ability, reliability and auditability are common rational given for using \gls{gl:es}~\citep{OVEREEM2021110970}.
 
-It is obvious, that the most repeated and almost always mentioned benefit of \gls{gl:es} is the events serialization into an Audit Log, that satisfies all characteristics as defined in chapter \ref{chap:adt}. Beside all other benefits, this makes \gls{gl:es} an optimized pattern to utilise when implementing \gls{gl:adt2} as discussed in section \ref{sec:adt2}
+It is obvious, that the most repeated and almost always mentioned benefit of \gls{gl:es} is the events serialization into an audit log, that satisfies all characteristics as defined in chapter \ref{chap:adt}. Beside all other benefits, this makes \gls{gl:es} an optimized pattern to utilise when implementing \gls{gl:adt2} as discussed in section \ref{sec:adt2}
 
 \gls{gl:es} also comes with debug-ability and customer support advantages. As put by~\citep{fowleres}:
 
