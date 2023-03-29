@@ -282,6 +282,6 @@ TSWLatexianTemp*
 *.ist
 *svg-inkscape*
 
-dev/
+**/dev/
 *tmp/
 **/bin

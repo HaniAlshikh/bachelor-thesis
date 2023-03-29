@@ -48,8 +48,10 @@ trust-m8-ca: ## trust monoskope certificate authority (OSX only)
 ##@ Deploy
 
 .PHONY: deploy
-deploy: deploy-cleanup kind-create-cluster deploy-m8-trust-anchor deploy-cert-manager deploy-emissary-ingress deploy-dex deploy-monoskope deploy-monogui ## deploy monoskope and monogui
+deploy: deploy-cleanup kind-create-cluster redeploy ## deploy monoskope and monogui
 
+.PHONY: redeploy
+redeploy: deploy-m8-trust-anchor deploy-cert-manager deploy-emissary-ingress deploy-dex deploy-monoskope deploy-monogui ## redeploy monoskope and monogui without cleanup
 
 .PHONY: kind-create-cluster
 kind-create-cluster: kind ## create kind cluster
